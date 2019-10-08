@@ -2,8 +2,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-LFS=/mnt/lfs
-
 mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
 chroot_check $? "6.05-directories mkdir -pv /{bin,boot,etc/{opt,sysconfig}"
 

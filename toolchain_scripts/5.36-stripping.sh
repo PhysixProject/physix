@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /mnt/lfs/physix/include.sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh               
 source ~/.bashrc
 
 # file format not recognized issue

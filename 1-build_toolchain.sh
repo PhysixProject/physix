@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source include.sh
+source ./include.sh
 
-TOOLCHAINLOGS=/mnt/lfs/system-build-logs
+TOOLCHAINLOGS=$BUILDROOT/system-build-logs
 
 IAM=`whoami`
 if [ $IAM != "root" ] ; then
@@ -13,8 +13,8 @@ if [ $IAM != "root" ] ; then
 fi
 
 CWD=`pwd`
-if [ ! $CWD == "/mnt/lfs/physix" ] ; then
-        echo "Must run from /mnt/lfs/physix"
+if [ ! $CWD == "$BUILDROOT/physix" ] ; then
+        echo "Must run from $BUILDROOT/physix"
         exit 1
 fi
 
@@ -35,7 +35,7 @@ for LINE in `cat ./1-build_toolchain.csv` ; do
         echo "$TIME : $BUILD_ID : Building $SCRIPT"
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-		su lfs -c "./toolchain_scripts/$SCRIPT $PKG0 $PKG1 $PKG2 $PKG3" &> $TOOLCHAINLOGS/$SCRIPT
+		su physix -c "./toolchain_scripts/$SCRIPT $PKG0 $PKG1 $PKG2 $PKG3" &> $TOOLCHAINLOGS/$SCRIPT
 		check $? "$SCRIPT"
 		echo ''
 	fi

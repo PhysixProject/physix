@@ -2,16 +2,17 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /mnt/lfs/physix/include.sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh               
 source ~/.bashrc
 
-cd /mnt/lfs/sources
+cd $BUILDROOT/sources
 PKG=$1
 stripit $PKG
 SRCD=$STRIPPED
 
 unpack $PKG
-cd /mnt/lfs/sources/$SRCD
+cd $BUILDROOT/sources/$SRCD
 
 sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
 echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
@@ -28,6 +29,6 @@ check $? "M4 make check" noexit
 make install
 check $? "M4 make install"
 
-rm -rf /mnt/lfs/sources/$SRCD
-check $? "M4: rm -rf /mnt/lfs/sources/m4-1.4.18"
+rm -rf $BUILDROOT/sources/$SRCD
+check $? "M4: rm -rf $BUILDROOT/sources/m4-1.4.18"
 

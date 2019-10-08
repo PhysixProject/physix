@@ -2,16 +2,17 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /mnt/lfs/physix/include.sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh
 source ~/.bashrc
 
-cd /mnt/lfs/sources      
+cd $BUILDROOT/sources      
 PKG=$1                   
 stripit $PKG             
 SRCD=$STRIPPED           
                          
 unpack $PKG              
-cd /mnt/lfs/sources/$SRCD
+cd $BUILDROOT/sources/$SRCD
 
 cp -v configure{,.orig}
 check $? "Expect: cp -v configure{,.orig}"
@@ -36,7 +37,7 @@ check $? "Expect Test" noexit
 make SCRIPTS="" install
 check $? "Expect: make SCRIPTS="" install"
 
-rm -rf /mnt/lfs/sources/$SRCD
-check $? "Expect: /mnt/lfs/sources/expect5.45.4"
+rm -rf $BUILDROOT/sources/$SRCD
+check $? "Expect: $BUILDROOT/sources/expect5.45.4"
 
 

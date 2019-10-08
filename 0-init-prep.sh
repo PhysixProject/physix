@@ -4,7 +4,6 @@
 
 source ./include.sh
 
-LFS='/mnt/lfs'
 PHYSIX=`pwd`
 
 # Used in md5_lookup
@@ -22,10 +21,10 @@ fi
 
 function setup_sources() {
 	local ERROR=0
-	mkdir -v /mnt/lfs/sources
+	mkdir -v $BUILDROOT/sources
 	echo -e "\n\nDownloading Sources..."
 	for pkg in `cat ./wget-list` ; do
-		wget -q --continue --directory-prefix=$LFS/sources $pkg
+		wget -q --continue --directory-prefix=$BUILDROOT/sources $pkg
 		if [ $? -ne 0 ] ; then
 			echo -e "\e[31m[ ERROR ]\e[0m $pkg"
 			ERROR=1
@@ -90,9 +89,9 @@ function init_storage() {
 		exit 1
 	fi
 
-	if [ ! -e /mnt/lfs ] ;  then
+	if [ ! -e $BUILDROOT ] ;  then
 		echo "Creating mountpoint..."
-		mkdir -v /mnt/lfs
+		mkdir -v $BUILDROOT
 	fi
 
 	local FSF=`cat build.conf | grep FS_FORMAT | cut -d'=' -f2`
@@ -124,7 +123,7 @@ function init_storage() {
 		exit 1
 	fi
 
-	mount $DEVICE /mnt/lfs
+	mount $DEVICE $BUILDROOT
 	if [ $? -ne 0 ] ; then
 		echo "[ERROR] mounting $DEVICE"
 		exit 1
@@ -139,56 +138,56 @@ function main() {
 	if [ $? -ne 0 ] ; then
 		echo "[ERROR] One or more source packages have failed to downlowd. View the log"
 		echo "messages above to determine which, and download it manually from another"
-		echo "location. Place the source in /mnt/lfs/sources, and restart INSTALL.sh"
+		echo "location. Place the source in $BUILDROOT/sources, and restart INSTALL.sh"
 		exit 1
 	fi
 
-	md5_verify '/mnt/lfs/sources'
+	md5_verify "$BUILDROOT/sources"
 
 	ln -sfv /usr/bin/bash /usr/bin/sh
 	ln -sfv /usr/bin/gawk /usr/bin/awk
 
-	mkdir -v $LFS/tools
-	ln -sfv $LFS/tools /
+	mkdir -v $BUILDROOT/tools
+	ln -sfv $BUILDROOT/tools /
 
-	groupadd lfs
+	groupadd physix
 
-	grep -q lfs /etc/passwd
+	grep -q physix /etc/passwd
 	if [ $? -ne 0 ] ; then
-		useradd -s /bin/bash -g lfs -m -k /dev/null lfs
+		useradd -s /bin/bash -g physix -m -k /dev/null physix
 	fi
 
-	echo "Set passwd for user 'lfs' on host system:"
-	passwd lfs
+	echo "Set passwd for user 'physix' on host system:"
+	passwd physix
 
-cat > /home/lfs/.bash_profile << "EOF"
+cat > /home/physix/.bash_profile << "EOF"
 exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF
 
-cat > /home/lfs/.bashrc << "EOF"
+cat > /home/physix/.bashrc << "EOF"
 set +h
 umask 022
-LFS=/mnt/lfs
+BUILDROOT=$BUILDROOT
 LC_ALL=POSIX
-LFS_TGT=$(uname -m)-lfs-linux-gnu
+BUILDROOT_TGT=$(uname -m)-lfs-linux-gnu
 PATH=/tools/bin:/bin:/usr/bin
 export LFS LC_ALL LFS_TGT PATH
 EOF
 
-	chown -v lfs $LFS/tools
-	chown -v lfs $LFS/sources
+	chown -v physix $BUILDROOT/tools
+	chown -v physix $BUILDROOT/sources
 
 	DPATH=$(dirname `pwd`)
-	cp -r $PHYSIX $LFS
-	chmod 777 $LFS/physix
+	cp -r $PHYSIX $BUILDROOT
+	chmod 777 $BUILDROOT/physix
 
-	chown lfs:lfs $LFS/physix
-	chown lfs:lfs $LFS/physix/system_scripts
+	chown physix:physix $BUILDROOT/physix
+	chown physix:physix $BUILDROOT/physix/system_scripts
 
-	mkdir /mnt/lfs/system-build-logs
-	chmod 777 /mnt/lfs/system-build-logs
-	touch /mnt/lfs/system-build-logs/build.log
-	chmod 666 /mnt/lfs/system-build-logs/build.log
+	mkdir $BUILDROOT/system-build-logs
+	chmod 777 $BUILDROOT/system-build-logs
+	touch $BUILDROOT/system-build-logs/build.log
+	chmod 666 $BUILDROOT/system-build-logs/build.log
 }
 
 function usage() {

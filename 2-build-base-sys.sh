@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /mnt/lfs/physix/include.sh
+source ./include.sh
 
 IAM=`whoami`
 if [ "$IAM" != "root" ] ; then
@@ -12,8 +12,8 @@ if [ "$IAM" != "root" ] ; then
 fi
 
 CWD=`pwd`
-if [ "$CWD" != "/mnt/lfs/physix" ] ; then
-	echo "[ERROR] must run from /mnt/lfs/physix, exiting..."
+if [ "$CWD" != "$BUILDROOT/physix" ] ; then
+	echo "[ERROR] must run from $BUILDROOT/physix, exiting..."
 	exit 1
 fi
 

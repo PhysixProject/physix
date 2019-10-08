@@ -1,18 +1,18 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-export LFS='/mnt/lfs'
+export BUILDROOT='/mnt/physix'
 
 function ok() {
 	local MSG=$1
 	echo -e "\e[92m[OK]\e[0m $MSG"
-	echo "[OK] $MSG\n" >> /mnt/lfs/system-build-logs/build.log
+	echo "[OK] $MSG\n" >> $BUILDROOT/system-build-logs/build.log
 }
 
 function error() {
 	local MSG=$1
 	echo -e "\e[31m[ERROR]\e[0m $MSG"
-	echo "[ERROR] $MSG\n" >> /mnt/lfs/system-build-logs/build.log
+	echo "[ERROR] $MSG\n" >> $BUILDROOT/system-build-logs/build.log
 }
 
 function chroot_ok() {
@@ -58,7 +58,7 @@ function check() {
 	if [ $RTN -ne 0 ] ; then
 		error "$MSG"
 		if [ $NOEXIT == "FALSE" ] ; then
-			grep '\[ERROR\]' /mnt/lfs/system-build-logs/*.sh > /mnt/lfs/system-build-logs/err.log
+			grep '\[ERROR\]' $BUILDROOT/system-build-logs/*.sh > $BUILDROOT/system-build-logs/err.log
 			exit 1
 		fi
 	else
@@ -98,8 +98,8 @@ function chroot-conf-build {
 		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"
 	fi
 
-	chroot "/mnt/lfs" /tools/bin/env -i HOME=/root  TERM="$TERM" \
-		PS1='(lfs chroot) \u:\w\$ ' \
+	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
+		PS1='(physix chroot) \u:\w\$ ' \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin \
 		/bin/bash --login -c "$SPATH/$SCRIPT $PKG $IO_DIRECTION"
 }
@@ -113,8 +113,8 @@ function chroot-build {
 	local PKG0=${3:-''}
 	local PKG1=${4:-''}
 
-	chroot "/mnt/lfs" /tools/bin/env -i HOME=/root  TERM="$TERM" \
-		PS1='(lfs chroot) \u:\w\$ '   \
+	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
+		PS1='(physix chroot) \u:\w\$ '   \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
 		/tools/bin/bash --login +h -c "$SPATH/$SCRIPT $PKG0 $PKG1 &> /system-build-logs/$SCRIPT"
 }
@@ -160,12 +160,12 @@ function chrooted-unpack() {
 function unpack() {
 	
 	PKG=$1
-	cd /mnt/lfs/sources
+	cd $BUILDROOT/sources
 
         echo $PKG | grep 'tar.gz'                                               
         if [ $? -eq 0 ]  ; then                                                 
                 DIR=`echo $PKG | sed s/.tar.gz//`                               
-                if [ -d /mnt/lfs/sources/$DIR ] ; then                                  
+                if [ -d $BUILDROOT/sources/$DIR ] ; then                                  
                         rm -rvf $DIR                                            
                 fi                                                              
         fi                                                                      
@@ -174,7 +174,7 @@ function unpack() {
         echo $PKG | grep 'tar.bz2'                                              
         if [ $? -eq 0 ]  ; then                                                 
                 DIR=`echo $PKG | sed s/.tar.bz2//`                              
-                if [ -d /mnt/lfs/sources/$DIR ] ; then                                  
+                if [ -d $BUILDROOT/sources/$DIR ] ; then                                  
                         rm -rvf $DIR                                            
                 fi                                                              
         fi                                                                      
@@ -182,12 +182,12 @@ function unpack() {
         echo $PKG | grep 'tar.xz'                                               
         if [ $? -eq 0 ]  ; then                                                 
                 DIR=`echo $PKG | sed s/.tar.xz//`                               
-                if [ -d /mnt/lfs/sources/$DIR ] ; then                                  
+                if [ -d $BUILDROOT/sources/$DIR ] ; then                                  
                         rm -rvf $DIR                                            
                 fi                                                              
         fi
 
-	tar xf $PKG -C /mnt/lfs/sources
+	tar xf $PKG -C $BUILDROOT/sources
 	check $? "tar xf $PKG"
 }
 

@@ -2,10 +2,11 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /mnt/lfs/physix/include.sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh               
 source ~/.bashrc
 
-cd /mnt/lfs/sources      
+cd $BUILDROOT/sources      
 PKG=$1
 unpack $PKG
 stripit $PKG
@@ -26,9 +27,9 @@ unpack $PKG3
 stripit $PKG3
 SRCD3=$STRIPPED
 
-cd /mnt/lfs/sources/$SRCD
+cd $BUILDROOT/sources/$SRCD
 
-cat gcc/limitx.h gcc/glimits.h gcc/limity.h > `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
+cat gcc/limitx.h gcc/glimits.h gcc/limity.h > `dirname $($BUILDROOT_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
 
 for file in gcc/config/{linux,i386/linux{,64}}.h
 do
@@ -63,10 +64,10 @@ mv -v ../$SRCD3 ./mpc
 mkdir -v build
 cd       build
 
-CC=$LFS_TGT-gcc                                    \
-CXX=$LFS_TGT-g++                                   \
-AR=$LFS_TGT-ar                                     \
-RANLIB=$LFS_TGT-ranlib                             \
+CC=$BUILDROOT_TGT-gcc                                    \
+CXX=$BUILDROOT_TGT-g++                                   \
+AR=$BUILDROOT_TGT-ar                                     \
+RANLIB=$BUILDROOT_TGT-ranlib                             \
 ../configure                                       \
     --prefix=/tools                                \
     --with-local-prefix=/tools                     \
@@ -88,7 +89,7 @@ check $? "GCC P2 make install"
 ln -sv gcc /tools/bin/cc
 check $? "gcc P2: ln -sv gcc /tools/bin/cc"
 
-rm -rf /mnt/lfs/sources/$SRCD
-check $? "gcc P2: rm -rf /mnt/lfs/sources/gcc-8.2.0"
+rm -rf $BUILDROOT/sources/$SRCD
+check $? "gcc P2: rm -rf $BUILDROOT/sources/gcc-8.2.0"
 
 

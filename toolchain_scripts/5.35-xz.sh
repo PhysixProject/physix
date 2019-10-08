@@ -1,17 +1,19 @@
 #!/bin/bash                                                                    
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-                                                                                
-source /mnt/lfs/physix/include.sh                                                               
+
+
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh
 source ~/.bashrc
 
-cd /mnt/lfs/sources
+cd $BUILDROOT/sources
 PKG=$1
 stripit $PKG
 SRCD=$STRIPPED
 
 unpack $PKG
-cd /mnt/lfs/sources/$SRCD
+cd $BUILDROOT/sources/$SRCD
 
 ./configure --prefix=/tools
 check $? "xz: Configure"
@@ -26,5 +28,5 @@ check $? "Tar: make check" noexit
 make install
 check $? "xz: make install"
 
-rm -rfv /mnt/lfs/sources/$SRCD
+rm -rfv $BUILDROOT/sources/$SRCD
 

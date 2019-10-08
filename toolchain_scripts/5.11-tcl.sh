@@ -2,17 +2,17 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-
-source /mnt/lfs/physix/include.sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh               
 source ~/.bashrc
 
-cd /mnt/lfs/sources      
+cd $BUILDROOT/sources      
 PKG=$1                   
 stripit $PKG             
 SRCD=$STRIPPED           
                          
 unpack $PKG              
-cd /mnt/lfs/sources/$SRCD
+cd $BUILDROOT/sources/$SRCD
 
 
 cd unix
@@ -36,6 +36,6 @@ check $? "TCL make install-private-headers"
 ln -sv tclsh8.6 /tools/bin/tclsh
 check $? "TCL ln -sv tclsh8.6 /tools/bin/tclsh"
 
-rm -rf /mnt/lfs/sources/$SRCD
-check $? "TCL: /mnt/lfs/sources/tcl8.6.9"
+rm -rf $BUILDROOT/sources/$SRCD
+check $? "TCL: $BUILDROOT/sources/tcl8.6.9"
 

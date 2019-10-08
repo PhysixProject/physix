@@ -2,9 +2,10 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /mnt/lfs/physix/include.sh
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+source $SCRIPTPATH/../include.sh               
 source ~/.bashrc
 
-chown -R root:root $LFS/tools
-check $? "chown -R root:root $LFS/tools"
+chown -R root:root $BUILDROOT/tools
+check $? "chown -R root:root $BUILDROOT/tools"
 

@@ -26,7 +26,7 @@ check $? "0-init-prep.sh -d : Setup Storage Device"
 ./0-init-prep.sh -s
 check $? "0-init-prep.sh -s : Get sources, lfs user setup"
 
-cd /mnt/lfs/physix/
+cd $BUILDROOT/physix/
 
 ./1-build_toolchain.sh
 check $? "1-build_toolchain.sh"
