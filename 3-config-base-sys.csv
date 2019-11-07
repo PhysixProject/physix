@@ -5,5 +5,5 @@ log,7.10-disable-clrscrn.sh,
 log,8.2-fstab.sh,
 log,8.3-kernel.sh,linux-5.2.8.tar.xz
 console,8.4-grub.sh,
-console,8.7-set-root-password.sh,
+console,8.7-setup-users-password.sh,
 log,9.1-os-release.sh,

@@ -16,66 +16,6 @@ if [ $user != 'root' ] ; then
 	exit 1
 fi
 
-# Call host system check
-
-
-function setup_sources() {
-	local ERROR=0
-	mkdir -v $BUILDROOT/sources
-	echo -e "\n\nDownloading Sources..."
-	for pkg in `cat ./wget-list` ; do
-		wget -q --continue --directory-prefix=$BUILDROOT/sources $pkg
-		if [ $? -ne 0 ] ; then
-			echo -e "\e[31m[ ERROR ]\e[0m $pkg"
-			ERROR=1
-		else
-			echo -e "\e[92m[ OK ]\e[0m $pkg"
-		fi
-	done
-	return $ERROR
-}
-
-
-# Fetch the expected md5sum of a source package.
-function md5_lookup() {
-	local FILE_NAME=$1
-	local MD5SUM=''
-	RTN=''
-	for ENTRY in `cat ./md5sum.lst` ; do
-		ENTRY_NAME=`echo $ENTRY | cut -d ',' -f1`
-		MD5SUM=`echo $ENTRY | cut -d ',' -f2`
-		if [ "$ENTRY_NAME" == "$FILE_NAME" ] ; then
-			RTN=$MD5SUM
-			return
-		fi
-	done
-}
-
- 
-function md5_verify() {
-	local SOURCES_DIR=$1
-	local ERR=0
-
-	echo -e "\n\nVerify Sources md5sums..."
-	for FILE in `ls $SOURCES_DIR` ; do
-		md5_lookup $FILE
-		C=`md5sum $SOURCES_DIR/$FILE | cut -d' ' -f1`
-		if [ "$RTN" == "$C" ] ; then
-			echo -ne "\e[92m[ OK ]\e[0m "
-		else
-			echo -ne "\e[31m[ ERROR ]\e[0m "
-			ERR=1
-		fi
-		echo  "$FILE: $C"
-	done
-
-	if [ $ERR -ne 0  ] ; then
-		echo "[FAIL] CHECK YOUR SOURCES! At lease 1 package is not Authentic."
-		exit 1
-	fi
-}
-
-
 # format storage
 # mount storage
 function init_storage() {
@@ -104,7 +44,6 @@ function init_storage() {
 	local LSBLK=`which lsblk`
 	if [ -e $LSBLK ] ; then eval $LSBLK; fi	
 
-	echo -e "\n\n--------------------------------------------------------------"
 	echo "You have requested to install to $DEVICE"
 	echo "build.conf specifies $FSF as the desired File System Format"
 	echo "This will format/Erase ALL Data on $DEVICE"
@@ -112,7 +51,6 @@ function init_storage() {
 	read RESP
 	if [ $RESP == "yes" ] ; then
 		echo "Formatting $DEVICE..."
-		sleep 5
 		eval $MKFS $DEVICE
 		if [ $? -ne 0 ] ; then 
 			echo "[ERROR] Formatting $DEVICE" 
@@ -134,15 +72,22 @@ function init_storage() {
 
 function main() {
 
-	setup_sources
-	if [ $? -ne 0 ] ; then
-		echo "[ERROR] One or more source packages have failed to downlowd. View the log"
-		echo "messages above to determine which, and download it manually from another"
-		echo "location. Place the source in $BUILDROOT/sources, and restart INSTALL.sh"
-		exit 1
-	fi
+	echo "Downloading src-list.base"                                      
+	pull_sources ./src-list.base $BUILDROOT/sources                       
+	verify_md5list "$BUILDROOT/sources" md5sum-list.base                  
+                                                                      
+	CONF_UTILS=`cat /physix/build.conf | grep CONF_UTILS | cut -d'=' -f2` 
+	if [ "$CONF_UTILS" == "y" ] ; then                                    
+	        pull_sources ./src-list.utils $BUILDROOT/sources              
+		verify_md5list "$BUILDROOT/sources" md5sum-list.utils         
+	fi                                                                    
+                                                                      
+	CONF_DEVEL=`cat /physix/build.conf | grep CONF_DEVEL | cut -d'=' -f2` 
+	if [ "$CONF_DEVEL" == "y" ] ; then                                    
+		pull_sources ./src-list.devel $BUILDROOT/sources              
+		verify_md5list "$BUILDROOT/sources" md5sum-list.devel         
+	fi                                                                    
 
-	md5_verify "$BUILDROOT/sources"
 
 	ln -sfv /usr/bin/bash /usr/bin/sh
 	ln -sfv /usr/bin/gawk /usr/bin/awk

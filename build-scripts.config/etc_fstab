@@ -1,0 +1,11 @@
+
+# Begin /etc/fstab
+
+# file system  mount-point  type     options             dump  fsck
+#                                                              order
+
+REPLACE_MARKER_STR     /           REPLACE_MARKER_FS    defaults            1     1
+#/dev/REPLACE_MARKER_SWP     swap         swap     pri=1               0     0
+
+# End /etc/fstab
+

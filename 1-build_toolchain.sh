@@ -35,14 +35,14 @@ for LINE in `cat ./1-build_toolchain.csv` ; do
         echo "$TIME : $BUILD_ID : Building $SCRIPT"
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-		su physix -c "./toolchain_scripts/$SCRIPT $PKG0 $PKG1 $PKG2 $PKG3" &> $TOOLCHAINLOGS/$SCRIPT
+		su physix -c "./build-scripts.toolchain/$SCRIPT $PKG0 $PKG1 $PKG2 $PKG3" &> $TOOLCHAINLOGS/$SCRIPT
 		check $? "$SCRIPT"
 		echo ''
 	fi
 	BUILD_ID=$((BUILD_ID+1))
 done 
 
-./toolchain_scripts/5.37-chown.sh
+./build-scripts.toolchain/5.37-chown.sh
 check $? "5.37-chown.sh"
 
 exit 0

@@ -65,7 +65,7 @@
 6.69-tar.sh,tar-1.32.tar.xz
 6.70-texinfo.sh,texinfo-6.6.tar.xz
 6.71-vim.sh,vim-8.1.1846.tar.gz
-6.72-systemd.sh,systemd-241.tar.gz,systemd-man-pages-241.tar.xz
+6.72-systemd.sh,systemd-243.tar.gz,systemd-man-pages-243.tar.xz
 6.73-dbus.sh,dbus-1.12.16.tar.gz
 6.74-procps-ng.sh,procps-ng-3.3.15.tar.xz
 6.75-util-linux.sh,util-linux-2.34.tar.xz

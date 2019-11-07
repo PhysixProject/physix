@@ -26,7 +26,7 @@ STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
 BUILD_ID=0
 TIME=`date "+%D %T"`
 echo "$TIME : $BUILD_ID : Building 6.02-prep.sh"
-./system_scripts/6.02-prep.sh
+./build-scripts.base/6.02-prep.sh
 check $? "6.02-prep"
 
 BUILD_ID=$((BUILD_ID+1))
@@ -37,8 +37,8 @@ for LINE in `cat ./2-build-base-sys.csv` ; do
 
 	TIME=`date "+%D %T"`
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-		echo "$TIME : $BUILD_ID : Building $SCRIPT"
-		chroot-build '/physix/system_scripts' $SCRIPT $PKG0 $PKG1
+		echo "$TIME : $BUILD_ID : Building $SCRIPT $PKG0 $PKG1"
+		chroot-build '/physix/build-scripts.base' $SCRIPT $PKG0 $PKG1
 		check $? "$SCRIPT"
 		echo ''
 	fi
