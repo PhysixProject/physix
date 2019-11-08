@@ -7,9 +7,12 @@ PKG=$1
 stripit $PKG
 SRCD=$STRIPPED
 
-cd /sources/xc/
+cd /sources/
 unpack $PKG
 cd /sources/$SRCD
+mv $SRCD /sources/xc 
+cd /sources/xc/$SRCD/
+
 
 sed -i "s/pthread-stubs//" configure &&
 rm -f src/fcobjshash.h

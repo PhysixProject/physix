@@ -12,12 +12,15 @@ unpack $PKG
 mv $SRCD /sources/xc 
 cd /sources/xc/$SRCD/
 
-./configure $XORG_CONFIG &&
-make
-chroot_check $? "libxau  : configure and make"
+mkdir build &&
+cd    build &&
 
-make install
-chroot_check $? "libxau : make install"
+meson --prefix=$XORG_PREFIX -Dudev=true &&
+ninja
+chroot_check $? "libdrm : ninja "
+
+ninja install
+chroot_check $? "libdrm : ninja install"
 
 rm -rf /sources/$SRCD
 

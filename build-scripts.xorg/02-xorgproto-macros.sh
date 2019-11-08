@@ -7,15 +7,16 @@ PKG=$1
 stripit $PKG
 SRCD=$STRIPPED
 
-cd /sources/xc/
+cd /sources/
 unpack $PKG
-cd /sources/$SRCD
+mv $SRCD /sources/xc 
+cd /sources/xc/$SRCD/
 
-mkdir build &&
-cd    build &&
-meson --prefix=$XORG_PREFIX .. &&
+mkdir build 
+cd    build 
+meson --prefix=$XORG_PREFIX .. && 
 ninja
-chroot_check $? "xorgprot : ninja"
+chroot_check $? "xorgproto : ninja"
 
 
 ninja install &&

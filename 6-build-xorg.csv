@@ -1,0 +1,17 @@
+log,00-init.sh,
+log,01-util-macros.sh,util-macros-1.19.2.tar.bz2
+log,02-xorgproto-macros.sh,xorgproto-2019.1.tar.bz2
+log,03-libxau.sh,libXau-1.0.9.tar.bz2
+log,04-libXdmcp.sh,libXdmcp-1.1.3.tar.bz2
+log,05-xcb-proto.sh,xcb-proto-1.13.tar.bz2
+log,06-libxcb.sh,libxcb-1.13.1.tar.bz2
+log,07-freetype.sh,freetype-2.10.1.tar.xz
+log,08-fontconfig.sh,fontconfig-2.13.1.tar.bz2
+log,09-xlibs.sh,
+log,10-xcb-util.sh,xcb-util-0.4.0.tar.bz2
+log,11-xcb-util-image.sh,xcb-util-image-0.4.0.tar.bz2
+log,12-xcb-util-keysyms.sh,xcb-util-keysyms-0.4.0.tar.bz2
+log,13-xcb-util-renderutil.sh,xcb-util-renderutil-0.3.9.tar.bz2
+log,14-xcb-util-wm.sh,xcb-util-wm-0.4.1.tar.bz2
+log,15-xcb-util-cursor.sh,xcb-util-cursor-0.1.3.tar.bz2
+log,16-libdrm.sh,libdrm-2.4.99.tar.bz2

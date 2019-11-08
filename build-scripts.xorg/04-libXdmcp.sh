@@ -9,7 +9,8 @@ SRCD=$STRIPPED
 
 cd /sources/xc/
 unpack $PKG
-cd /sources/$SRCD
+mv $SRCD /sources/xc 
+cd /sources/xc/$SRCD/
 
 ./configure $XORG_CONFIG &&
 make
