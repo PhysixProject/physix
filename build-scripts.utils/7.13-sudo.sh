@@ -13,12 +13,15 @@ cd /sources/$SRCD
 
 GUSER=`cat /physix/build.conf | grep GEN_USER | cut -d'=' -f2`
 
+sed -e '/^pre-install:/{N;s@;@ -a -r $(sudoersdir)/sudoers;@}' \
+    -i plugins/sudoers/Makefile.in
+
 ./configure --prefix=/usr              \
             --libexecdir=/usr/lib      \
             --with-secure-path         \
             --with-all-insults         \
             --with-env-editor          \
-            --docdir=/usr/share/doc/sudo-1.8.27 \
+            --docdir=/usr/share/doc/sudo-1.8.29 \
             --with-passprompt="[sudo] password for %p: " 
 chroot_check $? "sudo : configure"
 
