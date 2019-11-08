@@ -74,18 +74,18 @@ function main() {
 
 	echo "Downloading src-list.base"                                      
 	pull_sources ./src-list.base $BUILDROOT/sources                       
-	verify_md5list "$BUILDROOT/sources" md5sum-list.base                  
+	#verify_md5list "$BUILDROOT/sources" md5sum-list.base                  
                                                                       
 	CONF_UTILS=`cat /physix/build.conf | grep CONF_UTILS | cut -d'=' -f2` 
 	if [ "$CONF_UTILS" == "y" ] ; then                                    
 	        pull_sources ./src-list.utils $BUILDROOT/sources              
-		verify_md5list "$BUILDROOT/sources" md5sum-list.utils         
+		#verify_md5list "$BUILDROOT/sources" md5sum-list.utils         
 	fi                                                                    
                                                                       
 	CONF_DEVEL=`cat /physix/build.conf | grep CONF_DEVEL | cut -d'=' -f2` 
 	if [ "$CONF_DEVEL" == "y" ] ; then                                    
 		pull_sources ./src-list.devel $BUILDROOT/sources              
-		verify_md5list "$BUILDROOT/sources" md5sum-list.devel         
+		#verify_md5list "$BUILDROOT/sources" md5sum-list.devel         
 	fi                                                                    
 
 

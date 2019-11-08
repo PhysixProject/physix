@@ -26,8 +26,10 @@ STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
 BUILD_ID=0
 TIME=`date "+%D %T"`
 echo "$TIME : $BUILD_ID : Building 6.02-prep.sh"
-./build-scripts.base/6.02-prep.sh
-check $? "6.02-prep"
+if [ $START_POINT -eq 0 ] ; then
+	./build-scripts.base/2.020-prep.sh
+	check $? "2.020-prep"
+fi
 
 BUILD_ID=$((BUILD_ID+1))
 for LINE in `cat ./2-build-base-sys.csv` ; do

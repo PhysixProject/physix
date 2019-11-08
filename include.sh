@@ -120,37 +120,6 @@ function chroot-build {
 }
 
 
-#function chrooted-unpack() {
-#        PKG=$1
-#	cd /sources
-#
-#	strippit $PKG 
-#	DIR=$STRIPPED
-#
-#	if [ -d /sources/$DIR ] ; then
-#		rm -rvf $DIR
-#	fi
-# 
-#        tar xf $PKG -C /sources
-#        check $? "tar xf $PKG"
-#}
-
-
-#function unpack() {
-#	PKG=$1
-#	cd $BUILDROOT/sources
-#
-#	strippit $PKG
-#	DIR=$STRIPPED
-#
-#	if [ -d $BUILDROOT/sources/$DIR ] ; then
-#		rm -rvf $DIR
-#	fi
-#
-#	tar xf $PKG -C $BUILDROOT/sources
-#	check $? "tar xf $PKG"
-#}
-
 # Unpacks source archives. 
 # Assumes chrooted env uless NCHRT Flag is passsed as arg 2
 function unpack() {
@@ -186,60 +155,32 @@ function pull_sources() {
 	fi
 
         echo -e "\n\nDownloading $LIST Sources..."
-        for pkg in `cat $LIST | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
-                wget -q --continue --directory-prefix=$DEST_DIRECTORY $pkg
+        for LINE in `cat $LIST | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
+		local PKG_NAME=`echo $LINE | cut -d, -f1`
+		local PKG_URL=`echo $LINE | cut -d, -f2`
+		local PKG_MD5=`echo $LINE | cut -d, -f3`
+		echo "PKG_NAME $PKG_NAME"
+		echo "PKG_URL $PKG_URL"
+		echo "PKG_MD5 $PKG_MD5"
+                wget -q --continue --directory-prefix=$DEST_DIRECTORY $PKG_URL
                 if [ $? -ne 0 ] ; then
-                        echo -e "\e[31m[ ERROR ]\e[0m $pkg"
+                        echo -e "\e[31m[ ERROR ]\e[0m Downloading $PKG_URL"
                         ERROR=1
                 else
-                        echo -e "\e[92m[ OK ]\e[0m $pkg"
+                        echo -e "\e[92m[ OK ]\e[0m Downloading $PKG_URL"
                 fi
+
+		C=`md5sum $DEST_DIRECTORY/$PKG_NAME | cut -d' ' -f1`
+		if [ "$PKG_MD5" == "$C" ] ; then             
+		        echo -e "\e[92m[ OK ]\e[0m MD5-check $PKG_NAME : $PKG_MD5"    
+		else                                     
+		        echo -e "\e[31m[ ERROR ]\e[0m MD5-Check $PKG_NAME : $PKG_MD5" 
+			echo "[FAIL] CHECK YOUR SOURCES! At lease 1 package is not Authentic."
+		        ERROR=1                            
+		fi                                       
+
         done
         return $ERROR
-}
-
-# Fetch the expected md5sum of a source package.
-function md5_lookup() {
-        local FILE_NAME=$1
-	local LIST=$2
-        local MD5SUM=''
-        RTN=''
-        for ENTRY in `cat ./$LIST | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
-                ENTRY_NAME=`echo $ENTRY | cut -d ',' -f1`
-                MD5SUM=`echo $ENTRY | cut -d ',' -f2`
-                if [ "$ENTRY_NAME" == "$FILE_NAME" ] ; then
-                        RTN=$MD5SUM
-                        return
-                fi
-        done
-}
-
-function verify_md5list() {
-        local SOURCES_DIR=$1
-        local LIST=$2
-        local ERR=0
-	local ENTRY=''
-
-        echo -e "\n\nVerify Sources md5sums..." 
-        for ENTRY in `cat $LIST | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
-
-		FILE_NAME=`echo $ENTRY | cut -d ',' -f1`
-		MD5=`echo $ENTRY | cut -d ',' -f2`
-
-                C=`md5sum $SOURCES_DIR/$FILE_NAME | cut -d' ' -f1`
-                if [ "$MD5" == "$C" ] ; then
-                        echo -ne "\e[92m[ OK ]\e[0m "
-                else
-                        echo -ne "\e[31m[ ERROR ]\e[0m "
-                        ERR=1
-                fi
-                echo  "$FILE_NAME: $C"
-        done
-
-        if [ $ERR -ne 0  ] ; then
-                echo "[FAIL] CHECK YOUR SOURCES! At lease 1 package is not Authentic."
-                exit 1
-        fi
 }
 
 

@@ -42,8 +42,8 @@ for LINE in `cat ./1-build_toolchain.csv` ; do
 	BUILD_ID=$((BUILD_ID+1))
 done 
 
-./build-scripts.toolchain/5.37-chown.sh
-check $? "5.37-chown.sh"
+./build-scripts.toolchain/1.370-chown.sh
+check $? "1.370-chown.sh"
 
 exit 0
 
