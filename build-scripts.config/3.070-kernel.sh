@@ -24,11 +24,11 @@ chroot_check $? "system config: kernel : make"
 make modules_install
 chroot_check $? "system config: kernel : make module_install"
 
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-5.2.8-physix
+cp -v arch/x86/boot/bzImage /boot/vmlinuz-5.2.8-physix
 
-cp -iv System.map /boot/System.map-5.2.8
+cp -v System.map /boot/System.map-5.2.8
 
-cp -iv .config /boot/config-5.2.8
+cp -v .config /boot/config-5.2.8
 
 install -d /usr/share/doc/linux-5.2.8
 chroot_check $? "system config: kernel : install kernel doc"
