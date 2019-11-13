@@ -173,6 +173,14 @@ function check_build_conf() {
 #####  MAIN  ######
 check_build_conf
 
+verify_tools
+if [ $? -eq 0 ] ; then
+        echo "[ OK ] HOst tools verification"
+else
+        echo "[ FAIL ] HOst tools verification"
+        exit 1
+fi
+
 TEMP=`getopt -o s::d::h::v:: -n '0-init-prep.sh' -- "$@"`
 eval set -- "$TEMP"
 if [ $? -ne 0 ] ; then
