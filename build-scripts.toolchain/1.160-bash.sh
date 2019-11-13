@@ -27,7 +27,7 @@ check $? "bash make tests" noexit
 make install
 check $? "bash  make install"
 
-ln -sv bash /tools/bin/sh
+ln -sfv bash /tools/bin/sh
 check $? "bash: ln -sv bash /tools/bin/sh"
 
 rm -rf $BUILDROOT/sources/$SRCD
