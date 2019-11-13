@@ -3,6 +3,20 @@
 
 export BUILDROOT='/mnt/physix'
 
+function verify_tools() {
+
+       echo "Looking for required tools on host systemd..."
+       for TOOL in mkfs.ext3 gcc g++ make gawk bison ; do
+               which $TOOL
+               if [ $? -ne 0 ] ; then
+                       echo "$TOOL Not Found."
+                       exit 1
+               fi
+       done
+
+}
+
+
 function ok() {
         local MSG=$1
 	local BR=''
