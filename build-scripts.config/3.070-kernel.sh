@@ -18,7 +18,7 @@ chroot_check $? "system config: kernel : make mr_proper"
 make defconfig
 chroot_check $? "system config: kernel : make defconfig "
 
-make
+make -j$NPROC
 chroot_check $? "system config: kernel : make"
 
 make modules_install

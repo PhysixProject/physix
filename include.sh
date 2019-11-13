@@ -2,6 +2,8 @@
 # Copyright (C) 2019 Travis Davies
 
 export BUILDROOT='/mnt/physix'
+NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
+export $NPROC                                   
 
 function verify_tools() {
 
