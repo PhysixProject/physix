@@ -74,3 +74,4 @@ make-ca-1.4.tar.xz,http://physix-os.org/sysV-1.0/make-ca-1.4.tar.xz,995896ca8b4e
 wget-1.20.3.tar.gz,http://physix-os.org/sysV-1.0/wget-1.20.3.tar.gz,db4e6dc7977cbddcd543b240079a4899
 LVM2.2.03.05.tgz,http://physix-os.org/sysV-1.0/LVM2.2.03.05.tgz,22e4a9e66b94bbfcf81444472ed32a2d
 pcre-8.43.tar.bz2,http://physix-os.org/sysV-1.0/pcre-8.43.tar.bz2,636222e79e392c3d95dcc545f24f98c4
+libxslt-1.1.33.tar.gz,http://physix-os.org/sysV-1.0/libxslt-1.1.33.tar.gz,b3bd254a03e46d58f8ad1e4559cd2c2f
