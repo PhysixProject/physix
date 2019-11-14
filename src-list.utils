@@ -21,6 +21,7 @@ nspr-4.21.tar.gz,http://physix-os.org/sysV-1.0/nspr-4.21.tar.gz,b865586f19912a50
 libtirpc-1.1.4.tar.bz2,http://physix-os.org/sysV-1.0/libtirpc-1.1.4.tar.bz2,f5d2a623e9dfbd818d2f3f3a4a878e3a
 db-5.3.28.tar.gz,http://physix-os.org/sysV-1.0/db-5.3.28.tar.gz,b99454564d5b4479750567031d66fe24
 Linux-PAM-1.3.1.tar.xz,http://physix-os.org/sysV-1.0/Linux-PAM-1.3.1.tar.xz,558ff53b0fc0563ca97f79e911822165
+Linux-PAM-1.3.1-docs.tar.xz,http://physix-os.org/sysV-1.0/Linux-PAM-1.3.1-docs.tar.xz,1885fae049acd1b699a5459d7c4a0130
 shadow-4.7.tar.xz,http://physix-os.org/sysV-1.0/shadow-4.7.tar.xz,f7ce18c8dfd05f1a009266cb604d58b7
 liboauth-1.0.3.tar.gz,http://physix-os.org/sysV-1.0/liboauth-1.0.3.tar.gz,689b46c2b3ab1a39735ac33f714c4f7f
 liboauth-1.0.3-openssl-1.1.0-3.patch,http://physix-os.org/sysV-1.0/liboauth-1.0.3-openssl-1.1.0-3.patch,51bbc279d66a756f249c7ec1d27abf1a
@@ -41,7 +42,6 @@ p11-kit-0.23.16.1.tar.gz,http://physix-os.org/sysV-1.0/p11-kit-0.23.16.1.tar.gz,
 cracklib-words-2.9.7.bz2,http://physix-os.org/sysV-1.0/cracklib-words-2.9.7.bz2,94e9963e4786294f7fb0f2efd7618551
 libunistring-0.9.10.tar.xz,http://physix-os.org/sysV-1.0/libunistring-0.9.10.tar.xz,db08bb384e81968957f997ec9808926e
 db-5.3.28.tar.gz,http://physix-os.org/sysV-1.0/db-5.3.28.tar.gz,b99454564d5b4479750567031d66fe24
-Linux-PAM-1.3.1.tar.xz,http://physix-os.org/sysV-1.0/Linux-PAM-1.3.1.tar.xz,558ff53b0fc0563ca97f79e911822165
 shadow-4.7.tar.xz,http://physix-os.org/sysV-1.0/shadow-4.7.tar.xz,f7ce18c8dfd05f1a009266cb604d58b7
 liboauth-1.0.3.tar.gz,http://physix-os.org/sysV-1.0/liboauth-1.0.3.tar.gz,689b46c2b3ab1a39735ac33f714c4f7f
 libpwquality-1.4.0.tar.bz2,http://physix-os.org/sysV-1.0/libpwquality-1.4.0.tar.bz2,b8defcc7280a90e9400d6689c93a279c
