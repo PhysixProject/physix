@@ -71,3 +71,4 @@ traceroute-2.1.0.tar.gz,http://physix-os.org/sysV-1.0/traceroute-2.1.0.tar.gz,84
 mutt-1.12.1.tar.gz,http://physix-os.org/sysV-1.0/mutt-1.12.1.tar.gz,f77586a895f12d19de9c5250a4dfd034
 blfs-bootscripts-20190609.tar.xz,http://physix-os.org/sysV-1.0/blfs-bootscripts-20190609.tar.xz,9e2aaee06008c801a72fd252b6506044
 make-ca-1.4.tar.xz,http://physix-os.org/sysV-1.0/make-ca-1.4.tar.xz,995896ca8b4ee1f92a4a8fa46585d59d
+wget-1.20.3.tar.gz,http://physix-os.org/sysV-1.0/wget-1.20.3.tar.gz,db4e6dc7977cbddcd543b240079a4899
