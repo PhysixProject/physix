@@ -3,7 +3,7 @@
 
 export BUILDROOT='/mnt/physix'
 NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
-export $NPROC                                   
+export NPROC
 
 function verify_tools() {
 
