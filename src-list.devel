@@ -10,3 +10,4 @@ libarchive-3.4.0.tar.gz,http://physix-os.org/sysV-1.0/libarchive-3.4.0.tar.gz,60
 llvm-8.0.1.src.tar.xz,http://physix-os.org/sysV-1.0/llvm-8.0.1.src.tar.xz,9a3b63df01c52556f7afb5617934e79e
 cfe-8.0.1.src.tar.xz,http://physix-os.org/sysV-1.0/cfe-8.0.1.src.tar.xz,28db72b57ca99307259773e4ac74a6d3
 compiler-rt-8.0.1.src.tar.xz,http://physix-os.org/sysV-1.0/compiler-rt-8.0.1.src.tar.xz,c251e582862f9fcc880802f8f2920096
+libssh2-1.9.0.tar.gz,http://physix-os.org/sysV-1.0/libssh2-1.9.0.tar.gz,1beefafe8963982adc84b408b2959927
