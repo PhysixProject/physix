@@ -39,4 +39,9 @@ ln -sv /proc/self/mounts /etc/mtab
 cp /physix/build-scripts.base/etc_passwd /etc/passwd
 cp /physix/build-scripts.base/etc_group /etc/group
 
+touch /var/log/{btmp,lastlog,faillog,wtmp}
+chgrp -v utmp /var/log/lastlog
+chmod -v 664  /var/log/lastlog
+chmod -v 600  /var/log/btmp
+
 
