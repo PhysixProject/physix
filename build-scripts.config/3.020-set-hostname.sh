@@ -4,7 +4,7 @@
 
 source /physix/include.sh
 
-HN=`cat /physix/build.conf | grep HOSTNAME | cut -d'=' -f2`
+HN=`cat /physix/build.conf | grep CONF_HOSTNAME | cut -d'=' -f2`
 echo $HN > /etc/hostname
 chroot_check $? "system config : Set hostname from build.conf "
 

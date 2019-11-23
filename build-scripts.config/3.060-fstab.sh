@@ -4,9 +4,9 @@
 
 source /physix/include.sh
 
-ROOT_PART=`cat /physix/build.conf | grep ROOT_PARTITION | cut -d'=' -f2`
+ROOT_PART=`cat /physix/build.conf | grep CONF_ROOT_PARTITION | cut -d'=' -f2`
 ROOT_PART='\/dev\/'$ROOT_PART
-FS_FORMAT=`cat /physix/build.conf | grep FS_FORMAT | cut -d'=' -f2`
+FS_FORMAT=`cat /physix/build.conf | grep CONF_FS_FORMAT | cut -d'=' -f2`
 
 cp -v /physix/build-scripts.config/etc_fstab /etc/fstab
 chroot_check $? "system config : cp -v etc_fstab /etc/fstab "

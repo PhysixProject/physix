@@ -34,7 +34,7 @@ function init_storage() {
 		mkdir -v $BUILDROOT
 	fi
 
-	local FSF=`cat build.conf | grep FS_FORMAT | cut -d'=' -f2`
+	local FSF=`cat build.conf | grep CONF_FS_FORMAT | cut -d'=' -f2`
 	local MKFS=`which mkfs.$FSF` 
 	if [ ! -e $MKFS ] ; then
 		echo "mkfs.$FSF NOT FOUND. exiting..."
@@ -202,7 +202,7 @@ while true ; do
                 ;;
 
 	-d)
-		D=`cat build.conf | grep ROOT_PARTITION | cut -d'=' -f2`
+		D=`cat build.conf | grep CONF_ROOT_PARTITION | cut -d'=' -f2`
 		if [ -e /dev/$D ] ; then
 			init_storage "/dev/$D"
 		else
@@ -220,7 +220,4 @@ while true ; do
         *) usage ; exit 1 ;;
     esac
 done
-
-
-
 

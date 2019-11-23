@@ -5,9 +5,9 @@
 source /physix/include.sh
 
 # This should be dynamically set.
-SET_ROOT=`cat /physix/build.conf | grep GRUB_SET_ROOT | cut -d'=' -f2`
-ROOT_DEV=`cat /physix/build.conf | grep ROOT_DEVICE | cut -d'=' -f2`
-ROOT_PART=`cat /physix/build.conf | grep ROOT_PARTITION | cut -d'=' -f2`
+SET_ROOT=`cat /physix/build.conf | grep CONF_GRUB_SET_ROOT | cut -d'=' -f2`
+ROOT_DEV=`cat /physix/build.conf | grep CONF_ROOT_DEVICE | cut -d'=' -f2`
+ROOT_PART=`cat /physix/build.conf | grep CONF_ROOT_PARTITION | cut -d'=' -f2`
 ROOT_PART='\/dev\/'$ROOT_PART
 
 LOOP=0
