@@ -27,8 +27,8 @@ BUILD_ID=0
 TIME=`date "+%D %T"`
 echo "$TIME : $BUILD_ID : Building 6.02-prep.sh"
 if [ $START_POINT -eq 0 ] ; then
-	./build-scripts.base/2.020-prep.sh
-	check $? "2.020-prep"
+	./build-scripts.base/2.020-base-build-prep.sh
+	check $? "2.020-base-build-prep"
 fi
 
 BUILD_ID=$((BUILD_ID+1))

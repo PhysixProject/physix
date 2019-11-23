@@ -6,28 +6,42 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 source $SCRIPTPATH/../include.sh
 
 mkdir -pv $BUILDROOT/{dev,proc,sys,run}
-check $? "6.02-prep mkdir -pv $BUILDROOT/{dev,proc,sys,run}"
+check $? "2.020-base-build-prep.sh mkdir -pv $BUILDROOT/{dev,proc,sys,run}"
 
-mknod -m 600 $BUILDROOT/dev/console c 5 1
-check $? "6.02-prep mknod -m 600 $BUILDROOT/dev/console c 5 1"
+if [ ! -e $BUILDROOT/dev/console ] ; then
+	mknod -m 600 $BUILDROOT/dev/console c 5 1
+	check $? "2.020-base-build-prep.sh mknod -m 600 $BUILDROOT/dev/console c 5 1"
+fi
 
-mknod -m 666 $BUILDROOT/dev/null c 1 3
-check $? "6.02-prep mknod -m 666 $BUILDROOT/dev/null c 1 3"
+if [ ! -e $BUILDROOT/dev/null ] ; then
+	mknod -m 666 $BUILDROOT/dev/null c 1 3
+	check $? "2.020-base-build-prep.sh mknod -m 666 $BUILDROOT/dev/null c 1 3"
+fi
 
-mount -v --bind /dev $BUILDROOT/dev
-check $? "6.02-prep mount -v --bind /dev $BUILDROOT/dev"
+if [ ! -e $BUILDROOT/dev ] ; then
+	mount -v --bind /dev $BUILDROOT/dev
+	check $? "2.020-base-build-prep.sh mount -v --bind /dev $BUILDROOT/dev"
+fi
 
-mount -vt devpts devpts $BUILDROOT/dev/pts -o gid=5,mode=620
-check $? "6.02-prep mount -vt devpts devpts $BUILDROOT/dev/pts"
+if [ ! -e $BUILDROOT/dev/pts ] ; then
+	mount -vt devpts devpts $BUILDROOT/dev/pts -o gid=5,mode=620
+	check $? "2.020-base-build-prep.sh mount -vt devpts devpts $BUILDROOT/dev/pts"
+fi
 
-mount -vt proc proc $BUILDROOT/proc
-check $? "6.02-prep mount -vt proc proc $BUILDROOT/proc"
+if [ ! -e $BUILDROOT/proc ] ; then
+	mount -vt proc proc $BUILDROOT/proc
+	check $? "2.020-base-build-prep.sh mount -vt proc proc $BUILDROOT/proc"
+fi
 
-mount -vt sysfs sysfs $BUILDROOT/sys
-check $? "6.02-prep mount -vt sysfs sysfs $BUILDROOT/sys"
+if [ ! -e $BUILDROOT/sys ] ; then
+	mount -vt sysfs sysfs $BUILDROOT/sys
+	check $? "2.020-base-build-prep.sh mount -vt sysfs sysfs $BUILDROOT/sys"
+fi
 
-mount -vt tmpfs tmpfs $BUILDROOT/run
-check $? "6.02-prep mount -vt tmpfs tmpfs $BUILDROOT/run"
+if [ ! -e $BUILDROOT/run ] ; then
+	mount -vt tmpfs tmpfs $BUILDROOT/run
+	check $? "2.020-base-build-prep.sh mount -vt tmpfs tmpfs $BUILDROOT/run"
+fi
 
 if [ -h $BUILDROOT/dev/shm ]; then
   mkdir -pv $BUILDROOT/$(readlink $BUILDROOT/dev/shm)
