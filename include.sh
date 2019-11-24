@@ -115,8 +115,8 @@ function chroot-conf-build {
 	fi
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
-		PS1='(lfs chroot) \u:\w\$ ' \
-		PATH=/bin:/usr/bin:/sbin:/usr/sbin \
+		PS1='(physix chroot) \u:\w\$ '                         \
+		PATH=/bin:/usr/bin:/sbin:/usr/sbin                     \
 		/bin/bash --login -c "$SPATH/$SCRIPT $PKG $IO_DIRECTION"
 }
 
@@ -130,8 +130,8 @@ function chroot-build {
 	local PKG1=${3:-''}
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
-		PS1='(lfs chroot) \u:\w\$ '   \
-		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+		PS1='(physix chroot) \u:\w\$ '                         \
+		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
 		/tools/bin/bash --login +h -c "$SPATH/$SCRIPT $PKG0 $PKG1 &> /system-build-logs/$SCRIPT"
 }
 
