@@ -11,7 +11,9 @@ if [ $iuser != 'root' ] ; then
     exit 1
 fi
 
-echo "Building Xorg..."
+echo "---------------------------------"
+echo "- Building Xorg...              -"
+echo "---------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./6-build-xorg.csv | cut -d' ' -f1`

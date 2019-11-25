@@ -18,8 +18,9 @@ if [ ! $CWD == "$BUILDROOT/physix" ] ; then
         exit 1
 fi
 
-
-echo "Building Toolchain..."
+echo "--------------------------"
+echo "- Building Toolchain...   "
+echo "--------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./1-build_toolchain.csv | cut -d' ' -f1`

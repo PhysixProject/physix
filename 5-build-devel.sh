@@ -11,7 +11,9 @@ if [ $iuser != 'root' ] ; then
     exit 1
 fi
 
-echo "Building Misc Tools..."
+echo "---------------------------------"
+echo "- Building Development tools... -"
+echo "---------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./5-build-devel.csv | cut -d' ' -f1`

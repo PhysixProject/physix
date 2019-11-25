@@ -11,7 +11,9 @@ if [ $iuser != 'root' ] ; then
     exit 1                            
 fi                                    
 
-echo "Configuring Base System..."
+echo "------------------------------"
+echo "- Configuring Base System... -"
+echo "------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./3-config-base-sys.csv | cut -d' ' -f1`

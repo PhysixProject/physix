@@ -17,7 +17,9 @@ if [ "$CWD" != "$BUILDROOT/physix" ] ; then
 	exit 1
 fi
 
-echo "Building Base System..."
+echo "---------------------------"
+echo "- Building Base System... -"
+echo "---------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
