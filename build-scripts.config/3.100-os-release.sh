@@ -4,7 +4,7 @@
 
 source /physix/include.sh
 
-echo 9.0-systemd > /etc/lfs-release
+echo 9.0-systemd > /etc/physix-release
 chroot_check $? "system config : set /etc/lfs-release "
 
 cat > /etc/os-release << "EOF"

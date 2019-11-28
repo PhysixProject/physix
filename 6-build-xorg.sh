@@ -6,14 +6,13 @@ source ./include.sh
 
 iuser=`whoami`
 if [ $iuser != 'root' ] ; then
-    echo "Must run this as user: root"
-    echo "exiting..."
+    error "Must run this as user: root. Exiting"
     exit 1
 fi
 
-echo "---------------------------------"
-echo "- Building Xorg...              -"
-echo "---------------------------------"
+report "---------------------------------"
+report "- Building Xorg...              -"
+report "---------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./6-build-xorg.csv | cut -d' ' -f1`
@@ -27,7 +26,7 @@ for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
         PKG2=$(echo $LINE | cut -d',' -f5)
 
 	TIME=`date "+%D %T"`
-	echo "$TIME : $BUILD_ID : Building $SCRIPT"
+	report "$TIME : $BUILD_ID : Building $SCRIPT"
 
 	if [ "$IO" == "log" ] ; then
 	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"     

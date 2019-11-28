@@ -6,14 +6,13 @@ source ./include.sh
 
 iuser=`whoami`
 if [ $iuser != 'root' ] ; then
-    echo "Must run this as user: root"
-    echo "exiting..."
+    error "Must run this as user: root. Exiting..."
     exit 1
 fi
 
-echo "--------------------------"
-echo "- Building Utilities...  -"
-echo "--------------------------"
+report "--------------------------"
+report "- Building Utilities...  -"
+report "--------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./4-build-utils.csv | cut -d' ' -f1`
@@ -25,7 +24,7 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	PKG=$(echo $LINE | cut -d',' -f3)
 
 	TIME=`date "+%D %T"`
-	echo "$TIME : $BUILD_ID : Building $PKG"
+	report "$TIME : $BUILD_ID : Building $PKG"
 
 	if [ "$IO" == "log" ] ; then
 	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"     

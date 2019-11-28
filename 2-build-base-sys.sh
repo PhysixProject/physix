@@ -17,9 +17,9 @@ if [ "$CWD" != "$BUILDROOT/physix" ] ; then
 	exit 1
 fi
 
-echo "---------------------------"
-echo "- Building Base System... -"
-echo "---------------------------"
+report "---------------------------"
+report "- Building Base System... -"
+report "---------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
@@ -27,7 +27,7 @@ STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
 # Called differently becuase it is not chrooted
 BUILD_ID=0
 TIME=`date "+%D %T"`
-echo "$TIME : $BUILD_ID : Building 6.02-prep.sh"
+report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
 if [ $START_POINT -eq 0 ] ; then
 	./build-scripts.base/2.020-base-build-prep.sh
 	check $? "2.020-base-build-prep"
@@ -41,7 +41,7 @@ for LINE in `cat ./2-build-base-sys.csv` ; do
 
 	TIME=`date "+%D %T"`
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-		echo "$TIME : $BUILD_ID : Building $SCRIPT $PKG0 $PKG1"
+		report "$TIME : $BUILD_ID : Building $SCRIPT $PKG0 $PKG1"
 		chroot-build '/physix/build-scripts.base' $SCRIPT $PKG0 $PKG1
 		check $? "$SCRIPT"
 		echo ''

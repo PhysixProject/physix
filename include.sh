@@ -7,17 +7,28 @@ export NPROC
 
 function verify_tools() {
 
-       echo "Looking for required tools on host systemd..."
-       for TOOL in mkfs.ext3 gcc g++ make gawk bison ; do
-               which $TOOL
-               if [ $? -ne 0 ] ; then
-                       echo "$TOOL Not Found."
-                       exit 1
-               fi
-       done
+	echo "Looking for required tools on host systemd..."
+	for TOOL in mkfs.ext3 gcc g++ make gawk bison ; do
+		which $TOOL
+		if [ $? -ne 0 ] ; then
+			echo "$TOOL Not Found."
+			exit 1
+		fi
+	done
 
 }
 
+function report() {
+	local MSG=$1
+	local BR=''
+
+	if [ -r '/mnt/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
+		BR=$BUILDROOT
+	fi
+
+	echo -e "\e[93m[INFO]\e[0m $MSG"
+	echo "[INFO] $MSG\n" >> $BR/system-build-logs/build.log
+}
 
 function ok() {
         local MSG=$1
@@ -50,9 +61,8 @@ function chroot_check() {
 	local RTN=$1
 	local MSG=$2
 	local NOEXIT=${3:-"FALSE"}
-	echo "RTN:$RTN"
 	if [ $RTN -ne 0 ] ; then
-		error "$MSG"
+		error "$RTN:$MSG"
 		if [ $NOEXIT == "FALSE" ] ; then
 			grep '\[ERROR\]' /system-build-logs/*.sh > /system-build-logs/err.log
 			exit 1
@@ -71,9 +81,8 @@ function check() {
 	local MSG=$2
 	local NOEXIT=${3:-"FALSE"}
 	local BR=''
-	echo "RTN:$RTN"
 	if [ $RTN -ne 0 ] ; then
-		error "$MSG"
+		error "$RTN:$MSG"
 		if [ $NOEXIT == "FALSE" ] ; then
 			exit 1
 		fi

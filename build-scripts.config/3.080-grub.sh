@@ -12,16 +12,16 @@ ROOT_PART='\/dev\/'$ROOT_PART
 
 LOOP=0
 while [ $LOOP -eq 0 ] ; do
-    echo -e "\n\nTime to install Grub." 
-    echo "build.conf specifys:" 
-    echo "- ROOT_DEVICE: /dev/$ROOT_DEV"
-    echo "- ROOT_PARTITION: $ROOT_PARTITION"
-    echo "- GRUB sees ROOT_DEVICE as(hdX,Y): $SET_ROOT "
-    echo "NOTE: Grub see the root device number (hdX) as 1 less than ROOT_DEVICE number."
-    echo "the partition number (Y) is the same as ROOT_PARTITION's."
-    echo -e "\n"
-    echo "If you DO NOT wish to install grub to this device, type 'no'" 
-    echo -n "Install grub to /dev/$ROOT_DEV? (yes/no): "
+    report -e "\n\nTime to install Grub." 
+    report "build.conf specifys:" 
+    report "- ROOT_DEVICE: /dev/$ROOT_DEV"
+    report "- ROOT_PARTITION: $ROOT_PARTITION"
+    report "- GRUB sees ROOT_DEVICE as(hdX,Y): $SET_ROOT "
+    report "NOTE: Grub see the root device number (hdX) as 1 less than ROOT_DEVICE number."
+    report "the partition number (Y) is the same as ROOT_PARTITION's."
+    report -e "\n"
+    report "If you DO NOT wish to install grub to this device, type 'no'" 
+    report -n "Install grub to /dev/$ROOT_DEV? (yes/no): "
     read CHOICE 
 
     if [ "$CHOICE" == "yes" ] || [ "$CHOICE" == "no" ] ; then
@@ -71,8 +71,8 @@ sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 if [ -e /boot/grub ] ; then
-        cp -v /physix/build-scripts.config/unicode.pf2 /boot/grub/fonts
-        cp -v /physix/build-scripts.config/physix.gray.png /boot/grub/
+        cp -v /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts
+        cp -v /physix/build-scripts.config/configs/physix.gray.png /boot/grub/
         chroot_check $? "cp physix.gray.png /boot/grub/"
 fi
 

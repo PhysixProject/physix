@@ -8,7 +8,7 @@ GUSER=`cat /physix/build.conf | grep GEN_USER | cut -d'=' -f2`
 
 LOOP=0
 while [ $LOOP -eq 0 ] ; do
-	echo "Set root Password"
+	report "Set root Password"
 	passwd root
 	if [ $? -eq 0 ] ; then LOOP=1; fi
 done
