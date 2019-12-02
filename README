@@ -1,16 +1,21 @@
 
  - Physix Linux Project - 
-       MIT License 
+    MIT/GPLv2 License 
 ===========================
 
-Goal and Disclaimer:
-====================
-The goal of this project is to Automate the build process of a base Linux 
-system. It is inspired by the Linux From Scratch book.
-
+Disclaimer:
+============
 The programs included with this project are free software; This Distribution 
 of GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent permitted by 
 applicable law.
+
+
+Purpose:
+==========
+The goal of this project is to Automate the build process of a base Linux 
+system. It is originally inspired by the Linux From Scratch project. If you
+are not familiar with LFS, Please reference the project at: 
+http://www.linuxfromscratch.org/ before installing Physix. 
 
 As of this version, This automation is designed to install the OS to a
 single partition (defined in build.conf). No swap or boot partitions are 
@@ -24,43 +29,58 @@ will make more sense as to how this collection of scripts are organised.
 
 Branches:
 =========
-Versions of this project are tracked in branches.
+Versions of this project are tracked in branches. Currently there are 2 branches,
+physix-SysV, and physix-systemd. physix-SysV-LFS-8.4 is no longer supported.
 
 
 Project Architecture:
 =====================
-At the root, is INSTALL.sh. This script executes 5 Build scripts:
-- 0-init-prep.sh  - Covers LFS book Chapters 2.5 - 4.6    
-  Responsible for:
+The installation process is composed of 2 stages. 
+* STAGE 1: STAGE-1-INSTALL.sh, executes 4 Build scripts: 
+  - 0-init-prep.sh
+    Responsible for:
 	- Formatting and mounting the target disk partition.
 	- Download sources defined in wget-list. Occassionaly a URL or 2 
 	  goes unavailable, and you will have to find the missing package 
 	  somewhere else. Download to /mnt/physix/sources and restart INSTALL.sh.
 	- Verifying md5sums of sources, defined in md5sum.lst 
 	  See LFS Reference for source of md5sums:
-          http://www.linuxfromscratch.org/lfs/view/8.4/chapter03/packages.html
+	  http://www.linuxfromscratch.org/lfs/view/8.4/chapter03/packages.html
 
-- 1-build_toolchain.sh - Covers LFS book Chapter 5
-  Responsible for:
+  - 1-build_toolchain.sh
+    Responsible for:
 	- Build temporary userspace system and toolchain.
 
-- 2-build-base-sys.sh - Covers LFS book chapter 6
-  Responsible for:
+  - 2-build-base-sys.sh
+    Responsible for:
 	- Using the toolchain built by 1-build_toolchain.sh, to build the base 
           OS 
 
-- 3-config-base-sys.sh - Covers LFS book chapter 7
-  Responsible for:
+  - 3-config-base-sys.sh
+    Responsible for:
 	- Set up network config
 	- Config and install grub config to mbr
-	- build and compile Linux Kernel
+	- build and install Linux Kernel
 
-- 4-build-misc.sh - Intended for the additional scripts beyond the Linux From 
-  scratch book itself. This is the starting point for further development.
+  - Reboot.
 
+* STAGE 2: STAGE-2-INSTALL.sh, Executes 2 build scripts.
+  - 4-build-utils.sh - Build and install system related utilities. 
+  - 5.build-devel.sh - Build and install development related tools.
+
+
+Making changes to the build process.
+=====================================
 The build scripts perform their designated operations by iterating through each
-line of their csv config file. The csv files are 2 columns composed of the name
-of the script to exectute, and the src tarball for that script to build.  
+line of their associated csv config file. These csv files instruct build scripts
+of what script to run and what source arvhive to pass to it.
+
+If, for example, you wanted to change the version of the mutt email client, you 
+would edit 2 files. First edit the src-list.utils file. Update the name of the  
+source archive, the url where it is located, and the expected md5sum of that archive. 
+Then edit 4-build-utils.csv, to change the src archive name. Please note, newer 
+versions of software may install differently, and in that case you should 
+investigate build-scripts.utils/4.510-mutt.sh.
 
 This archetecure makes it easy to change the version of the sources, and lets
 you experiment across different source versions. 
@@ -69,30 +89,19 @@ you experiment across different source versions.
 Installation:
 =============
 0. Edit build.conf
-   An Example configuration might look like:
-	CONF_HOSTNAME=noodles
-	CONF_ROOT_DEVICE=sdb
-	CONF_ROOT_PARTITION=sdb2
-	CONF_GRUB_SET_ROOT=(hd0,2)
-	CONF_IP_ADDRESS=192.168.1.42
-	CONF_NAMESERVER=192.168.1.182
-	CONF_DEFAULT_ROUTE=192.168.1.1
-	CONF_FS_FORMAT=ext4
-	CONF_GEN_USER=bob
-	CONF_UTILS=y
-	CONF_DEVEL=y
-1. Run ./INSTALL.sh. This will build the toolchain, then the base system, and 
-   then runs configuration scripts.
-   The user will be prompted for verify the installation target partition before
-   formatting it, and to set the password for the physix user of the host system. 
-
-2. During the configuration portion of the build, the user is prompted to set 
+   See Example build.conf in Documentation:
+1. Run ./STAGE-1-INSTALL.sh. 
+   During the configuration portion of the build, the user is prompted to set 
    the password for the root user, and the thumbs up for installing grub.
+2. Reboot.
+3. ./STAGE-2-INSTALL.sh
 
 
-NOTE on Debugging/WTF just happened?! :
+NOTE on Debugging what happened?! :
 =======================================
-All build script output is logged and stored in /mnt/physix/system-build-logs.
+Output for each package build is logged to /mnt/physix/system-build-logs/$SCRIPT.
+Higher level and general output for the build process is logged to,
+/mnt/physix/system-build-logs/build.log
 
 
 NOTE on Test Suites:
@@ -101,21 +110,6 @@ It is always a good idea to run the test suites. Several test suites encounter
 expected or known failures. The failed return code is checked for and reported
 by the 'check' and 'chroot_check' functions. In some cases, a 3rd argument is
 provided such that the Error will be logged but will not halt the build process.
-
-
-NOTE on development testing:
-============================
-This project was tested during development on: 
-- Intel(R) Core(TM) i7-3820, 
-- Samsung SSD 840 (2nd harddisk)
-- Linux 4.20.14 
-- Fedora 29
-- build.conf:
-    HOSTNAME=noodles
-    ROOT_DEVICE=sdb
-    ROOT_PARTITION=sdb1
-    IP_ADDRESS=192.168.1.2
-    FS_FORMAT=ext3
 
 
 Contributions:
