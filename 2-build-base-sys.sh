@@ -27,7 +27,11 @@ STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
 # Called differently becuase it is not chrooted
 BUILD_ID=0
 TIME=`date "+%D %T"`
+<<<<<<< HEAD
 report "$TIME : $BUILD_ID : Building 6.02-prep.sh"
+=======
+report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
+>>>>>>> 25a1f98621dcfc8ba00670035652c1384aabbba5
 if [ $START_POINT -eq 0 ] ; then
 	./build-scripts.base/2.020-base-build-prep.sh
 	check $? "2.020-base-build-prep"

@@ -18,3 +18,4 @@ chroot_check $? "sed -i $SED_CMD /etc/fstab"
 SED_CMD='s/REPLACE_MARKER_FS/'$FS_FORMAT'/g'
 sed -i $SED_CMD /etc/fstab
 chroot_check $? "sed -i $SED_CMD /etc/fstab"
+

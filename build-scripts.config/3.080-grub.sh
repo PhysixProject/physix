@@ -12,16 +12,26 @@ ROOT_PART='\/dev\/'$ROOT_PART
 
 LOOP=0
 while [ $LOOP -eq 0 ] ; do
+<<<<<<< HEAD
     report "\n\nTime to install Grub." 
+=======
+    report -e "\n\nTime to install Grub." 
+>>>>>>> 25a1f98621dcfc8ba00670035652c1384aabbba5
     report "build.conf specifys:" 
     report "- ROOT_DEVICE: /dev/$ROOT_DEV"
     report "- ROOT_PARTITION: $ROOT_PARTITION"
     report "- GRUB sees ROOT_DEVICE as(hdX,Y): $SET_ROOT "
     report "NOTE: Grub see the root device number (hdX) as 1 less than ROOT_DEVICE number."
     report "the partition number (Y) is the same as ROOT_PARTITION's."
+<<<<<<< HEAD
     report "\n"
     report "If you DO NOT wish to install grub to this device, type 'no'" 
     report "Install grub to /dev/$ROOT_DEV? (yes/no): "
+=======
+    report -e "\n"
+    report "If you DO NOT wish to install grub to this device, type 'no'" 
+    report -n "Install grub to /dev/$ROOT_DEV? (yes/no): "
+>>>>>>> 25a1f98621dcfc8ba00670035652c1384aabbba5
     read CHOICE 
 
     if [ "$CHOICE" == "yes" ] || [ "$CHOICE" == "no" ] ; then
