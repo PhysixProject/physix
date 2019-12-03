@@ -3,6 +3,11 @@
 # md5sum values identical to Beyond Linux From Scratch Version 9.0
 ###############################################################################
 
+libnl-doc-3.4.0.tar.gz,http://physix-os.org/sysV-1.0/libnl-doc-3.4.0.tar.gz,2255846ccf58875529f84898df325dea
+libnl-3.4.0.tar.gz,http://physix-os.org/sysV-1.0/libnl-3.4.0.tar.gz,8f71910c03db363b41e2ea62057a4311
+iw-5.3.tar.xz,http://physix-os.org/sysV-1.0/iw-5.3.tar.xz,b65bb6dc3b9474c55f6107a25469d8cf
+nfs-utils-2.4.1.tar.xz,http://physix-os.org/sysV-1.0/nfs-utils-2.4.1.tar.xz,ce1921b8f15db54c3a6c840795312242
+rpcsvc-proto-1.4.tar.gz,http://physix-os.org/sysV-1.0/rpcsvc-proto-1.4.tar.gz,df1022ccc5d0aff30b8e505735b4a98b
 curl-7.65.3.tar.xz,http://physix-os.org/sysV-1.0/curl-7.65.3.tar.xz,7bd5b2ebfd3f591034eb8b55314d8c02
 nettle-3.5.1.tar.gz,http://physix-os.org/sysV-1.0/nettle-3.5.1.tar.gz,0e5707b418c3826768d41130fbe4ee86
 json-c-0.13.1.tar.gz,http://physix-os.org/sysV-1.0/json-c-0.13.1.tar.gz,04969ad59cc37bddd83741a08b98f350
