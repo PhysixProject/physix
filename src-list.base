@@ -76,6 +76,8 @@ XML-Parser-2.44.tar.gz,http://physix-os.org/sysV-1.0/XML-Parser-2.44.tar.gz,af48
 xz-5.2.4.tar.xz,http://physix-os.org/sysV-1.0/xz-5.2.4.tar.xz,003e4d0b1b1899fc6e3000b24feddf7c
 zlib-1.2.11.tar.xz,http://physix-os.org/sysV-1.0/zlib-1.2.11.tar.xz,85adef240c5f370b308da8c938951a68
 systemd-243.tar.gz,http://physix-os.org/sysV-1.0/systemd-243.tar.gz,ca2403fa7dff73afd2e896b4cb25021b
+systemd-man-pages-243.tar.xz,http://physix-os.org/sysV-1.0/systemd-man-pages-243.tar.xz,22278b3c8fa27323b5baafffb093f0f0
+systemd-243-consolidated_fixes-2.patch,http://physix-os.org/sysV-1.0/systemd-243-consolidated_fixes-2.patch,2bad2992f4373eb925885f2ea2fb8d14
 dbus-1.12.16.tar.gz,http://physix-os.org/sysV-1.0/dbus-1.12.16.tar.gz,2dbeae80dfc9e3632320c6a53d5e8890
 bzip2-1.0.8-install_docs-1.patch,http://physix-os.org/sysV-1.0/bzip2-1.0.8-install_docs-1.patch,6a5ac7e89b791aae556de0f745916f7f
 coreutils-8.31-i18n-1.patch,http://physix-os.org/sysV-1.0/coreutils-8.31-i18n-1.patch,a9404fb575dfd5514f3c8f4120f9ca7d

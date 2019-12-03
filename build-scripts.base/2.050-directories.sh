@@ -36,8 +36,8 @@ install -vdm755 /usr/lib/pkgconfig
 ln -sv bash /bin/sh
 ln -sv /proc/self/mounts /etc/mtab
 
-cp /physix/build-scripts.base/etc_passwd /etc/passwd
-cp /physix/build-scripts.base/etc_group /etc/group
+cp /physix/build-scripts.base/configs/etc_passwd /etc/passwd
+cp /physix/build-scripts.base/configs/etc_group /etc/group
 
 touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog

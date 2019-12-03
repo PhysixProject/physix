@@ -71,8 +71,8 @@ sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 if [ -e /boot/grub ] ; then
-        cp -v /physix/build-scripts.config/unicode.pf2 /boot/grub/fonts
-        cp -v /physix/build-scripts.config/physix.gray.png /boot/grub/
+        cp -v /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts
+        cp -v /physix/build-scripts.config/configs/physix.gray.png /boot/grub/
         chroot_check $? "cp physix.gray.png /boot/grub/"
 fi
 
