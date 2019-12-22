@@ -126,7 +126,7 @@ EOF
 	cp -r $PHYSIX $BUILDROOT
 	chmod 777 $BUILDROOT/physix
 
-	chown physix:physix $BUILDROOT/physix
+	chown -R physix:physix $BUILDROOT/physix
 	chown physix:physix $BUILDROOT/physix/system_scripts
 
 	mkdir $BUILDROOT/system-build-logs

@@ -24,3 +24,11 @@ while [ $LOOP -eq 0 ] ; do
         if [ $? -eq 0 ] ; then LOOP=1; fi
 done
 
+useradd -m physix
+chroot_check $? "useradd  physix"
+LOOP=0
+while [ $LOOP -eq 0 ] ; do
+        passwd physix
+        if [ $? -eq 0 ] ; then LOOP=1; fi
+done
+

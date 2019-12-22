@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch
 chroot_check $? "docbook: patch"
@@ -28,7 +20,4 @@ install -v -m644 -D README \
 install -v -m644    RELEASE-NOTES* NEWS* \
                     /usr/share/doc/docbook-xsl-nons-1.79.2
 chroot_check $? "docbook: install"
-
-
-rm -rf /sources/$SRCD
 

@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../libxslt-1.1.33-security_fix-1.patch
 
@@ -22,6 +14,4 @@ chroot_check $? "libxslt : make"
 
 make install
 chroot_check $? "libxslt : make install"
-
-rm -rf /sources/$SRCD
 

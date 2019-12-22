@@ -6,7 +6,6 @@ NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
 export NPROC
 
 function verify_tools() {
-
 	echo "Looking for required tools on host systemd..."
 	for TOOL in mkfs.ext3 gcc g++ make gawk bison ; do
 		which $TOOL
@@ -15,31 +14,39 @@ function verify_tools() {
 			exit 1
 		fi
 	done
-
 }
 
 function report() {
 	local MSG=$1
 	local BR=''
 
-	if [ -r '/mnt/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
-		BR=$BUILDROOT
+	echo -e "\e[93m[INFO]\e[0m $MSG"
+
+	# chroot context
+	if [ -r /system-build-logs/build.log ] ; then
+		echo -e "[INFO] $MSG" >> /system-build-logs/build.log
 	fi
 
-	echo -e "\e[93m[INFO]\e[0m $MSG"
-	echo "[INFO] $MSG\n" >> $BR/system-build-logs/build.log
+	# Non-chroot, not mounted
+	if [ -r '/mnt/physix/system-build-logs/build.log' ] ; then
+		echo -e "[INFO] $MSG" >> /mnt/physix/system-build-logs/build.log
+	else
+		echo -e "[INFO] $MSG" >> /tmp/physix-init-host-build.log
+	fi
+
 }
 
 function ok() {
         local MSG=$1
 	local BR=''
+	local TIME=`date "+%D %T"`
 
 	if [ -r '/mnt/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
 		BR=$BUILDROOT
 	fi
 
-        echo -e "\e[92m[OK]\e[0m $MSG"
-        echo "[OK] $MSG\n" >> $BR/system-build-logs/build.log
+        echo -e "\e[92m[OK]\e[0m $TIME : $MSG"
+        echo -e "[OK] $TIME : $MSG" >> $BR/system-build-logs/build.log
 }
 
 
@@ -51,8 +58,8 @@ function error() {
 		BR=$BUILDROOT
 	fi
 
-        echo -e "\e[31m[ERROR]\e[0m $MSG"
-        echo "[ERROR] $MSG\n" >> $BR/system-build-logs/build.log
+        echo -e "\e[31m[ERROR]\e[0m $TIME :$MSG"
+        echo -e "[ERROR] $TIME : $MSG" >> $BR/system-build-logs/build.log
 }
 
 # Check, handle and log return code
@@ -107,6 +114,31 @@ function stripit() {
 	STRIPPED=$DN
 }
 
+# Returns name of the directory contained in archive.
+# Assumes it is run after unpack()
+function return_src_dir() {
+	local ARCHIVE=$1
+	local FLAG=${2:-''}
+	local BR=''
+	local TMP=''
+	SRC_DIR='NULL'
+
+	if [ "$FLAG" == "NCHRT" ] ; then
+		BR=$BUILDROOT           
+	fi                              
+
+	TMP=$(tar -tf $BR/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
+	if [ $? -ne 0 ] ; then
+		echo "[ERROR] return_src_dir(): tar -tf $NAME"
+		exit 1
+	fi
+
+	if [ -e $BR/sources/$TMP ] ; then 
+		export SRC_DIR=$TMP
+		return 0
+	fi
+}
+
 
 # Used by 3-config-base-sys.sh and beyond
 # Runs build scripts under /bin/bash
@@ -126,7 +158,7 @@ function chroot-conf-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin                     \
-		/bin/bash --login -c "$SPATH/$SCRIPT $PKG $IO_DIRECTION"
+		/bin/bash --login -c "/physix/build-scripts.config/$SCRIPT $PKG $IO_DIRECTION"
 }
 
 
@@ -135,13 +167,15 @@ function chroot-conf-build {
 function chroot-build {
 	local SPATH=$1
 	local SCRIPT=$2
-	local PKG0=${3:-''}
-	local PKG1=${3:-''}
+	local SRC0=${3:-''}
+	local SRC1=${4:-''}
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
-		/tools/bin/bash --login +h -c "$SPATH/$SCRIPT $PKG0 $PKG1 &> /system-build-logs/$SCRIPT"
+		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /system-build-logs/$SCRIPT"
+
+
 }
 
 
@@ -149,23 +183,28 @@ function chroot-build {
 # Assumes chrooted env uless NCHRT Flag is passsed as arg 2
 function unpack() {
 	PKG=$1
-	FLAG=${2:-''}
+	local OWNER=${2:-''}
+	local FLAG=${3:-''}
 	local BR=''
 
 	if [ "$FLAG" == "NCHRT" ] ; then
 		BR=$BUILDROOT
 	fi
-        cd $BR/sources
 
-        stripit $PKG
-        DIR=$STRIPPED
-
+	DIR=$(tar -tf $BR/sources/$PKG | cut -d'/' -f1 | head -n 1)
         if [ -d $BR/sources/$DIR ] ; then
-                rm -rvf $DIR
+                rm -rf $DIR
         fi
 
-        tar xf $PKG -C $BR/sources
-        check $? "tar xf $PKG"
+        tar xf $BR/sources/$PKG -C $BR/sources
+	if [ $? -ne 0 ] ; then
+		error "tar xf $BR/sources/$PKG"
+		exit 1
+	fi
+	if [ "$OWNER" != "" ] ; then
+		chown --recursive $OWNER $BR/sources/$DIR
+	fi
+
 }
 
 

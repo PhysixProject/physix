@@ -1,18 +1,9 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-source $SCRIPTPATH/../include.sh
-source ~/.bashrc
-
-cd $BUILDROOT/sources      
-PKG=$1                   
-stripit $PKG NCHRT
-SRCD=$STRIPPED           
-                         
-unpack $PKG NCHRT
-cd $BUILDROOT/sources/$SRCD
+source ../../physix/include.sh || exit 1
+cd $BUILDROOT/sources/$1 || exit 1
+source ~/.bashrc                        
 
 cp -v configure{,.orig}
 check $? "Expect: cp -v configure{,.orig}"
@@ -36,8 +27,4 @@ check $? "Expect Test" noexit
 
 make SCRIPTS="" install
 check $? "Expect: make SCRIPTS="" install"
-
-rm -rf $BUILDROOT/sources/$SRCD
-check $? "Expect: $BUILDROOT/sources/expect5.45.4"
-
 

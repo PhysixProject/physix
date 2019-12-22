@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../liboauth-1.0.3-openssl-1.1.0-3.patch
 chroot_check $? "liboauth : patch"
@@ -20,6 +12,4 @@ make
 chroot_check $? "liboauth : make"
 make install
 chroot_check $? "liboauth : make install"
-
-rm -rf /sources/$SRCD
 

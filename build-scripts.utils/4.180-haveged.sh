@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr 
 chroot_check $? "haveged : configure"
@@ -24,6 +16,4 @@ chroot_check $? "haveged : make install"
 
 #init script for boot
 #make install-haveged
-
-rm -rf /sources/$SRCD
 

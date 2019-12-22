@@ -1,16 +1,8 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1
 
 # Uncomment these 2 cp commands to build generic libraries.
 #cp -v configfsf.guess config.guess
@@ -42,5 +34,5 @@ chroot_check $? "system-build : GMP : make install"
 make install-html
 chroot_check $? "system-build : GMP : make install html"
 
-rm -rfv /sources/$SRCD
+
 

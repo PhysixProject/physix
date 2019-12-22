@@ -1,17 +1,8 @@
 #!/bin/bash 
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
-
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
 ./configure --prefix=/usr        \
             --localstatedir=/var \
@@ -35,6 +26,4 @@ chroot_check $? "inetutils make install"
 
 mv -v /usr/bin/{hostname,ping,ping6,traceroute} /bin
 mv -v /usr/bin/ifconfig /sbin
-
-rm -rfv /sources/$SRCD
 

@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr      \
             --sbindir=/sbin    \
@@ -31,6 +23,4 @@ do
   ln -sfv ../../lib/$(readlink /usr/lib/lib${file}.so) /usr/lib/lib${file}.so
   chroot_check $? "iptables : ln /usr/lib/lib${file}.so"
 done
-
-rm -rf /sources/$SRCD
 

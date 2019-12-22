@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../nss-3.45-standalone-1.patch &&
 chroot_check $? "nss : patch"
@@ -44,6 +36,4 @@ chroot_check $? "nss : install /usr/lib/pkgconfig"
 
 ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
 chroot_check $? "nss : ln /usr/lib/libnssckbi.so"
-
-rm -rf /sources/$SRCD
 

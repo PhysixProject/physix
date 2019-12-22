@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 tar -xf ../Linux-PAM-1.3.1-docs.tar.xz --strip-components=1
 chroot_check $? "Linux-PAM : untar doc tarball"
@@ -124,6 +116,4 @@ session     required        pam_deny.so
 # End /etc/pam.d/other
 EOF
 chroot_check $? "Linux-PAM : /etc/pam.d/other writen"
-
-rm -rf /sources/$SRCD
 

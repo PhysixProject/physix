@@ -21,9 +21,5 @@ rm -vf /a.out
 #rm -vf /sources
 #rm -vf /tools
 
-mv -v /sources.tar /usr/src
-
-if [ -e /tools.tar ] ; then
-	mv -v /tools.tar /usr/src
-fi
+#mv -v /sources.tar /usr/src
 

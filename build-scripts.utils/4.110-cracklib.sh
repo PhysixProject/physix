@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 sed -i '/skipping/d' util/packer.c &&
 
@@ -37,6 +29,4 @@ chroot_check $? "cracklib : install docs"
 create-cracklib-dict     /usr/share/dict/cracklib-words \
                          /usr/share/dict/cracklib-extra-words
 chroot_check $? "cracklib : create cracklib dict"
-
-rm -rf /sources/$SRCD
 

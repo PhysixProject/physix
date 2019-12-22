@@ -1,17 +1,8 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh
-
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-                    
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
 mkdir -v build
 cd build
@@ -48,5 +39,5 @@ makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
 install -v -m644 doc/com_err.info /usr/share/info
 install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 
-rm -rfv /sources/$SRCD
+
 

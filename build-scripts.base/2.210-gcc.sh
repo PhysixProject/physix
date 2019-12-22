@@ -1,18 +1,8 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-
-cd /sources
-PKG=$1              
-stripit $PKG        
-SRCD=$STRIPPED      
-                    
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
-
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1
 
 case $(uname -m) in
   x86_64)
@@ -76,5 +66,5 @@ rm -v dummy.c a.out dummy.log
 mkdir -pv /usr/share/gdb/auto-load/usr/lib
 mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
 
-rm -rfv /sources/$SRCD
+
 

@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr                           \
             --disable-static                        \
@@ -26,6 +18,4 @@ find docs \( -name Makefile\* -o -name \*.1 -o -name \*.3 \) -exec rm {} \; &&
 install -v -d -m755 /usr/share/doc/curl-7.65.3 &&
 cp -v -R docs/*     /usr/share/doc/curl-7.65.3
 chroot_check $? "curl : make install"
-
-rm -rf /sources/$SRCD
 

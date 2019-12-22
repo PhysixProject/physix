@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr --without-python 
 chroot_check $? "bind-utils : configure"
@@ -24,6 +16,4 @@ chroot_check $? "bind-utils : make"
 
 make -C bin/dig install
 chroot_check $? "bind-utils : make install"
-
-rm -rf /sources/$SRCD
 

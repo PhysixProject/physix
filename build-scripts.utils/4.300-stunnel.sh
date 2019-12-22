@@ -64,5 +64,3 @@ chroot_check $? "stunnel : /etc/stunnel/stunnel.conf written"
 make install-stunnel
 chroot_check $? "stunnel : make install-stunnel"
 
-rm -rfv /sources/$SRCD
-

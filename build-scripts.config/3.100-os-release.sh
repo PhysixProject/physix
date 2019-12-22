@@ -5,22 +5,22 @@
 source /physix/include.sh
 
 echo 9.0-systemd > /etc/physix-release
-chroot_check $? "system config : set /etc/lfs-release "
+chroot_check $? "system config : set /etc/physix-release "
 
 cat > /etc/os-release << "EOF"
-NAME="Linux From Scratch"
-VERSION="9.0-systemd"
-ID=lfs
-PRETTY_NAME="Linux From Scratch 9.0-systemd"
+NAME="Physix"
+VERSION="systemd"
+ID=physix
+PRETTY_NAME="Physix-systemd"
 VERSION_CODENAME="Physix"
 EOF
 chroot_check $? "system config : set /etc/os-release"
 
 cat > /etc/lsb-release << "EOF"
-DISTRIB_ID="Linux From Scratch"
-DISTRIB_RELEASE="9.0-systemd"
+DISTRIB_ID="Physix"
+DISTRIB_RELEASE="Physix-systemd"
 DISTRIB_CODENAME="Physix"
-DISTRIB_DESCRIPTION="Linux From Scratch"
+DISTRIB_DESCRIPTION="Physix"
 EOF
 chroot_check $? "system config : set /etc/lsb-release "
 

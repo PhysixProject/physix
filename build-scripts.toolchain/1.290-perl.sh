@@ -1,18 +1,10 @@
 #!/bin/bash                                                                    
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
+source ../../physix/include.sh || exit 1
+cd $BUILDROOT/sources/$1 || exit 1
+source ~/.bashrc                        
 
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-source $SCRIPTPATH/../include.sh
-source ~/.bashrc
-
-cd $BUILDROOT/sources      
-PKG=$1                   
-stripit $PKG             
-SRCD=$STRIPPED           
-                         
-unpack $PKG NCHRT
-cd $BUILDROOT/sources/$SRCD
 
 sh Configure -des -Dprefix=/tools -Dlibs=-lm -Uloclibpth -Ulocincpth
 check $? "perl: Configure"
@@ -29,6 +21,4 @@ check $? "perl: mkdir -pv /tools/lib/perl5/5.28.1"
 cp -Rv lib/* /tools/lib/perl5/5.30.0
 #strange errors but files are being written
 #check $? "perl: cp -Rv lib/* /tools/lib/perl5/5.28.1"
-
-rm -rfv $BUILDROOT/sources/$SRCD
 

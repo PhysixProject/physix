@@ -1,9 +1,8 @@
-2.020-base-build-prep.sh
 2.050-directories.sh,
 2.070-linux-api-headers.sh,linux-5.2.8.tar.xz
 2.080-man.sh,man-pages-5.02.tar.xz
 2.090-glibc.sh,glibc-2.30.tar.xz
-2.100-adjust-toolchain.sh,nil
+2.100-adjust-toolchain.sh,
 2.110-zlib.sh,zlib-1.2.11.tar.xz
 2.120-file.sh,file-5.37.tar.gz
 2.130-readline.sh,readline-8.0.tar.gz
@@ -44,7 +43,7 @@
 2.480-libelf.sh,elfutils-0.177.tar.bz2
 2.490-libffi.sh,libffi-3.2.1.tar.gz
 2.500-openssl.sh,openssl-1.1.1c.tar.gz
-2.510-python.sh,Python-3.7.4.tar.xz
+2.510-python.sh,Python-3.7.4.tar.xz,python-3.7.4-docs-html.tar.bz2
 2.520-ninja.sh,ninja-1.9.0.tar.gz
 2.530-meson.sh,meson-0.51.1.tar.gz
 2.540-coreutils.sh,coreutils-8.31.tar.xz

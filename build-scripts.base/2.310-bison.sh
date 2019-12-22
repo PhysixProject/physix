@@ -1,16 +1,8 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1              
-stripit $PKG        
-SRCD=$STRIPPED      
-                    
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
 sed -i '9327 s/mv/cp/' Makefile.in
 chroot_check $? "6.31-bison sed -i '9327 s/mv/cp/' Makefile.in"
@@ -24,5 +16,5 @@ chroot_check $? "6.31-bison make"
 make install
 chroot_check $? "6.31-biso nake install"
 
-rm -rfv /sources/$SRCD
+
 

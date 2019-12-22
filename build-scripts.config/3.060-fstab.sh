@@ -1,8 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh
+source /physix/include.sh || exit 3 
 
 ROOT_PART=`cat /physix/build.conf | grep CONF_ROOT_PARTITION | cut -d'=' -f2`
 ROOT_PART='\/dev\/'$ROOT_PART

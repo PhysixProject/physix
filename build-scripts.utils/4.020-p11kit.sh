@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 sed '20,$ d' -i trust/trust-extract-compat.in &&
 cat >> trust/trust-extract-compat.in << "EOF"
@@ -35,6 +27,4 @@ ln -sfv /usr/libexec/p11-kit/trust-extract-compat \
 chroot_check $? "p11kit : make install"
 
 ln -sfv ./pkcs11/p11-kit-trust.so /usr/lib/libnssckbi.so
-
-rm -rf /sources/$SRCD
 

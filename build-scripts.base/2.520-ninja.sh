@@ -1,16 +1,8 @@
 #!/bin/bash 
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources                                 
-PKG=$1              
-stripit $PKG        
-SRCD=$STRIPPED      
-                    
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
 export NINJAJOBS=4
 
@@ -20,7 +12,6 @@ sed -i '/int Guess/a \
   if ( jobs != NULL ) j = atoi( jobs );\
   if ( j > 0 ) return j;\
 ' src/ninja.cc
-
 
 python3 configure.py --bootstrap
 chroot_check $? "ninja python3 configure bootstrap"
@@ -37,6 +28,4 @@ install -vm755 ninja /usr/bin/
 install -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninja
 install -vDm644 misc/zsh-completion  /usr/share/zsh/site-functions/_ninja
 chroot_check $? "ninja install"
-
-rm -rfv /sources/$SRCD
 

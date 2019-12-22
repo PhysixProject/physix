@@ -1,17 +1,9 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
-source /physix/include.sh                
-cd /sources
-PKG=$1              
-stripit $PKG        
-chroot_check $? "system-build : stripit"
-SRCD=$STRIPPED      
-
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
 
 sed -i 's/usr/tools/'                 build-aux/help2man
 sed -i 's/testsuite.panic-tests.sh//' Makefile.in
@@ -35,5 +27,5 @@ chroot_check $? "system-build : sed : make install"
 install -d -m755           /usr/share/doc/sed-4.7
 install -m644 doc/sed.html /usr/share/doc/sed-4.7
 
-rm -rfv /sources/$SRCD
+
 

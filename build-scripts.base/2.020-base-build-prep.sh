@@ -1,9 +1,10 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
+source $BUILDROOT/physix/include.sh || exit 1 
 
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-source $SCRIPTPATH/../include.sh
+#SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+#source $SCRIPTPATH/../include.sh
 
 mkdir -pv $BUILDROOT/{dev,proc,sys,run}
 check $? "6.02-prep mkdir -pv $BUILDROOT/{dev,proc,sys,run}"

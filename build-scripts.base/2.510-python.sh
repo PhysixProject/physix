@@ -1,17 +1,8 @@
 #!/bin/bash 
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1              
-stripit $PKG        
-SRCD=$STRIPPED      
-                    
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
-
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
 ./configure --prefix=/usr       \
             --enable-shared     \
@@ -31,11 +22,7 @@ chmod -v 755 /usr/lib/libpython3.so
 
 install -v -dm755 /usr/share/doc/python-3.7.2/html 
 
-tar --strip-components=1  \
-    --no-same-owner       \
-    --no-same-permissions \
-    -C /usr/share/doc/python-3.7.2/html \
-    -xvf ../python-3.7.2-docs-html.tar.bz2
-
-rm -rfv /sources/$SRCD
+mkdir -p /usr/share/doc/python-3.7.4/html &&
+cp -r ../$2 /usr/share/doc/python-3.7.4/html
+chroot_check $? "Install preformatted docs"
 

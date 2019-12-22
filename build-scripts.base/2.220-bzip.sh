@@ -1,16 +1,8 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1              
-stripit $PKG        
-SRCD=$STRIPPED      
-                    
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../bzip2-1.0.8-install_docs-1.patch
 chroot_check $? "system-build : bzip2  : patch"
@@ -39,6 +31,4 @@ ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
 rm -v /usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 /bin/bunzip2
 ln -sv bzip2 /bin/bzcat
-
-rm -rfv /sources/$SRCD
 

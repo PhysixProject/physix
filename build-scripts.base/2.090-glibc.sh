@@ -1,17 +1,8 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh
-
-cd /sources
-PKG=$1                                                                          
-stripit $PKG                                                                    
-SRCD=$STRIPPED                                                                  
-                                                                                
-cd /sources                                                                     
-unpack $PKG                                                            
-cd /sources/$SRCD 
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../glibc-2.30-fhs-1.patch
 chroot_check $? "system-build : glibc : patch glibc-2.29-fhs-1.patch "
@@ -123,5 +114,5 @@ cp -v /physix/system_scripts/configs/etc_ld.so.conf  /etc/ld.so.conf
 
 mkdir -pv /etc/ld.so.conf.d
 
-rm -rfv /sources/$SRCD
+
 

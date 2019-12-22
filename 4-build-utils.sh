@@ -3,6 +3,9 @@
 # Copyright (C) 2019 Travis Davies
 
 source ./include.sh
+source ./build.conf
+
+chmod -R $CONF_GEN_USER:$CONF_GEN_USER /sources
 
 iuser=`whoami`
 if [ $iuser != 'root' ] ; then
@@ -23,22 +26,43 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	SCRIPT=$(echo $LINE | cut -d',' -f2)
 	PKG=$(echo $LINE | cut -d',' -f3)
 
-	TIME=`date "+%D %T"`
-	report "$TIME : $BUILD_ID : Building $PKG"
-
 	if [ "$IO" == "log" ] ; then
 	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"     
 	else                                                     
 		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"  
 	fi                                                       
 
+	TIME=`date "+%D %T"`
+	report "$TIME : $BUILD_ID : Building $PKG"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-		eval "/physix/build-scripts.utils/$SCRIPT $PKG $IO_DIRECTION"
+
+		if [ $PKG ] ; then
+			# physix doesn't exist as a user
+			unpack $PKG "physix:root" 
+			check $? "Unpack $PKG"
+			return_src_dir $PKG 
+			SRC0=$SRC_DIR
+		fi
+                                                                
+		if [ ! -e /physix/build-scripts.utils/$SCRIPT ] ; then
+			report "Build Script NOT found: /build-scripts.utils/$SCRIPT"
+			exit 1
+		fi
+
+		eval "/physix/build-scripts.utils/$SCRIPT $SRC0 $IO_DIRECTION"
 		check $? "$SCRIPT"
 		echo ''
+
+		#if [ "$CONF_BUILD_SMALL" == "y" ] ; then 
+		#	cd /sources && rm -rf ./$SRC0
+		#fi                                       
 	fi
 	BUILD_ID=$((BUILD_ID+1))
 done
+
+report "-----------------------------"
+report "- Utilities Build Complete  -"
+report "-----------------------------"
 
 exit 0
 

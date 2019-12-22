@@ -1,18 +1,10 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
+source ../../physix/include.sh || exit 1
+cd $BUILDROOT/sources/$1 || exit 1
+source ~/.bashrc                        
 
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-source $SCRIPTPATH/../include.sh
-source ~/.bashrc
-
-cd $BUILDROOT/sources      
-PKG=$1                   
-stripit $PKG             
-SRCD=$STRIPPED           
-                         
-unpack $PKG NCHRT
-cd $BUILDROOT/sources/$SRCD
 
 mkdir -v build
 cd       build
@@ -42,5 +34,4 @@ check $? "Glibc: glibc: $BUILDROOT_TGT-gcc dummy.c"
 
 rm -v dummy.c a.out
 
-rm -rf $BUILDROOT/sources/$SRCD
 

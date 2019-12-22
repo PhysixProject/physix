@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 GUSER=`cat /physix/build.conf | grep GEN_USER | cut -d'=' -f2`
 
@@ -40,6 +32,4 @@ chroot_check $? "sudo : /etc/sudoers.d/sudo written"
 
 usermod -a -G wheel $GUSER
 chroot_check $? "sudo : Added $GUSER to wheel group"
-
-rm -rf /sources/$SRCD
 

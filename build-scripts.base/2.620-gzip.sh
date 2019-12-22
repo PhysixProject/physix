@@ -1,17 +1,8 @@
 #!/bin/bash 
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr
 chroot_check $? "gzip config"
@@ -28,7 +19,7 @@ chroot_check $? "gzip make install"
 
 mv -v /usr/bin/gzip /bin
 
-rm -rfv /sources/$SRCD
 
-rm -rfv /sources/$SRCD
+
+
 

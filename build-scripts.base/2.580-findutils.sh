@@ -1,19 +1,10 @@
 #!/bin/bash 
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1              
-stripit $PKG        
-SRCD=$STRIPPED      
-                    
-cd /sources         
-unpack $PKG
-cd /sources/$SRCD   
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1           
 
 sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in
-
 
 sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c
 sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c
@@ -34,6 +25,4 @@ chroot_check $? "findutils make install"
 
 mv -v /usr/bin/find /bin
 sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
-
-rm -rfv /sources/$SRCD
 

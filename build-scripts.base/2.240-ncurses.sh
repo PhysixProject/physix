@@ -1,16 +1,8 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-
-source /physix/include.sh                
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+cd /sources/$1 || exit 1
 
 sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in
 
@@ -49,5 +41,5 @@ ln -sfv libncurses.so      /usr/lib/libcurses.so
 mkdir -v       /usr/share/doc/ncurses-6.1
 cp -v -R doc/* /usr/share/doc/ncurses-6.1
 
-rm -rfv /sources/$SRCD
+
 

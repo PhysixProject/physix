@@ -37,9 +37,6 @@ check $? "2-build-base-sys.sh"
 ./3-config-base-sys.sh
 check $? "3-config-base-sys.sh"
 
-./4-build-misc.sh
-check $? "4-build-misc.sh"
-
 echo "Build Complete"
 echo "Reboot the system from the device specifed in build.conf"
 

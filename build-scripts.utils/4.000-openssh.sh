@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 install  -v -m700 -d /var/lib/sshd &&
 chown    -v root:sys /var/lib/sshd &&
@@ -39,6 +31,4 @@ install -v -m755 -d /usr/share/doc/openssh-8.0p1     &&
 install -v -m644    INSTALL LICENCE OVERVIEW README* \
                     /usr/share/doc/openssh-8.0p1
 chroot_check $? "openssh : make install"
-
-rm -rf /sources/$SRCD
 

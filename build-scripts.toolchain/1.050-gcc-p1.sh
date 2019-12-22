@@ -1,20 +1,10 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
+source ../../physix/include.sh || exit 1
+cd $BUILDROOT/sources/$1 || exit 1
+source ~/.bashrc                        
 
-
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-source $SCRIPTPATH/../include.sh
-source ~/.bashrc
-
-
-cd $BUILDROOT/sources      
-PKG=$1                   
-stripit $PKG             
-SRCD=$STRIPPED           
-                         
-unpack $PKG NCHRT
-cd $BUILDROOT/sources/$SRCD
 
 tar -xf ../mpfr-4.0.2.tar.xz
 mv -v mpfr-4.0.2 mpfr
@@ -77,5 +67,4 @@ check $? "GCC Pass 1 make"
 make install
 check $? "GCC Pass 1 make install"
 
-rm -rf $BUILDROOT/sources/$SRCD
 

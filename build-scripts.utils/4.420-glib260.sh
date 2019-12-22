@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 patch -Np1 -i ../glib-2.60.6-skip_warnings-1.patch
 
@@ -27,6 +19,4 @@ ninja install &&
 mkdir -p /usr/share/doc/glib-2.60.6 &&
 cp -r ../docs/reference/{NEWS,gio,glib,gobject} /usr/share/doc/glib-2.60.6
 chroot_check $? "glibc 2.60 : make install"
-
-rm -rf /sources/$SRCD
 

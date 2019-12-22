@@ -1,15 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 make PREFIX=/usr                \
      SHAREDIR=/usr/share/hwdata \
@@ -22,7 +14,4 @@ make PREFIX=/usr                \
      install install-lib        &&
 chmod -v 755 /usr/lib/libpci.so
 chroot_check $? "pciutils : make install"
-
-
-rm -rf /sources/$SRCD
 

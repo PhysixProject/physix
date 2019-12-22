@@ -1,16 +1,7 @@
 #!/bin/bash
-
-source /physix/include.sh
-                     
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources
-unpack $PKG
-cd /sources/$SRCD
-
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr
 chroot_check $? "libassuan : configure"
@@ -30,6 +21,4 @@ install -v -m644 doc/assuan_nochunks.html \
 install -v -m644 doc/assuan.{txt,texi} \
                     /usr/share/doc/libassuan-2.5.3
 chroot_check $? "libassuan : make install"
-
-rm -rf /sources/$SRCD
 
