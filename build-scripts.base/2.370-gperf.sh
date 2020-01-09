@@ -12,7 +12,7 @@ chroot_check $? "gperf make"
 
 #test known to fail if compiled in parallel
 make -j1 check
-chroot_check $? "gperf make check" noexit
+chroot_check $? "gperf make check" NOEXIT
 
 make install
 chroot_check $? "gperf make install"

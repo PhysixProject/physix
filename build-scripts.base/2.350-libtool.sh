@@ -12,10 +12,8 @@ chroot_check $? "libtool make"
 
 make -j8 check
 # 5 Tests expected to fail
-chroot_check $? "libtool make check" noexit
+chroot_check $? "libtool make check" NOEXIT
 
 make install
 chroot_check $? "libtool make install"
-
-
 

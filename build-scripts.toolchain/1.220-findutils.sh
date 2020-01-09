@@ -21,7 +21,7 @@ make
 check $? "Findutils make"
 
 make check
-check $? "Findutils make check" noexit
+check $? "Findutils make check" NOEXIT 
                                                                                 
 make install
 check $? "Findutils make install"

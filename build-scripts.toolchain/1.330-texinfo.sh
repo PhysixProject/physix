@@ -5,7 +5,6 @@ source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
 source ~/.bashrc                        
 
-
 ./configure --prefix=/tools
 check $? "Texinfo: Configure"
 
@@ -14,7 +13,7 @@ check $? "texingo: make"
 
 make check
 # Not necessary
-check $? "texinfo: make check" noexit
+check $? "texinfo: make check" NOEXIT
 
 make install
 check $? "Texinfo: make install"

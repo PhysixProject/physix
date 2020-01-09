@@ -49,4 +49,3 @@ grep found dummy.log
 # If all is well...
 #rm -v dummy.c a.out dummy.log
 
-

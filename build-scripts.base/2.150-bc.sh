@@ -11,7 +11,7 @@ make
 chroot_check $? "system-build : bc : make" 
 
 make test
-chroot_check $? "system-build : bc : make test" noexit
+chroot_check $? "system-build : bc : make test" NOEXIT
 
 make install
 chroot_check $? "system-build : bc : make install" 

@@ -13,7 +13,7 @@ make -j8
 chroot_check $? "intltool make"
 
 make check
-chroot_check $? "intltool make check" noexit
+chroot_check $? "intltool make check" NOEXIT
 
 make install
 chroot_check $? "intltool make install"

@@ -15,13 +15,11 @@ make -j8
 chroot_check $? "expat make"
 
 make check
-chroot_check $? "expat make check" noexit
+chroot_check $? "expat make check" NOEXIT
 
 make install 
 chroot_check $? "expat make install"
 
 # install documentation
 #install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.6
-
-
 

@@ -14,7 +14,7 @@ check $? "xz: make"
 
 make check
 # Not necessary
-check $? "Tar: make check" noexit
+check $? "Tar: make check" NOEXIT
 
 make install
 check $? "xz: make install"

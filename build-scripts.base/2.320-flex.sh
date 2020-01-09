@@ -14,12 +14,10 @@ make -j8
 chroot_check $? "flex make"
 
 make check
-chroot_check $? "flex make check" noexit
+chroot_check $? "flex make check" NOEXIT
 
 make install
 chroot_check $? "flex make install"
 
 ln -sv flex /usr/bin/lex
-
-
 

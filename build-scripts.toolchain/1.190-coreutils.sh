@@ -13,7 +13,7 @@ make -j8
 check $? "coreutils make"
 
 make RUN_EXPENSIVE_TESTS=yes check
-check $? "coreutils make RUN_EXPENSIVE_TESTS=yes check" noexit
+check $? "coreutils make RUN_EXPENSIVE_TESTS=yes check" NOEXIT
 
 make install
 check $? "coreutils make install"

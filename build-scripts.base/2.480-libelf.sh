@@ -11,7 +11,7 @@ make -j8
 chroot_check $? "libelf make"
 
 make check
-chroot_check $? "libelf make check" noexit
+chroot_check $? "libelf make check" NOEXIT
 
 make -C libelf install
 chroot_check $? "libelf make install"

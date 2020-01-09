@@ -35,7 +35,7 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	fi
 
 
-	TIME=`date "+%D %T"`
+	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID : Building $PKG0"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 

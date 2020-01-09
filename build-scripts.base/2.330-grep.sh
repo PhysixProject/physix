@@ -11,10 +11,8 @@ make -j8
 chroot_check $? "grep eake"
 
 make -k check
-chroot_check $? "grep make -k check" noexit
+chroot_check $? "grep make -k check" NOEXIT
 
 make install
 chroot_check $? "grep make install"
-
-
 

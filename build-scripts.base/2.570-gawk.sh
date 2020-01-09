@@ -13,7 +13,7 @@ make
 chroot_check $? "gawk make"
 
 make check
-chroot_check $? "gawk make check" noexit
+chroot_check $? "gawk make check" NOEXIT
 
 make install
 chroot_check $? "gawk make install"

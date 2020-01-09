@@ -14,7 +14,7 @@ make -j8
 chroot_check $? "system-build : pkg config  : make"
 
 make check
-chroot_check $? "system-build : pkg config : make check" noexit
+chroot_check $? "system-build : pkg config : make check" NOEXIT
 
 make install
 chroot_check $? "system-build : pkg config : make install"

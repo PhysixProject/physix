@@ -50,9 +50,14 @@
 2.550-check.sh,check-0.12.0.tar.gz
 2.560-diffutils.sh,diffutils-3.7.tar.xz
 2.570-gawk.sh,gawk-5.0.1.tar.xz
+2.580-cpio.sh,cpio-2.12.tar.bz2
+2.580-dracut.sh,dracut-049.tar.gz
 2.580-findutils.sh,findutils-4.6.0.tar.gz
 2.590-groff.sh,groff-1.22.4.tar.gz
-2.600-grub.sh,grub-2.04.tar.xz
+2.591-libaio.sh,libaio_0.3.112.orig.tar.xz
+#2.593-popt.sh,popt-1.16.tar.gz
+#2.594-efivar.sh,efivar-37.tar.bz2
+#2.595-efibootmgr.sh,efibootmgr-16.tar.bz2
 2.610-less.sh,less-551.tar.gz
 2.620-gzip.sh,gzip-1.10.tar.xz
 2.630-iproute.sh,iproute2-5.2.0.tar.xz
@@ -69,5 +74,7 @@
 2.740-procps-ng.sh,procps-ng-3.3.15.tar.xz
 2.750-util-linux.sh,util-linux-2.34.tar.xz
 2.760-e2fsprogs.sh,e2fsprogs-1.45.3.tar.gz
+2.770-lvm2.sh,LVM2.2.03.05.tgz
+2.775-grub.sh,grub-2.04.tar.xz
 2.780-stripping.sh,
 2.790-cleanup.sh,

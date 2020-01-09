@@ -4,7 +4,6 @@
 source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
 source ~/.bashrc                        
-                                                                                
 
 ./configure --prefix=/tools
 check $? "tar: Configure"
@@ -14,7 +13,7 @@ check $? "Tar: make"
 
 make check
 # Not necessary
-check $? "Tar: make check" noexit
+check $? "Tar: make check" NOEXIT
 
 make install
 check $? "Tar: make install"

@@ -5,7 +5,6 @@ source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
 source ~/.bashrc                        
 
-
 ./configure --prefix=/tools
 check $? "patch: Configure"
 
@@ -13,7 +12,7 @@ make
 check $? "patch: make"
 
 make check
-check $? "patch make check" noexit
+check $? "patch make check" NOEXIT
 
 make install
 check $? "patch make install"

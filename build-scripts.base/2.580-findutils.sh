@@ -18,7 +18,7 @@ make
 chroot_check $? "findutils make"
 
 make check
-chroot_check $? "findutils make check" noexit
+chroot_check $? "findutils make check" NOEXIT
 
 make install
 chroot_check $? "findutils make install"

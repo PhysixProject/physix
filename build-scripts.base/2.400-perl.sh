@@ -22,7 +22,7 @@ make -j8
 chroot_check $? "system build : perl : make"
 
 make -k test
-chroot_check $? "system build : perl : make test " noexit
+chroot_check $? "system build : perl : make test " NOEXIT
 # One test fails due to using the most recent version of gdbm. 
 
 make install

@@ -20,7 +20,7 @@ python3 configure.py
 chroot_check $? "ninja python3 configure"
 
 ./ninja ninja_test
-chroot_check $? "ninja test" noexit
+chroot_check $? "ninja test" NOEXIT
 
 ./ninja_test --gtest_filter=-SubprocessTest.SetWithLots
 

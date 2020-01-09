@@ -11,7 +11,7 @@ make -j8
 chroot_check $? "automake make"
 
 make -j4 check
-chroot_check $? "automake make check" noexit
+chroot_check $? "automake make check" NOEXIT
 
 make install
 chroot_check $? "automake make install"

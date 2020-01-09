@@ -12,7 +12,7 @@ make -j8
 check $? "diffutils make"
 
 make check
-check $? "diffutils make check" noexit
+check $? "diffutils make check" NOEXIT
 
 make install
 check $? "diffutils make install"

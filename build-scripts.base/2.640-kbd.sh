@@ -17,7 +17,7 @@ make
 chroot_check $? "kbd make"
 
 make check
-chroot_check $? "kbd make check" noexit
+chroot_check $? "kbd make check" NOEXIT
 
 make install
 chroot_check $? "kbd make install"
@@ -25,6 +25,4 @@ chroot_check $? "kbd make install"
 mkdir -v       /usr/share/doc/kbd-2.0.4
 
 cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4
-
-
 

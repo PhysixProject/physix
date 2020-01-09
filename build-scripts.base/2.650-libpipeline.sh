@@ -11,10 +11,8 @@ make
 chroot_check $? "libpipeline make"
 
 make check
-chroot_check $? "libpipeline make check" noexit
+chroot_check $? "libpipeline make check" NOEXIT
 
 make install
 chroot_check $? "libpipeline make install"
-
-
 

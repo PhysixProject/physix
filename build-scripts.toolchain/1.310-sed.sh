@@ -5,7 +5,6 @@ source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
 source ~/.bashrc                        
 
-
 ./configure --prefix=/tools
 check $? "Sed: Configure"
 
@@ -14,7 +13,7 @@ check $? "Sed: make"
 
 make check
 # not necessary and often returns non zero
-check $? "Sed make check" noexit
+check $? "Sed make check" NOEXIT
 
 make install
 check $? "Sed: make install"

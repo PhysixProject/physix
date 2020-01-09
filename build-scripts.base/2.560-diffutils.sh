@@ -11,7 +11,7 @@ make
 chroot_check $? "diffutils make"
 
 make check
-chroot_check $? "diffutils make check" noexit
+chroot_check $? "diffutils make check" NOEXIT
 
 make install
 chroot_check $? "diffutils make install"

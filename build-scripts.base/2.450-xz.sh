@@ -13,7 +13,7 @@ make -j8
 chroot_check $? "xz make"
 
 make check
-chroot_check $? "xz make check" noexit
+chroot_check $? "xz make check" NOEXIT
 
 make install
 chroot_check $? "xz make install"

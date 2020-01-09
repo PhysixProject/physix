@@ -27,5 +27,3 @@ chroot_check $? "system-build : mpfr : make install"
 make install-html
 chroot_check $? "system-build : mpfr : make install html"
 
-
-

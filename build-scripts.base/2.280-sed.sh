@@ -19,13 +19,11 @@ chroot_check $? "system-build : sed : make html"
 
 make check
 # Disable check for now. Expected failure because valgrind is not present.
-chroot_check $? "system-build : sed : make check" noexit
+chroot_check $? "system-build : sed : make check" NOEXIT
 
 make install
 chroot_check $? "system-build : sed : make install"
 
 install -d -m755           /usr/share/doc/sed-4.7
 install -m644 doc/sed.html /usr/share/doc/sed-4.7
-
-
 

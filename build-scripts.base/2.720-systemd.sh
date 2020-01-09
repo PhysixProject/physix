@@ -65,14 +65,14 @@ systemctl disable systemd-time-wait-sync.service
 chroot_check $? "systemd : disable systemd-time-wait-sync.service"
 
 # Setup systemd core system users
-useradd -M -U systemd-network              
-chroot_check $? "useradd  systemd-network" 
+#useradd -M -U systemd-network              
+#chroot_check $? "useradd  systemd-network" 
                                            
-useradd -M -U systemd-resolve              
-chroot_check $? "useradd  systemd-resolve" 
+#useradd -M -U systemd-resolve              
+#chroot_check $? "useradd  systemd-resolve" 
                                            
-useradd -M -U systemd-timesync             
-chroot_check $? "useradd  systemd-timesync"
+#useradd -M -U systemd-timesync             
+#chroot_check $? "useradd  systemd-timesync"
 
 # Prevent systemd from constant start attempts, which leads to being throttled.
 sed -i 's/RestartSec=0/RestartSec=1/' /lib/systemd/system/systemd-networkd.service

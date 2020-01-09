@@ -5,9 +5,7 @@ source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
 source ~/.bashrc                        
 
-
 sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
-
 
 ./configure --prefix=/tools --without-guile
 check $? "make: Configure"
@@ -16,7 +14,7 @@ make
 check $? "make: make"
 
 make check
-check $? "make make check" noexit
+check $? "make make check" NOEXIT
 
 make install
 check $? "make make install"

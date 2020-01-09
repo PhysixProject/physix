@@ -46,11 +46,8 @@ SED_CMD='s/INTERFACE_MARKER/'$IFACE'/g'
 sed -i $SED_CMD /etc/systemd/network/10-ether0.link
 chroot_check $? "Set IFACE: $IFACE"
 
-
 cp -v /physix/build-scripts.config/configs/etc_hosts.cfg /etc/hosts
 chroot_check $? "system config : network : wrote /etc/hosts"
-
-
 
 # SETUP UDEV
 report "Creating /etc/udev/rules.d/70-persistent-net.rules"                     
@@ -60,13 +57,14 @@ if [ -r $RULES ] ; then
         touch /etc/udev/rules.d/70-persistent-net.rules                         
 fi                                                                              
                                                                                 
-for IFACE in `ls /sys/class/net` ; do                                           
-        MAC=`cat /sys/class/net/$IFACE/address`                                 
-        TYPE=`cat /sys/class/net/$IFACE/type`                                   
-        ID=`cat /sys/class/net/$IFACE/dev_id`                                   
-        echo "SUBSYSTEM==\"net\", ACTION==\"add\", DRIVERS==\"?*\", ATTR{address}==\"$MAC\", ATTR{dev_id}==\"$ID\", ATTR{type}==\"$TYPE\", NAME=\"$IFACE\"" >> $RULES
+for IFACE in `ls /sys/class/net` ; do
+        MAC=`cat /sys/class/net/$IFACE/address`
+        TYPE=`cat /sys/class/net/$IFACE/type`
+        ID=`cat /sys/class/net/$IFACE/dev_id`
+	ENTRY="SUBSYSTEM==\"net\", ACTION==\"add\", DRIVERS==\"?*\", ATTR{address}==\"$MAC\", ATTR{dev_id}==\"$ID\", ATTR{type}==\"$TYPE\", NAME=\"$IFACE\""
+        echo $ENTRY >> $RULES
+	chroot_check $? "$ENTRY"
 done                                                                            
-chroot_check $? "!!"                                                            
 
 #cp -v /physix/etc_resolv.conf /etc/resolv.conf
 

@@ -6,7 +6,6 @@ cd /sources/$1 || exit 1
 
 sed -i '5481,5485 s/({/(\\{/' tp/Texinfo/Parser.pm
 
-
 ./configure --prefix=/usr --disable-static
 chroot_check $? "texinfo"
 
@@ -14,7 +13,7 @@ make
 chroot_check $? "texinfo make" 
 
 make check
-chroot_check $? "texinfo make check" noexit 
+chroot_check $? "texinfo make check" NOEXIT
 
 make install
 chroot_check $? "texinfo make install" 
@@ -28,6 +27,4 @@ for f in *
   do install-info $f dir 2>/dev/null
 done
 popd
-
-
 

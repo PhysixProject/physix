@@ -34,5 +34,3 @@ chroot_check $? "system-build : GMP : make install"
 make install-html
 chroot_check $? "system-build : GMP : make install html"
 
-
-

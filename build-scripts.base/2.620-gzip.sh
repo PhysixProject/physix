@@ -12,14 +12,10 @@ chroot_check $? "gzip make"
 
 make check
 # Test fail so don't tank it.. (Cross fingers, pray to Satan).
-chroot_check $? "gzip make check" noexit
+chroot_check $? "gzip make check" NOEXIT
 
 make install
 chroot_check $? "gzip make install"
 
 mv -v /usr/bin/gzip /bin
-
-
-
-
 

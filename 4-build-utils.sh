@@ -32,7 +32,7 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"  
 	fi                                                       
 
-	TIME=`date "+%D %T"`
+	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID : Building $PKG"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 

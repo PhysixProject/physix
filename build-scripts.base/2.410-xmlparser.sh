@@ -10,7 +10,7 @@ make -j8
 chroot_check $? "system build : xmlparser : make"
 
 make test
-chroot_check $? "system build : xmlparser : make test" noexit
+chroot_check $? "system build : xmlparser : make test" NOEXIT
 
 make install
 chroot_check $? "system build : xmlparser : make install"

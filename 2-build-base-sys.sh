@@ -26,7 +26,7 @@ START_POINT=${1:-0}
 STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
 
 BUILD_ID=0
-TIME=`date "+%D %T"`
+TIME=`date "+%D-%T"`
 report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
 
 # Called differently becuase it is not chrooted
@@ -42,7 +42,7 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 	PKG0=$(echo $LINE | cut -d',' -f2)
 	PKG1=$(echo $LINE | cut -d',' -f3)
 
-	TIME=`date "+%D %T"`
+	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID : Building $SCRIPT"
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
@@ -59,8 +59,6 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 			check $? "Unpack $PKG0"
 			return_src_dir $PKG0 "NCHRT"
 			SRC0=$SRC_DIR
-			#cd $BUILDROOT/sources/$SRC_DIR
-			#check $? "cd $BUILDROOT/sources/$SRC_DIR"
 		fi
 
 		if [ ! -e $BUILDROOT/physix/build-scripts.base/$SCRIPT ] ; then
@@ -72,10 +70,10 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 		check $? "$SCRIPT"
 		echo ''
 
-		#if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
-		#       return_src_dir "$PKG0" NCHRT                  
-		#       cd $BUILDROOT/sources/ && rm -rf $SRC0        
-		#fi                                                   
+		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
+		       return_src_dir "$PKG0" NCHRT                  
+		       cd $BUILDROOT/sources/ && rm -rf $SRC0        
+		fi                                                   
 
 	fi
 

@@ -1,3 +1,5 @@
+cpio-2.12.tar.bz2,http://physix-os.org/sysV-1.0/cpio-2.12.tar.bz2,93eea9f07c0058c097891c73e4955456
+dracut-049.tar.gz,http://physix-os.org/sysV-1.0/dracut-049.tar.gz,a43d54620a8fca3591003a66a16aefc3
 acl-2.2.53.tar.gz,http://physix-os.org/sysV-1.0/acl-2.2.53.tar.gz,007aabf1dbb550bcddde52a244cd1070
 attr-2.4.48.tar.gz,http://physix-os.org/sysV-1.0/attr-2.4.48.tar.gz,bc1e5cb5c96d99b24886f1f527d3bb3d
 autoconf-2.69.tar.xz,http://physix-os.org/sysV-1.0/autoconf-2.69.tar.xz,50f97f4159805e374639a73e2636f22e
@@ -28,6 +30,9 @@ gmp-6.1.2.tar.xz,http://physix-os.org/sysV-1.0/gmp-6.1.2.tar.xz,f58fa8001d60c4c7
 gperf-3.1.tar.gz,http://physix-os.org/sysV-1.0/gperf-3.1.tar.gz,9e251c0a618ad0824b51117d5d9db87e
 grep-3.3.tar.xz,http://physix-os.org/sysV-1.0/grep-3.3.tar.xz,05d0718a1b7cc706a4bdf8115363f1ed
 groff-1.22.4.tar.gz,http://physix-os.org/sysV-1.0/groff-1.22.4.tar.gz,08fb04335e2f5e73f23ea4c3adbf0c5f
+efibootmgr-16.tar.bz2,http://physix-os.org/sysV-1.0/efibootmgr-16.tar.bz2,ab7cf46774fda951a0e8a40beb65a90e
+efivar-37.tar.bz2,http://physix-os.org/sysV-1.0/efivar-37.tar.bz2,9f067275c5f7aafdd75bfb364280ac9c
+efivar-37-gcc_9-1.patch,http://physix-os.org/sysV-1.0/efivar-37-gcc_9-1.patch,2f2bd3d8a14cb2691b6295f1f852b2a7
 grub-2.04.tar.xz,http://physix-os.org/sysV-1.0/grub-2.04.tar.xz,5aaca6713b47ca2456d8324a58755ac7
 gzip-1.10.tar.xz,http://physix-os.org/sysV-1.0/gzip-1.10.tar.xz,691b1221694c3394f1c537df4eee39d3
 iana-etc-2.30.tar.bz2,http://physix-os.org/sysV-1.0/iana-etc-2.30.tar.bz2,3ba3afb1d1b261383d247f46cb135ee8

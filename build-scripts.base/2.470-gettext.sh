@@ -19,7 +19,7 @@ make -j8
 chroot_check $? "gettext make"
 
 make check
-chroot_check $? "gettext make check" noexit
+chroot_check $? "gettext make check" NOEXIT
 
 make install
 chroot_check $? "gettext make install"

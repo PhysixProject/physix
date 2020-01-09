@@ -17,5 +17,3 @@ chroot_check $? "system-build : find dest/include \( -name .install -o -name ..i
 cp -rv dest/include/* /usr/include
 chroot_check $? "system-build : cp -rv dest/include/* /usr/include "
 
-
-

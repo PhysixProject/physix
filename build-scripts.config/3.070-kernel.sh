@@ -38,3 +38,7 @@ install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 EOF
 chroot_check $? "system config: kernel : /etc/modprobe.d/usb.conf"
 
+
+mkinitrd /boot/initrd.physix-5.2.8 5.2.8
+chroot_check $? "Install mkinitrd"
+

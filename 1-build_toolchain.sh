@@ -33,20 +33,11 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 	PKG2=$(echo $LINE | cut -d',' -f4)
 	PKG3=$(echo $LINE | cut -d',' -f5)
 
-        TIME=`date "+%D %T"`
+        TIME=`date "+%Y-%m-%d-%T"`
         report "$TIME : $BUILD_ID : Building $SCRIPT"
 
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-
-		#for I in `seq 1 $#` ; do
-		#	if [ $[I] ] ; then
-		#		unpack $[I] "physix:root" NCHRT
-		#		check $? "Unpack $[I]"
-		#		return_src_dir $[I] "NCHRT"
-		#		$[I]=$SRC_DIR
-		#	fi
-		#done
 
 		if [ $PKG3 ] ; then
 			unpack $PKG3 "physix:root" NCHRT
@@ -86,7 +77,7 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		fi
 
 		# Execute the build instructions.
-		su physix -c "$BUILDROOT/physix/build-scripts.toolchain/$SCRIPT $SRC0 $SRC1 $SRC2 $SRC3" &> $TOOLCHAINLOGS/$SCRIPT
+		su physix -c "$BUILDROOT/physix/build-scripts.toolchain/$SCRIPT $SRC0 $SRC1 $SRC2 $SRC3" &> $TOOLCHAINLOGS/$TIME-$SCRIPT
 		check $? "$SCRIPT"
 		echo ''
 

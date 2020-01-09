@@ -23,7 +23,7 @@ chroot_check $? "e2fsprogs make"
 
 make check
 # Don't stop if test suite fails
-chroot_check $? "e2fsprogs make check" noexit
+chroot_check $? "e2fsprogs make check" NOEXIT
 
 make install
 chroot_check $? "e2fsprogs make install" 
@@ -38,6 +38,4 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
 install -v -m644 doc/com_err.info /usr/share/info
 install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
-
-
 

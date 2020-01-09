@@ -11,10 +11,8 @@ make
 chroot_check $? "patch make "
 
 make check
-chroot_check $? "patch make check" noexit
+chroot_check $? "patch make check" NOEXIT
 
 make install
 chroot_check $? "patch make install "
-
-
 

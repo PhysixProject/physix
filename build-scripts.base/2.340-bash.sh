@@ -15,7 +15,7 @@ chroot_check $? "bash make"
 
 chown -Rv nobody .
 su nobody -s /bin/bash -c "PATH=$PATH HOME=/home make tests"
-chroot_check $? "make tests" noexit
+chroot_check $? "make tests" NOEXIT
 
 make install
 chroot_check $? "make install"

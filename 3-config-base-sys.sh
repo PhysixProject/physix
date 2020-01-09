@@ -25,7 +25,7 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 	SCRIPT=$(echo $LINE | cut -d',' -f2)
 	PKG=$(echo $LINE | cut -d',' -f3)
 
-	TIME=`date "+%D %T"`
+	TIME=`date "+%D-%T"`
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
                                                                 
 		if [ $PKG ] ; then
@@ -45,10 +45,10 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		check $? "$SCRIPT"
 		echo ''
 
-		#if [ "$CONF_BUILD_SMALL" == "y" ] ; then
-		#       return_src_dir $PKG NCHRT
-		#       rm -rf $BUILDROOT/sources/$SRC_DIR
-		#fi
+		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
+			return_src_dir "$PKG0" NCHRT
+			cd $BUILDROOT/sources/ && rm -rf $SRC0
+		fi
 	fi
 
 	BUILD_ID=$((BUILD_ID+1))

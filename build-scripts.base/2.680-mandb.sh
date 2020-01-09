@@ -21,7 +21,7 @@ make
 chroot_check $? "mandb make"
 
 make check
-chroot_check $? "mandb make check" noexit
+chroot_check $? "mandb make check" NOEXIT
 
 make install
 chroot_check $? "mandb make install"

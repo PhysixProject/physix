@@ -20,10 +20,7 @@ echo "| __ |\ | |  |  /  |    | |\ | |  |  \/  "
 echo "|__] | \| |__| /   |___ | | \| |__| _/\_ "
 echo ""
 
-./0-init-prep.sh -d
-check $? "0-init-prep.sh -d : Setup Storage Device"
-
-./0-init-prep.sh -s
+./0-init-prep.sh
 check $? "0-init-prep.sh -s : Get sources, lfs user setup"
 
 cd $BUILDROOT/physix/

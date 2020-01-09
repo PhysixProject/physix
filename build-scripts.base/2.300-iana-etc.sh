@@ -10,5 +10,3 @@ chroot_check $? "system-build : iana-etc : make"
 make install 
 chroot_check $? "system-build : iana-etc : make install"
 
-
-

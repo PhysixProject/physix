@@ -16,5 +16,3 @@ chroot_check $? "6.31-bison make"
 make install
 chroot_check $? "6.31-biso nake install"
 
-
-

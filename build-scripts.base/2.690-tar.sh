@@ -15,13 +15,11 @@ make -j8
 chroot_check $? "tar make"
 
 make check
-chroot_check $? "tar make check" noexit
+chroot_check $? "tar make check" NOEXIT
 
 make install
 chroot_check $? "tar make install"
 
 make -C doc install-html docdir=/usr/share/doc/tar-1.31
 chroot_check $? "tar install doc"
-
-
 

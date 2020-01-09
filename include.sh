@@ -148,11 +148,12 @@ function chroot-conf-build {
 	local PKG=${3:-''}
 	local IO=${4:-''}
 	local IO_DIRECTION=''
+	local TIME=`date "+%Y-%m-%d-%T"`
 
 	if [ "$IO" == 'log'  ] ; then
-		IO_DIRECTION="&> /system-build-logs/$SCRIPT"
+		IO_DIRECTION="&> /system-build-logs/$TIME-$SCRIPT"
 	else
-		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"
+		IO_DIRECTION="| tee /system-build-logs/$TIME-$SCRIPT"
 	fi
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
@@ -169,12 +170,12 @@ function chroot-build {
 	local SCRIPT=$2
 	local SRC0=${3:-''}
 	local SRC1=${4:-''}
+	local TIME=`date "+%Y-%m-%d-%T"`
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
-		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /system-build-logs/$SCRIPT"
-
+		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /system-build-logs/$TIME-$SCRIPT"
 
 }
 

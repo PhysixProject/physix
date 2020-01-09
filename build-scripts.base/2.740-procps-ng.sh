@@ -19,13 +19,11 @@ sed -i -r 's|(pmap_initname)\\\$|\1|' testsuite/pmap.test/pmap.exp
 sed -i '/set tty/d' testsuite/pkill.test/pkill.exp
 rm testsuite/pgrep.test/pgrep.exp
 make check
-chroot_check $? "procps check" noexit
+chroot_check $? "procps check" NOEXIT
 
 make install
 chroot_check $? "procps make install"
 
 mv -v /usr/lib/libprocps.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
-
-
 

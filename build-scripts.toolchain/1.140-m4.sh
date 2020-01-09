@@ -16,7 +16,7 @@ make -j8
 check $? "M4 make"
 
 make check
-check $? "M4 make check" noexit
+check $? "M4 make check" NOEXIT
 
 make install
 check $? "M4 make install"

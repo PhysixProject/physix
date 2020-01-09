@@ -11,7 +11,7 @@ make
 chroot_check $? "check make"
 
 make check
-chroot_check $? "check make check" noexit
+chroot_check $? "check make check" NOEXIT
 
 make install
 chroot_check $? "check make install"

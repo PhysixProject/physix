@@ -18,7 +18,7 @@ make -j8
 chroot_check $? "libffi make"
 
 make check 
-chroot_check $? "libffi make check" noexit
+chroot_check $? "libffi make check" NOEXIT
 
 make install
 chroot_check $? "libffi make install"

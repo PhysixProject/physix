@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh
+source /physix/build.conf
 
 # This should be dynamically set.
 SET_ROOT=`cat /physix/build.conf | grep CONF_GRUB_SET_ROOT | cut -d'=' -f2`
@@ -29,18 +30,16 @@ while [ $LOOP -eq 0 ] ; do
 done
 
 if [ $CHOICE == 'yes' ] ; then
-    grub-install /dev/$ROOT_DEV 
-    chroot_check $? "system config: grub : grub-install /dev/$ROOT_DEV"
+    grub-install /dev/$ROOT_DEV
+    chroot_check $? "grub-install /dev/$ROOT_DEV" 
+    #grub-install --force --target=i386-pc --efi-directory=/boot/efi --bootloader-id=physix --recheck $CONF_ROOT_DEVICE
+    #chroot_check $? "grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub --recheck"
 else
     exit 0
 fi
 
-cp -v /physix/build-scripts.config/configs/grub.cfg /boot/grub/grub.cfg  
+cp -v /physix/build-scripts.config/configs/lvm-grub.cfg /boot/grub/grub.cfg  
 chroot_check $? "cp grub.cfg"                                                     
-
-SED_CMD='s/ROOT_PART_MARKER/'$ROOT_PART'/g'
-sed -i $SED_CMD /boot/grub/grub.cfg
-chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 SED_CMD='s/SET_ROOT_MARKER/'$SET_ROOT'/g'
 sed -i $SED_CMD /boot/grub/grub.cfg
@@ -48,6 +47,8 @@ chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 if [ -e /boot/grub ] ; then
         cp -v /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts
+	chroot_check $? "cp -v /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts"
+
         cp -v /physix/build-scripts.config/configs/physix.gray.png /boot/grub/
         chroot_check $? "cp physix.gray.png /boot/grub/"
 fi

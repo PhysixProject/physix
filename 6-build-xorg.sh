@@ -25,7 +25,7 @@ for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
         PKG1=$(echo $LINE | cut -d',' -f4)
         PKG2=$(echo $LINE | cut -d',' -f5)
 
-	TIME=`date "+%D %T"`
+	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID : Building $SCRIPT"
 
 	if [ "$IO" == "log" ] ; then

@@ -4,7 +4,9 @@
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-REPLACE_MARKER_STR     /           REPLACE_MARKER_FS    defaults            1     1
+/dev/mapper/physix-root /           ext4 defaults   0 1
+UUID=BOOT_UUID_MARKER   /boot       ext2 defaults   0 2
+/dev/mapper/physix-home /home       ext4 defaults    0 2  
 #/dev/REPLACE_MARKER_SWP     swap         swap     pri=1               0     0
 
 # End /etc/fstab

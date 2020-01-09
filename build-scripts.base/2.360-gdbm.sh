@@ -13,10 +13,8 @@ make -j8
 chroot_check $? "gdbm make"
 
 make check
-chroot_check $? "gdbm make check" noexit
+chroot_check $? "gdbm make check" NOEXIT
 
 make install
 chroot_check $? "gdbm make installed"
-
-
 

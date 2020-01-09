@@ -10,7 +10,6 @@ chroot_check $? "system-build : glibc : patch glibc-2.29-fhs-1.patch "
 sed -i '/asm.socket.h/a# include <linux/sockios.h>' \
    sysdeps/unix/sysv/linux/bits/socket.h
 
-
 case $(uname -m) in
     i?86)   ln -sfv ld-linux.so.2 /lib/ld-lsb.so.3
     ;;
@@ -21,7 +20,6 @@ esac
 
 mkdir -v build
 cd       build
-
 
 CC="gcc -ffile-prefix-map=/tools=/usr" \
 ../configure --prefix=/usr                          \
@@ -35,14 +33,13 @@ chroot_check $? "system-build : glibc : configure "
 make 
 chroot_check $? "system-build : glibc : make "
 
-
 case $(uname -m) in
   i?86)   ln -sfnv $PWD/elf/ld-linux.so.2        /lib ;;
   x86_64) ln -sfnv $PWD/elf/ld-linux-x86-64.so.2 /lib ;;
 esac
 
 make check
-chroot_check $? "system-build : glibc : make check" noexit
+chroot_check $? "system-build : glibc : make check" NOEXIT
 
 touch /etc/ld.so.conf
 
@@ -56,7 +53,6 @@ mkdir -pv /var/cache/nscd
 
 install -v -Dm644 ../nscd/nscd.tmpfiles /usr/lib/tmpfiles.d/nscd.conf
 install -v -Dm644 ../nscd/nscd.service /lib/systemd/system/nscd.service
-
 
 mkdir -pv /usr/lib/locale
 localedef -i POSIX -f UTF-8 C.UTF-8 2> /dev/null || true
@@ -110,9 +106,7 @@ unset ZONEINFO
 #tzselect
 cp -v /usr/share/zoneinfo/US/Pacific /etc/localtime
 
-cp -v /physix/system_scripts/configs/etc_ld.so.conf  /etc/ld.so.conf
+cp -v /physix/build-scripts.base/configs/etc_ld.so.conf  /etc/ld.so.conf
 
 mkdir -pv /etc/ld.so.conf.d
-
-
 

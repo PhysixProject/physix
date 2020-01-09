@@ -15,7 +15,7 @@ make -j8
 chroot_check $? "openssl make"
 
 make test
-chroot_check $? "openssl make test" noexit
+chroot_check $? "openssl make test" NOEXIT
 
 sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
 make MANSUFFIX=ssl install

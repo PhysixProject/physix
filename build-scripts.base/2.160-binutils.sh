@@ -34,5 +34,3 @@ chroot_check $? "system-build : binutils : make check"
 make tooldir=/usr install
 chroot_check $? "system-build : binutils : make install"
 
-
-

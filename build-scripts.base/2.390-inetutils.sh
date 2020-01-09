@@ -19,7 +19,7 @@ make -j8
 chroot_check $? "inetutils make"
 
 make check
-chroot_check $? "inetutils make check" noexit
+chroot_check $? "inetutils make check" NOEXIT
 
 make install
 chroot_check $? "inetutils make install"

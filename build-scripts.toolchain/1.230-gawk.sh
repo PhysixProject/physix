@@ -12,7 +12,7 @@ make
 check $? "gawk: make"
 
 make check
-check $? "gawk: make check" noexit
+check $? "gawk: make check" NOEXIT
 
 make install
 check $? "gawk: make install"

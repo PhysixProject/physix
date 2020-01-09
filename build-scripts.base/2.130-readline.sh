@@ -27,5 +27,3 @@ ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so
 install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.0
 chroot_check $? "system-build : readline : install"
 
-
-

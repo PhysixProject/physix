@@ -23,7 +23,7 @@ make install
 check $? "Expect: make install"
 
 make test
-check $? "Expect Test" noexit
+check $? "Expect Test" NOEXIT
 
 make SCRIPTS="" install
 check $? "Expect: make SCRIPTS="" install"
