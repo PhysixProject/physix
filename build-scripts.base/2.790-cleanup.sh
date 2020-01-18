@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /physix/include.sh                
+source /physix/include.sh
 
 rm -rf /tmp/*
 

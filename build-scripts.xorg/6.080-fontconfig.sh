@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /physix/include.sh
-                     
+
 cd /sources
 PKG=$1
 stripit $PKG
@@ -10,7 +10,7 @@ SRCD=$STRIPPED
 cd /sources/
 unpack $PKG
 cd /sources/$SRCD
-mv $SRCD /sources/xc 
+mv $SRCD /sources/xc
 cd /sources/xc/$SRCD/
 
 
@@ -27,6 +27,4 @@ chroot_check $? "fontconfig : make "
 
 make install
 chroot_check $? "fontconfig : make install"
-
-rm -rf /sources/$SRCD
 

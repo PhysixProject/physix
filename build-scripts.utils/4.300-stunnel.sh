@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /physix/include.sh
-                     
+
 cd /sources
 PKG=$1
 stripit $PKG
@@ -19,7 +19,7 @@ chroot_check $? "stunnel : group/user add"
 ./configure --prefix=/usr        \
             --sysconfdir=/etc    \
             --localstatedir=/var \
-            --disable-systemd    
+            --disable-systemd
 chroot_check $? "stunnel : configure"
 
 make

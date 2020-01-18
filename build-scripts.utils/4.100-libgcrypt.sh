@@ -4,7 +4,7 @@ source /physix/build.conf || exit 1
 cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr
-chroot_check $? "libgcrypt : configure" 
+chroot_check $? "libgcrypt : configure"
 
 make
 chroot_check $? "libgcrypt : make"

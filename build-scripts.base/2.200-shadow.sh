@@ -17,7 +17,7 @@ sed -i 's/1000/999/' etc/useradd
 ./configure --sysconfdir=/etc --with-group-name-max-length=32
 chroot_check $? "system-build : shadow : configure"
 
-make -j8 
+make -j8
 chroot_check $? "system-build : shadow : make "
 
 make install

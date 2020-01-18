@@ -18,18 +18,19 @@ function verify_tools() {
 
 function report() {
 	local MSG=$1
+	local NO_NEW_LINE=$2
 	local BR=''
 
 	echo -e "\e[93m[INFO]\e[0m $MSG"
 
 	# chroot context
-	if [ -r /system-build-logs/build.log ] ; then
+	if [ -r /var/physix/system-build-logs/build.log ] ; then
 		echo -e "[INFO] $MSG" >> /system-build-logs/build.log
 	fi
 
 	# Non-chroot, not mounted
-	if [ -r '/mnt/physix/system-build-logs/build.log' ] ; then
-		echo -e "[INFO] $MSG" >> /mnt/physix/system-build-logs/build.log
+	if [ -r '/mnt/physix/var/physix/system-build-logs/build.log' ] ; then
+		echo -e "[INFO] $MSG" >> /mnt/physix/var/physix/system-build-logs/build.log
 	else
 		echo -e "[INFO] $MSG" >> /tmp/physix-init-host-build.log
 	fi
@@ -41,12 +42,12 @@ function ok() {
 	local BR=''
 	local TIME=`date "+%D %T"`
 
-	if [ -r '/mnt/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
+	if [ -r '/mnt/physix/var/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
 		BR=$BUILDROOT
 	fi
 
         echo -e "\e[92m[OK]\e[0m $TIME : $MSG"
-        echo -e "[OK] $TIME : $MSG" >> $BR/system-build-logs/build.log
+        echo -e "[OK] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
 }
 
 
@@ -54,12 +55,12 @@ function error() {
         local MSG=$1
 	local BR=''
 
-	if [ -r '/mnt/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
+	if [ -r '/mnt/physix/var/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
 		BR=$BUILDROOT
 	fi
 
         echo -e "\e[31m[ERROR]\e[0m $TIME :$MSG"
-        echo -e "[ERROR] $TIME : $MSG" >> $BR/system-build-logs/build.log
+        echo -e "[ERROR] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
 }
 
 # Check, handle and log return code
@@ -71,7 +72,7 @@ function chroot_check() {
 	if [ $RTN -ne 0 ] ; then
 		error "$RTN:$MSG"
 		if [ $NOEXIT == "FALSE" ] ; then
-			grep '\[ERROR\]' /system-build-logs/*.sh > /system-build-logs/err.log
+			grep '\[ERROR\]' /var/physix/system-build-logs/*.sh > /var/physix/system-build-logs/err.log
 			exit 1
 		fi
 	else
@@ -124,8 +125,8 @@ function return_src_dir() {
 	SRC_DIR='NULL'
 
 	if [ "$FLAG" == "NCHRT" ] ; then
-		BR=$BUILDROOT           
-	fi                              
+		BR=$BUILDROOT
+	fi
 
 	TMP=$(tar -tf $BR/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
 	if [ $? -ne 0 ] ; then
@@ -133,7 +134,7 @@ function return_src_dir() {
 		exit 1
 	fi
 
-	if [ -e $BR/sources/$TMP ] ; then 
+	if [ -e $BR/sources/$TMP ] ; then
 		export SRC_DIR=$TMP
 		return 0
 	fi
@@ -151,9 +152,9 @@ function chroot-conf-build {
 	local TIME=`date "+%Y-%m-%d-%T"`
 
 	if [ "$IO" == 'log'  ] ; then
-		IO_DIRECTION="&> /system-build-logs/$TIME-$SCRIPT"
+		IO_DIRECTION="&> /var/physix/system-build-logs/$TIME-$SCRIPT"
 	else
-		IO_DIRECTION="| tee /system-build-logs/$TIME-$SCRIPT"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$TIME-$SCRIPT"
 	fi
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
@@ -175,12 +176,12 @@ function chroot-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
-		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /system-build-logs/$TIME-$SCRIPT"
+		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$TIME-$SCRIPT"
 
 }
 
 
-# Unpacks source archives. 
+# Unpacks source archives.
 # Assumes chrooted env uless NCHRT Flag is passsed as arg 2
 function unpack() {
 	PKG=$1
@@ -209,7 +210,7 @@ function unpack() {
 }
 
 
-# Download sources packages                                                  
+# Download sources packages
 function pull_sources() {
 	local LIST=$1
 	local DEST_DIRECTORY=$2
@@ -236,13 +237,13 @@ function pull_sources() {
                 fi
 
 		C=`md5sum $DEST_DIRECTORY/$PKG_NAME | cut -d' ' -f1`
-		if [ "$PKG_MD5" == "$C" ] ; then             
-		        echo -e "\e[92m[ OK ]\e[0m MD5-check $PKG_NAME : $PKG_MD5"    
-		else                                     
-		        echo -e "\e[31m[ ERROR ]\e[0m MD5-Check $PKG_NAME : $PKG_MD5" 
+		if [ "$PKG_MD5" == "$C" ] ; then
+		        echo -e "\e[92m[ OK ]\e[0m MD5-check $PKG_NAME : $PKG_MD5"
+		else
+		        echo -e "\e[31m[ ERROR ]\e[0m MD5-Check $PKG_NAME : $PKG_MD5"
 			echo "[FAIL] CHECK YOUR SOURCES! At lease 1 package is not Authentic."
-		        ERROR=1                            
-		fi                                       
+		        ERROR=1
+		fi
 
         done
         return $ERROR

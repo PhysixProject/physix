@@ -6,7 +6,7 @@ cd /sources/$1 || exit 1
 ./configure --prefix=/usr    \
             --disable-static \
             --with-history   \
-            --with-python=/usr/bin/python3 
+            --with-python=/usr/bin/python3
 chroot_check $? "libxml2 : configure"
 
 make

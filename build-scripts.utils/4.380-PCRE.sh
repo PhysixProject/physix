@@ -11,7 +11,7 @@ cd /sources/$1 || exit 1
             --enable-pcregrep-libz            \
             --enable-pcregrep-libbz2          \
             --enable-pcretest-libreadline     \
-            --disable-static                 
+            --disable-static
 chroot_check $? "PCRE : configure"
 
 make

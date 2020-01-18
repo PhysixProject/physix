@@ -5,7 +5,7 @@
 source ./include.sh
 source ./build.conf
 
-TOOLCHAINLOGS=$BUILDROOT/system-build-logs
+TOOLCHAINLOGS=$BUILDROOT/var/physix/system-build-logs
 
 IAM=`whoami`
 if [ $IAM != "root" ] ; then
@@ -63,7 +63,7 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		fi
 
 		if [ $PKG0 ] ; then
-			unpack $PKG0 "physix:root" NCHRT   
+			unpack $PKG0 "physix:root" NCHRT
 			check $? "Unpack $PKG0"
 			return_src_dir $PKG0 "NCHRT"
 			cd $BUILDROOT/sources/$SRC_DIR
@@ -81,21 +81,21 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		check $? "$SCRIPT"
 		echo ''
 
-		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then  
+		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
 			cd $BUILDROOT/sources/ && rm -rf ./$SRC0
-		fi                                        
+		fi
 	fi
 
 	BUILD_ID=$((BUILD_ID+1))
 
-done 
+done
 
 /mnt/physix/physix/build-scripts.toolchain/1.370-chown.sh
 check $? "1.370-chown.sh"
 
-report "-------------------------------" 
-report "- Toolchain Build Complete!  -" 
-report "------------------------------" 
+report "-------------------------------"
+report "- Toolchain Build Complete!  -"
+report "------------------------------"
 
 exit 0
 

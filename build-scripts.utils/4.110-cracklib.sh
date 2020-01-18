@@ -7,7 +7,7 @@ sed -i '/skipping/d' util/packer.c &&
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --with-default-dict=/lib/cracklib/pw_dict 
+            --with-default-dict=/lib/cracklib/pw_dict
 chroot_check $? "cracklib : configure"
 make
 chroot_check $? "cracklib : make"

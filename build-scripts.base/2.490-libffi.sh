@@ -1,8 +1,8 @@
-#!/bin/bash 
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1           
+cd /sources/$1 || exit 1
 
 sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' \
     -i include/Makefile.in
@@ -17,7 +17,7 @@ chroot_check $? "libffi configure"
 make -j8
 chroot_check $? "libffi make"
 
-make check 
+make check
 chroot_check $? "libffi make check" NOEXIT
 
 make install

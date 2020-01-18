@@ -31,7 +31,7 @@ chroot_check $? "system-build : gcc : make "
 
 ulimit -s 32768
 rm ../gcc/testsuite/g++.dg/pr83239.C
-chown -Rv nobody . 
+chown -Rv nobody .
 su nobody -s /bin/bash -c "PATH=$PATH make -k check"
 ../contrib/test_summary
 

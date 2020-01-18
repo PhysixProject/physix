@@ -1,10 +1,9 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
+source /physix/include.sh || exit 1
+source /physix/build.conf || exit 1
 
-source /physix/include.sh
-
-GUSER=`cat /physix/build.conf | grep GEN_USER | cut -d'=' -f2`
 
 LOOP=0
 while [ $LOOP -eq 0 ] ; do
@@ -12,15 +11,19 @@ while [ $LOOP -eq 0 ] ; do
 	passwd root
 	if [ $? -eq 0 ] ; then LOOP=1; fi
 done
+cp /physix/build-scripts.config/configs/bashrc /root/.bashrc
+chroot_check $? "Create root/.bashrc"
 
+echo "build.conf specifys a general user to be created: $CONF_GEN_USER"
+useradd -m $CONF_GEN_USER
+chroot_check $? "useradd -m $CONF_GEN_USER"
 
-echo "build.conf specifys a general user to be created: $GUSER"
-useradd -m $GUSER
-chroot_check $? "useradd -m $GUSER"
+cp /physix/build-scripts.config/configs/bashrc /home/$CONF_GEN_USER/.bashrc
+chroot_check $? "Create /home/$CONF_GEN_USER/.bashrc"
 
 LOOP=0
 while [ $LOOP -eq 0 ] ; do
-        passwd $GUSER
+        passwd $CONF_GEN_USER
         if [ $? -eq 0 ] ; then LOOP=1; fi
 done
 

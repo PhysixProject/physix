@@ -6,7 +6,7 @@ cd /sources/$1 || exit 1
 ./configure --prefix=/usr                           \
             --disable-static                        \
             --enable-threaded-resolver              \
-            --with-ca-path=/etc/ssl/certs 
+            --with-ca-path=/etc/ssl/certs
 chroot_check $? "curl : configure"
 
 make

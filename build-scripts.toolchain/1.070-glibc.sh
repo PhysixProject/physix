@@ -3,7 +3,7 @@
 # Copyright (C) 2019 Travis Davies
 source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
-source ~/.bashrc                        
+source ~/.bashrc
 
 
 mkdir -v build
@@ -11,7 +11,7 @@ cd       build
 
 ../configure                             \
       --prefix=/tools                    \
-      --host=$BUILDROOT_TGT                    \
+      --host=$BUILDROOT_TGT              \
       --build=$(../scripts/config.guess) \
       --enable-kernel=3.2                \
       --with-headers=/tools/include
@@ -31,7 +31,4 @@ check $? "glibc: $BUILDROOT_TGT-gcc dummy.c"
 
 readelf -l a.out | grep ': /tools'
 check $? "Glibc: glibc: $BUILDROOT_TGT-gcc dummy.c"
-
-rm -v dummy.c a.out
-
 

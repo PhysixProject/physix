@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-source /physix/include.sh || exit 3 
+source /physix/include.sh || exit 3
 
 mkdir -pv /etc/systemd/system/getty@tty1.service.d
 

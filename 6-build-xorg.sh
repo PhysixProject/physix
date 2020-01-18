@@ -29,10 +29,10 @@ for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	report "$TIME : $BUILD_ID : Building $SCRIPT"
 
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"     
-	else                                                     
-		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"  
-	fi                                                       
+	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"
+	else
+		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"
+	fi
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 		eval "/physix/build-scripts.xorg/$SCRIPT $PKG0 $PKG1 $PKG2 $IO_DIRECTION"

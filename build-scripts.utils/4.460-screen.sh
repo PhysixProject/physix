@@ -8,10 +8,10 @@ cd /sources/$1 || exit 1
             --mandir=/usr/share/man           \
             --with-socket-dir=/run/screen     \
             --with-pty-group=5                \
-            --with-sys-screenrc=/etc/screenrc 
+            --with-sys-screenrc=/etc/screenrc
 chroot_check $? "screen : configure"
 
-sed -i -e "s%/usr/local/etc/screenrc%/etc/screenrc%" {etc,doc}/* 
+sed -i -e "s%/usr/local/etc/screenrc%/etc/screenrc%" {etc,doc}/*
 
 make
 chroot_check $? "screen : make"

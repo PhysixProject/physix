@@ -9,14 +9,14 @@ echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
 chroot_check $? "system-build : readline : sed 2" 'sys'
 
 ./configure --prefix=/usr
-chroot_check $? "system-build : m4 : configure" 
+chroot_check $? "system-build : m4 : configure"
 
 make
-chroot_check $? "system-build : m4 : make" 
+chroot_check $? "system-build : m4 : make"
 
 make check
 chroot_check $? "system-build : m4 : make check" NOEXIT
 
 make install
-chroot_check $? "system-build : m4 : make install" 
+chroot_check $? "system-build : m4 : make install"
 

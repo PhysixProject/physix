@@ -1,19 +1,19 @@
-#!/bin/bash                                                                    
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
-source ~/.bashrc                        
+source ~/.bashrc
 
 ./configure --prefix=/tools
-check $? "File configure"                                                     
-                                                                                
-make                                                                            
-check $? "File make"                                                          
+check $? "File configure"
 
-make check                                                                                
+make
+check $? "File make"
+
+make check
 check $? "File make check" NOEXIT
-                                                                                
-make install                                                                    
+
+make install
 check $? "File make install"
 

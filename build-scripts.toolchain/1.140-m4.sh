@@ -3,7 +3,7 @@
 # Copyright (C) 2019 Travis Davies
 source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
-source ~/.bashrc                        
+source ~/.bashrc
 
 
 sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c

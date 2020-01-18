@@ -12,5 +12,3 @@ chroot_check $? "npth: make "
 make install
 chroot_check $? "npth: make install"
 
-rm -rf /sources/$SRCD
-

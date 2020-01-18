@@ -18,8 +18,8 @@ cp -v doc/manual.txt{,.shipped} &&
             --enable-pop                            \
             --enable-imap                           \
             --enable-hcache                         \
-            --enable-sidebar                        
-chroot_check $? "mutt : configure" 
+            --enable-sidebar
+chroot_check $? "mutt : configure"
 
 make
 chroot_check $? "mutt : make"

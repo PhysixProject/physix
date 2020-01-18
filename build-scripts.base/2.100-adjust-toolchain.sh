@@ -35,7 +35,7 @@ grep -B1 '^ /usr/include' dummy.log
 
 
 grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'
-#expect 
+#expect
 #SEARCH_DIR("/usr/lib")
 #SEARCH_DIR("/lib")
 

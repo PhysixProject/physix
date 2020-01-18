@@ -17,8 +17,8 @@ make html
 chroot_check $? "system-build : mpc : make html"
 
 #critical
-make check 
-chroot_check $? "system-build : mpc: make check"                                  
+make check
+chroot_check $? "system-build : mpc: make check"
 
 make install
 chroot_check $? "system-build : mpc : make install"

@@ -9,7 +9,7 @@ PATH=$PATH:/sbin:/usr/sbin      &&
             --exec-prefix=      \
             --enable-cmdlib     \
             --enable-pkgconfig  \
-            --enable-udev_sync  
+            --enable-udev_sync
 chroot_check $? "lvm2 : configure"
 
 make                            &&

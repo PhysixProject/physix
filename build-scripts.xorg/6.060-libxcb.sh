@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /physix/include.sh
-                     
+
 cd /sources
 PKG=$1
 stripit $PKG
@@ -9,7 +9,7 @@ SRCD=$STRIPPED
 
 cd /sources/
 unpack $PKG
-mv $SRCD /sources/xc 
+mv $SRCD /sources/xc
 cd /sources/xc/$SRCD/
 
 sed -i "s/pthread-stubs//" configure &&
@@ -22,6 +22,4 @@ chroot_check $? "libxcb :config / make"
 
 make install
 chroot_check $? "libxcb : make install"
-
-rm -rf /sources/$SRCD
 

@@ -5,19 +5,19 @@ source /physix/include.sh || exit 1
 cd /sources/$1 || exit 1
 
 sed -i '/MV.*old/d' Makefile.in
-chroot_check $? "system-build : readline : sed 1" 
+chroot_check $? "system-build : readline : sed 1"
 
 sed -i '/{OLDSUFF}/c:' support/shlib-install
-chroot_check $? "system-build : readline : sed 2" 
+chroot_check $? "system-build : readline : sed 2"
 
 ./configure --prefix=/usr  --disable-static --docdir=/usr/share/doc/readline-8.0
-chroot_check $? "system-build : readline : configure" 
+chroot_check $? "system-build : readline : configure"
 
 make SHLIB_LIBS="-L/tools/lib -lncursesw"
-chroot_check $? "system-build : readline : make" 
+chroot_check $? "system-build : readline : make"
 
 make SHLIB_LIBS="-L/tools/lib -lncursesw" install
-chroot_check $? "system-build : readline : make install" 
+chroot_check $? "system-build : readline : make install"
 
 mv -v /usr/lib/lib{readline,history}.so.* /lib
 chmod -v u+w /lib/lib{readline,history}.so.*

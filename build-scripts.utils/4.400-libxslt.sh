@@ -6,7 +6,7 @@ cd /sources/$1 || exit 1
 patch -Np1 -i ../libxslt-1.1.33-security_fix-1.patch
 
 sed -i s/3000/5000/ libxslt/transform.c doc/xsltproc.{1,xml} &&
-./configure --prefix=/usr --disable-static                   
+./configure --prefix=/usr --disable-static
 chroot_check $? "libxslt : configure"
 
 make

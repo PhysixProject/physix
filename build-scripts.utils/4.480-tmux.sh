@@ -3,7 +3,7 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd /sources/$1 || exit 1
 
-./configure  
+./configure
 chroot_check $? "tmux : configure"
 
 make

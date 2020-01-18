@@ -3,23 +3,24 @@
 # Copyright (C) 2019 Travis Davies
 source ../../physix/include.sh || exit 1
 cd $BUILDROOT/sources/$1 || exit 1
-source ~/.bashrc                        
+source ~/.bashrc
 
-mkdir -v build                                                                  
-cd       build                                                                  
-                                                                                
-../configure --prefix=/tools --with-sysroot=$BUILDROOT --with-lib-path=/tools/lib --target=$BUILDROOT_TGT --disable-nls --disable-werror  
+mkdir -v build
+cd       build
+
+../configure --prefix=/tools --with-sysroot=$BUILDROOT --with-lib-path=/tools/lib --target=$BUILDROOT_TGT --disable-nls --disable-werror
 check $? "Binutils Configure"
 
 make -j8
 check $? "Binutils make"
 
-                                                                                
-case $(uname -m) in                                                             
-  x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;                     
-esac                                                                            
-                                                                                
-make install 
+
+case $(uname -m) in
+  x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
+esac
+
+make install
 check $? "Binutils make install"
 
-exit 0    
+exit 0
+

@@ -1,8 +1,8 @@
-#!/bin/bash 
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1           
+cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr                            \
             --exec-prefix=                           \
@@ -10,7 +10,7 @@ cd /sources/$1 || exit 1
             --docdir=/usr/share/doc/procps-ng-3.3.15 \
             --disable-static                         \
             --disable-kill
-chroot_check $? "procps confiugre"  
+chroot_check $? "procps confiugre"
 
 make
 chroot_check $? "procps make"

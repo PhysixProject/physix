@@ -5,14 +5,14 @@ source /physix/include.sh || exit 1
 cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr
-chroot_check $? "system-build : file : configure" 
+chroot_check $? "system-build : file : configure"
 
 make
-chroot_check $? "system-build : file : make" 
+chroot_check $? "system-build : file : make"
 
 make check
-chroot_check $? "system-build : file : make check" NOEXIT 
+chroot_check $? "system-build : file : make check" NOEXIT
 
 make install
-chroot_check $? "system-build : file : make install" 
+chroot_check $? "system-build : file : make install"
 

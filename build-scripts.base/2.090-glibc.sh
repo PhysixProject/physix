@@ -30,7 +30,7 @@ CC="gcc -ffile-prefix-map=/tools=/usr" \
              libc_cv_slibdir=/lib
 chroot_check $? "system-build : glibc : configure "
 
-make 
+make
 chroot_check $? "system-build : glibc : make "
 
 case $(uname -m) in

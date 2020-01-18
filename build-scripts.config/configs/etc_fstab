@@ -4,9 +4,9 @@
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-/dev/mapper/physix-root /           ext4 defaults   0 1
-UUID=BOOT_UUID_MARKER   /boot       ext2 defaults   0 2
-/dev/mapper/physix-home /home       ext4 defaults    0 2  
+/dev/mapper/physix-root /      btrfs  defaults   0 1
+UUID=BOOT_UUID_MARKER   /boot  ext2   defaults   0 2
+/dev/mapper/physix-home /home  btrfs  defaults   0 2  
 #/dev/REPLACE_MARKER_SWP     swap         swap     pri=1               0     0
 
 # End /etc/fstab

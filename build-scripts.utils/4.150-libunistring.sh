@@ -5,7 +5,7 @@ cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/libunistring-0.9.10 
+            --docdir=/usr/share/doc/libunistring-0.9.10
 chroot_check $? "libunistring : configure"
 
 make

@@ -27,10 +27,10 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	PKG=$(echo $LINE | cut -d',' -f3)
 
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"     
-	else                                                     
-		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"  
-	fi                                                       
+	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"
+	else
+		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"
+	fi
 
 	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID : Building $PKG"
@@ -38,12 +38,12 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 
 		if [ $PKG ] ; then
 			# physix doesn't exist as a user
-			unpack $PKG "physix:root" 
+			unpack $PKG "physix:root"
 			check $? "Unpack $PKG"
-			return_src_dir $PKG 
+			return_src_dir $PKG
 			SRC0=$SRC_DIR
 		fi
-                                                                
+
 		if [ ! -e /physix/build-scripts.utils/$SCRIPT ] ; then
 			report "Build Script NOT found: /build-scripts.utils/$SCRIPT"
 			exit 1
@@ -53,9 +53,9 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 		check $? "$SCRIPT"
 		echo ''
 
-		#if [ "$CONF_BUILD_SMALL" == "y" ] ; then 
+		#if [ "$CONF_BUILD_SMALL" == "y" ] ; then
 		#	cd /sources && rm -rf ./$SRC0
-		#fi                                       
+		#fi
 	fi
 	BUILD_ID=$((BUILD_ID+1))
 done

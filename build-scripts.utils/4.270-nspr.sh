@@ -11,7 +11,7 @@ chroot_check $? "nspr : sed content "
 ./configure --prefix=/usr \
             --with-mozilla \
             --with-pthreads \
-            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) 
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)
 chroot_check $? "nspr : configure"
 
 make

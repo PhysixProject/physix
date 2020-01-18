@@ -7,7 +7,7 @@ cd /sources/$1 || exit 1
             --sbindir=/sbin    \
             --disable-nftables \
             --enable-libipq    \
-            --with-xtlibdir=/lib/xtables 
+            --with-xtlibdir=/lib/xtables
 chroot_check $? "iptables : configure"
 
 make

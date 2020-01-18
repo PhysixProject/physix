@@ -14,8 +14,8 @@ sed -e 's/dummy links/dummy lynx/'                                     \
             --sysconfdir=/etc                \
             --libdir=/usr/lib                \
             --enable-securedir=/lib/security \
-            --docdir=/usr/share/doc/Linux-PAM-1.3.1 
-chroot_check $? "Linux-PAM : configure"	    
+            --docdir=/usr/share/doc/Linux-PAM-1.3.1
+chroot_check $? "Linux-PAM : configure"
 
 make
 chroot_check $? "Linux-PAM : make"

@@ -4,7 +4,7 @@ source /physix/build.conf || exit 1
 cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr \
-            --with-crypto_backend=openssl 
+            --with-crypto_backend=openssl
 chroot_check $? "cryptsetup: configure"
 
 make

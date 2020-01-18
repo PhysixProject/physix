@@ -1,4 +1,4 @@
-#!/bin/bash                         
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
@@ -31,10 +31,10 @@ report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
 
 # Called differently becuase it is not chrooted
 if [ $START_POINT -eq 0 ] ; then
-	report "Running: 2.02.-base-build-prep.sh"  
+	report "Running: 2.02.-base-build-prep.sh"
 	./build-scripts.base/2.020-base-build-prep.sh
 	check $? "2.020-base-build-prep.sh"
-fi 
+fi
 
 BUILD_ID=$((BUILD_ID+1))
 for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
@@ -71,15 +71,14 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
-		       return_src_dir "$PKG0" NCHRT                  
-		       cd $BUILDROOT/sources/ && rm -rf $SRC0        
-		fi                                                   
+		       cd $BUILDROOT/sources/ && rm -rf ./$SRC0
+		fi
 
 	fi
 
 	BUILD_ID=$((BUILD_ID+1))
 
-done 
+done
 
 report "--------------------------------"
 report "- Base System Build Complete!  -"

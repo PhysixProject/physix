@@ -15,7 +15,7 @@ chroot_check $? "p11kit : "
 
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
-            --with-trust-paths=/etc/pki/anchors 
+            --with-trust-paths=/etc/pki/anchors
 chroot_check $? "p11kit : configure"
 
 make

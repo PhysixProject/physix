@@ -6,7 +6,7 @@ cd /sources/$1 || exit 1
 ./configure --prefix=/usr                                   \
             --sysconfdir=/etc                               \
             --disable-static                                \
-            --disable-gssapi                                
+            --disable-gssapi
 chroot_check $? "libtirpc : configure"
 
 make

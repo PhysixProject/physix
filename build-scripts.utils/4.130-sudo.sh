@@ -14,7 +14,7 @@ sed -e '/^pre-install:/{N;s@;@ -a -r $(sudoersdir)/sudoers;@}' \
             --with-all-insults         \
             --with-env-editor          \
             --docdir=/usr/share/doc/sudo-1.8.29 \
-            --with-passprompt="[sudo] password for %p: " 
+            --with-passprompt="[sudo] password for %p: "
 chroot_check $? "sudo : configure"
 
 make

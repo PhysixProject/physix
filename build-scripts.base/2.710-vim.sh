@@ -1,8 +1,8 @@
-#!/bin/bash 
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1           
+cd /sources/$1 || exit 1
 
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 
@@ -10,12 +10,12 @@ echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 chroot_check $? "vim configure"
 
 make -j8
-chroot_check $? "vim make" 
+chroot_check $? "vim make"
 
 LANG=en_US.UTF-8 make -j1 test &> vim-test.log
 
 make install
-chroot_check $? "vim make install"  
+chroot_check $? "vim make install"
 
 ln -sv vim /usr/bin/vi
 for L in  /usr/share/man/{,*/}man1/vim.1; do
@@ -30,7 +30,7 @@ cat > /etc/vimrc << "EOF"
 
 " Ensure defaults are set before customizing settings, not after
 source $VIMRUNTIME/defaults.vim
-let skip_defaults_vim=1 
+let skip_defaults_vim=1
 
 set nocompatible
 set backspace=2
@@ -42,7 +42,7 @@ endif
 
 " End /etc/vimrc
 EOF
-chroot_check $? "vim wrtie /etc/vimrc"  
+chroot_check $? "vim wrtie /etc/vimrc"
 
 #vim -c ':options'
 

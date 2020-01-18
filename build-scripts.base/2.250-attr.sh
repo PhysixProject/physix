@@ -16,7 +16,7 @@ make -j8
 chroot_check $? "system-build : attr : make "
 
 make check
-chroot_check $? "system-build : attr : make check" NOEXIT 
+chroot_check $? "system-build : attr : make check" NOEXIT
 
 make install
 chroot_check $? "system-build : attr : make install "

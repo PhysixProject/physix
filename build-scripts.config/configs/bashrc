@@ -1,0 +1,6 @@
+# .bashrc
+
+alias bb='cd ..'
+
+PS1='# Physix # '
+

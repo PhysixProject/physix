@@ -3,8 +3,8 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd /sources/$1 || exit 1
 
-./configure --prefix=/usr --disable-static 
-chroot_check $? "libgpg-error : configure" 
+./configure --prefix=/usr --disable-static
+chroot_check $? "libgpg-error : configure"
 
 sed -i 's/namespace/pkg_&/' src/Makefile.{am,in} src/mkstrtable.awk
 

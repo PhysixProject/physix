@@ -10,7 +10,7 @@ cd build_unix                        &&
                   --enable-compat185 \
                   --enable-dbm       \
                   --disable-static   \
-                  --enable-cxx       
+                  --enable-cxx
 chroot_check $? "BerkeleyDB : configure"
 make
 chroot_check $? "BerkeleyDB : make"

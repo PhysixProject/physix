@@ -76,5 +76,7 @@
 2.760-e2fsprogs.sh,e2fsprogs-1.45.3.tar.gz
 2.770-lvm2.sh,LVM2.2.03.05.tgz
 2.775-grub.sh,grub-2.04.tar.xz
+2.776-lzo.sh,lzo-2.10.tar.gz
+2.777-btrfs-progs.sh,btrfs-progs-v5.2.1.tar.xz
 2.780-stripping.sh,
 2.790-cleanup.sh,

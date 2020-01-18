@@ -1,21 +1,21 @@
-#!/bin/bash 
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
-source /physix/include.sh                
+source /physix/include.sh
 
 save_lib="ld-2.29.so libc-2.29.so libpthread-2.29.so libthread_db-1.0.so"
 
 cd /lib
 
 for LIB in $save_lib; do
-    objcopy --only-keep-debug $LIB $LIB.dbg 
+    objcopy --only-keep-debug $LIB $LIB.dbg
     strip --strip-unneeded $LIB
-    objcopy --add-gnu-debuglink=$LIB.dbg $LIB 
-done    
+    objcopy --add-gnu-debuglink=$LIB.dbg $LIB
+done
 
 save_usrlib="libquadmath.so.0.0.0 libstdc++.so.6.0.25
-             libitm.so.1.0.0 libatomic.so.1.2.0" 
+             libitm.so.1.0.0 libatomic.so.1.2.0"
 
 cd /usr/lib
 

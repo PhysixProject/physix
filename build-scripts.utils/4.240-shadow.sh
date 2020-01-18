@@ -15,7 +15,7 @@ chroot_check $? "shadow : sed Makefile.in"
 
 
 sed -i 's/1000/999/' etc/useradd                           &&
-./configure --sysconfdir=/etc --with-group-name-max-length=32 
+./configure --sysconfdir=/etc --with-group-name-max-length=32
 chroot_check $? "shadow : "
 
 make
@@ -155,7 +155,7 @@ password  required    pam_permit.so
 EOF
 chroot_check $? "shadow : /etc/pam.d/chage written"
 
-if [ -f /etc/login.access ] ; then 
+if [ -f /etc/login.access ] ; then
 	mv -v /etc/login.access{,.NOUSE}
 	chroot_check $? "shadow : mv /etc/login.access"
 fi

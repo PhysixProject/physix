@@ -9,7 +9,7 @@ sed -e '/noinst_SCRIPTS = gpg-zip/c sbin_SCRIPTS += gpg-zip' \
 ./configure --prefix=/usr            \
             --enable-symcryptrun     \
             --localstatedir=/var     \
-            --docdir=/usr/share/doc/gnupg-2.2.17 
+            --docdir=/usr/share/doc/gnupg-2.2.17
 chroot_check $? "GnuPG : configure"
 
 make &&
@@ -30,6 +30,4 @@ install -v -m644    doc/*.texi doc/gnupg.txt \
 install -v -m644    doc/gnupg.html/* \
                     /usr/share/doc/gnupg-2.2.17/html
 chroot_check $? "GnuPG : make install"
-
-rm -rf /sources/$SRCD
 

@@ -2,14 +2,14 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1           
+cd /sources/$1 || exit 1
 
 
 sed -i 's/usr/tools/'                 build-aux/help2man
 sed -i 's/testsuite.panic-tests.sh//' Makefile.in
 
 ./configure --prefix=/usr --bindir=/bin
-chroot_check $? "system-build : sed : configure" 
+chroot_check $? "system-build : sed : configure"
 
 make -j8
 chroot_check $? "system-build : sed : make"

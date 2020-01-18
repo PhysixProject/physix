@@ -1,5 +1,5 @@
 log,3.020-set-hostname.sh,
-log,3.030-network-conf.sh,   
+log,3.030-network-conf.sh,
 log,3.040-shells.sh,
 log,3.050-disable-clrscrn.sh,
 log,3.060-fstab.sh,

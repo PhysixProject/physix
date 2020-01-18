@@ -1,5 +1,5 @@
 #!/bin/bash
-                         
+
 source /physix/include.sh
 
 rm -rf /sources/xc

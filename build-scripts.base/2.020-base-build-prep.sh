@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-source $BUILDROOT/physix/include.sh || exit 1 
+source $BUILDROOT/physix/include.sh || exit 1
 
 #SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 #source $SCRIPTPATH/../include.sh

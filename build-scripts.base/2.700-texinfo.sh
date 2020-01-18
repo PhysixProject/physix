@@ -1,8 +1,8 @@
-#!/bin/bash 
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1           
+cd /sources/$1 || exit 1
 
 sed -i '5481,5485 s/({/(\\{/' tp/Texinfo/Parser.pm
 
@@ -10,16 +10,16 @@ sed -i '5481,5485 s/({/(\\{/' tp/Texinfo/Parser.pm
 chroot_check $? "texinfo"
 
 make
-chroot_check $? "texinfo make" 
+chroot_check $? "texinfo make"
 
 make check
 chroot_check $? "texinfo make check" NOEXIT
 
 make install
-chroot_check $? "texinfo make install" 
+chroot_check $? "texinfo make install"
 
 make TEXMF=/usr/share/texmf install-tex
-chroot_check $? "texinfo install texmf " 
+chroot_check $? "texinfo install texmf "
 
 pushd /usr/share/info
 rm -v dir

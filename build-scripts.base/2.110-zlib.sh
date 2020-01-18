@@ -5,16 +5,16 @@ source /physix/include.sh || exit 1
 cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr
-chrrot_check $? "system-build : zlib : configure" 
+chrrot_check $? "system-build : zlib : configure"
 
 make
-chroot_check $? "system-build : zlib : make" 
+chroot_check $? "system-build : zlib : make"
 
 make check
 chroot_check $? "system-build : zlib : make check" NOEXIT
 
 make install
-chroot_check $? "system-build : zlib : make install" 
+chroot_check $? "system-build : zlib : make install"
 
 mv -v /usr/lib/libz.so.* /lib
 chroot_check $? "system-build : zlib : mv -v /usr/lib/libz.so.* /lib" 'sys'

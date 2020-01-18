@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /physix/include.sh
-                     
+
 cd /sources
 PKG=$1
 stripit $PKG
@@ -9,7 +9,7 @@ SRCD=$STRIPPED
 
 cd /sources/
 unpack $PKG
-mv $SRCD /sources/xc 
+mv $SRCD /sources/xc
 cd /sources/xc/$SRCD/
 
 sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
@@ -23,6 +23,4 @@ chroot_check $? "freetype : make "
 
 make install
 chroot_check $? "freetype : make install"
-
-rm -rf /sources/$SRCD
 

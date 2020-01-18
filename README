@@ -1,24 +1,24 @@
 
- - Physix Linux Project - 
-    MIT/GPLv2 License 
+ - Physix Linux Project -
+    MIT/GPLv2 License
 ===========================
 
 Disclaimer:
 ============
-The programs included with this project are free software; This Distribution 
-of GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent permitted by 
+The programs included with this project are free software; This Distribution
+of GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
 applicable law.
 
 
 Purpose:
 ==========
-The goal of this project is to Automate the build process of a base Linux 
+The goal of this project is to Automate the build process of a base Linux
 system. It is originally inspired by the Linux From Scratch project. If you
-are not familiar with LFS, Please reference the project at: 
-http://www.linuxfromscratch.org/ before installing Physix. 
+are not familiar with LFS, Please reference the project at:
+http://www.linuxfromscratch.org/ before installing Physix.
 
 As of this version, This automation is designed to install the OS to a
-single partition (defined in build.conf). No swap or boot partitions are 
+single partition (defined in build.conf). No swap or boot partitions are
 configured at this point.
 
 IT IS HIGHLY RECCOMENED to use a sepperate storage device other than your host
@@ -35,15 +35,15 @@ physix-SysV, and physix-systemd. physix-SysV-LFS-8.4 is no longer supported.
 
 Project Architecture:
 =====================
-The installation process is composed of 2 stages. 
-* STAGE 1: STAGE-1-INSTALL.sh, executes 4 Build scripts: 
+The installation process is composed of 2 stages.
+* STAGE 1: STAGE-1-INSTALL.sh, executes 4 Build scripts:
   - 0-init-prep.sh
     Responsible for:
 	- Formatting and mounting the target disk partition.
-	- Download sources defined in wget-list. Occassionaly a URL or 2 
-	  goes unavailable, and you will have to find the missing package 
+	- Download sources defined in wget-list. Occassionaly a URL or 2
+	  goes unavailable, and you will have to find the missing package
 	  somewhere else. Download to /mnt/physix/sources and restart INSTALL.sh.
-	- Verifying md5sums of sources, defined in md5sum.lst 
+	- Verifying md5sums of sources, defined in md5sum.lst
 	  See LFS Reference for source of md5sums:
 	  http://www.linuxfromscratch.org/lfs/view/8.4/chapter03/packages.html
 
@@ -53,8 +53,8 @@ The installation process is composed of 2 stages.
 
   - 2-build-base-sys.sh
     Responsible for:
-	- Using the toolchain built by 1-build_toolchain.sh, to build the base 
-          OS 
+	- Using the toolchain built by 1-build_toolchain.sh, to build the base
+          OS
 
   - 3-config-base-sys.sh
     Responsible for:
@@ -65,7 +65,7 @@ The installation process is composed of 2 stages.
   - Reboot.
 
 * STAGE 2: STAGE-2-INSTALL.sh, Executes 2 build scripts.
-  - 4-build-utils.sh - Build and install system related utilities. 
+  - 4-build-utils.sh - Build and install system related utilities.
   - 5.build-devel.sh - Build and install development related tools.
 
 
@@ -75,23 +75,23 @@ The build scripts perform their designated operations by iterating through each
 line of their associated csv config file. These csv files instruct build scripts
 of what script to run and what source arvhive to pass to it.
 
-If, for example, you wanted to change the version of the mutt email client, you 
-would edit 2 files. First edit the src-list.utils file. Update the name of the  
-source archive, the url where it is located, and the expected md5sum of that archive. 
-Then edit 4-build-utils.csv, to change the src archive name. Please note, newer 
-versions of software may install differently, and in that case you should 
+If, for example, you wanted to change the version of the mutt email client, you
+would edit 2 files. First edit the src-list.utils file. Update the name of the
+source archive, the url where it is located, and the expected md5sum of that archive.
+Then edit 4-build-utils.csv, to change the src archive name. Please note, newer
+versions of software may install differently, and in that case you should
 investigate build-scripts.utils/4.510-mutt.sh.
 
 This archetecure makes it easy to change the version of the sources, and lets
-you experiment across different source versions. 
+you experiment across different source versions.
 
 
 Installation:
 =============
 0. Edit build.conf
    See Example build.conf in Documentation:
-1. Run ./STAGE-1-INSTALL.sh. 
-   During the configuration portion of the build, the user is prompted to set 
+1. Run ./STAGE-1-INSTALL.sh.
+   During the configuration portion of the build, the user is prompted to set
    the password for the root user, and the thumbs up for installing grub.
 2. Reboot.
 3. ./STAGE-2-INSTALL.sh
@@ -116,5 +116,5 @@ Contributions:
 ==============
 Contributions are very welcome! :)
 Please open an issue/task on github.
-Also see TODO. 
+Also see TODO.
 

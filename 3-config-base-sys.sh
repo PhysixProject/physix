@@ -1,15 +1,15 @@
-#!/bin/bash                         
+#!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
 source ./include.sh
 source ./build.conf
 
-IAM=`whoami`                            
-if [ "$IAM" != "root" ] ; then          
-    error "Must run this as user: root" 
-    exit 1                              
-fi                                      
+IAM=`whoami`
+if [ "$IAM" != "root" ] ; then
+    error "Must run this as user: root"
+    exit 1
+fi
 
 
 echo "------------------------------"
@@ -27,14 +27,14 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 
 	TIME=`date "+%D-%T"`
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
-                                                                
+
 		if [ $PKG ] ; then
 			unpack $PKG "physix:root" NCHRT
 			check $? "Unpack $PKG"
 			return_src_dir $PKG "NCHRT"
 			SRC0=$SRC_DIR
 		fi
-                                                                
+
 		if [ ! -e $BUILDROOT/physix/build-scripts.config/$SCRIPT ] ; then
 			report "Build Script NOT found: /build-scripts.config/$SCRIPT"
 			exit 1
@@ -46,7 +46,6 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
-			return_src_dir "$PKG0" NCHRT
 			cd $BUILDROOT/sources/ && rm -rf $SRC0
 		fi
 	fi

@@ -5,7 +5,7 @@ cd /sources/$1 || exit 1
 
 ./configure --prefix=/usr --disable-static \
             --with-securedir=/lib/security \
-            --with-python-binary=python3   
+            --with-python-binary=python3
 chroot_check $? "libpwquality : configure"
 
 make

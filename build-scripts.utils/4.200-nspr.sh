@@ -10,7 +10,7 @@ sed -i 's#$(LIBRARY) ##'            config/rules.mk         &&
 ./configure --prefix=/usr \
             --with-mozilla \
             --with-pthreads \
-            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) 
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)
 chroot_check $? "nspr : configure"
 
 make
