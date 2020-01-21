@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
 patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
 

@@ -66,9 +66,8 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 			unpack $PKG0 "physix:root" NCHRT
 			check $? "Unpack $PKG0"
 			return_src_dir $PKG0 "NCHRT"
-			cd $BUILDROOT/sources/$SRC_DIR
+			check $? "return_src_dir $PKG0"
 			SRC0=$SRC_DIR
-			check $? "cd $BUILDROOT/sources/$SRC0"
 		fi
 
 		if [ ! -e $BUILDROOT/physix/build-scripts.toolchain/$SCRIPT ] ; then
@@ -82,7 +81,7 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
-			cd $BUILDROOT/sources/ && rm -rf ./$SRC0
+			cd $BUILDROOT/usr/src/physix/sources/ && rm -rf ./$SRC0
 		fi
 	fi
 

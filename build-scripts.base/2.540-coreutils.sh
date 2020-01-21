@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
 patch -Np1 -i ../coreutils-8.31-i18n-1.patch
 chroot_check $? "coreutils patch -Np1 -i ../coreutils-8.30-i18n-1.patch"

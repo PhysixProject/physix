@@ -5,7 +5,7 @@
 source ./include.sh
 source ./build.conf
 
-chmod -R $CONF_GEN_USER:$CONF_GEN_USER /sources
+chmod -R physix:physix /usr/src/physix/sources
 
 iuser=`whoami`
 if [ $iuser != 'root' ] ; then
@@ -53,9 +53,9 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 		check $? "$SCRIPT"
 		echo ''
 
-		#if [ "$CONF_BUILD_SMALL" == "y" ] ; then
-		#	cd /sources && rm -rf ./$SRC0
-		#fi
+		if [ "$CONF_BUILD_SMALL" == "y" ] ; then
+			cd /usr/src/physix/sources && rm -rf ./$SRC0
+		fi
 	fi
 	BUILD_ID=$((BUILD_ID+1))
 done

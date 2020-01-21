@@ -9,7 +9,7 @@ SRCD=$STRIPPED
 
 cd /sources
 unpack $PKG
-cd /sources/$SRCD
+cd $SOURCE_DIR/$SRCD
 
 groupadd -g 51 stunnel &&
 useradd -c "stunnel Daemon" -d /var/lib/stunnel \

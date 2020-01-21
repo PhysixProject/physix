@@ -46,7 +46,7 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then
-			cd $BUILDROOT/sources/ && rm -rf $SRC0
+			cd $BUILDROOT/usr/src/physix/sources/ && rm -rf ./$SRC0
 		fi
 	fi
 

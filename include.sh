@@ -2,6 +2,9 @@
 # Copyright (C) 2019 Travis Davies
 
 export BUILDROOT='/mnt/physix'
+export BR_SOURCE_DIR=$BUILDROOT/usr/src/physix/sources
+export SOURCE_DIR=/usr/src/physix/sources
+
 NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
 export NPROC
 
@@ -25,7 +28,7 @@ function report() {
 
 	# chroot context
 	if [ -r /var/physix/system-build-logs/build.log ] ; then
-		echo -e "[INFO] $MSG" >> /system-build-logs/build.log
+		echo -e "[INFO] $MSG" >> /var/physix/system-build-logs/build.log
 	fi
 
 	# Non-chroot, not mounted
@@ -128,13 +131,13 @@ function return_src_dir() {
 		BR=$BUILDROOT
 	fi
 
-	TMP=$(tar -tf $BR/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
+	TMP=$(tar -tf $BR/usr/src/physix/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
 	if [ $? -ne 0 ] ; then
 		echo "[ERROR] return_src_dir(): tar -tf $NAME"
 		exit 1
 	fi
 
-	if [ -e $BR/sources/$TMP ] ; then
+	if [ -e $BR/usr/src/physix/sources/$TMP ] ; then
 		export SRC_DIR=$TMP
 		return 0
 	fi
@@ -193,18 +196,18 @@ function unpack() {
 		BR=$BUILDROOT
 	fi
 
-	DIR=$(tar -tf $BR/sources/$PKG | cut -d'/' -f1 | head -n 1)
-        if [ -d $BR/sources/$DIR ] ; then
+	DIR=$(tar -tf $BR/usr/src/physix/sources/$PKG | cut -d'/' -f1 | head -n 1)
+        if [ -d $BR/usr/src/physix/sources/$DIR ] ; then
                 rm -rf $DIR
         fi
 
-        tar xf $BR/sources/$PKG -C $BR/sources
+        tar xf $BR/usr/src/physix/sources/$PKG -C $BR/usr/src/physix/sources
 	if [ $? -ne 0 ] ; then
-		error "tar xf $BR/sources/$PKG"
+		error "tar xf $BR/usr/src/physix/sources/$PKG"
 		exit 1
 	fi
 	if [ "$OWNER" != "" ] ; then
-		chown --recursive $OWNER $BR/sources/$DIR
+		chown --recursive $OWNER $BR/usr/src/physix/sources/$DIR
 	fi
 
 }
@@ -217,7 +220,7 @@ function pull_sources() {
         local ERROR=0
 
 	if [ ! -d $DEST_DIRECTORY ] ; then
-		mkdir -v $DEST_DIRECTORY
+		mkdir -vp $DEST_DIRECTORY
 	fi
 
         echo -e "\n\nDownloading $LIST Sources..."
@@ -227,7 +230,9 @@ function pull_sources() {
 		local PKG_MD5=`echo $LINE | cut -d, -f3`
 		echo "PKG_NAME $PKG_NAME"
 		echo "PKG_URL $PKG_URL"
+		echo "DESTINATION $DEST_DIRECTORY"
 		echo "PKG_MD5 $PKG_MD5"
+
                 wget -q --continue --directory-prefix=$DEST_DIRECTORY $PKG_URL
                 if [ $? -ne 0 ] ; then
                         echo -e "\e[31m[ ERROR ]\e[0m Downloading $PKG_URL"
@@ -235,6 +240,7 @@ function pull_sources() {
                 else
                         echo -e "\e[92m[ OK ]\e[0m Downloading $PKG_URL"
                 fi
+		
 
 		C=`md5sum $DEST_DIRECTORY/$PKG_NAME | cut -d' ' -f1`
 		if [ "$PKG_MD5" == "$C" ] ; then

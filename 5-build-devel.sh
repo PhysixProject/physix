@@ -68,9 +68,9 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 		check $? "$SCRIPT"
 		echo ''
 
-		#if [ "$CONF_BUILD_SMALL" == "y" ] ; then
-		#       cd /sources/ && rm -rf ./$SRC0
-		#fi
+		if [ "$CONF_BUILD_SMALL" == "y" ] ; then
+		       cd /usr/src/physix/sources/ && rm -rf ./$SRC0
+		fi
 	fi
 	BUILD_ID=$((BUILD_ID+1))
 done

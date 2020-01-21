@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
 patch -Np1 -i ../glibc-2.30-fhs-1.patch
 chroot_check $? "system-build : glibc : patch glibc-2.29-fhs-1.patch "

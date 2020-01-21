@@ -21,10 +21,10 @@ log,4.190-iptables.sh,iptables-1.8.3.tar.bz2
 log,4.200-nspr.sh,nspr-4.21.tar.gz
 log,4.210-libtirpc.sh,libtirpc-1.1.4.tar.bz2
 log,4.220-BerkeleyDB.sh,db-5.3.28.tar.gz
-log,4.230-linux-pam.sh,Linux-PAM-1.3.1.tar.xz,Linux-PAM-1.3.1-docs.tar.xz
-log,4.240-shadow.sh,shadow-4.7.tar.xz
+#log,4.230-linux-pam.sh,Linux-PAM-1.3.1.tar.xz,Linux-PAM-1.3.1-docs.tar.xz
+#log,4.240-shadow.sh,shadow-4.7.tar.xz
 log,4.250-liboauth.sh,liboauth-1.0.3.tar.gz,liboauth-1.0.3-openssl-1.1.0-3.patch
-log,4.260-libpwquality.sh,libpwquality-1.4.0.tar.bz2
+#log,4.260-libpwquality.sh,libpwquality-1.4.0.tar.bz2
 log,4.270-nspr.sh,nspr-4.21.tar.gz
 log,4.280-unzip.sh,unzip60.tar.gz
 log,4.330-cryptsetup.sh,cryptsetup-2.0.6.tar.xz

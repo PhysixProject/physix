@@ -3,7 +3,7 @@
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
 export LIBRARY_PATH=/usr/lib/:$LIBRARY_PATH
-cd /sources/$1 || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
 make mrproper
 chroot_check $? "system-build : linux-api-headers: make mrproper "

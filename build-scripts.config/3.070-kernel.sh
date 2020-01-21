@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /physix/include.sh || exit 1
-cd /sources/$1 || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
 make mrproper
 chroot_check $? "system config: kernel : make mr_proper"
@@ -10,7 +10,7 @@ chroot_check $? "system config: kernel : make mr_proper"
 #make defconfig
 #chroot_check $? "system config: kernel : make defconfig "
 
-cp /physix/build-scripts.config/configs/linux_config-5.2.8 /sources/$1/.config
+cp /physix/build-scripts.config/configs/linux_config-5.2.8 /usr/src/physix/sources/$1/.config
 chroot_check $? "Set Physix 5.2.8 Linux kernel config"
 
 make -j$NPROC

@@ -1,7 +1,7 @@
 #!/bin/bash
 source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
-cd /sources/$1 || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
 patch -Np1 -i ../nss-3.45-standalone-1.patch &&
 chroot_check $? "nss : patch"

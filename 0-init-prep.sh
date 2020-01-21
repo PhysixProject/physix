@@ -114,17 +114,23 @@ function init_storage_lvm() {
                 exit 1
         fi
 
-	#lvcreate -L 150G -n var physix
-	#if [ $? -ne 0 ] ; then
-	 #      report "[ERROR] lvcreate -L 150G -n home physix"
-	 #      exit 1
-	#fi
+	lvcreate -L 150G -n var physix
+	if [ $? -ne 0 ] ; then
+	       report "[ERROR] lvcreate -L 150G -n home physix"
+	       exit 1
+	fi
 
         eval $MKFS /dev/mapper/physix-home
         if [ $? -ne 0 ] ; then
                 report "[ERROR] $MKFS /dev/mapper/physix-home"
                 exit 1
         fi
+
+	eval $MKFS /dev/mapper/physix-var
+	if [ $? -ne 0 ] ; then
+		report "[ERROR] $MKFS /dev/mapper/physix-var"
+		exit 1
+	fi
 
         mkdir -p $BUILDROOT
         mount /dev/mapper/physix-root $BUILDROOT
@@ -146,31 +152,39 @@ function init_storage_lvm() {
                 report "[ERROR] mounting $BUILDROOT/boot"
                 exit 1
         fi
+
+	mkdir -p $BUILDROOT/var
+	mount /dev/sda2 $BUILDROOT/var
+	if [ $? -ne 0 ] ; then
+        	report "[ERROR] mounting $BUILDROOT/var"
+        	exit 1
+	fi
+
+
 }
 
 
 function complete_setup() {
 
 	mkdir -vp $BUILDROOT/var/physix/system-build-logs
-	#mkdir -v $BUILDROOT/system-build-logs
 	mkdir -vp $BUILDROOT/usr/src/physix/sources
 
 	# TODO tighten these perms
 	chmod 777 $BUILDROOT/system-build-logs
-	mv -v /tmp/physix-init-host-build.log $BUILDROOT/system-build-logs/build.log
+	mv -v /tmp/physix-init-host-build.log $BUILDROOT/var/physix/system-build-logs/build.log
 	chmod 666 $BUILDROOT/system-build-logs/build.log
 
 	echo "Downloading src-list.base"
-	pull_sources ./src-list.base $BUILDROOT/sources
+	pull_sources ./src-list.base /mnt/physix/usr/src/physix/sources
 
 	CONF_UTILS=`cat ./build.conf | grep CONF_UTILS | cut -d'=' -f2`
 	if [ "$CONF_UTILS" == "y" ] ; then
-		pull_sources ./src-list.utils $BUILDROOT/sources
+		pull_sources ./src-list.utils /mnt/physix/usr/src/physix/sources
 	fi
 
 	CONF_DEVEL=`cat ./build.conf | grep CONF_DEVEL | cut -d'=' -f2`
 	if [ "$CONF_DEVEL" == "y" ] ; then
-		pull_sources ./src-list.devel $BUILDROOT/sources
+		pull_sources ./src-list.devel /mnt/physix/usr/src/physix/sources
 	fi
 
 	ln -sfv /usr/bin/bash /usr/bin/sh
@@ -208,7 +222,7 @@ function complete_setup() {
 	fi
 
 	chown -v physix $BUILDROOT/tools
-	chown -v physix $BUILDROOT/sources
+	chown -v physix $BUILDROOT/usr/src/physix/sources
 
 	DPATH=$(dirname `pwd`)
 	cp -r $PWD $BUILDROOT
