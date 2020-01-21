@@ -11,14 +11,14 @@ while [ $LOOP -eq 0 ] ; do
 	passwd root
 	if [ $? -eq 0 ] ; then LOOP=1; fi
 done
-cp /physix/build-scripts.config/configs/bashrc /root/.bashrc
+cp /physix/build-scripts.config/configs/etc_bashrc /root/.bashrc
 chroot_check $? "Create root/.bashrc"
 
 echo "build.conf specifys a general user to be created: $CONF_GEN_USER"
 useradd -m $CONF_GEN_USER
 chroot_check $? "useradd -m $CONF_GEN_USER"
 
-cp /physix/build-scripts.config/configs/bashrc /home/$CONF_GEN_USER/.bashrc
+cp /physix/build-scripts.config/configs/etc_bashrc /home/$CONF_GEN_USER/.bashrc
 chroot_check $? "Create /home/$CONF_GEN_USER/.bashrc"
 
 LOOP=0

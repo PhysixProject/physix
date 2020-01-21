@@ -29,11 +29,10 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	report "$TIME : $BUILD_ID : Building $PKG0"
 
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"
+	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT"
 	else
-		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT"
 	fi
-
 
 	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID : Building $PKG0"
@@ -81,6 +80,4 @@ report "- Development tools build complete  -"
 report "-------------------------------------"
 
 exit 0
-
-
 

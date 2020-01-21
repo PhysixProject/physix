@@ -27,9 +27,9 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	PKG=$(echo $LINE | cut -d',' -f3)
 
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /system-build-logs/$SCRIPT"
+	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT"
 	else
-		IO_DIRECTION="| tee /system-build-logs/$SCRIPT"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT"
 	fi
 
 	TIME=`date "+%D-%T"`

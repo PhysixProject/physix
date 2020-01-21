@@ -55,7 +55,7 @@
 2.580-findutils.sh,findutils-4.6.0.tar.gz
 2.590-groff.sh,groff-1.22.4.tar.gz
 2.591-libaio.sh,libaio_0.3.112.orig.tar.xz
-#2.593-popt.sh,popt-1.16.tar.gz
+2.593-popt.sh,popt-1.16.tar.gz
 #2.594-efivar.sh,efivar-37.tar.bz2
 #2.595-efibootmgr.sh,efibootmgr-16.tar.bz2
 2.610-less.sh,less-551.tar.gz
