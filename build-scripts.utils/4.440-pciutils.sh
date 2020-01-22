@@ -3,9 +3,9 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-make PREFIX=/usr                \
+su physix -c 'make PREFIX=/usr  \
      SHAREDIR=/usr/share/hwdata \
-     SHARED=yes
+     SHARED=yes'
 chroot_check $? "pciutils : make"
 
 make PREFIX=/usr                \

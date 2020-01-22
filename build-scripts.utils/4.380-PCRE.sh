@@ -3,7 +3,7 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr                     \
+su physix -c './configure --prefix=/usr                     \
             --docdir=/usr/share/doc/pcre-8.43 \
             --enable-unicode-properties       \
             --enable-pcre16                   \
@@ -11,10 +11,10 @@ cd $SOURCE_DIR/$1 || exit 1
             --enable-pcregrep-libz            \
             --enable-pcregrep-libbz2          \
             --enable-pcretest-libreadline     \
-            --disable-static
+            --disable-static'
 chroot_check $? "PCRE : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "PCRE : make"
 
 make install                     &&

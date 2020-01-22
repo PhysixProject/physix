@@ -3,13 +3,13 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr    \
+su physix -c './configure --prefix=/usr    \
             --disable-static \
             --with-history   \
-            --with-python=/usr/bin/python3
+            --with-python=/usr/bin/python3'
 chroot_check $? "libxml2 : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "libxml2 : make"
 
 make install

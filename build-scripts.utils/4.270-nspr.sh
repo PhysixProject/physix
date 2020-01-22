@@ -8,13 +8,13 @@ sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&
 sed -i 's#$(LIBRARY) ##'            config/rules.mk         &&
 chroot_check $? "nspr : sed content "
 
-./configure --prefix=/usr \
+su physix -c './configure --prefix=/usr \
             --with-mozilla \
             --with-pthreads \
-            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)'
 chroot_check $? "nspr : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "nspr : make"
 
 make install

@@ -3,7 +3,7 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-make
+su physix -c 'make'
 chroot_check $? "tree : make"
 
 make MANDIR=/usr/share/man/man1 install &&

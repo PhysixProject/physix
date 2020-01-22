@@ -3,20 +3,21 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-tar -xf ../cfe-8.0.1.src.tar.xz -C tools
-chroot_check $? "LLVM : tar -xf ../cfe-8.0.1.src.tar.xz -C tools"
-tar -xf ../compiler-rt-8.0.1.src.tar.xz -C projects
-chroot_check $? "LLVM : tar -xf ../cfe-8.0.1.src.tar.xz -C tools"
+su physix -c 'cp -r ../compiler-rt-8.0.1.src ./projects'
+chroot_check $? "cp -r ../compiler-rt-8.0.1.src ./projects"
 
-mv tools/cfe-8.0.1.src tools/clang
-chroot_check $? "LLVM : mv tools/cfe-8.0.1.src tools/clang "
+su physix -c 'cp -r ../cfe-8.0.1.src ./tools'
+chroot_check $? "cp -r ../cfe-8.0.1.src ./tools"
 
-mv projects/compiler-rt-8.0.1.src projects/compiler-rt
-chroot_check $? "LLVM : mv projects/compiler-rt-8.0.1.src projects/compiler-rt"
+su physix -c 'mv -v ./tools/cfe-8.0.1.src tools/clang'
+chroot_check $? "mv -v ./tools/cfe-8.0.1.src tools/clang"
 
-mkdir -v build &&
-cd       build &&
-CC=gcc CXX=g++                                  \
+su physix -c 'mv ./projects/compiler-rt-8.0.1.src projects/compiler-rt'
+chroot_check $? "mv ./projects/compiler-rt-8.0.1.src projects/compiler-rt"
+
+su physix -c 'mkdir -v build &&
+              cd build       &&                 
+CC=gcc CXX=g++               &&                  
 cmake -DCMAKE_INSTALL_PREFIX=/usr               \
       -DLLVM_ENABLE_FFI=ON                      \
       -DCMAKE_BUILD_TYPE=Release                \
@@ -25,14 +26,18 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr               \
       -DLLVM_ENABLE_RTTI=ON                     \
       -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;BPF" \
       -DLLVM_BUILD_TESTS=ON                     \
-      -Wno-dev -G Ninja ..
+      -Wno-dev -G Ninja ..'
 chroot_check $? "LLVM : configure"
 
-ninja
+pwd
+cd build
+pwd
+su physix -c 'ninja'
 chroot_check $? "LLVM : ninjja (make)"
 
 #ninja docs-clang-html docs-clang-man
 #chroot_check $? "LLVM : ninja docs-clang-html docs-clang-man"
 
 ninja install
+chroot_check $? "LLVM : ninjja install"
 

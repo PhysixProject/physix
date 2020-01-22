@@ -3,10 +3,10 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr --disable-gpg-test
+su physix -c './configure --prefix=/usr --disable-gpg-test'
 chroot_check $? "gpgme : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "gpgme : make"
 
 make install

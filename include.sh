@@ -206,8 +206,10 @@ function unpack() {
 		error "tar xf $BR/usr/src/physix/sources/$PKG"
 		exit 1
 	fi
+
 	if [ "$OWNER" != "" ] ; then
 		chown --recursive $OWNER $BR/usr/src/physix/sources/$DIR
+		chmod 750 $BR/usr/src/physix/sources/$DIR
 	fi
 
 }

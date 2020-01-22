@@ -3,17 +3,17 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-patch -Np1 -i ../nss-3.45-standalone-1.patch &&
+su physix -c 'patch -Np1 -i ../nss-3.45-standalone-1.patch'
 chroot_check $? "nss : patch"
 
 cd nss
-make -j1 BUILD_OPT=1                  \
+su physix -c 'make -j1 BUILD_OPT=1                  \
   NSPR_INCLUDE_DIR=/usr/include/nspr  \
   USE_SYSTEM_ZLIB=1                   \
   ZLIB_LIBS=-lz                       \
   NSS_ENABLE_WERROR=0                 \
   $([ $(uname -m) = x86_64 ] && echo USE_64=1) \
-  $([ -f /usr/include/sqlite3.h ] && echo NSS_USE_SYSTEM_SQLITE=1)
+  $([ -f /usr/include/sqlite3.h ] && echo NSS_USE_SYSTEM_SQLITE=1)'
 chroot_check $? "nss : make "
 
 cd ../dist                                                          &&

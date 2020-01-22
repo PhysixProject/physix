@@ -6,16 +6,16 @@ cd $SOURCE_DIR/$1 || exit 1
 sed -e '/noinst_SCRIPTS = gpg-zip/c sbin_SCRIPTS += gpg-zip' \
     -i tools/Makefile.in
 
-./configure --prefix=/usr            \
-            --enable-symcryptrun     \
-            --localstatedir=/var     \
-            --docdir=/usr/share/doc/gnupg-2.2.17
+su physix -c './configure --prefix=/usr \
+              --enable-symcryptrun      \
+              --localstatedir=/var      \
+              --docdir=/usr/share/doc/gnupg-2.2.17'
 chroot_check $? "GnuPG : configure"
 
-make &&
-makeinfo --html --no-split -o doc/gnupg_nochunks.html doc/gnupg.texi &&
-makeinfo --plaintext       -o doc/gnupg.txt           doc/gnupg.texi &&
-make -C doc html
+su physix -c 'make &&
+              makeinfo --html --no-split -o doc/gnupg_nochunks.html doc/gnupg.texi &&
+              makeinfo --plaintext       -o doc/gnupg.txt           doc/gnupg.texi &&
+              make -C doc html'
 chroot_check $? "GnuPG : make"
 
 make check

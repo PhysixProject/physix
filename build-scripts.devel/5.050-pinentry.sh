@@ -3,10 +3,10 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr --enable-pinentry-tty
+su physix -c './configure --prefix=/usr --enable-pinentry-tty'
 chroot_check $? "pinentry: configure"
 
-make
+su physix -c 'make'
 chroot_check $? "pinentry: make"
 
 make install

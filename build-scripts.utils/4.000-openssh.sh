@@ -14,13 +14,13 @@ useradd  -c 'sshd PrivSep' \
          -u 50 sshd
 chroot_check $? "openssh : useradd sshd" NOEXIT
 
-./configure --prefix=/usr                     \
-            --sysconfdir=/etc/ssh             \
-            --with-md5-passwords              \
-            --with-privsep-path=/var/lib/sshd
+su physix -c './configure --prefix=/usr    \
+               --sysconfdir=/etc/ssh       \
+               --with-md5-passwords        \
+               --with-privsep-path=/var/lib/sshd'
 chroot_check $? "openssh : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "openssh : make"
 
 make install &&

@@ -14,11 +14,11 @@ chroot_check $? "shadow : sed Makefile.in"
 
 
 
-sed -i 's/1000/999/' etc/useradd                           &&
-./configure --sysconfdir=/etc --with-group-name-max-length=32
+sed -i 's/1000/999/' etc/useradd
+su physix -c './configure --sysconfdir=/etc --with-group-name-max-length=32'
 chroot_check $? "shadow : "
 
-make
+su physix -c 'make'
 chroot_check $? "shadow : make"
 
 make install &&

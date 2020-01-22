@@ -5,15 +5,15 @@ cd $SOURCE_DIR/$1 || exit 1
 
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
 
-./bootstrap --prefix=/usr        \
+su physix -c './bootstrap --prefix=/usr        \
             --system-libs        \
             --mandir=/share/man  \
             --no-system-jsoncpp  \
             --no-system-librhash \
-            --docdir=/share/doc/cmake-3.15.2
+            --docdir=/share/doc/cmake-3.15.2'
 chroot_check $? "cmake: bootstrap"
 
-make
+su physix -c 'make'
 chroot_check $? "cmake: make"
 
 make install

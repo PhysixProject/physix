@@ -3,7 +3,7 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch
+su physix -c 'patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch'
 chroot_check $? "docbook: patch"
 
 install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2 &&

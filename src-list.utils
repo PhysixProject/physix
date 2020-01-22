@@ -2,7 +2,7 @@
 # Base system packages and associated md5sums
 # md5sum values identical to Beyond Linux From Scratch Version 9.0
 ###############################################################################
-
+glib-2.60.6-skip_warnings-1.patch,http://physix-os.org/source/glib-2.60.6-skip_warnings-1.patch,6252d5c0b400558908b8a41b772c9794
 libnl-doc-3.4.0.tar.gz,http://physix-os.org/source/libnl-doc-3.4.0.tar.gz,2255846ccf58875529f84898df325dea
 libnl-3.4.0.tar.gz,http://physix-os.org/source/libnl-3.4.0.tar.gz,8f71910c03db363b41e2ea62057a4311
 iw-5.3.tar.xz,http://physix-os.org/source/iw-5.3.tar.xz,b65bb6dc3b9474c55f6107a25469d8cf

@@ -10,14 +10,14 @@ sed -e 's/dummy links/dummy lynx/'                                     \
     -e 's/-no-numbering -no-references/-force-html -nonumbers -stdin/' \
     -i configure
 
-./configure --prefix=/usr                    \
+su physix -c './configure --prefix=/usr                    \
             --sysconfdir=/etc                \
             --libdir=/usr/lib                \
             --enable-securedir=/lib/security \
-            --docdir=/usr/share/doc/Linux-PAM-1.3.1
+            --docdir=/usr/share/doc/Linux-PAM-1.3.1'
 chroot_check $? "Linux-PAM : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "Linux-PAM : make"
 
 

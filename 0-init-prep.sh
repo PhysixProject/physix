@@ -35,90 +35,119 @@ function init_storage_lvm() {
                 exit 1
         fi
 
-	local FSF=`echo $CONF_FS_FORMAT | cut -d'=' -f2`
-	local MKFS=`which mkfs.$FSF`
+
+#FIND TOOLS
+	local MKFS=`which mkfs.$CONF_FS_FORMAT`
 	if [ ! -e $MKFS ] ; then
-        	echo "[ERROR] mkfs.$FSF NOT FOUND. exiting..."
+        	echo "[ERROR] mkfs.$MKFS NOT FOUND in path. exiting..."
         	exit 1
 	fi
 
+	local PARTED=`which parted`
+	if [ ! -e $PARTED ] ; then
+        	echo "[ERROR] parted tool NOT FOUND in path. exiting..."
+        	exit 1
+	fi
+
+	local MKFAT=`which mkfs.fat`
+	if [ ! -e $MKFAT ] ; then
+        	echo "[ERROR] mkfs.FAT NOT FOUND in path. exiting..."
+        	exit 1
+	fi
+
+	local MKEXT2=`which mkfs.ext2`
+	if [ ! -e $MKEXT2 ] ; then
+        	echo "[ERROR] mkfs.ext2 NOT FOUND in path. exiting..."
+        	exit 1
+	fi
+
+
+
+
+#CREATE PARTITIONS	
         report "Creating Partitions"
-	/sbin/parted /dev/sda mklabel msdos 1
-        /sbin/parted /dev/sda mkpart primary 1 1024
+	eval $PARTED /dev/$CONF_ROOT_DEVICE mklabel msdos 1
+        eval $PARTED /dev/$CONF_ROOT_DEVICE mkpart primary 1 1024
         if [ $? -ne 0 ] ; then
                 report "[ERROR] create primary 1 1024"
                 exit 1
         fi
 
-        /sbin/parted /dev/sda mkpart primary 1024 2025
+        eval $PARTED /dev/$CONF_ROOT_DEVICE mkpart primary 1024 2025
         if [ $? -ne 0 ] ; then
                 report "[ERROR] create primary 1024 2025"
                 exit 1
         fi
 
-        /sbin/parted /dev/sda mkpart primary 2025 497000
+        eval $PARTED /dev/$CONF_ROOT_DEVICE mkpart primary 2025 497000
         if [ $? -ne 0 ] ; then
                 report "[ERROR] create primary 2025 497000"
                 exit 1
         fi
 
-        /sbin/parted /dev/sda set 1 boot on
+        eval $PARTED /dev/$CONF_ROOT_DEVICE set 1 boot on
         if [ $? -ne 0 ] ; then
                 report "[ERROR] parted /dev/sda set 1 boot on"
                 exit 1
         fi
 
+
+#CREATE LOGICAL VOLUES
+	pvcreate -ff /dev/"$CONF_ROOT_DEVICE"3
+	if [ $? -ne 0 ] ; then
+        	report "[ERROR] Createing Physical Volume $CONF_ROOT_DEVICE'3'. exiting..."
+        	exit 1
+	fi
+
+	vgcreate physix /dev/"$CONF_ROOT_DEVICE"3
+	if [ $? -ne 0 ] ; then
+        	report "[ERROR] vgcreate physix /dev/$CONF_ROOT_DEVICE'3'"
+        	exit 1
+	fi
+
+	lvcreate -L 100G -n root physix
+	if [ $? -ne 0 ] ; then
+        	report "[ERROR] lvcreate -L 100G -n root physix"
+        	exit 1
+	fi
+
+	lvcreate -L 150G -n home physix
+	if [ $? -ne 0 ] ; then
+        	report "[ERROR] lvcreate -L 150G -n home physix"
+        	exit 1
+	fi
+
+	lvcreate -L 150G -n var physix
+	if [ $? -ne 0 ] ; then
+       		report "[ERROR] lvcreate -L 150G -n var physix"
+       		exit 1
+	fi
+
+
+
+#FORMAT VOLUMES
+
 	if [ "$CONF_FORMAT_UEFI"=="y" ] ; then
-		/sbin/mkfs.fat  /dev/"$CONF_ROOT_DEVICE"1
+		eval $MKFS -f /dev/"$CONF_ROOT_DEVICE"1
 		if [ $? -ne 0 ] ; then
-			report "[ERROR] mkfs.fat  /dev/$CONF_ROOT_DEVICE'1'"
+			report "[ERROR] mkfs.$CONF_FS_FORMAT /dev/$CONF_ROOT_DEVICE'1'"
 			exit 1
 		fi
 	fi
 
 	if [ "$CONF_FORMAT_BOOT"=="y" ] ; then
-		/sbin/mkfs.ext2 /dev/"$CONF_ROOT_DEVICE"2
+		eval $MKEXT2 /dev/"$CONF_ROOT_DEVICE"2
 		if [ $? -ne 0 ] ; then
 			report "[ERROR] mkfs.ext2 /dev/$CONF_ROOT_DEVICE'2'"
 			exit 1
 		fi
 	fi
 
-        pvcreate -ff /dev/"$CONF_ROOT_DEVICE"3
-        if [ $? -ne 0 ] ; then
-                report "[ERROR] Createing Physical Volume $CONF_ROOT_DEVICE'3'. exiting..."
-                exit 1
-        fi
-
-        vgcreate physix /dev/"$CONF_ROOT_DEVICE"3
-        if [ $? -ne 0 ] ; then
-                report "[ERROR] vgcreate physix /dev/$CONF_ROOT_DEVICE'3'"
-                exit 1
-        fi
-
-        lvcreate -L 100G -n root physix
-        if [ $? -ne 0 ] ; then
-                report "[ERROR] lvcreate -L 100G -n root physix"
-                exit 1
-        fi
-
-        lvcreate -L 150G -n home physix
-        if [ $? -ne 0 ] ; then
-                report "[ERROR] lvcreate -L 150G -n home physix"
-                exit 1
-        fi
-
         eval $MKFS /dev/mapper/physix-root
         if [ $? -ne 0 ] ; then
                 report "[ERROR] $MKFS /dev/mapper/physix-root"
                 exit 1
         fi
-
-	lvcreate -L 150G -n var physix
-	if [ $? -ne 0 ] ; then
-	       report "[ERROR] lvcreate -L 150G -n home physix"
-	       exit 1
-	fi
 
         eval $MKFS /dev/mapper/physix-home
         if [ $? -ne 0 ] ; then
@@ -132,6 +161,8 @@ function init_storage_lvm() {
 		exit 1
 	fi
 
+
+#MOUNT VOLUMES
         mkdir -p $BUILDROOT
         mount /dev/mapper/physix-root $BUILDROOT
         if [ $? -ne 0 ] ; then
@@ -146,21 +177,19 @@ function init_storage_lvm() {
                 exit 1
         fi
 
+	mkdir -p $BUILDROOT/var
+	mount /dev/mapper/physix-var $BUILDROOT/var
+	if [ $? -ne 0 ] ; then
+        	report "[ERROR] mounting $BUILDROOT/var"
+        	exit 1
+	fi
+
         mkdir -p $BUILDROOT/boot
         mount /dev/sda2 $BUILDROOT/boot
         if [ $? -ne 0 ] ; then
                 report "[ERROR] mounting $BUILDROOT/boot"
                 exit 1
         fi
-
-	mkdir -p $BUILDROOT/var
-	mount /dev/sda2 $BUILDROOT/var
-	if [ $? -ne 0 ] ; then
-        	report "[ERROR] mounting $BUILDROOT/var"
-        	exit 1
-	fi
-
-
 }
 
 
@@ -196,19 +225,17 @@ function complete_setup() {
 	mkdir -v $BUILDROOT/tools
 	ln -sfv $BUILDROOT/tools /
 
-	groupadd physix
-
 	grep -q physix /etc/passwd
 	if [ $? -ne 0 ] ; then
-		useradd -s /bin/bash -g physix -m -k /dev/null physix
+		useradd -s /bin/bash -g physix -m -k /dev/null physix --shell bash
 	fi
 
-	LOOP=0
-	while [ $LOOP -eq 0 ] ; do
-		report "Please Set passwd for 'physix' user"
-		passwd physix
-		if [ $? -eq 0 ] ; then LOOP=1; fi
-	done
+	#LOOP=0
+	#while [ $LOOP -eq 0 ] ; do
+	#	report "Please Set passwd for 'physix' user"
+	#	passwd physix
+	#	if [ $? -eq 0 ] ; then LOOP=1; fi
+	#done
 
 	cp -v configs/physix-bash-profile /home/physix/.bash_profile
 	if [ $? -ne 0 ] ; then

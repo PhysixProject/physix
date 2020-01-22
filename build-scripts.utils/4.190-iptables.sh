@@ -3,14 +3,14 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr      \
+su physix -c './configure --prefix=/usr      \
             --sbindir=/sbin    \
             --disable-nftables \
             --enable-libipq    \
-            --with-xtlibdir=/lib/xtables
+            --with-xtlibdir=/lib/xtables'
 chroot_check $? "iptables : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "iptables : make"
 
 make install &&

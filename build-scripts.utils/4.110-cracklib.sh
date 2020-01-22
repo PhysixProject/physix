@@ -5,11 +5,12 @@ cd $SOURCE_DIR/$1 || exit 1
 
 sed -i '/skipping/d' util/packer.c &&
 
-./configure --prefix=/usr    \
+su physix -c './configure --prefix=/usr    \
             --disable-static \
-            --with-default-dict=/lib/cracklib/pw_dict
+            --with-default-dict=/lib/cracklib/pw_dict'
 chroot_check $? "cracklib : configure"
-make
+
+su physix -c 'make'
 chroot_check $? "cracklib : make"
 
 make install                      &&

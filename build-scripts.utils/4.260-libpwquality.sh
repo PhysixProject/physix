@@ -3,12 +3,12 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr --disable-static \
+su physix -c './configure --prefix=/usr --disable-static \
             --with-securedir=/lib/security \
-            --with-python-binary=python3
+            --with-python-binary=python3'
 chroot_check $? "libpwquality : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "libpwquality : make"
 
 make install

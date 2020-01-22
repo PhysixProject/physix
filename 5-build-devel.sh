@@ -39,21 +39,21 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
 		if [ $PKG2 ] ; then
-			unpack $PKG2 "$CONF_GEN_USER:root"
+			unpack $PKG2 "physix:root"
 			check $? "Unpack $PKG2"
 			return_src_dir $PKG2
 			SRC2=$SRC_DIR
 		fi
 
 		if [ $PKG1 ] ; then
-			unpack $PKG1 "$CONF_GEN_USER:root"
+			unpack $PKG1 "physix:root"
 			check $? "Unpack $PKG1"
 			return_src_dir $PKG1
 			SRC1=$SRC_DIR
 		fi
 
 		if [ $PKG0 ] ; then
-			unpack $PKG0 "$CONF_GEN_USER:root"
+			unpack $PKG0 "physix:root"
 			check $? "Unpack $PKG0"
 			return_src_dir $PKG0
 			SRC0=$SRC_DIR

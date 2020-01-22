@@ -13,12 +13,12 @@ cat >> trust/trust-extract-compat.in << "EOF"
 EOF
 chroot_check $? "p11kit : "
 
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --with-trust-paths=/etc/pki/anchors
+su physix -c './configure --prefix=/usr  \
+              --sysconfdir=/etc          \
+              --with-trust-paths=/etc/pki/anchors'
 chroot_check $? "p11kit : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "p11kit : make"
 
 make install &&

@@ -9,19 +9,19 @@ if [ $? -ne 0 ] ; then
         chroot_check $? "mutt : groupadd -g 34 mail"
 fi
 
-cp -v doc/manual.txt{,.shipped} &&
-./configure --prefix=/usr                           \
-            --sysconfdir=/etc                       \
+su physix -c 'cp -v doc/manual.txt{,.shipped} &&
+            ./configure --prefix=/usr                \
+            --sysconfdir=/etc                        \
             --with-docdir=/usr/share/doc/mutt-1.12.1 \
-            --with-ssl                              \
-            --enable-external-dotlock               \
-            --enable-pop                            \
-            --enable-imap                           \
-            --enable-hcache                         \
-            --enable-sidebar
+            --with-ssl                               \
+            --enable-external-dotlock                \
+            --enable-pop                             \
+            --enable-imap                            \
+            --enable-hcache                          \
+            --enable-sidebar'
 chroot_check $? "mutt : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "mutt : make"
 
 make install &&

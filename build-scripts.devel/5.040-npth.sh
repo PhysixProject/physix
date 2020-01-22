@@ -3,11 +3,11 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure --prefix=/usr
+su physix -c './configure --prefix=/usr'
 chroot_check $? "npth: make install"
 
-make
-chroot_check $? "npth: make "
+su physix -c 'make'
+chroot_check $? "npth: make"
 
 make install
 chroot_check $? "npth: make install"

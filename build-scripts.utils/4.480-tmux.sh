@@ -3,10 +3,10 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-./configure
+su physix -c './configure'
 chroot_check $? "tmux : configure"
 
-make
+su physix -c 'make'
 chroot_check $? "tmux : make"
 
 make install
