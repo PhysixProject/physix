@@ -11,3 +11,4 @@ llvm-8.0.1.src.tar.xz,http://physix-os.org/source/llvm-8.0.1.src.tar.xz,9a3b63df
 cfe-8.0.1.src.tar.xz,http://physix-os.org/source/cfe-8.0.1.src.tar.xz,28db72b57ca99307259773e4ac74a6d3
 compiler-rt-8.0.1.src.tar.xz,http://physix-os.org/source/compiler-rt-8.0.1.src.tar.xz,c251e582862f9fcc880802f8f2920096
 libssh2-1.9.0.tar.gz,http://physix-os.org/source/libssh2-1.9.0.tar.gz,1beefafe8963982adc84b408b2959927
+rustc-1.35.0-src.tar.gz,http://physix-os.org/source/rustc-1.35.0-src.tar.gz,f43af67a139ce21ff5f530bbd2f486aa
