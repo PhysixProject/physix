@@ -1,6 +1,5 @@
 #!/bin/bash
 source /physix/include.sh || exit 1
-source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 GUSER=`cat /physix/build.conf | grep GEN_USER | cut -d'=' -f2`

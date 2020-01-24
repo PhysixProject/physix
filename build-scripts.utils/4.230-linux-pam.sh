@@ -1,6 +1,5 @@
 #!/bin/bash
 source /physix/include.sh || exit 1
-source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 tar -xf ../Linux-PAM-1.3.1-docs.tar.xz --strip-components=1

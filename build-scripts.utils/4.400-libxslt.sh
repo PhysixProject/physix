@@ -1,6 +1,5 @@
 #!/bin/bash
 source /physix/include.sh || exit 1
-source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 su physix -c 'patch -Np1 -i ../libxslt-1.1.33-security_fix-1.patch'
