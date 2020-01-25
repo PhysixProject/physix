@@ -37,3 +37,7 @@ install -m644 /physix/build-scripts.utils/configs/openssh/sshd.socket    /lib/sy
 systemctl enable sshd.service
 chroot_check $? "systemctl enable sshd.service"
 
+systemctl start sshd.service
+chroot_check $? "systemctl start sshd.service"
+
+

@@ -2,7 +2,7 @@
 source /physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-su physix -c 'sed -i '/utsname.h/a#include <sys/sysmacros.h>' libparted/arch/linux.c '
+su physix -c "sed -i '/utsname.h/a#include <sys/sysmacros.h>' libparted/arch/linux.c"
 chroot_check $? "sed libparted/arch/linux.c"
 
 su physix -c './configure --prefix=/usr --disable-static '
