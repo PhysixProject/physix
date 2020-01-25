@@ -17,7 +17,7 @@ report "---------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./5-build-devel.csv | cut -d' ' -f1`
-
+NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.devel/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO=$(echo $LINE | cut -d',' -f1)
@@ -28,14 +28,15 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 
 	report "$TIME : $BUILD_ID : Building $PKG0"
 
+	local TIME=`date "+%Y-%m-%d-%T"`
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT"
+	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT-$TIME"
 	else
-		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT-$TIME"
 	fi
 
 	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID : Building $PKG0"
+	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $PKG0"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
 		if [ $PKG2 ] ; then

@@ -25,14 +25,15 @@ for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
         PKG1=$(echo $LINE | cut -d',' -f4)
         PKG2=$(echo $LINE | cut -d',' -f5)
 
-	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID : Building $SCRIPT"
-
+	local TIME=`date "+%Y-%m-%d-%T"`
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT"
+	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT-$TIME"
 	else
-		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT-$TIME"
 	fi
+
+	TIME=`date "+%D-%T"`
+	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 		eval "/physix/build-scripts.xorg/$SCRIPT $PKG0 $PKG1 $PKG2 $IO_DIRECTION"

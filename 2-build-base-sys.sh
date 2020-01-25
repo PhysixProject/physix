@@ -24,7 +24,7 @@ report "---------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
-
+NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.base/ | wc -l`
 BUILD_ID=0
 TIME=`date "+%D-%T"`
 report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
@@ -43,7 +43,7 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 	PKG1=$(echo $LINE | cut -d',' -f3)
 
 	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID : Building $SCRIPT"
+	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 

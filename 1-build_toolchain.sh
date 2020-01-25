@@ -25,6 +25,7 @@ report "--------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./1-build_toolchain.csv | cut -d' ' -f1`
+NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.toolchain/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	SCRIPT=$(echo $LINE | cut -d',' -f1)
@@ -34,7 +35,7 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 	PKG3=$(echo $LINE | cut -d',' -f5)
 
         TIME=`date "+%Y-%m-%d-%T"`
-        report "$TIME : $BUILD_ID : Building $SCRIPT"
+        report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
 
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
@@ -76,7 +77,7 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		fi
 
 		# Execute the build instructions.
-		su physix -c "$BUILDROOT/physix/build-scripts.toolchain/$SCRIPT $SRC0 $SRC1 $SRC2 $SRC3" &> $TOOLCHAINLOGS/$TIME-$SCRIPT
+		su physix -c "$BUILDROOT/physix/build-scripts.toolchain/$SCRIPT $SRC0 $SRC1 $SRC2 $SRC3" &> $TOOLCHAINLOGS/$SCRIPT-$TIME
 		check $? "$SCRIPT"
 		echo ''
 

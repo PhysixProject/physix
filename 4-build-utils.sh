@@ -19,7 +19,7 @@ report "--------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./4-build-utils.csv | cut -d' ' -f1`
-
+NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.utils/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO=$(echo $LINE | cut -d',' -f1)
@@ -33,7 +33,7 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	fi
 
 	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID : Building $PKG"
+	report "$TIME : $BUILD_ID/$NUM_SCRIPTS: Building $PKG"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
 		if [ $PKG ] ; then

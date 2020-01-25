@@ -18,7 +18,7 @@ echo "------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./3-config-base-sys.csv | cut -d' ' -f1`
-
+NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.config/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO=$(echo $LINE | cut -d',' -f1)
@@ -40,7 +40,7 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 			exit 1
 		fi
 
-		report "$TIME : $BUILD_ID : Building $SCRIPT"
+		report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
 		chroot-conf-build '/physix/build-scripts.config' $SCRIPT $SRC0 $IO
 		check $? "$SCRIPT"
 		echo ''
