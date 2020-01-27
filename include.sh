@@ -191,28 +191,44 @@ function chroot-build {
 # Assumes chrooted env uless NCHRT Flag is passsed as arg 2
 function unpack() {
 	PKG=$1
-	local OWNER=${2:-''}
-	local FLAG=${3:-''}
+	local OWNER=$2
+	local FLAG=$3
+	local SRCPATH=/usr/src/physix/sources/${4:-''}
 	local BR=''
+
+	if [ "$PKG" == "" ] ; then
+		error "Unpack() requires argument for package name"
+		exit 1
+	fi
+
+	if [ "$OWNER" == "" ] ; then
+		error "Unpack() requires argument for package ownership"
+		exit 1
+	fi
+
+	if [ "FLAG" == "" ] ; then
+		error "Unpack() requires flag argument to determine context of chroot environment"
+		exit 1
+	fi
 
 	if [ "$FLAG" == "NCHRT" ] ; then
 		BR=$BUILDROOT
 	fi
 
-	DIR=$(tar -tf $BR/usr/src/physix/sources/$PKG | cut -d'/' -f1 | head -n 1)
+	DIR=$(tar -tf $BR/$SRCPATH/$PKG | cut -d'/' -f1 | head -n 1)
         if [ -d $BR/usr/src/physix/sources/$DIR ] ; then
                 rm -rf $DIR
         fi
 
-        tar xf $BR/usr/src/physix/sources/$PKG -C $BR/usr/src/physix/sources
+        tar xf $BR/$SRCPATH/$PKG -C $BR/$SRCPATH
 	if [ $? -ne 0 ] ; then
-		error "tar xf $BR/usr/src/physix/sources/$PKG"
+		error "tar xf $BR/$SRCPATH/$PKG"
 		exit 1
 	fi
 
 	if [ "$OWNER" != "" ] ; then
-		chown --recursive $OWNER $BR/usr/src/physix/sources/$DIR
-		chmod 750 $BR/usr/src/physix/sources/$DIR
+		chown --recursive $OWNER $BR/$SRCPATH/$DIR
+		chmod 750 $BR/$SRCPATH/$DIR
 	fi
 
 }

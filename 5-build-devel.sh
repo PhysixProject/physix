@@ -17,7 +17,7 @@ report "---------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./5-build-devel.csv | cut -d' ' -f1`
-NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.devel/ | wc -l`
+NUM_SCRIPTS=`ls /physix/build-scripts.devel/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO=$(echo $LINE | cut -d',' -f1)
@@ -40,21 +40,21 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
 		if [ $PKG2 ] ; then
-			unpack $PKG2 "physix:root"
+			unpack $PKG2 "physix:root" 'FLAG'
 			check $? "Unpack $PKG2"
 			return_src_dir $PKG2
 			SRC2=$SRC_DIR
 		fi
 
 		if [ $PKG1 ] ; then
-			unpack $PKG1 "physix:root"
+			unpack $PKG1 "physix:root" 'FLAG'
 			check $? "Unpack $PKG1"
 			return_src_dir $PKG1
 			SRC1=$SRC_DIR
 		fi
 
 		if [ $PKG0 ] ; then
-			unpack $PKG0 "physix:root"
+			unpack $PKG0 "physix:root" 'FLAG'
 			check $? "Unpack $PKG0"
 			return_src_dir $PKG0
 			SRC0=$SRC_DIR

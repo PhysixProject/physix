@@ -16,7 +16,7 @@ report "---------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./6-build-xorg.csv | cut -d' ' -f1`
-
+NUM_SCRIPTS=`ls /physix/build-scripts.xorg/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO=$(echo $LINE | cut -d',' -f1)
@@ -35,6 +35,27 @@ for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	TIME=`date "+%D-%T"`
 	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
 
+	if [ $PKG2 ] ; then
+		unpack $PKG2 "physix:root" 'FLAG' 'xc'
+		check $? "Unpack $PKG2"
+		return_src_dir $PKG2
+		SRC2=$SRC_DIR
+	fi
+
+	if [ $PKG1 ] ; then
+		unpack $PKG1 "physix:root" 'FLAG' 'xc'
+		check $? "Unpack $PKG1"
+		return_src_dir $PKG1
+		SRC1=$SRC_DIR
+	fi
+
+	if [ $PKG0 ] ; then
+		unpack $PKG2 "physix:root" 'FLAG' 'xc'
+		check $? "Unpack $PKG2"
+		return_src_dir $PKG2
+		SRC2=$SRC_DIR
+	fi
+
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 		eval "/physix/build-scripts.xorg/$SCRIPT $PKG0 $PKG1 $PKG2 $IO_DIRECTION"
 		check $? "$SCRIPT"
@@ -44,6 +65,4 @@ for LINE in `cat ./6-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 done
 
 exit 0
-
-
 

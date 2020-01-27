@@ -1,16 +1,6 @@
 #!/bin/bash
-
-source /physix/include.sh
-
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources/
-unpack $PKG
-mv $SRCD /sources/xc
-cd /sources/xc/$SRCD/
+source /physix/include.sh || exit 1
+cd $SOURCE_DIR/xc/$1 || exit 1
 
 ./configure $XORG_CONFIG
 chroot_check $? "xcb-util-keysyms : config"

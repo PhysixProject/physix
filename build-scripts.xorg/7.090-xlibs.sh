@@ -1,8 +1,6 @@
 #!/bin/bash
-
 source /physix/include.sh
-
-cd /sources/xc
+cd $SOURCE_DIR/xc/ || exit 1
 
 cat > lib-7.md5 << "EOF"
 ce2fb8100c6647ee81451ebe388b17ad  xtrans-1.4.0.tar.bz2

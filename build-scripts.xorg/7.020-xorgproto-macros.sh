@@ -1,16 +1,6 @@
 #!/bin/bash
-
 source /physix/include.sh
-
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources/
-unpack $PKG
-mv $SRCD /sources/xc
-cd /sources/xc/$SRCD/
+cd $SOURCE_DIR/xc/$1 || exit 1
 
 mkdir build
 cd    build

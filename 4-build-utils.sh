@@ -19,7 +19,7 @@ report "--------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./4-build-utils.csv | cut -d' ' -f1`
-NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.utils/ | wc -l`
+NUM_SCRIPTS=`ls /physix/build-scripts.utils/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO=$(echo $LINE | cut -d',' -f1)
@@ -38,7 +38,7 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 
 		if [ $PKG ] ; then
 			# physix doesn't exist as a user
-			unpack $PKG "physix:root"
+			unpack $PKG "physix:root" 'FLAG'
 			check $? "Unpack $PKG"
 			return_src_dir $PKG
 			SRC0=$SRC_DIR

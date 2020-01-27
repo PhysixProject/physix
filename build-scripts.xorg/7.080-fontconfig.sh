@@ -1,18 +1,6 @@
 #!/bin/bash
-
-source /physix/include.sh
-
-cd /sources
-PKG=$1
-stripit $PKG
-SRCD=$STRIPPED
-
-cd /sources/
-unpack $PKG
-cd /sources/$SRCD
-mv $SRCD /sources/xc
-cd /sources/xc/$SRCD/
-
+source /physix/include.sh || exit 1
+cd $SOURCE_DIR/xc/$1 || exit 1
 
 sed -i "s/pthread-stubs//" configure &&
 rm -f src/fcobjshash.h

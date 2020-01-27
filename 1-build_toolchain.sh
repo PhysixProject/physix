@@ -25,7 +25,7 @@ report "--------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./1-build_toolchain.csv | cut -d' ' -f1`
-NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.toolchain/ | wc -l`
+NUM_SCRIPTS=`ls $BUILDROOT/physix/build-scripts.toolchain/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	SCRIPT=$(echo $LINE | cut -d',' -f1)

@@ -24,7 +24,7 @@ report "---------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
-NUM_SCRIPTS=`ls $BUILDROOT/build-scripts.base/ | wc -l`
+NUM_SCRIPTS=`ls $BUILDROOT/physix/build-scripts.base/ | wc -l`
 BUILD_ID=0
 TIME=`date "+%D-%T"`
 report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
