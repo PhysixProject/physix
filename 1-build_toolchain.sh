@@ -77,6 +77,7 @@ for LINE in `cat ./1-build_toolchain.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 		fi
 
 		# Execute the build instructions.
+		TIME=`date "+%Y-%m-%d-%T" | tr ":" "-"`
 		su physix -c "$BUILDROOT/physix/build-scripts.toolchain/$SCRIPT $SRC0 $SRC1 $SRC2 $SRC3" &> $TOOLCHAINLOGS/$SCRIPT-$TIME
 		check $? "$SCRIPT"
 		echo ''
@@ -93,9 +94,12 @@ done
 /mnt/physix/physix/build-scripts.toolchain/1.370-chown.sh
 check $? "1.370-chown.sh"
 
-report "-------------------------------"
-report "- Toolchain Build Complete!  -"
-report "------------------------------"
+report "------------------------------------"
+report "- Toolchain Build complete.        -"
+report "- Next Step:                       -"
+report "-   Execute: ./2-build-base-sys.sh -"
+report "------------------------------------"
+
 
 exit 0
 

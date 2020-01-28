@@ -17,9 +17,10 @@ chroot_check $? "system-build : sed : make"
 make html
 chroot_check $? "system-build : sed : make html"
 
-make check
-# Disable check for now. Expected failure because valgrind is not present.
-chroot_check $? "system-build : sed : make check" NOEXIT
+if [ "$CONF_RUN_ALL_TEST_SUITE"=="y" ] ; then
+	make check
+	chroot_check $? "system-build : sed : make check" NOEXIT
+fi
 
 make install
 chroot_check $? "system-build : sed : make install"

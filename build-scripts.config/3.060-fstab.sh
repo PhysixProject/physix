@@ -12,7 +12,11 @@ SED_CMD='s/BOOT_UUID_MARKER/'$BOOT'/g'
 sed -i $SED_CMD /etc/fstab
 chroot_check $? "sed -i $SED_CMD /etc/fstab"
 
-SED_CMD='s/FS_MARKER/'$CONF_FS_FORMAT'/g'
+if [ $CONF_ROOTPART_FS ] ; then
+	SED_CMD='s/FS_MARKER/'$CONF_ROOTPART_FS'/g'
+else
+	SED_CMD='s/FS_MARKER/'ext4'/g'
+fi
 sed -i $SED_CMD /etc/fstab
 chroot_check $? "sed -i $SED_CMD /etc/fstab"
 

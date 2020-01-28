@@ -80,9 +80,11 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 
 done
 
-report "--------------------------------"
-report "- Base System Build Complete!  -"
-report "--------------------------------"
+report "--------------------------------------"
+report "- Base System Build Complete!        -"
+report "- Next Step:                         -"
+report "-   Execute: ./3-config-base-sys.sh  -"
+report "--------------------------------------"
 
 exit 0
 

@@ -14,8 +14,10 @@ chroot_check $? "tar configure"
 make -j8
 chroot_check $? "tar make"
 
-make check
-chroot_check $? "tar make check" NOEXIT
+if [ "$CONF_RUN_ALL_TEST_SUITE"=="y" ] ; then
+	make check
+	chroot_check $? "tar make check" NOEXIT
+fi
 
 make install
 chroot_check $? "tar make install"

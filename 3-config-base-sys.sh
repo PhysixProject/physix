@@ -54,9 +54,15 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 
 done
 
-echo "------------------------------"
-echo "- Base System Configured     -"
-echo "------------------------------"
+
+report "---------------------------------------"
+report "- Base System Configuration Complete! -"
+report "- Next Step:                          -"
+report "-   1. Reboot your machine            -"
+report "-   2. login                          -"
+report "-   3. cd /physix                     -"
+report "-   4. Execute: ./4-build-utils.sh    -"
+report "---------------------------------------"
 
 exit 0
 

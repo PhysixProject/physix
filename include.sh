@@ -78,7 +78,7 @@ function chroot_check() {
 	if [ $RTN -ne 0 ] ; then
 		error "$RTN:$MSG"
 		if [ $NOEXIT == "FALSE" ] ; then
-			grep '\[ERROR\]' /var/physix/system-build-logs/*.sh > /var/physix/system-build-logs/err.log
+			grep '\[ERROR\]' /var/physix/system-build-logs/ > /var/physix/system-build-logs/err.log
 			exit 1
 		fi
 	else
@@ -155,9 +155,9 @@ function chroot-conf-build {
 	local PKG=${3:-''}
 	local IO=${4:-''}
 	local IO_DIRECTION=''
-	local TIME=`date "+%Y-%m-%d-%T"`
+	local TIME=`date "+%Y-%m-%d-%T" | tr ":" "-"`
 
-	if [ "$IO" == 'log'  ] ; then
+	if [ "$IO" == 'log' ] ; then
 		IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT-$TIME"
 	else
 		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT-$TIME"
@@ -177,7 +177,7 @@ function chroot-build {
 	local SCRIPT=$2
 	local SRC0=${3:-''}
 	local SRC1=${4:-''}
-	local TIME=`date "+%Y-%m-%d-%T"`
+	local TIME=`date "+%Y-%m-%d-%T" | tr ":" "-"`
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \

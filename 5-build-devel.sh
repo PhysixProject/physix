@@ -26,9 +26,7 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
         PKG1=$(echo $LINE | cut -d',' -f4)
         PKG2=$(echo $LINE | cut -d',' -f5)
 
-	report "$TIME : $BUILD_ID : Building $PKG0"
-
-	local TIME=`date "+%Y-%m-%d-%T"`
+	TIME=`date "+%Y-%m-%d-%T "| tr ":" "-"`
 	if [ "$IO" == "log" ] ; then
 	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT-$TIME"
 	else

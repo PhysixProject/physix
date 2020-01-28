@@ -5,10 +5,10 @@ source /physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 patch -Np1 -i ../systemd-243-consolidated_fixes-2.patch
-chroot_check $? "systemd :"
+chroot_check $? "systemd : patch systemd-243-consolidated_fixes-2.patch"
 
 ln -sf /tools/bin/true /usr/bin/xsltproc
-chroot_check $? "systemd :"
+chroot_check $? "systemd : ln -sf /tools/bin/true /usr/bin/xsltproc"
 
 
 for file in /tools/lib/lib{blkid,mount,uuid}.so*; do

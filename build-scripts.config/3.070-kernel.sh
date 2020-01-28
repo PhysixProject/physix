@@ -20,13 +20,19 @@ make modules_install
 chroot_check $? "system config: kernel : make module_install"
 
 cp -v arch/x86/boot/bzImage /boot/vmlinuz-5.2.8.physix.x86_64
+chroot_check $? "/boot/vmlinuz-5.2.8.physix.x86_64"
+
 cp -v System.map /boot/System.map-5.2.8
+chroot_check $? "/boot/System.map-5.2.8"
+
 cp -v .config /boot/config-5.2.8.physix.x86_64
+chroot_check $? "/boot/config-5.2.8.physix.x86_64"
 
 install -d /usr/share/doc/linux-5.2.8
 chroot_check $? "system config: kernel : install kernel doc"
 
 cp -r Documentation/* /usr/share/doc/linux-5.2.8
+chroot_check $? "cp -r Documentation/* /usr/share/doc/linux-5.2.8"
 
 install -v -m755 -d /etc/modprobe.d
 chroot_check $? "system config: kernel : install -v -m755 -d /etc/modprobe.d"

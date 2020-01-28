@@ -44,7 +44,7 @@ function init_storage_lvm() {
         		exit 1
 		fi
 	else
-		local MKFS=`which mkfs.btrfs`
+		local MKFS=`which mkfs.ext4`
 		if [ ! -e $MKFS ] ; then
 			echo "[ERROR] Default: mkfs.btrfs NOT FOUND in path. exiting..."
 			exit 1
@@ -212,7 +212,7 @@ function init_storage_lvm() {
 			exit 1
 		fi
 	else
-		lvcreate -L 10G -n usr physix
+		lvcreate -L 20G -n usr physix
 		if [ $? -ne 0 ] ; then
 			report "lvcreate -L 4G -n usr physix"
 			exit 1
@@ -404,11 +404,11 @@ fi
 
 complete_setup
 
-report "--------------------------------"
-report "- Disk Partitioning complete.  -"
-report "- Next Steps:                  -"
-report "-   cd /mnt/physix/physix      -"
-report "-   ./1-build_toolchain.sh     -"
-report "--------------------------------"
+report "----------------------------------------"
+report "- Disk Partitioning complete.          -"
+report "- Next Steps:                          -"
+report "-   1. cd /mnt/physix/physix           -"
+report "-   2. Execute: ./1-build_toolchain.sh -"
+report "----------------------------------------"
 
 exit 0

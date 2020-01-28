@@ -12,8 +12,10 @@ chroot_check $? "texinfo"
 make
 chroot_check $? "texinfo make"
 
-make check
-chroot_check $? "texinfo make check" NOEXIT
+if [ "$CONF_RUN_ALL_TEST_SUITE"=="y" ] ; then
+	make check
+	chroot_check $? "texinfo make check" NOEXIT
+fi
 
 make install
 chroot_check $? "texinfo make install"
