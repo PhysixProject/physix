@@ -2,6 +2,7 @@
 # Utility system packages and associated md5sums
 # md5sum values identical to Beyond Linux From Scratch Version 9.0
 ###############################################################################
+dosfstools-4.1.tar.xz,http://physix-os.org/source/dosfstools-4.1.tar.xz,07a1050db1a898e9a2e03b0c4569c4bd
 parted-3.2.tar.xz,http://physix-os.org/source/parted-3.2.tar.xz,0247b6a7b314f8edeb618159fa95f9cb
 glib-2.60.6-skip_warnings-1.patch,http://physix-os.org/source/glib-2.60.6-skip_warnings-1.patch,6252d5c0b400558908b8a41b772c9794
 libnl-doc-3.4.0.tar.gz,http://physix-os.org/source/libnl-doc-3.4.0.tar.gz,2255846ccf58875529f84898df325dea

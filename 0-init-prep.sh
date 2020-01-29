@@ -24,6 +24,13 @@ fi
 #-----------------------------------------------------------------
 function init_storage_lvm() {
 
+	ls /dev/mapper/ | grep -q "$CONF_VOL_GROUP_NAME-"
+	if [ $? -eq 0 ] ; then
+		echo "[ERROR] a Volume group named CONF_VOL_GROUP_NAME already exists on this system"
+		echo "Please set anohter name in build.conf"
+		exit 1
+	fi
+
         local NUM_PARTITIONS=`ls /dev/ | grep $CONF_ROOT_DEVICE | wc -l`
         if [ $NUM_PARTITIONS -gt 1 ] ; then
                 lsblk -f
@@ -38,13 +45,13 @@ function init_storage_lvm() {
 
 #FIND TOOLS
 	if [ $CONF_ROOTPART_FS ] ; then
-		local MKFS=`which mkfs.$CONF_ROOTPART_FS`
+		MKFS=`which mkfs.$CONF_ROOTPART_FS`
 		if [ ! -e $MKFS ] ; then
         		echo "[ERROR] mkfs.$MKFS NOT FOUND in path. exiting..."
         		exit 1
 		fi
 	else
-		local MKFS=`which mkfs.ext4`
+		MKFS=`which mkfs.ext4`
 		if [ ! -e $MKFS ] ; then
 			echo "[ERROR] Default: mkfs.btrfs NOT FOUND in path. exiting..."
 			exit 1
@@ -77,8 +84,8 @@ function init_storage_lvm() {
 	eval $PARTED /dev/$CONF_ROOT_DEVICE mklabel msdos 1
 
 
-	PREV_LIMIT=0
 	# SETUP UEFI Partition
+	PREV_LIMIT=0
 	if [ $CONF_UEFI_PART_SIZE ] ; then
 		eval $PARTED /dev/$CONF_ROOT_DEVICE mkpart primary 1 $CONF_UEFI_PART_SIZE
 		if [ $? -ne 0 ] ; then
@@ -144,7 +151,7 @@ function init_storage_lvm() {
 
 	eval $PARTED /dev/$CONF_ROOT_DEVICE set 1 boot on
 	if [ $? -ne 0 ] ; then
-		report "[ERROR] parted /dev/sda set 1 boot on"
+		report "[ERROR] parted /dev/$CONF_ROOT_DEVICE set 1 boot on"
 		exit 1
 	fi
 
@@ -157,64 +164,68 @@ function init_storage_lvm() {
         	exit 1
 	fi
 
-	vgcreate physix /dev/"$CONF_ROOT_DEVICE"3
+	vgcreate $CONF_VOL_GROUP_NAME /dev/"$CONF_ROOT_DEVICE"3
 	if [ $? -ne 0 ] ; then
-        	report "[ERROR] vgcreate physix /dev/$CONF_ROOT_DEVICE'3'"
+		report "[ERROR] vgcreate $CONF_VOL_GROUP_NAME /dev/$CONF_ROOT_DEVICE'3'"
         	exit 1
 	fi
 
+	#CREATE / LOGICAL VOLUME
 	if [ $CONF_LOGICAL_ROOT_SIZE ] ; then
-		lvcreate -L "$CONF_LOGICAL_ROOT_SIZE"G -n root physix
+		lvcreate -L "$CONF_LOGICAL_ROOT_SIZE"G -n root $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-        		report "[ERROR] lvcreate -L 100G -n root physix"
-        		exit 1
+			report "[ERROR] lvcreate -L 100G -n root $CONF_VOL_GROUP_NAME"
+			exit 1
 		fi
 	else
-		lvcreate -L 10G -n root physix
+		lvcreate -L 10G -n root $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-			report "lvcreate -L 10G -n root physix"
+			report "lvcreate -L 10G -n root $CONF_VOL_GROUP_NAME"
 			exit 1
 		fi
 	fi
 
+	#CREATE /home LOGICAL VOLUME
 	if [ $CONF_LOGICAL_HOME_SIZE ] ; then
-		lvcreate -L "$CONF_LOGICAL_HOME_SIZE"G -n home physix
+		lvcreate -L "$CONF_LOGICAL_HOME_SIZE"G -n home $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-        		report "[ERROR] lvcreate -L 150G -n home physix"
-        		exit 1
+			report "[ERROR] lvcreate -L 150G -n home $CONF_VOL_GROUP_NAME"
+			exit 1
 		fi
 	else
-		lvcreate -L 10G -n home physix
+		lvcreate -L 10G -n home $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-			report "[ERROR] lvcreate -L 150G -n home physix"
+			report "[ERROR] lvcreate -L 150G -n home $CONF_VOL_GROUP_NAME"
 			exit 1
 		fi
 	fi
 
+	#CREATE /var LOGICAL VOLUME
 	if [ $CONF_LOGICAL_VAR_SIZE ] ; then
-		lvcreate -L "$CONF_LOGICAL_VAR_SIZE"G -n var physix
+		lvcreate -L "$CONF_LOGICAL_VAR_SIZE"G -n var $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-       			report "[ERROR] lvcreate -L $CONF_LOGICAL_VAR_SIZE GB -n var physix"
-       			exit 1
+			report "[ERROR] lvcreate -L $CONF_LOGICAL_VAR_SIZE GB -n var $CONF_VOL_GROUP_NAME"
+			exit 1
 		fi
 	else
-                lvcreate -L 5G -n var physix
+                lvcreate -L 5G -n var $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-			report "[ERROR] lvcreate -L $CONF_LOGICAL_VAR_SIZE GB -n var physix"
+			report "[ERROR] lvcreate -L $CONF_LOGICAL_VAR_SIZE GB -n var $CONF_VOL_GROUP_NAME"
 			exit 1
 		fi
 	fi
 
+	#CREATE /usr LOGICAL VOLUME
 	if [ $CONF_LOGICAL_USR_SIZE ] ; then
-		lvcreate -L "$CONF_LOGICAL_USR_SIZE"G -n usr physix
+		lvcreate -L "$CONF_LOGICAL_USR_SIZE"G -n usr $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-			report "lvcreate -L "$CONF_LOGICAL_USR_SIZE"G -n usr physix"
+			report "lvcreate -L "$CONF_LOGICAL_USR_SIZE"G -n usr $CONF_VOL_GROUP_NAME"
 			exit 1
 		fi
 	else
-		lvcreate -L 20G -n usr physix
+		lvcreate -L 20G -n usr $CONF_VOL_GROUP_NAME
 		if [ $? -ne 0 ] ; then
-			report "lvcreate -L 4G -n usr physix"
+			report "lvcreate -L 4G -n usr $CONF_VOL_GROUP_NAME"
 			exit 1
 		fi
 	fi
@@ -233,64 +244,64 @@ function init_storage_lvm() {
 		exit 1
 	fi
 
-        eval $MKFS /dev/mapper/physix-root
+	mkfs.$CONF_ROOTPART_FS /dev/mapper/"$CONF_VOL_GROUP_NAME"-root
         if [ $? -ne 0 ] ; then
-                report "[ERROR] $MKFS /dev/mapper/physix-root"
-                exit 1
+		report "[ERROR] $MKFS /dev/mapper/"$CONF_VOL_GROUP_NAME"-root"
+		exit 1
         fi
 
-        eval $MKFS /dev/mapper/physix-home
+        mkfs.$CONF_ROOTPART_FS /dev/mapper/"$CONF_VOL_GROUP_NAME"-home
         if [ $? -ne 0 ] ; then
-                report "[ERROR] $MKFS /dev/mapper/physix-home"
-                exit 1
+		report "[ERROR] $MKFS /dev/mapper/physix-home"
+		exit 1
         fi
 
-	eval $MKFS /dev/mapper/physix-var
+	mkfs.$CONF_ROOTPART_FS /dev/mapper/"$CONF_VOL_GROUP_NAME"-var
 	if [ $? -ne 0 ] ; then
 		report "[ERROR] $MKFS /dev/mapper/physix-var"
 		exit 1
 	fi
 
-	eval $MKFS /dev/mapper/physix-usr
+	mkfs.$CONF_ROOTPART_FS /dev/mapper/"$CONF_VOL_GROUP_NAME"-usr
 	if [ $? -ne 0 ] ; then
-        	report "[ERROR] $MKFS /dev/mapper/physix-usr"
-        	exit 1
+		report "[ERROR] $MKFS /dev/mapper/physix-usr"
+		exit 1
 	fi
 	
 
 #MOUNT VOLUMES
 	mkdir -p $BUILDROOT
-	mount /dev/mapper/physix-root $BUILDROOT
+	mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-root $BUILDROOT
 	if [ $? -ne 0 ] ; then
-		report "[ERROR] mounting $DEVICE"
+		report "[ERROR] mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-root $BUILDROOT"
 		exit 1
 	fi
 
 	mkdir -p $BUILDROOT/home
-	mount /dev/mapper/physix-home $BUILDROOT/home
+	mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-home $BUILDROOT/home
 	if [ $? -ne 0 ] ; then
-		report "[ERROR] mounting $BUILDROOT/home"
+		report "[ERROR] mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-home $BUILDROOT/home"
 		exit 1
 	fi
 
 	mkdir -p $BUILDROOT/var
-	mount /dev/mapper/physix-var $BUILDROOT/var
+	mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-var $BUILDROOT/var
 	if [ $? -ne 0 ] ; then
-		report "[ERROR] mounting $BUILDROOT/var"
+		report "[ERROR] mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-var $BUILDROOT/var"
 		exit 1
 	fi
 
 	mkdir -p $BUILDROOT/boot
-	mount /dev/sda2 $BUILDROOT/boot
+	mount /dev/"$CONF_ROOT_DEVICE"2 $BUILDROOT/boot
 	if [ $? -ne 0 ] ; then
-		report "[ERROR] mounting $BUILDROOT/boot"
+		report "[ERROR] mount /dev/"$CONF_ROOT_DEVICE"2 $BUILDROOT/boot"
 		exit 1
 	fi
 
 	mkdir -p $BUILDROOT/usr
-	mount /dev/mapper/physix-usr $BUILDROOT/usr
+	mount /dev/mapper/"$CONF_VOL_GROUP_NAME"-usr $BUILDROOT/usr
 	if [ $? -ne 0 ] ; then
-		report "[ERROR] mounting $BUILDROOT/boot"
+		report "[ERROR] mount /dev/mapper/physix-usr $BUILDROOT/usr"
 		exit 1
 	fi
 }
@@ -332,15 +343,18 @@ function complete_setup() {
 
 	grep -q physix /etc/passwd
 	if [ $? -ne 0 ] ; then
-		useradd -s /bin/bash -g physix -m -k /dev/null physix --shell bash
+		useradd -s /bin/bash -m physix 
 	fi
 
-	cp -v configs/physix-bash-profile /home/physix/.bash_profile
+	cp -r $PWD $BUILDROOT
+	chmod 777 $BUILDROOT/physix
+
+	cp -v $BUILDROOT/physix/configs/physix-bash-profile /home/physix/.bash_profile
 	if [ $? -ne 0 ] ; then
 		echo "Error Creating /home/physix/.bash_profile"
 		exit 1
 	fi
-	cp -v configs/physix-bashrc /home/physix/.bashrc
+	cp -v $BUILDROOT/physix/configs/physix-bashrc /home/physix/.bashrc
 	if [ $? -ne 0 ] ; then
 		echo "Error Creating /home/physix/.bashrc"
 		exit 1
@@ -348,10 +362,6 @@ function complete_setup() {
 
 	chown -v physix $BUILDROOT/tools
 	chown -v physix $BUILDROOT/usr/src/physix/sources
-
-	DPATH=$(dirname `pwd`)
-	cp -r $PWD $BUILDROOT
-	chmod 777 $BUILDROOT/physix
 }
 
 function check_build_conf() {

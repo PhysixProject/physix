@@ -35,10 +35,16 @@ else
     exit 0
 fi
 
-cp -v /physix/build-scripts.config/configs/lvm-grub.cfg /boot/grub/grub.cfg
-chroot_check $? "cp grub.cfg"
+#if [ $CONF_USE_LVM=="y" ] ; then
+	cp -v /physix/build-scripts.config/configs/lvm-grub.cfg /boot/grub/grub.cfg
+	chroot_check $? "cp grub.cfg"
+#fi
 
 SED_CMD='s/SET_ROOT_MARKER/'$SET_ROOT'/g'
+sed -i $SED_CMD /boot/grub/grub.cfg
+chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
+
+SED_CMD='s/VAL_GROUP_MARKER/'$CONF_VOL_GROUP_MARKER'/g'
 sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
@@ -49,4 +55,5 @@ if [ -e /boot/grub ] ; then
         cp -v /physix/build-scripts.config/configs/physix-splash.png /boot/grub/
         chroot_check $? "cp physix-splash.png /boot/grub/"
 fi
+
 

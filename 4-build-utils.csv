@@ -47,3 +47,4 @@ log,4.490-rsync.sh,rsync-3.1.3.tar.gz
 log,4.500-traceroute.sh,traceroute-2.1.0.tar.gz
 log,4.510-mutt.sh,mutt-1.12.1.tar.gz
 log,4.520-parted.sh,parted-3.2.tar.xz
+log,4.530-dosfstools.sh,dosfstools-4.1.tar.xz
