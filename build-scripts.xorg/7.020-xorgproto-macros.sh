@@ -1,13 +1,14 @@
-#!/bin/bash
-source /physix/include.sh
-cd $SOURCE_DIR/xc/$1 || exit 1
+#!/bin/bash -x
+source /physix/include.sh || exit 1
+source /etc/profile.d/xorg.sh || exit 2
+cd $SOURCE_DIR/xc/$1 || exit 3
 
-mkdir build
+su physix -c 'mkdir ./build'
 cd    build
-meson --prefix=$XORG_PREFIX .. &&
-ninja
-chroot_check $? "xorgproto : ninja"
 
+su physix -c "meson --prefix=$XORG_PREFIX .. &&
+              ninja"
+chroot_check $? "xorgproto : ninja"
 
 ninja install &&
 install -vdm 755 $XORG_PREFIX/share/doc/xorgproto-2019.1 &&

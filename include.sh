@@ -134,16 +134,25 @@ function return_src_dir() {
 		BR=$BUILDROOT
 	fi
 
-	TMP=$(tar -tf $BR/usr/src/physix/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
-	if [ $? -ne 0 ] ; then
+	if [ ! -e $BR/usr/src/physix/sources/$ARCHIVE ] ; then
+		echo "[ERROR] Not Found: $BR/usr/src/physix/sources/$ARCHIVE"
+		exit 1
+	fi
+
+	local P=`echo $BR/usr/src/physix/sources/$ARCHIVE | sed 's/\/\//\//g'`
+	#TMP=$(tar -tf $BR/usr/src/physix/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
+	TMP=$(tar -tf $P | cut -d'/' -f1 | head -n 1)
+	echo "TMP: $TMP"
+	if [ $? -ne 0 ] && [ "$TMP"!="" ]; then
 		echo "[ERROR] return_src_dir(): tar -tf $NAME"
 		exit 1
 	fi
 
-	if [ -e $BR/usr/src/physix/sources/$TMP ] ; then
+	#if [ -e $BR/usr/src/physix/sources/$TMP ] ; then
+		echo "Exporting $TMP"
 		export SRC_DIR=$TMP
-		return 0
-	fi
+	#	return 0
+	#fi
 }
 
 
@@ -190,10 +199,11 @@ function chroot-build {
 # Unpacks source archives.
 # Assumes chrooted env uless NCHRT Flag is passsed as arg 2
 function unpack() {
-	PKG=$1
+	local PKG=$1
 	local OWNER=$2
 	local FLAG=$3
-	local SRCPATH=/usr/src/physix/sources/${4:-''}
+	local SRCPATH="/usr/src/physix/sources/"
+	local DEST="/usr/src/physix/sources/"${4:-''}
 	local BR=''
 
 	if [ "$PKG" == "" ] ; then
@@ -216,19 +226,29 @@ function unpack() {
 	fi
 
 	DIR=$(tar -tf $BR/$SRCPATH/$PKG | cut -d'/' -f1 | head -n 1)
-        if [ -d $BR/usr/src/physix/sources/$DIR ] ; then
-                rm -rf $DIR
+	local P=`echo $BR/$SRCPATH/$PKG | sed 's/\/\//\//g'`
+	local D=`echo $BR/$DEST | sed  's/\/\//\//g'`
+        #if [ -d $BR/usr/src/physix/sources/$DIR ] ; then
+	if [ -d $D/$DIR ] ; then
+                cd $D && rm -rf ./$DIR 
         fi
 
-        tar xf $BR/$SRCPATH/$PKG -C $BR/$SRCPATH
+	#if [ -d $D/$DIR ] ; then
+	#	ok "Found pre-existing Directory: $D/$DIR"
+	#	echo ""RM IT!
+	#fi
+
+        #tar xf $BR/$SRCPATH/$PKG -C $BR/$DEST
+	echo "tar xf $P -C $D"
+	tar xf $P -C $D
 	if [ $? -ne 0 ] ; then
-		error "tar xf $BR/$SRCPATH/$PKG"
+		error "tar xf $P -C $D"
 		exit 1
 	fi
 
 	if [ "$OWNER" != "" ] ; then
-		chown --recursive $OWNER $BR/$SRCPATH/$DIR
-		chmod 750 $BR/$SRCPATH/$DIR
+		chown --recursive $OWNER $BR/$DEST
+		chmod 750 $BR/$DEST
 	fi
 
 }
@@ -262,14 +282,18 @@ function pull_sources() {
                         echo -e "\e[92m[ OK ]\e[0m Downloading $PKG_URL"
                 fi
 		
-
-		C=`md5sum $DEST_DIRECTORY/$PKG_NAME | cut -d' ' -f1`
-		if [ "$PKG_MD5" == "$C" ] ; then
-		        echo -e "\e[92m[ OK ]\e[0m MD5-check $PKG_NAME : $PKG_MD5"
+		if [ -e $DEST_DIRECTORY/$PKG_NAME ] ; then
+			C=`md5sum $DEST_DIRECTORY/$PKG_NAME | cut -d' ' -f1`
+			if [ "$PKG_MD5" == "$C" ] ; then
+		        	echo -e "\e[92m[ OK ]\e[0m MD5-check $PKG_NAME : $PKG_MD5"
+			else
+		        	echo -e "\e[31m[ ERROR ]\e[0m MD5-Check $PKG_NAME : $PKG_MD5"
+				echo -e "  Expected:$PKG_MD5  Found:$C"
+				echo "[FAIL] CHECK YOUR SOURCES! At lease 1 package is not Authentic."
+		        	ERROR=1
+			fi
 		else
-		        echo -e "\e[31m[ ERROR ]\e[0m MD5-Check $PKG_NAME : $PKG_MD5"
-			echo "[FAIL] CHECK YOUR SOURCES! At lease 1 package is not Authentic."
-		        ERROR=1
+			echo "[ ERROR ] NOT FOUND: $DEST_DIRECTORY/$PKG_NAME  "	
 		fi
 
         done

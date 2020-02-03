@@ -4,11 +4,11 @@ source /etc/profile.d/xorg.sh || exit 2
 cd $SOURCE_DIR/xc/$1 || exit 3
 
 su physix -c "./configure $XORG_CONFIG"
-chroot_check $? "xcb: configure and make"
+chroot_check $? "configure "
 
-su physix -c 'make'
-chroot_check $? "xcb : make"
+su physix -c "make"
+chroot_check $? "make "
 
 make install
-chroot_check $? "xcb : make install"
+chroot_check $? "make install"
 
