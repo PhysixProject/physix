@@ -20,11 +20,14 @@ chroot_check $? "Create /root/.bashrc"
 
 if [ $CONF_GEN_USER ] ; then
 	echo "build.conf specifys a general user to be created: $CONF_GEN_USER"
-	useradd -m $CONF_GEN_USER
-	chroot_check $? "useradd -m $CONF_GEN_USER"
+	grep -q travis /etc/passwd
+	if [ $? -ne 0 ] ; then
+		useradd -m $CONF_GEN_USER
+		chroot_check $? "useradd -m $CONF_GEN_USER"
+	fi
 
-	cp /physix/build-scripts.config/configs/profile /root/.profile
-	chroot_check $? "Create ~/.profile"
+	cp /physix/build-scripts.config/configs/profile /home/$CONF_GEN_USER/.profile
+	chroot_check $? "Create /home/$CONF_GEN_USER/.profile"
 	chown $CONF_GEN_USER:$CONF_GEN_USER /home/$CONF_GEN_USER/.profile
 	chroot_check $? "chown /home/$CONF_GEN_USER/.profile"
 
@@ -40,6 +43,9 @@ if [ $CONF_GEN_USER ] ; then
 	done
 fi
 
-useradd -m physix
-chroot_check $? "useradd  physix"
+grep -q physix /etc/passwd
+if [ $? -ne 0 ] ; then
+	useradd -m physix
+	chroot_check $? "useradd physix"
+fi
 

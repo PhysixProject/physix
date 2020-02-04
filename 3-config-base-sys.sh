@@ -42,7 +42,7 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 
 		report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
 		chroot-conf-build '/physix/build-scripts.config' $SCRIPT $SRC0 $IO
-		check $? "$SCRIPT"
+		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then

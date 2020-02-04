@@ -345,6 +345,8 @@ function complete_setup() {
 	if [ $? -ne 0 ] ; then
 		useradd -s /bin/bash -m physix 
 	fi
+	mkdir -pv /home/physix
+	chown physix:physix /home/physix
 
 	cp -r $PWD $BUILDROOT
 	chmod 777 $BUILDROOT/physix

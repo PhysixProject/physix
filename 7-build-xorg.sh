@@ -58,7 +58,7 @@ for LINE in `cat ./7-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 		
 		echo "/physix/build-scripts.xorg/$SCRIPT $SRC0"
 		eval "/physix/build-scripts.xorg/$SCRIPT $SRC0 $PKG0 $PKG2 $IO_DIRECTION"
-		check $? "$SCRIPT $SRC0"
+		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 	fi
 	BUILD_ID=$((BUILD_ID+1))

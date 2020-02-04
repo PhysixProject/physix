@@ -64,7 +64,7 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 		fi
 
 		eval "/physix/build-scripts.devel/$SCRIPT $SRC0 $PKG1 $PKG2 $IO_DIRECTION"
-		check $? "$SCRIPT"
+		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] ; then

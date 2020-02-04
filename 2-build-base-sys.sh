@@ -42,10 +42,10 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 	PKG0=$(echo $LINE | cut -d',' -f2)
 	PKG1=$(echo $LINE | cut -d',' -f3)
 
-	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
-
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
+
+		TIME=`date "+%D-%T"`
+		report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $PKG0 : $SCRIPT"
 
 		if [ $PKG1 ] ; then
 			unpack $PKG1 "physix:root" NCHRT
@@ -67,7 +67,7 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 		fi
 
 		chroot-build '/physix/build-scripts.base' $SCRIPT $SRC0 $SRC1
-		check $? "$SCRIPT"
+		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] && [ $SRC0 ] ; then

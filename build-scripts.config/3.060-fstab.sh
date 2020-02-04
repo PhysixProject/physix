@@ -20,4 +20,7 @@ fi
 sed -i $SED_CMD /etc/fstab
 chroot_check $? "sed -i $SED_CMD /etc/fstab"
 
+SED_CMD='s/VOL_GROUP_MARKER/'$CONF_VOL_GROUP_NAME'/g'
+sed -i $SED_CMD /etc/fstab
+chroot_check $? "fstab sed edit $SED_CMD"
 

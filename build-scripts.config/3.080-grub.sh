@@ -44,7 +44,7 @@ SED_CMD='s/SET_ROOT_MARKER/'$SET_ROOT'/g'
 sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
-SED_CMD='s/VAL_GROUP_MARKER/'$CONF_VOL_GROUP_MARKER'/g'
+SED_CMD='s/VOL_GROUP_MARKER/'$CONF_VOL_GROUP_NAME'/g'
 sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 

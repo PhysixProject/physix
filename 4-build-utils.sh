@@ -26,10 +26,11 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 	SCRIPT=$(echo $LINE | cut -d',' -f2)
 	PKG=$(echo $LINE | cut -d',' -f3)
 
+	TIME=`date "+%Y-%m-%d-%T"| tr ":" "-"`
 	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT"
+	        IO_DIRECTION="&> /var/physix/system-build-logs/$TIME-$SCRIPT"
 	else
-		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$TIME-$SCRIPT"
 	fi
 
 	TIME=`date "+%D-%T"`
@@ -50,7 +51,7 @@ for LINE in `cat ./4-build-utils.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 		fi
 
 		eval "/physix/build-scripts.utils/$SCRIPT $SRC0 $IO_DIRECTION"
-		check $? "$SCRIPT"
+		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 
 		if [ "$CONF_BUILD_SMALL" == "y" ] ; then

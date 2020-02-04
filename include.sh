@@ -139,20 +139,13 @@ function return_src_dir() {
 		exit 1
 	fi
 
-	local P=`echo $BR/usr/src/physix/sources/$ARCHIVE | sed 's/\/\//\//g'`
-	#TMP=$(tar -tf $BR/usr/src/physix/sources/$ARCHIVE | cut -d'/' -f1 | head -n 1)
-	TMP=$(tar -tf $P | cut -d'/' -f1 | head -n 1)
-	echo "TMP: $TMP"
+	local ARCHIVE_PATH=`echo $BR/usr/src/physix/sources/$ARCHIVE | sed 's/\/\//\//g'`
+	TMP=$(tar -tf $ARCHIVE_PATH | cut -d'/' -f1 | head -n 1)
 	if [ $? -ne 0 ] && [ "$TMP"!="" ]; then
 		echo "[ERROR] return_src_dir(): tar -tf $NAME"
 		exit 1
 	fi
-
-	#if [ -e $BR/usr/src/physix/sources/$TMP ] ; then
-		echo "Exporting $TMP"
-		export SRC_DIR=$TMP
-	#	return 0
-	#fi
+	export SRC_DIR=$TMP
 }
 
 
@@ -167,9 +160,9 @@ function chroot-conf-build {
 	local TIME=`date "+%Y-%m-%d-%T" | tr ":" "-"`
 
 	if [ "$IO" == 'log' ] ; then
-		IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT-$TIME"
+		IO_DIRECTION="&> /var/physix/system-build-logs/$TIME-$SCRIPT"
 	else
-		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT-$TIME"
+		IO_DIRECTION="| tee /var/physix/system-build-logs/$TIME-$SCRIPT"
 	fi
 
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
@@ -191,7 +184,7 @@ function chroot-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
-		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$SCRIPT-$TIME"
+		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$TIME-$SCRIPT"
 
 }
 
@@ -225,32 +218,21 @@ function unpack() {
 		BR=$BUILDROOT
 	fi
 
-	DIR=$(tar -tf $BR/$SRCPATH/$PKG | cut -d'/' -f1 | head -n 1)
-	local P=`echo $BR/$SRCPATH/$PKG | sed 's/\/\//\//g'`
-	local D=`echo $BR/$DEST | sed  's/\/\//\//g'`
-        #if [ -d $BR/usr/src/physix/sources/$DIR ] ; then
-	if [ -d $D/$DIR ] ; then
-                cd $D && rm -rf ./$DIR 
+	DIR_NAME=$(tar -tf $BR/$SRCPATH/$PKG | cut -d'/' -f1 | head -n 1)
+	local ARCHIVE_PATH=`echo $BR/$SRCPATH/$PKG | sed 's/\/\//\//g'`
+	local ARCHIVE_DEST=`echo $BR/$DEST | sed  's/\/\//\//g'`
+	if [ -d $ARCHIVE_DEST/$DIR_NAME ] ; then
+                cd $ARCHIVE_DEST && rm -rf ./$DIR_NAME
         fi
 
-	#if [ -d $D/$DIR ] ; then
-	#	ok "Found pre-existing Directory: $D/$DIR"
-	#	echo ""RM IT!
-	#fi
-
-        #tar xf $BR/$SRCPATH/$PKG -C $BR/$DEST
-	echo "tar xf $P -C $D"
-	tar xf $P -C $D
+	tar xf $ARCHIVE_PATH -C $ARCHIVE_DEST
 	if [ $? -ne 0 ] ; then
-		error "tar xf $P -C $D"
+		error "tar xf $ARCHIVE_PATH -C $ARCHIVE_DEST"
 		exit 1
 	fi
 
-	if [ "$OWNER" != "" ] ; then
-		chown --recursive $OWNER $BR/$DEST
-		chmod 750 $BR/$DEST
-	fi
-
+	chown --recursive $OWNER $ARCHIVE_DEST/$DIR_NAME
+	chmod 750 $ARCHIVE_DEST/$DIR_NAME
 }
 
 
