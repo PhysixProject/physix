@@ -329,7 +329,7 @@ function complete_setup() {
 	fi
 
 	if [ "$CONF_XORG"=="y" ] ; then
-		pull_sources ./src-list.xorg /mnt/physix/usr/src/physix/sources/xc
+		pull_sources ./src-list.xorg /mnt/physix/usr/src/physix/sources/
 	fi
 
 	ln -sfv /usr/bin/bash /usr/bin/sh

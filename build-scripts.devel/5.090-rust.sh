@@ -57,5 +57,32 @@ export RUSTFLAGS="$RUSTFLAGS -C link-args=-lffi" &&
 python3 ./x.py build --exclude src/tools/miri
 
 
+export LIBSSH2_SYS_USE_PKG_CONFIG=1 &&
+DESTDIR=${PWD}/install python3 ./x.py install &&
+unset LIBSSH2_SYS_USE_PKG_CONFIG
 
+
+chown -R root:root install &&
+cp -a install/* /
+
+cat >> /etc/ld.so.conf << EOF
+# Begin rustc addition
+
+/opt/rustc/lib
+
+# End rustc addition
+EOF
+
+ldconfig
+
+
+cat > /etc/profile.d/rustc.sh << "EOF"
+# Begin /etc/profile.d/rustc.sh
+
+pathprepend /opt/rustc/bin           PATH
+
+# End /etc/profile.d/rustc.sh
+EOF
+
+source /etc/profile.d/rustc.sh
 
