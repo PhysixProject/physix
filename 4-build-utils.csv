@@ -3,7 +3,6 @@ log,4.010-libtasn.sh,libtasn1-4.14.tar.gz
 log,4.020-p11kit.sh,p11-kit-0.23.16.1.tar.gz
 log,4.030-make-ca.sh,make-ca-1.4.tar.xz
 log,4.040-wget.sh,wget-1.20.3.tar.gz
-#console,4.050-get-util-srcs.sh,
 log,4.060-curl.sh,curl-7.65.3.tar.xz
 log,4.070-nettle.sh,nettle-3.5.1.tar.gz
 log,4.080-json-c.sh,json-c-0.13.1.tar.gz

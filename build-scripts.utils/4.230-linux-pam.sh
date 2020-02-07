@@ -31,6 +31,9 @@ session  required       pam_deny.so
 EOF
 chroot_check $? "Linux-PAM : /etc/pam.d/other written"
 
+make check
+chroot_check $? "make check"
+
 make install &&
 chmod -v 4755 /sbin/unix_chkpwd &&
 chroot_check $? "Linux-PAM : make install"

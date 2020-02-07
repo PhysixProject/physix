@@ -33,4 +33,6 @@ fi
 
 unset RED GREEN NORMAL
 
+source /etc/profile.d/*
+
 # End /etc/bashrc

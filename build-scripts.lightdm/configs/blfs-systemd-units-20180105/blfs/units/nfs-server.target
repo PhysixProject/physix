@@ -1,0 +1,7 @@
+[Unit]
+Description=NFS File Server Daemons
+Wants=rpc-mountd.service
+Wants=rpc-statd.service
+
+[Install]
+WantedBy=multi-user.target

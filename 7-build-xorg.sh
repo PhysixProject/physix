@@ -25,13 +25,6 @@ for LINE in `cat ./7-build-xorg.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
         PKG1=$(echo $LINE | cut -d',' -f4)
         PKG2=$(echo $LINE | cut -d',' -f5)
 
-	#TIME=`date "+%Y-%m-%d-%T "| tr ":" "-"`
-	#if [ "$IO" == "log" ] ; then
-	#        IO_DIRECTION="&> /var/physix/system-build-logs/$TIME-$SCRIPT-$PKG0"
-	#else
-	#	IO_DIRECTION="| tee /var/physix/system-build-logs/$TIME-$SCRIPT-$PKG0"
-	#fi
-
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
         	if [ $PKG0 ] ; then

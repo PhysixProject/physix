@@ -1,0 +1,12 @@
+[Unit]
+Description=Exim Mail Daemon
+After=network.target
+
+[Service]
+PIDFile=/run/exim.pid
+ExecStart=/usr/sbin/exim -bdf -q30m
+ExecReload=/bin/kill -HUP $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

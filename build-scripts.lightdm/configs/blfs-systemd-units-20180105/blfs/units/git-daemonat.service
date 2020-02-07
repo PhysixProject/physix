@@ -1,0 +1,9 @@
+[Unit]
+Description=Git Daemon Instance
+
+[Service]
+User=git
+ExecStart=-/usr/lib/git-core/git-daemon --inetd --export-all --base-path=/srv/git
+StandardInput=socket
+StandardOutput=inherit
+StandardError=journal

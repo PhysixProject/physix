@@ -26,15 +26,6 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
         PKG1=$(echo $LINE | cut -d',' -f4)
         PKG2=$(echo $LINE | cut -d',' -f5)
 
-	TIME=`date "+%Y-%m-%d-%T "| tr ":" "-"`
-	if [ "$IO" == "log" ] ; then
-	        IO_DIRECTION="&> /var/physix/system-build-logs/$SCRIPT-$TIME"
-	else
-		IO_DIRECTION="| tee /var/physix/system-build-logs/$SCRIPT-$TIME"
-	fi
-
-	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $PKG0"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
 		if [ $PKG2 ] ; then
@@ -62,6 +53,16 @@ for LINE in `cat ./5-build-devel.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; d
 			report "Build Script NOT found: /build-scripts.devel/$SCRIPT"
 			exit 1
 		fi
+
+		TIME=`date "+%Y-%m-%d-%T "| tr ":" "-"`
+		if [ "$IO" == "log" ] ; then
+			IO_DIRECTION="&> /var/physix/system-build-logs/$TIME-$SCRIPT"
+		else
+			IO_DIRECTION="| tee /var/physix/system-build-logs/$TIME-$SCRIPT"
+		fi
+
+		TIME=`date "+%D-%T"`
+		report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $PKG0"
 
 		eval "/physix/build-scripts.devel/$SCRIPT $SRC0 $PKG1 $PKG2 $IO_DIRECTION"
 		check $? "Build Complete: $SRC0 : $SCRIPT"

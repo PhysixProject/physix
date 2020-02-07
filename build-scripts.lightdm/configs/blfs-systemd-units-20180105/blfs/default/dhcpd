@@ -1,0 +1,6 @@
+# Begin /etc/default/dhcpd
+
+# Options to pass to dhcpd.
+DHCPD_OPTS=""
+
+# End /etc/default/dhcpd

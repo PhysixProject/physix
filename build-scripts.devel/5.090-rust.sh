@@ -3,86 +3,42 @@ source /physix/include.sh || exit 1
 source /physix/build.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-export RUSTFLAGS="$RUSTFLAGS -C link-args=-lffi" &&
-python3 ./x.py build --exclude src/tools/miri
-chroot_check $? "python3 ./x.py build --exclude src/tools/miri"
+su physix -c 'ping -q -c 3  8.8.8.8'
+chroot_check $? "Ping: Internet Reachable"
+# If this fails, try: 'ip route add default via <your-router-ip-addr>'
 
-chown -R root:root install &&
+mkdir /opt/rustc-1.35.0  &&
+ln -svfin rustc-1.35.0 /opt/rustc
+chroot_check $? "mkdir /opt/rustc-*"
+
+
+su physix -c 'cp /physix/build-scripts.devel/configs/rustc/config.toml .'
+chroot_check $? "Set ./config.toml"
+
+
+su physix -c 'export RUSTFLAGS="$RUSTFLAGS -C link-args=-lffi" &&
+              python3 ./x.py build --exclude src/tools/miri'
+chroot_check $? "Compile Rust"
+
+
+su physix -c 'export LIBSSH2_SYS_USE_PKG_CONFIG=1 &&
+              DESTDIR=${PWD}/install python3 ./x.py install &&
+              unset LIBSSH2_SYS_USE_PKG_CONFIG'
+chroot_check $? "DESTDIR install"
+
+
+chown -Rv root:root ./install
+chroot_check $? "chown ./install"
+
 cp -a install/* /
+chroot_check $? "cp install/*"
 
-cat << EOF > config.toml
-# see config.toml.example for more possible options
-# See the 8.4 book for an example using shipped LLVM
-# e.g. if not installing clang, or using a version before 8.0.
-[llvm]
-# by default, rust will build for a myriad of architectures
-targets = "X86"
-
-# When using system llvm prefer shared libraries
-link-shared = true
-
-[build]
-# omit docs to save time and space (default is to build them)
-docs = false
-
-# install cargo as well as rust
-extended = true
-
-[install]
-prefix = "/opt/rustc-1.35.0"
-docdir = "share/doc/rustc-1.35.0"
-
-[rust]
-channel = "stable"
-rpath = false
-
-# BLFS does not install the FileCheck executable from llvm,
-# so disable codegen tests
-codegen-tests = false
-
-[target.x86_64-unknown-linux-gnu]
-# NB the output of llvm-config (i.e. help options) may be
-# dumped to the screen when config.toml is parsed.
-llvm-config = "/usr/bin/llvm-config"
-
-[target.i686-unknown-linux-gnu]
-# NB the output of llvm-config (i.e. help options) may be
-# dumped to the screen when config.toml is parsed.
-llvm-config = "/usr/bin/llvm-config"
-
-EOF
-
-
-export RUSTFLAGS="$RUSTFLAGS -C link-args=-lffi" &&
-python3 ./x.py build --exclude src/tools/miri
-
-
-export LIBSSH2_SYS_USE_PKG_CONFIG=1 &&
-DESTDIR=${PWD}/install python3 ./x.py install &&
-unset LIBSSH2_SYS_USE_PKG_CONFIG
-
-
-chown -R root:root install &&
-cp -a install/* /
-
-cat >> /etc/ld.so.conf << EOF
-# Begin rustc addition
-
-/opt/rustc/lib
-
-# End rustc addition
-EOF
-
+cp /physix/build-scripts.devel/configs/rustc/ld.so.conf /etc/ld.so.conf
+chroot_check $? "Set /etc/ld.so.conf"
 ldconfig
 
-
-cat > /etc/profile.d/rustc.sh << "EOF"
-# Begin /etc/profile.d/rustc.sh
-
-pathprepend /opt/rustc/bin           PATH
-
-# End /etc/profile.d/rustc.sh
-EOF
+cp /physix/build-scripts.devel/configs/rustc/rustc.sh /etc/profile.d/rustc.sh
+chroot_check $? "Set /etc/profile.d/rustc.sh"
 
 source /etc/profile.d/rustc.sh
 
