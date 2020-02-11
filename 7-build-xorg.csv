@@ -117,3 +117,5 @@ log,7.330-twm.sh,twm-1.0.10.tar.bz2
 log,7.340-xterm.sh,xterm-352.tgz
 log,7.999-general.sh,xclock-1.0.9.tar.bz2
 log,7.350-xinit.sh,xinit-1.4.1.tar.bz2
+log,7.360-mozjs.sh,mozjs-60.8.0.tar.bz2
+log,7.3709-polkit.sh,polkit-0.116.tar.gz

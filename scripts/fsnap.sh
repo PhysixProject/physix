@@ -1,33 +1,25 @@
-#!/bin/bash
+#!/bin/bash 
 
-TAG='binutils'
-DATE=`date "+%HH-%MM-%SSec-"`
+function snapshot {
+	local DIR=$1
+	local TAG=$2
+	local SNAP="$TAG"-$DATE
 
-for F in `find /var` ; do 
-	if [ ! -d $F ] ; then
-		md5sum $F >> var-$DATE 
-	fi
-done
-
-for F in `find /usr` ; do
-	if [ ! -d $F ] ; then
-        	md5sum $F >> usr-$DATE
-	fi
-done
-
-
-for F in `find /sbin` ; do
-        if [ ! -d $F ] ; then
-                md5sum $F >> sbin-$DATE
-        fi
-done
+	for F in $(find $1) ; do
+        	if [ ! -d $F ] ; then
+                	md5sum $F >> $SNAP
+        	else
+                	echo "Directory  $F" >> $SNAP
+        	fi
+	done
+}
 
 
-for F in `find /bin` ; do
-        if [ ! -d $F ] ; then
-                md5sum $F >> sbin-$DATE
-        fi
-done
+DATE=`date "+%HH-%MM-%SSec"`
 
-
+TAG=$1
+snapshot '/etc' $TAG
+snapshot '/usr' $TAG
+snapshot '/bin' $TAG
+snapshot '/sbin' $TAG
 

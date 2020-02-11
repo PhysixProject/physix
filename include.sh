@@ -239,7 +239,7 @@ function unpack() {
 # Download sources packages
 function pull_sources() {
 	local LIST=$1
-	local DEST_DIRECTORY=$2
+	local DEST_DIRECTORY=${2:-'/usr/src/physix/sources/'}
         local ERROR=0
 
 	if [ ! -d $DEST_DIRECTORY ] ; then

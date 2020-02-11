@@ -7,3 +7,5 @@ log,5.060-gnupg.sh,gnupg-2.2.17.tar.bz2
 log,5.070-libssh2.sh,libssh2-1.9.0.tar.gz
 log,5.080-llvm.sh,llvm-8.0.1.src.tar.xz,cfe-8.0.1.src.tar.xz,compiler-rt-8.0.1.src.tar.xz
 log,5.090-rust.sh,rustc-1.35.0-src.tar.gz
+log,5.100-ICU.sh,icu4c-64_2-src.tgz
+log,5.110-python.sh,Python-2.7.16.tar.xz

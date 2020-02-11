@@ -1,0 +1,16 @@
+# Default Delay after failed login attempt
+#auth       optional   pam_faildelay.so  delay=3000000
+
+# Sets the loginuid process attribute
+#session    required     pam_loginuid.so
+
+# parsing /etc/environment needs "readenv=1"
+#session       required   pam_env.so readenv=1
+
+
+# locale variables are also kept into /etc/default/locale in etch
+# reading this file *in addition to /etc/environment* does not hurt
+#session       required   pam_env.so readenv=1 envfile=/etc/default/locale
+
+#session    optional   pam_lastlog.so
+

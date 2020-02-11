@@ -60,8 +60,9 @@ report "- Base System Configuration Complete! -"
 report "- Next Step:                          -"
 report "-   1. Reboot your machine            -"
 report "-   2. login                          -"
-report "-   3. cd /physix                     -"
-report "-   4. Execute: ./4-build-utils.sh    -"
+report "-   3. Verify Internet is reachable   -"
+report "-   4. cd /physix                     -"
+report "-   5. Execute: ./4-build-utils.sh    -"
 report "---------------------------------------"
 
 exit 0

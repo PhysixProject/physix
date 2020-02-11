@@ -41,7 +41,7 @@ install -v -dm770 -o lightdm -g lightdm /var/log/lightdm
 chroot_check $? "make install"
 
 
-tar -xf ../lightdm-gtk-greeter-2.0.6.tar.gz &&
+su physix -c 'tar -xf ../lightdm-gtk-greeter-2.0.6.tar.gz'
 cd lightdm-gtk-greeter-2.0.6 
 
 su physix -c './configure                   \

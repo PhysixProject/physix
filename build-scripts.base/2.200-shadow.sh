@@ -25,3 +25,9 @@ chroot_check $? "system-build : shadow : make install"
 
 mv -v /usr/bin/passwd /bin
 
+pwconv
+chroot_check $? "pwconv"
+
+grpconv
+chroot_check $? "grpconv"
+

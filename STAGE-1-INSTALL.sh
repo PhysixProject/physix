@@ -21,7 +21,7 @@ echo "|__] | \| |__| /   |___ | | \| |__| _/\_ "
 echo ""
 
 ./0-init-prep.sh
-check $? "0-init-prep.sh -s : Get sources, lfs user setup"
+check $? "0-init-prep.sh"
 
 cd $BUILDROOT/physix/
 

@@ -48,7 +48,6 @@ p11-kit-0.23.16.1.tar.gz,http://physixproject.org/source/p11-kit-0.23.16.1.tar.g
 cracklib-words-2.9.7.bz2,http://physixproject.org/source/cracklib-words-2.9.7.bz2,94e9963e4786294f7fb0f2efd7618551
 libunistring-0.9.10.tar.xz,http://physixproject.org/source/libunistring-0.9.10.tar.xz,db08bb384e81968957f997ec9808926e
 db-5.3.28.tar.gz,http://physixproject.org/source/db-5.3.28.tar.gz,b99454564d5b4479750567031d66fe24
-shadow-4.7.tar.xz,http://physixproject.org/source/shadow-4.7.tar.xz,f7ce18c8dfd05f1a009266cb604d58b7
 liboauth-1.0.3.tar.gz,http://physixproject.org/source/liboauth-1.0.3.tar.gz,689b46c2b3ab1a39735ac33f714c4f7f
 libpwquality-1.4.0.tar.bz2,http://physixproject.org/source/libpwquality-1.4.0.tar.bz2,b8defcc7280a90e9400d6689c93a279c
 nspr-4.21.tar.gz,http://physixproject.org/source/nspr-4.21.tar.gz,b865586f19912a50acc3755d8a45dbaa
@@ -80,3 +79,6 @@ pcre-8.43.tar.bz2,http://physixproject.org/source/pcre-8.43.tar.bz2,636222e79e39
 libxslt-1.1.33.tar.gz,http://physixproject.org/source/libxslt-1.1.33.tar.gz,b3bd254a03e46d58f8ad1e4559cd2c2f
 docbook-xsl-nons-1.79.2.tar.bz2,http://physixproject.org/source/docbook-xsl-nons-1.79.2.tar.bz2,2666d1488d6ced1551d15f31d7ed8c38
 docbook-xsl-nons-1.79.2-stack_fix-1.patch,http://physixproject.org/source/docbook-xsl-nons-1.79.2-stack_fix-1.patch,8457bd6ee6b06fbc6dc540e1b096f766
+autoconf-2.13.tar.gz,http://physixproject.org/source/autoconf-2.13.tar.gz,9de56d4a161a723228220b0f425dc711
+autoconf-2.13-consolidated_fixes-1.patch,http://physixproject.org/source/autoconf-2.13-consolidated_fixes-1.patch,9ceaee69e62767770eb473d5242db70d
+

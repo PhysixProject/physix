@@ -121,3 +121,6 @@ xcb-util-renderutil-0.3.9.tar.bz2,http://physixproject.org/source/xorg/xcb-util-
 xcb-util-wm-0.4.1.tar.bz2,http://physixproject.org/source/xorg/xcb-util-wm-0.4.1.tar.bz2,87b19a1cd7bfcb65a24e36c300e03129
 xcb-util-cursor-0.1.3.tar.bz2,http://physixproject.org/source/xorg/xcb-util-cursor-0.1.3.tar.bz2,6ac3b17cba51aaaa36ba035a53527214
 libdrm-2.4.100.tar.bz2,http://physixproject.org/source/xorg/libdrm-2.4.100.tar.bz2,f47bc87e28198ba527e6b44ffdd62f65
+mozjs-60.8.0.tar.bz2,http://physixproject.org/source/xorg/mozjs-60.8.0.tar.bz2,5eda38cc08a3594a3f2c3cc185d4f15b
+polkit-0.116.tar.gz,http://physixproject.org/source/xorg/polkit-0.116.tar.gz,4b37258583393e83069a0e2e89c0162a
+accountsservice-0.6.55.tar.xz,http://physixproject.org/source/xorg/accountsservice-0.6.55.tar.xz,6e4c6fbd490260cfe17de2e76f5d803a
