@@ -18,12 +18,13 @@ echo "------------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./3-config-base-sys.csv | cut -d' ' -f1`
-NUM_SCRIPTS=`ls $BUILDROOT/physix/build-scripts.config/ | wc -l`
+NUM_SCRIPTS=`ls $BUILDROOT/physix/build-scripts/base-configs/ | wc -l`
 BUILD_ID=0
 for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
-	IO=$(echo $LINE | cut -d',' -f1)
-	SCRIPT=$(echo $LINE | cut -d',' -f2)
-	PKG=$(echo $LINE | cut -d',' -f3)
+	SUBTREE=$(echo $LINE | cut -d',' -f1)
+	IO=$(echo $LINE | cut -d',' -f2)
+	SCRIPT=$(echo $LINE | cut -d',' -f3)
+	PKG=$(echo $LINE | cut -d',' -f4)
 
 	TIME=`date "+%D-%T"`
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
@@ -35,13 +36,13 @@ for LINE in `cat ./3-config-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'`
 			SRC0=$SRC_DIR
 		fi
 
-		if [ ! -e $BUILDROOT/physix/build-scripts.config/$SCRIPT ] ; then
+		if [ ! -e $BUILDROOT/physix/build-scripts/base-config/$SCRIPT ] ; then
 			report "Build Script NOT found: /build-scripts.config/$SCRIPT"
 			exit 1
 		fi
 
 		report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $SCRIPT"
-		chroot-conf-build '/physix/build-scripts.config' $SCRIPT $SRC0 $IO
+		chroot-conf-build "/physix/build-scripts/$SUBTREE" $SCRIPT $SRC0 $IO
 		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 

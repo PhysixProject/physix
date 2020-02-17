@@ -24,7 +24,7 @@ report "---------------------------"
 
 START_POINT=${1:-0}
 STOP_POINT=`wc -l ./2-build-base-sys.csv | cut -d' ' -f1`
-NUM_SCRIPTS=`ls $BUILDROOT/physix/build-scripts.base/ | wc -l`
+NUM_SCRIPTS=`ls $BUILDROOT/physix/build-scripts/base/ | wc -l`
 BUILD_ID=0
 TIME=`date "+%D-%T"`
 report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
@@ -32,15 +32,16 @@ report "$TIME : $BUILD_ID : Building 2.020-base-build-prep.sh"
 # Called differently becuase it is not chrooted
 if [ $START_POINT -eq 0 ] ; then
 	report "Running: 2.02.-base-build-prep.sh"
-	./build-scripts.base/2.020-base-build-prep.sh
+	./build-scripts/base/2.020-base-build-prep.sh
 	check $? "2.020-base-build-prep.sh"
 fi
 
 BUILD_ID=$((BUILD_ID+1))
 for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
-	SCRIPT=$(echo $LINE | cut -d',' -f1)
-	PKG0=$(echo $LINE | cut -d',' -f2)
-	PKG1=$(echo $LINE | cut -d',' -f3)
+	SUBTREE=$(echo $LINE | cut -d',' -f1)
+	SCRIPT=$(echo $LINE | cut -d',' -f2)
+	PKG0=$(echo $LINE | cut -d',' -f3)
+	PKG1=$(echo $LINE | cut -d',' -f4)
 
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
@@ -61,12 +62,12 @@ for LINE in `cat ./2-build-base-sys.csv | grep -v -e '^#' | grep -v -e '^\s*$'` 
 			SRC0=$SRC_DIR
 		fi
 
-		if [ ! -e $BUILDROOT/physix/build-scripts.base/$SCRIPT ] ; then
-			report "File not found: /build-scripts.base/$SCRIPT"
+		if [ ! -e $BUILDROOT/physix/build-scripts/$SUBTREE/$SCRIPT ] ; then
+			report "File not found: /build-scripts/$SUBTREE/$SCRIPT"
 			exit 1
 		fi
 
-		chroot-build '/physix/build-scripts.base' $SCRIPT $SRC0 $SRC1
+		chroot-build "/physix/build-scripts/$SUBTREE" $SCRIPT $SRC0 $SRC1
 		check $? "Build Complete: $SRC0 : $SCRIPT"
 		echo ''
 

@@ -4,6 +4,7 @@
 export BUILDROOT='/mnt/physix'
 export BR_SOURCE_DIR=$BUILDROOT/usr/src/physix/sources
 export SOURCE_DIR=/usr/src/physix/sources
+export LOG_DIR=/var/log/physix/build-logs/
 
 [ -e /mnt/physix/build.conf ] && source /mnt/physix/build.conf
 [ -e /physix//build.conf ]    && source /physix//build.conf
@@ -168,7 +169,7 @@ function chroot-conf-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin                     \
-		/bin/bash --login -c "/physix/build-scripts.config/$SCRIPT $PKG $IO_DIRECTION"
+		/bin/bash --login -c "/physix/build-scripts/base-config/$SCRIPT $PKG $IO_DIRECTION"
 }
 
 
@@ -184,7 +185,7 @@ function chroot-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
-		/tools/bin/bash --login +h -c "/physix/build-scripts.base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$TIME-$SCRIPT"
+		/tools/bin/bash --login +h -c "/physix/build-scripts/base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$TIME-$SCRIPT"
 
 }
 
