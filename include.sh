@@ -53,7 +53,7 @@ function ok() {
 		BR=$BUILDROOT
 	fi
 
-        echo -e "\e[92m[OK]\e[0m $TIME : $MSG"
+        echo -e "\e[92m[OK]\e[0m   $TIME : $MSG"
         echo -e "[OK] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
 }
 

@@ -1,1 +1,1 @@
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:/opt/rustc/bin/
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/lib:/opt/rustc/bin/

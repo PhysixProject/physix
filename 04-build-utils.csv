@@ -20,14 +20,15 @@ utils,4.190-iptables.sh,iptables-1.8.3.tar.bz2
 utils,4.200-nspr.sh,nspr-4.21.tar.gz
 utils,4.210-libtirpc.sh,libtirpc-1.1.4.tar.bz2
 utils,4.220-BerkeleyDB.sh,db-5.3.28.tar.gz
-utils,4.230-linux-pam.sh,Linux-PAM-1.3.1.tar.xz,Linux-PAM-1.3.1-docs.tar.xz
+utils,4.230-linux-pam.sh,Linux-PAM-1.3.1.tar.xz
 utils,4.231-libcap-pam.sh,libcap-2.27.tar.xz
 utils,4.240-shadow.sh,shadow-4.7.tar.xz
 utils,4.245-openssh.sh,openssh-8.0p1.tar.gz
 utils,4.245-systemd.sh,systemd-243.tar.gz,systemd-man-pages-243.tar.xz
-utils,4.250-liboauth.sh,liboauth-1.0.3.tar.gz,liboauth-1.0.3-openssl-1.1.0-3.patch
+utils,4.250-liboauth.sh,liboauth-1.0.3.tar.gz,
 utils,4.260-libpwquality.sh,libpwquality-1.4.0.tar.bz2
 utils,4.270-nspr.sh,nspr-4.21.tar.gz
+utils,4.290-nss.sh,nss-3.45.tar.gz
 utils,4.280-unzip.sh,unzip60.tar.gz
 utils,4.330-cryptsetup.sh,cryptsetup-2.0.6.tar.xz
 utils,4.340-lsof.sh,lsof_4.91.tar.gz

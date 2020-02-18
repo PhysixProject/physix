@@ -5,11 +5,12 @@ cd $SOURCE_DIR/$1 || exit 1
 su physix -c 'tar -xf ../Linux-PAM-1.3.1-docs.tar.xz --strip-components=1'
 chroot_check $? "Linux-PAM : untar doc tarball"
 
-su physix -c "ed -e 's/dummy links/dummy lynx/' \
-    -e 's/-no-numbering -no-references/-force-html -nonumbers -stdin/' \
-    -i configure"
+#if lynx installed
+#su physix -c "sed -e 's/dummy links/dummy lynx/' \
+#    -e 's/-no-numbering -no-references/-force-html -nonumbers -stdin/' \
+#    -i configure"
 
-su physix -c './configure --prefix=/usr                    \
+su physix -c './configure --prefix=/usr      \
             --sysconfdir=/etc                \
             --libdir=/usr/lib                \
             --enable-securedir=/lib/security \

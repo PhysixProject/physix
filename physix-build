@@ -2,6 +2,16 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 
+
+function clearvars() {
+        SUBTREE=
+        SCRIPT=
+        PKG0=
+        PKG1=
+	PKG2=
+}
+
+
 source ./include.sh
 source ./build.conf
 
@@ -29,6 +39,8 @@ STOP_POINT=`wc -l ./$RECIPE | cut -d' ' -f1`
 NUM_SCRIPTS=`cat ./$RECIPE | wc -l`
 BUILD_ID=0
 for LINE in `cat ./$RECIPE | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
+	clearvars
+
 	SUBTREE=$(echo $LINE | cut -d',' -f1)
 	SCRIPT=$(echo $LINE | cut -d',' -f2)
 	PKG0=$(echo $LINE | cut -d',' -f3)
@@ -39,7 +51,7 @@ for LINE in `cat ./$RECIPE | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
 	IO_DIRECTION="&> /var/physix/system-build-logs/$TIME-$SCRIPT"
 
 	TIME=`date "+%D-%T"`
-	report "$TIME : $BUILD_ID/$NUM_SCRIPTS: Building $PKG0"
+	report "$TIME : $BUILD_ID/$NUM_SCRIPTS : Building $PKG0"
 	if [ $BUILD_ID -ge $START_POINT ] && [ $BUILD_ID -le $STOP_POINT ] ; then
 
 		if [ $PKG0 ] ; then
@@ -64,7 +76,7 @@ for LINE in `cat ./$RECIPE | grep -v -e '^#' | grep -v -e '^\s*$'` ; do
                 fi
 
 		if [ ! -e /physix/build-scripts/$SUBTREE/$SCRIPT ] ; then
-			report "Build Script NOT found: /build-scripts/utils/$SCRIPT"
+			report "Build Script NOT found: /build-scripts/$SUBTREE/$SCRIPT"
 			exit 1
 		fi
 

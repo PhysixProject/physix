@@ -12,13 +12,13 @@ while [ $LOOP -eq 0 ] ; do
 	if [ $? -eq 0 ] ; then LOOP=1; fi
 done
 
-cp /physix/build-scripts/base-config/configs/etc_profile /etc/profile
+cp -v /physix/build-scripts/base-config/configs/etc_profile /etc/profile
 chroot_check $? "Create /etc/profile"
 
-cp /physix/build-scripts/base-config/configs/user_profile /root/.profile
+cp -v /physix/build-scripts/base-config/configs/user_profile /root/.profile
 chroot_check $? "Create /root/.profile"
 
-cp /physix/build-scripts/base-config/configs/etc_bashrc /root/.bashrc
+cp -v /physix/build-scripts/base-config/configs/etc_bashrc /root/.bashrc
 chroot_check $? "Create /root/.bashrc"
 
 if [ $CONF_GEN_USER ] ; then

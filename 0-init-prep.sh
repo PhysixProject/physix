@@ -324,12 +324,10 @@ function complete_setup() {
 		pull_sources ./src-list.utils /mnt/physix/usr/src/physix/sources
 	fi
 
-	if [ "$CONF_DEVEL" == "y" ] ; then
-		pull_sources ./src-list.devel /mnt/physix/usr/src/physix/sources
-	fi
-
 	if [ "$CONF_XORG"=="y" ] ; then
 		pull_sources ./src-list.xorg /mnt/physix/usr/src/physix/sources/
+		pull_sources ./src-list.lxde /mnt/physix/usr/src/physix/sources/
+		pull_sources ./src-list.lightdm /mnt/physix/usr/src/physix/sources/
 	fi
 
 	ln -sfv /usr/bin/bash /usr/bin/sh
@@ -351,12 +349,12 @@ function complete_setup() {
 	cp -r $PWD $BUILDROOT
 	chmod 777 $BUILDROOT/physix
 
-	cp -v $BUILDROOT/physix/configs/physix-bash-profile /home/physix/.bash_profile
+	cp -v $BUILDROOT/physix/build-scripts/base-config/configs/physix-bash-profile  /home/physix/.bash_profile
 	if [ $? -ne 0 ] ; then
 		echo "Error Creating /home/physix/.bash_profile"
 		exit 1
 	fi
-	cp -v $BUILDROOT/physix/configs/physix-bashrc /home/physix/.bashrc
+	cp -v $BUILDROOT/physix/build-scripts/base-config/configs/physix-bashrc  /home/physix/.bashrc
 	if [ $? -ne 0 ] ; then
 		echo "Error Creating /home/physix/.bashrc"
 		exit 1

@@ -32,6 +32,7 @@ lightdm,8.240-gdkpix-buf.sh,gdk-pixbuf-2.38.1.tar.xz
 lightdm,8.260-libxklavier.sh,libxklavier-5.4.tar.bz2
 lightdm,8.143-librsvg.sh,librsvg-2.44.14.tar.xz
 lightdm,8.270-perl-uri.sh,URI-1.76.tar.gz
+gnome,9.125-docbook-xml-dtd.sh,
 lightdm,8.280-gtk.sh,gtk+-3.24.10.tar.xz
 lightdm,8.290-libxfce4util.sh,libxfce4util-4.14.0.tar.bz2
 lightdm,8.292-libxfconf.sh,xfconf-4.14.1.tar.bz2
