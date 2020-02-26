@@ -1,0 +1,9 @@
+set +h
+umask 022
+BUILDROOT=$BUILDROOT
+#BUILDROOT=/mnt/physix
+LC_ALL=POSIX
+BUILDROOT_TGT=$(uname -m)-lfs-linux-gnu
+PATH=/tools/bin:/bin:/usr/bin
+export BUILDROOT LC_ALL BUILDROOT_TGT PATH
+

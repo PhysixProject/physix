@@ -1,0 +1,725 @@
+{
+	"0":{
+		"group": "02-base",
+		"build_script": "2.010-directories.sh",
+		"archives": [],
+		"patches": [],
+		"sources": {}
+	},
+	"1":{
+		"group": "02-base",
+		"build_script": "2.020-linux-api-headers.sh",
+		"archives": ["linux-5.2.8.tar.xz"],
+		"patches": [],
+		"sources":{
+			"http://physixproject.org/source/linux-5.2.8.tar.xz":"602dd0ecb8646e539fefb2beb6eb6fe0"
+		}
+	},
+	"2":{
+               "group": "02-base",
+               "build_script": "2.030-man.sh",
+               "archives": ["man-pages-5.02.tar.xz"],
+               "patches": [],
+               "sources": {
+                        "http://physixproject.org/source/man-pages-5.02.tar.xz":"136e5e3380963571a079693d8ae38f52"
+                }
+	},
+	"3":{
+                "group": "02-base",
+                "build_script": "2.040-glibc.sh",
+                "archives": ["glibc-2.30.tar.xz"],
+                "patches": ["glibc-2.30-fhs-1.patch"],
+                "sources": {
+			"http://physixproject.org/source/glibc-2.30.tar.xz":"2b1dbdf27b28620752956c061d62f60c",
+			"http://physixproject.org/source/glibc-2.30-fhs-1.patch":"9a5997c3452909b1769918c759eff8a2"
+                }
+
+	},
+	"4":{
+                "group": "02-base",
+                "build_script": "2.050-adjust-toolchain.sh",
+                "archives": [],
+                "patches": [],
+                "sources": {}
+	},
+	"5":{
+                "group": "02-base",
+                "build_script": "2.060-zlib.sh",
+                "archives": ["zlib-1.2.11.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/zlib-1.2.11.tar.xz":"85adef240c5f370b308da8c938951a68"
+                }
+	},
+        "6":{
+                "group": "02-base",
+                "build_script": "2.070-file.sh",
+                "archives": ["file-5.37.tar.gz"],
+                "patches": [],
+	        "sources": {
+			"http://physixproject.org/source/file-5.37.tar.gz":"80c29aca745466c6c24d11f059329075"
+		}
+                
+        },
+        "7":{
+                "group": "02-base",
+                "build_script": "2.080-readline.sh",
+                "archives": ["readline-8.0.tar.gz"],
+                "patches": [],
+	        "sources": {
+                       	"http://physixproject.org/source/readline-8.0.tar.gz":"7e6c1f16aee3244a69aba6e438295ca3" 
+                }
+        },
+        "8":{
+                "group": "02-base",
+                "build_script": "2.090-m4.sh",
+                "archives": ["m4-1.4.18.tar.xz"],
+                "patches": [],
+                "sources": {
+                	"http://physixproject.org/source/m4-1.4.18.tar.xz":"730bb15d96fffe47e148d1e09235af82"
+                }
+        },
+        "9":{
+                "group": "02-base",
+                "build_script": "2.100-bc.sh",
+                "archives": ["bc-2.1.3.tar.gz"],
+                "patches": "",
+                "sources": {
+                       	"http://physixproject.org/source/bc-2.1.3.tar.gz":"2a882dc39c0fb8e36c12f590d54cc039"
+                }
+        },
+        "10":{
+                "group": "02-base",
+                "build_script": "2.110-binutils.sh",
+                "archives": ["binutils-2.32.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/binutils-2.32.tar.xz":"0d174cdaf85721c5723bf52355be41e6"
+                }
+        },
+        "11":{
+                "group": "02-base",
+                "build_script": "2.120-gmp.sh",
+                "archives": ["gmp-6.1.2.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/gmp-6.1.2.tar.xz":"f58fa8001d60c4c77595fbbb62b63c1d"
+                }
+        },
+        "12":{
+                "group": "02-base",
+                "build_script": "2.130-mpfr.sh",
+                "archives": ["mpfr-4.0.2.tar.xz"],
+                "patches": [],
+                "sources": {
+                       "http://physixproject.org/source/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8"
+                }
+        },
+        "13":{
+                "group": "02-base",
+                "build_script": "2.140-mpc.sh",
+                "archives": ["mpc-1.1.0.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
+                }
+        },
+        "14":{
+                "group": "02-base",
+                "build_script": "2.150-shadow.sh",
+                "archives": ["shadow-4.7.tar.xz"],
+                "patches": [],
+                "sources": {
+			"http://physixproject.org/source/shadow-4.7.tar.xz":"f7ce18c8dfd05f1a009266cb604d58b7"
+                }
+        },
+        "15":{
+                "group": "02-base",
+                "build_script": "2.160-gcc.sh",
+                "archives": ["gcc-9.2.0.tar.xz"],
+                "patches": [],
+                "sources": {
+			"http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78"
+                }
+        },
+        "16":{
+                "group": "02-base",
+                "build_script": "2.170-bzip.sh",
+                "archives": ["bzip2-1.0.8.tar.gz"],
+                "patches": ["bzip2-1.0.8-install_docs-1.patch"],
+                "sources": {
+			"http://physixproject.org/source/bzip2-1.0.8.tar.gz":"67e051268d0c475ea773822f7500d0e5",
+			"http://physixproject.org/source/bzip2-1.0.8-install_docs-1.patch":"6a5ac7e89b791aae556de0f745916f7f"
+                }
+        },
+        "17":{
+                "group": "02-base",
+                "build_script": "2.180-pkg-config.sh",
+                "archives": ["pkg-config-0.29.2.tar.gz"],
+                "patches": [],
+		"sources": {
+                        "http://physixproject.org/source/pkg-config-0.29.2.tar.gz":"f6e931e319531b736fadc017f470e68a"
+                }
+        },
+        "18":{
+                "group": "02-base",
+                "build_script": "2.190-ncurses.sh",
+                "archives": ["ncurses-6.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/ncurses-6.1.tar.gz":"98c889aaf8d23910d2b92d65be2e737a"
+                }
+        },
+        "19":{
+                "group": "02-base",
+                "build_script": "2.200-attr.sh",
+                "archives": ["attr-2.4.48.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/attr-2.4.48.tar.gz":"bc1e5cb5c96d99b24886f1f527d3bb3d"
+                }
+        },
+        "20":{
+                "group": "02-base",
+                "build_script": "2.210-acl.sh",
+                "archives": ["acl-2.2.53.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/acl-2.2.53.tar.gz":"007aabf1dbb550bcddde52a244cd1070"
+                }
+        },
+        "21":{
+                "group": "02-base",
+                "build_script": "2.220-libcap.sh",
+                "archives": ["libcap-2.27.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/libcap-2.27.tar.xz":"2e8f9fab32eb5ccb37969fe317fd17aa"
+
+                }
+        },
+        "22":{
+                "group": "02-base",
+                "build_script": "2.230-sed.sh",
+                "archives": ["sed-4.7.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/sed-4.7.tar.xz":"777ddfd9d71dd06711fe91f0925e1573"
+                }
+        },
+        "23":{
+                "group": "02-base",
+                "build_script": "2.240-psmisc.sh",
+                "archives": ["psmisc-23.2.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/psmisc-23.2.tar.xz":"0524258861f00be1a02d27d39d8e5e62"
+                }
+        },
+	"24":{
+                "group": "02-base",
+                "build_script": "2.250-iana-etc.sh",
+                "archives": ["iana-etc-2.30.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/iana-etc-2.30.tar.bz2":"3ba3afb1d1b261383d247f46cb135ee8"
+                }
+        },
+        "25":{
+                "group": "02-base",
+                "build_script": "2.260-bison.sh",
+                "archives": ["bison-3.4.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/bison-3.4.1.tar.xz":"201286a573b12da109df96282fe4ff4a"
+                }
+        },
+        "26":{
+                "group": "02-base",
+                "build_script": "2.270-flex.sh",
+                "archives": ["flex-2.6.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/flex-2.6.4.tar.gz":"2882e3179748cc9f9c23ec593d6adc8d"
+                }
+        },
+        "27":{
+                "group": "02-base",
+                "build_script": "2.280-grep.sh",
+                "archives": ["grep-3.3.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/grep-3.3.tar.xz":"05d0718a1b7cc706a4bdf8115363f1ed"
+                }
+        },
+        "28":{
+                "group": "02-base",
+                "build_script": "2.290-bash.sh",
+                "archives": ["bash-5.0.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/bash-5.0.tar.gz":"2b44b47b905be16f45709648f671820b"
+                }
+        },
+        "29":{
+                "group": "02-base",
+                "build_script": "2.300-libtool.sh",
+                "archives": ["libtool-2.4.6.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/libtool-2.4.6.tar.xz":"1bfb9b923f2c1339b4d2ce1807064aa5"
+
+                }
+        },
+        "30":{
+                "group": "02-base",
+                "build_script": "2.310-gdbm.sh",
+                "archives": ["gdbm-1.18.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/gdbm-1.18.1.tar.gz":"988dc82182121c7570e0cb8b4fcd5415"
+                }
+        },
+        "31":{
+                "group": "02-base",
+                "build_script": "2.320-gperf.sh",
+                "archives": ["gperf-3.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/gperf-3.1.tar.gz":"9e251c0a618ad0824b51117d5d9db87e"
+                }
+        },
+        "32":{
+                "group": "02-base",
+                "build_script": "2.330-expat.sh",
+                "archives": ["expat-2.2.7.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/expat-2.2.7.tar.xz":"3659bc0938db78815b5f5a9c24d732aa"
+                }
+        },
+        "33":{
+                "group": "02-base",
+                "build_script": "2.340-inetutils.sh",
+                "archives": ["inetutils-1.9.4.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/inetutils-1.9.4.tar.xz":"87fef1fa3f603aef11c41dcc097af75e"
+                }
+        },
+        "34":{
+                "group": "02-base",
+                "build_script": "2.350-perl.sh",
+                "archives": ["perl-5.30.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/perl-5.30.0.tar.xz":"037c35000550bdcb47552ad0f6d3064d"
+                }
+        },
+        "35":{
+                "group": "02-base",
+                "build_script": "2.360-xmlparser.sh",
+                "archives": ["XML-Parser-2.44.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/XML-Parser-2.44.tar.gz":"af4813fe3952362451201ced6fbce379"
+                }
+        },
+        "36":{
+                "group": "02-base",
+                "build_script": "2.370-intltool.sh",
+                "archives": ["intltool-0.51.0.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/intltool-0.51.0.tar.gz":"12e517cac2b57a0121cda351570f1e63"
+                }
+        },
+        "37":{
+                "group": "02-base",
+                "build_script": "2.380-autoconf.sh",
+                "archives": ["autoconf-2.69.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/autoconf-2.69.tar.xz":"50f97f4159805e374639a73e2636f22e"
+                }
+        },
+        "38":{
+                "group": "02-base",
+                "build_script": "2.390-automake.sh",
+                "archives": ["automake-1.16.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/automake-1.16.1.tar.xz":"53f38e7591fa57c3d2cee682be668e5b"
+                }
+        },
+        "39":{
+                "group": "02-base",
+                "build_script": "2.400-xz.sh",
+                "archives": ["xz-5.2.4.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/xz-5.2.4.tar.xz":"003e4d0b1b1899fc6e3000b24feddf7c"
+                }
+        },
+        "40":{
+                "group": "02-base",
+                "build_script": "2.410-kmod.sh",
+                "archives": ["kmod-26.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/kmod-26.tar.xz":"1129c243199bdd7db01b55a61aa19601"
+                }
+        },
+        "41":{
+                "group": "02-base",
+                "build_script": "2.420-gettext.sh",
+                "archives": ["gettext-0.20.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/gettext-0.20.1.tar.xz":"9ed9e26ab613b668e0026222a9c23639"
+                }
+        },
+        "42":{
+                "group": "02-base",
+                "build_script": "2.430-libelf.sh",
+                "archives": ["elfutils-0.177.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/elfutils-0.177.tar.bz2":"0b583722f911e1632544718d502aab87"
+                }
+        },
+        "43":{
+                "group": "02-base",
+                "build_script": "2.440-libffi.sh",
+                "archives": ["libffi-3.2.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/libffi-3.2.1.tar.gz":"83b89587607e3eb65c70d361f13bab43"
+                }
+        },
+        "44":{
+                "group": "02-base",
+                "build_script": "2.450-openssl.sh",
+                "archives": ["openssl-1.1.1c.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/openssl-1.1.1c.tar.gz":"15e21da6efe8aa0e0768ffd8cd37a5f6"
+                }
+        },
+        "45":{
+                "group": "02-base",
+                "build_script": "2.460-python.sh",
+                "archives": ["Python-3.7.4.tar.xz"],
+                "patches": [],
+                "sources": {
+			"http://physixproject.org/source/Python-3.7.4.tar.xz":"d33e4aae66097051c2eca45ee3604803",
+                        "http://physixproject.org/source/python-3.7.4-docs-html.tar.bz2":"c410337e954dbba2d04fe169c355a6a2"
+                }
+        },
+        "46":{
+                "group": "02-base",
+                "build_script": "2.470-ninja.sh",
+                "archives": ["ninja-1.9.0.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/ninja-1.9.0.tar.gz":"f340be768a76724b83e6daab69009902"
+                }
+        },
+        "47":{
+                "group": "02-base",
+                "build_script": "2.480-meson.sh",
+                "archives": ["meson-0.51.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/meson-0.51.1.tar.gz":"48787e391ec5c052799a3dd491f73909"
+                }
+        },
+        "48":{
+                "group": "02-base",
+                "build_script": "2.490-coreutils.sh",
+                "archives": ["coreutils-8.31.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/coreutils-8.31.tar.xz":"0009a224d8e288e8ec406ef0161f9293",
+			"http://physixproject.org/source/coreutils-8.31-i18n-1.patch":"a9404fb575dfd5514f3c8f4120f9ca7d"
+                }
+        },
+        "49":{
+                "group": "02-base",
+                "build_script": "2.500-check.sh",
+                "archives": ["check-0.12.0.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/check-0.12.0.tar.gz":"31b17c6075820a434119592941186f70"
+                }
+        },
+        "50":{
+                "group": "02-base",
+                "build_script": "2.510-diffutils.sh",
+                "archives": ["diffutils-3.7.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/diffutils-3.7.tar.xz":"4824adc0e95dbbf11dfbdfaad6a1e461"
+                }
+        },
+
+        "51":{
+                "group": "02-base",
+                "build_script": "2.520-gawk.sh",
+                "archives": ["gawk-5.0.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/gawk-5.0.1.tar.xz":"f9db3f6715207c6f13719713abc9c707"
+                }
+        },
+
+        "52":{
+                "group": "02-base",
+                "build_script": "2.530-cpio.sh",
+                "archives": ["cpio-2.12.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/cpio-2.12.tar.bz2":"93eea9f07c0058c097891c73e4955456"
+                }
+        },
+        "53":{
+                "group": "02-base",
+                "build_script": "2.540-dracut.sh",
+                "archives": ["dracut-049.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/dracut-049.tar.gz":"a43d54620a8fca3591003a66a16aefc3"
+                }
+        },
+        "54":{
+                "group": "02-base",
+                "build_script": "2.550-findutils.sh",
+                "archives": ["findutils-4.6.0.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/findutils-4.6.0.tar.gz":"9936aa8009438ce185bea2694a997fc1"
+                }
+        },
+        "55":{
+                "group": "02-base",
+                "build_script": "2.560-groff.sh",
+                "archives": ["groff-1.22.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/groff-1.22.4.tar.gz":"08fb04335e2f5e73f23ea4c3adbf0c5f"
+                }
+        },
+        "56":{
+                "group": "02-base",
+                "build_script": "2.570-libaio.sh",
+                "archives": ["libaio_0.3.112.orig.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/libaio_0.3.112.orig.tar.xz":"66e3b7dd255581a73542ee851f8cd737"
+                }
+        },
+        "57":{
+                "group": "02-base",
+                "build_script": "2.580-popt.sh",
+                "archives": ["popt-1.16.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/popt-1.16.tar.gz":"3743beefa3dd6247a73f8f7a32c14c33"
+                }
+        },
+        "58":{
+                "group": "02-base",
+                "build_script": "2.610-less.sh",
+                "archives": ["less-551.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/less-551.tar.gz":"4ad4408b06d7a6626a055cb453f36819"
+                }
+        },
+        "59":{
+                "group": "02-base",
+                "build_script": "2.620-gzip.sh",
+                "archives": ["gzip-1.10.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/gzip-1.10.tar.xz":"691b1221694c3394f1c537df4eee39d3"
+                }
+        },
+        "60":{
+                "group": "02-base",
+                "build_script": "2.630-iproute.sh",
+                "archives": ["iproute2-5.2.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/iproute2-5.2.0.tar.xz":"0cb2736e7bc2f56254a363d3d23703b7"
+                }
+        },
+        "61":{
+                "group": "02-base",
+                "build_script": "2.640-kbd.sh",
+                "archives": ["kbd-2.2.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/kbd-2.2.0.tar.xz":"d1d7ae0b5fb875dc082731e09cd0c8bc"
+                }
+        },
+        "62":{
+                "group": "02-base",
+                "build_script": "2.650-libpipeline.sh",
+                "archives": ["libpipeline-1.5.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/libpipeline-1.5.1.tar.gz":"4c8fe6cd85422baafd6e060f896c61bc"
+                }
+        },
+        "63":{
+                "group": "02-base",
+                "build_script": "2.660-make.sh",
+                "archives": ["make-4.2.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/make-4.2.1.tar.gz":"7d0dcb6c474b258aab4d54098f2cf5a7"
+                }
+        },
+        "64":{
+                "group": "02-base",
+                "build_script": "2.670-patch.sh",
+                "archives": ["patch-2.7.6.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/patch-2.7.6.tar.xz":"78ad9937e4caadcba1526ef1853730d5"
+                }
+        },
+        "65":{
+                "group": "02-base",
+                "build_script": "2.680-mandb.sh",
+                "archives": ["man-db-2.8.6.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/man-db-2.8.6.1.tar.xz":"22e82fe1127f4ca95de7100168a927d1"
+                }
+        },
+        "66":{
+                "group": "02-base",
+                "build_script": "2.690-tar.sh",
+                "archives": ["tar-1.32.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/tar-1.32.tar.xz":"83e38700a80a26e30b2df054e69956e5"
+                }
+        },
+        "67":{
+                "group": "02-base",
+                "build_script": "2.700-texinfo.sh",
+                "archives": ["texinfo-6.6.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/texinfo-6.6.tar.xz":"5231da3e6aa106cd0532b8609e5b3702"
+                }
+        },
+        "68":{
+                "group": "02-base",
+                "build_script": "2.710-vim.sh",
+                "archives": ["vim-8.1.1846.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/vim-8.1.1846.tar.gz":"4f129a05254d93c739fcede843df87df"
+                }
+        },
+        "69":{
+                "group": "02-base",
+                "build_script": "2.720-systemd.sh",
+                "archives": ["systemd-243.tar.gz"],
+                "patches": ["systemd-243-consolidated_fixes-2.patch"],
+                "sources": {
+                        "http://physixproject.org/source/systemd-243.tar.gz":"ca2403fa7dff73afd2e896b4cb25021b",
+			"http://physixproject.org/source/systemd-243-consolidated_fixes-2.patch":"2bad2992f4373eb925885f2ea2fb8d14"
+                }
+        },
+        "70":{
+                "group": "02-base",
+                "build_script": "2.730-dbus.sh",
+                "archives": ["dbus-1.12.16.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/dbus-1.12.16.tar.gz":"2dbeae80dfc9e3632320c6a53d5e8890"
+                }
+        },
+        "71":{
+                "group": "02-base",
+                "build_script": "2.740-procps-ng.sh",
+                "archives": ["procps-ng-3.3.15.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/procps-ng-3.3.15.tar.xz":"2b0717a7cb474b3d6dfdeedfbad2eccc"
+                }
+        },
+        "72":{
+                "group": "02-base",
+                "build_script": "2.750-util-linux.sh",
+                "archives": ["util-linux-2.34.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
+                }
+        },
+        "73":{
+                "group": "02-base",
+                "build_script": "2.760-e2fsprogs.sh",
+                "archives": ["e2fsprogs-1.45.3.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/e2fsprogs-1.45.3.tar.gz":"447a225c05f0a81121f6ddffbf55b06c"
+                }
+        },
+        "74":{
+                "group": "02-base",
+                "build_script": "2.770-lvm2.sh",
+                "archives": ["LVM2.2.03.05.tgz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/LVM2.2.03.05.tgz":"22e4a9e66b94bbfcf81444472ed32a2d"
+                }
+        },
+        "75":{
+                "group": "02-base",
+                "build_script": "2.780-grub.sh",
+                "archives": ["grub-2.04.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/grub-2.04.tar.xz":"5aaca6713b47ca2456d8324a58755ac7"
+                }
+        },
+        "76":{
+                "group": "02-base",
+                "build_script": "2.790-lzo.sh",
+                "archives": ["lzo-2.10.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/lzo-2.10.tar.gz":"39d3f3f9c55c87b1e5d6888e1420f4b5"
+                }
+        },
+        "77":{
+                "group": "02-base",
+                "build_script": "2.800-btrfs-progs.sh",
+                "archives": ["btrfs-progs-v5.2.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/btrfs-progs-v5.2.1.tar.xz":"9bacd0fec4efd449a6223f1c72ab91b3"
+                }
+        },
+        "78":{
+                "group": "02-base",
+                "build_script": "2.810-stripping.sh",
+                "archives": [],
+                "patches": [],
+                "sources": {}
+        },
+        "79":{
+                "group": "02-base",
+                "build_script": "2.820-cleanup.sh",
+                "archives": [],
+                "patches": [],
+                "sources": {}
+        }
+}

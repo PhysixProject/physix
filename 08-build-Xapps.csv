@@ -1,0 +1,14 @@
+08-Xapps,9.000-libnotify.sh,libnotify-0.7.8.tar.xz
+08-Xapps,9.010-c-ares.sh,c-ares-1.15.0.tar.gz
+08-Xapps,9.020-nghttp2.sh,nghttp2-1.39.2.tar.xz
+08-Xapps,9.025-nodejs.sh,node-v10.16.3.tar.xz
+08-Xapps,9.030-flac.sh,flac-1.3.3.tar.xz
+08-Xapps,9.040-libogg.sh,libogg-1.3.3.tar.xz 
+08-Xapps,9.050-libvorbis.sh,libvorbis-1.3.6.tar.xz
+08-Xapps,9.060-libsndfile.sh,libsndfile-1.0.28.tar.gz
+08-Xapps,9.080-speex.sh,speex-1.2.0.tar.gz,speexdsp-1.2rc3.tar.gz
+08-Xapps,9.090-pulse-audio.sh,pulseaudio-12.2.tar.xz
+08-Xapps,9.100-cbingen.sh,cbindgen-0.9.0.tar.gz
+08-Xapps,9.120-libwebp.sh,libwebp-1.0.3.tar.gz
+08-Xapps,9.130-yasm.sh,yasm-1.3.0.tar.gz
+08-Xapps,9.140-firefox.sh,firefox-68.0.2.source.tar.xz

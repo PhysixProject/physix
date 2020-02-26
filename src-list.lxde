@@ -1,3 +1,6 @@
+pygobject-2.28.7.tar.xz,http://physixproject.org/source/lxde/pygobject-2.28.7.tar.xz,ae48b60c690c4aa894e69e0c97802745
+pycairo-1.18.1.tar.gz,http://physixproject.org/source/lxde/pycairo-1.18.1.tar.gz,7610da8a40a7bed548991aa3416431d1
+gtk+-2.24.32.tar.xz,http://physixproject.org/source/lxde/gtk+-2.24.32.tar.xz,d5742aa42275203a499b59b4c382a784
 lxmenu-data-0.1.5.tar.xz,http://physixproject.org/source/lxde/lxmenu-data-0.1.5.tar.xz,cc1989444284a65dbc7047348a68d6d4
 libfm-1.3.1.tar.xz,http://physixproject.org/source/lxde/libfm-1.3.1.tar.xz,c15ecd2c9317e2c385cd3f046d0b61ba
 menu-cache-1.1.0.tar.xz,http://physixproject.org/source/lxde/menu-cache-1.1.0.tar.xz,99999a0bca48b980105208760c8fd893
@@ -9,10 +12,12 @@ pygtk-2.24.0.tar.bz2,http://physixproject.org/source/lxde/pygtk-2.24.0.tar.bz2,a
 libwnck-2.30.7.tar.xz,http://physixproject.org/source/lxde/libwnck-2.30.7.tar.xz,3d20f26105a2fd878899d6ecdbe9a082
 keybinder-0.3.1.tar.gz,http://physixproject.org/source/lxde/keybinder-0.3.1.tar.gz,a6d7caae0dcb040b08692b008a68a507
 wireless_tools.29.tar.gz,http://physixproject.org/source/lxde/wireless_tools.29.tar.gz,e06c222e186f7cc013fd272d023710cb
+wireless_tools-29-fix_iwlist_scanning-1.patch,http://physixproject.org/source/lxde/wireless_tools-29-fix_iwlist_scanning-1.patch,9db3a9451d8cb969e388e089be401408
 lxpanel-0.10.0.tar.xz,http://physixproject.org/source/lxde/lxpanel-0.10.0.tar.xz,e6a1f9bd5cf39812e1c5d2453a34a7c5
 dbus-glib-0.110.tar.gz,http://physixproject.org/source/lxde/dbus-glib-0.110.tar.gz,d7cebf1d69445cbd28b4983392145192
 lxappearance-0.6.3.tar.xz,http://physixproject.org/source/lxde/lxappearance-0.6.3.tar.xz,f10345313e2c12bad51c1b58bd46b454
 libunique-1.1.6.tar.bz2,http://physixproject.org/source/lxde/libunique-1.1.6.tar.bz2,7955769ef31f1bc4f83446dbb3625e6d
+libunique-1.1.6-upstream_fixes-1.patch,http://physixproject.org/source/lxde/libunique-1.1.6-upstream_fixes-1.patch,4ce1bf51879a679b55be831f31bf3a2f
 lxsession-0.5.4.tar.xz,http://physixproject.org/source/lxde/lxsession-0.5.4.tar.xz,e255aaf3c2a8e49812e3477fb3f099b0
 lxde-common-0.99.2.tar.xz,http://physixproject.org/source/lxde/lxde-common-0.99.2.tar.xz,14a9d19c4576dc15d985453ccb8ca9f6
 gpicview-0.2.5.tar.xz,http://physixproject.org/source/lxde/gpicview-0.2.5.tar.xz,26be9b0c5a234f1afe7d83d02a4a33f4

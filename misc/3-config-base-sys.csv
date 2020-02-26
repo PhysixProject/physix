@@ -1,0 +1,9 @@
+base-config,log,3.020-set-hostname.sh,
+base-config,log,3.030-network-conf.sh,
+base-config,log,3.040-shells.sh,
+base-config,log,3.050-disable-clrscrn.sh,
+base-config,log,3.060-fstab.sh,
+base-config,log,3.070-kernel.sh,linux-5.2.8.tar.xz
+base-config,console,3.080-grub.sh,
+base-config,console,3.090-setup-users-password.sh,
+base-config,log,3.100-os-release.sh,

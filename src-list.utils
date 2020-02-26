@@ -2,6 +2,8 @@
 # Utility system packages and associated md5sums
 # md5sum values identical to Beyond Linux From Scratch Version 9.0
 ###############################################################################
+sqlite-autoconf-3310100.tar.gz,http://physixproject.org/source/sqlite-autoconf-3310100.tar.gz,2d0a553534c521504e3ac3ad3b90f125
+zip30.tar.gz,http://physixproject.org/source/zip30.tar.gz,7b74551e63f8ee6aab6fbc86676c0d37
 dosfstools-4.1.tar.xz,http://physixproject.org/source/dosfstools-4.1.tar.xz,07a1050db1a898e9a2e03b0c4569c4bd
 parted-3.2.tar.xz,http://physixproject.org/source/parted-3.2.tar.xz,0247b6a7b314f8edeb618159fa95f9cb
 glib-2.60.6-skip_warnings-1.patch,http://physixproject.org/source/glib-2.60.6-skip_warnings-1.patch,6252d5c0b400558908b8a41b772c9794
@@ -36,7 +38,6 @@ libpwquality-1.4.0.tar.bz2,http://physixproject.org/source/libpwquality-1.4.0.ta
 nspr-4.21.tar.gz,http://physixproject.org/source/nspr-4.21.tar.gz,b865586f19912a50acc3755d8a45dbaa
 unzip60.tar.gz,http://physixproject.org/source/unzip60.tar.gz,62b490407489521db863b523a7f86375
 stunnel-5.55.tar.gz,http://physixproject.org/source/stunnel-5.55.tar.gz,7b41592034ede114e8c4e058fc8c238b
-libaio_0.3.112.orig.tar.xz,http://physixproject.org/source/libaio_0.3.112.orig.tar.xz,66e3b7dd255581a73542ee851f8cd737
 cryptsetup-2.0.6.tar.xz,http://physixproject.org/source/cryptsetup-2.0.6.tar.xz,ec03e09cbe978a19fa6d6194ac642bae
 volume_key-0.3.12.tar.gz,http://physixproject.org/source/volume_key-0.3.12.tar.gz,d1c76f24e08ddd8c1787687d0af5a814
 tree-1.8.0.tgz,http://physixproject.org/source/tree-1.8.0.tgz,715191c7f369be377fc7cc8ce0ccd835
@@ -54,13 +55,11 @@ libpwquality-1.4.0.tar.bz2,http://physixproject.org/source/libpwquality-1.4.0.ta
 nspr-4.21.tar.gz,http://physixproject.org/source/nspr-4.21.tar.gz,b865586f19912a50acc3755d8a45dbaa
 unzip60.tar.gz,http://physixproject.org/source/unzip60.tar.gz,62b490407489521db863b523a7f86375
 stunnel-5.55.tar.gz,http://physixproject.org/source/stunnel-5.55.tar.gz,7b41592034ede114e8c4e058fc8c238b
-libaio_0.3.112.orig.tar.xz,http://physixproject.org/source/libaio_0.3.112.orig.tar.xz,66e3b7dd255581a73542ee851f8cd737
 cryptsetup-2.0.6.tar.xz,http://physixproject.org/source/cryptsetup-2.0.6.tar.xz,ec03e09cbe978a19fa6d6194ac642bae
 volume_key-0.3.12.tar.gz,http://physixproject.org/source/volume_key-0.3.12.tar.gz,d1c76f24e08ddd8c1787687d0af5a814
 lsof_4.91.tar.gz,http://physixproject.org/source/lsof_4.91.tar.gz,10e1353aa4bf2fd5bbed65db9ef6fd47
 time-1.9.tar.gz,http://physixproject.org/source/time-1.9.tar.gz,d2356e0fe1c0b85285d83c6b2ad51b5f
 tree-1.8.0.tgz,http://physixproject.org/source/tree-1.8.0.tgz,715191c7f369be377fc7cc8ce0ccd835
-popt-1.16.tar.gz,http://physixproject.org/source/popt-1.16.tar.gz,3743beefa3dd6247a73f8f7a32c14c33
 which-2.21.tar.gz,http://physixproject.org/source/which-2.21.tar.gz,097ff1a324ae02e0a3b0369f07a7544a
 glib-2.60.6.tar.xz,http://physixproject.org/source/glib-2.60.6.tar.xz,cd6865d8ce40db5e4c12b7d180953de6
 pciutils-3.6.2.tar.xz,http://physixproject.org/source/pciutils-3.6.2.tar.xz,77963796d1be4f451b83e6da28ba4f82

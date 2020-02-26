@@ -1,0 +1,1105 @@
+{
+	"recipe-file":"05-xorg.json",
+
+	"0":{
+		"group": "05-xorg",
+		"build_script": "7.000-init.sh",
+		"archives": ["util-macros-1.19.2.tar.bz2"],
+		"patches": [],
+		"sources": {}
+	},
+        "1":{   
+                "group": "05-xorg",
+                "build_script": "7.010-util-macros.sh",
+                "archives": ["util-macros-1.19.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/xorg/util-macros-1.19.2.tar.bz2":"58edef899364f78fbde9479ded20211e"
+                }
+        },
+        "2":{   
+                "group": "05-xorg",
+                "build_script": "7.020-xorgproto-macros.sh",
+                "archives": [],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/xorg/xorgproto-2019.1.tar.bz2":"802ccb9e977ba3cf94ba798ddb2898a4"
+                }
+        },
+        "3":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXau-1.0.9.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "4":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXdmcp-1.1.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "5":{   
+                "group": "05-xorg",
+                "build_script": "7.050-xcb-proto.sh",
+                "archives": ["xcb-proto-1.13.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "6":{   
+                "group": "05-xorg",
+                "build_script": "7.060-libxcb.sh",
+                "archives": ["libxcb-1.13.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "7":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xtrans-1.4.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "8":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libX11-1.6.8.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "9":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXext-1.3.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "10":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libFS-1.0.8.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "11":{   
+                "group": "05-xorg",
+                "build_script": "7.066-libICE.sh",
+                "archives": ["libICE-1.0.10.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "12":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libSM-1.2.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "13":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXScrnSaver-1.2.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "14":{   
+                "group": "05-xorg",
+                "build_script": "7.069-libXt.sh",
+                "archives": ["libXt-1.2.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "15":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXmu-1.1.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "16":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXpm-3.5.12.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "17":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXaw-1.0.13.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "18":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXfixes-5.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "19":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXcomposite-0.4.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "20":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXrender-0.9.10.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "21":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXcursor-1.2.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "22":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXdamage-1.1.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "23":{   
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libfontenc-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "24":{   
+                "group": "05-xorg",
+                "build_script": "7.094-freetype.sh",
+                "archives": ["freetype-2.10.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "25":{
+                "group": "05-xorg",
+                "build_script": "7.079-libXfont2.sh",
+                "archives": ["libXfont2-2.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "26":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXi-1.7.10.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "27":{
+                "group": "05-xorg",
+                "build_script": "7.082-libXinerama.sh",
+                "archives": ["libXinerama-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "28":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXrandr-1.5.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "29":{
+                "group": "05-xorg",
+                "build_script": "7.084-libXres.sh",
+                "archives": ["libXres-1.2.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "30":{
+                "group": "05-xorg",
+                "build_script": "7.085-libXtst.sh",
+                "archives": ["libXtst-1.2.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "31":{
+                "group": "05-xorg",
+                "build_script": "7.086-libXv.sh",
+                "archives": ["libXv-1.0.11.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "32":{
+                "group": "05-xorg",
+                "build_script": "7.087-libXvMC.sh",
+                "archives": ["libXvMC-1.0.11.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "33":{
+                "group": "05-xorg",
+                "build_script": "7.088-libXxf86dga.sh",
+                "archives": ["libXxf86dga-1.1.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "34":{
+                "group": "05-xorg",
+                "build_script": "7.089-libXxf86vm.sh",
+                "archives": ["libXxf86vm-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "35":{
+                "group": "05-xorg",
+                "build_script": "7.090-libdmx.sh",
+                "archives": ["libdmx-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "36":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libpciaccess-0.16.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "37":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libxkbfile-1.1.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "38":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libxshmfence-1.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "39":{
+                "group": "05-xorg",
+                "build_script": "7.095-fontconfig.sh",
+                "archives": ["fontconfig-2.13.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "40":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["libXft-2.3.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "41":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcb-util-0.4.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "42":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcb-util-image-0.4.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "43":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcb-util-keysyms-0.4.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "44":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcb-util-renderutil-0.3.9.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "45":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcb-util-wm-0.4.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "46":{
+                "group": "05-xorg",
+                "build_script": ".999-general.sh",
+                "archives": ["xcb-util-cursor-0.1.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "47":{
+                "group": "05-xorg",
+                "build_script": "7.160-libdrm.sh",
+                "archives": ["libdrm-2.4.100.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "48":{
+                "group": "05-xorg",
+                "build_script": "7.170-python-makeupsafe.sh",
+                "archives": ["MarkupSafe-1.1.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "49":{
+                "group": "05-xorg",
+                "build_script": "7.180-python-mako.sh",
+                "archives": ["Mako-1.1.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+
+        "50":{
+                "group": "05-xorg",
+                "build_script": "7.200-libvdpau.sh",
+                "archives": ["libva-2.6.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "51":{
+                "group": "05-xorg",
+                "build_script": "7.200-libvdpau.sh",
+                "archives": ["libvdpau-1.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "52":{
+                "group": "05-xorg",
+                "build_script": "7.211-wayland-proto.sh",
+                "archives": ["wayland-1.17.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "53":{
+                "group": "05-xorg",
+                "build_script": "7.220-mesa.sh",
+                "archives": ["mesa-19.3.3.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "54":{
+                "group": "05-xorg",
+                "build_script": "7.230-xbitmaps.sh",
+                "archives": ["xbitmaps-1.1.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "55":{
+                "group": "05-xorg",
+                "build_script": "7.240-libpng.sh",
+                "archives": ["libpng-1.6.37.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "56":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["iceauth-1.0.8.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "57":{
+                "group": "05-xorg",
+                "build_script": "7.250-luit.sh",
+                "archives": ["luit-1.1.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+
+        "58":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["mkfontdir-1.0.7.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+
+        "59":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["mkfontscale-1.2.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "60":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["sessreg-1.1.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "61":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["setxkbmap-1.3.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "62":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["smproxy-1.0.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "63":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["x11perf-1.6.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "64":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xauth-1.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "65":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xbacklight-1.2.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "66":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcmsdb-1.0.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "67":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcursorgen-1.0.7.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "68":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xdpyinfo-1.3.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "69":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xdriinfo-1.0.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "70":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xev-1.2.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "71":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xgamma-1.0.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "72":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xhost-1.0.8.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "73":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xinput-1.6.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "74":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xkbcomp-1.4.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "75":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xkbevd-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "76":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xkbutils-1.0.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "77":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xkill-1.0.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "78":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xlsatoms-1.1.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "79":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xlsclients-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "80":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xmessage-1.0.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "81":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xmodmap-1.0.10.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "82":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xpr-1.0.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "83":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xprop-1.2.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "84":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xrandr-1.5.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "85":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xrdb-1.2.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "86":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xrefresh-1.0.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "87":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xset-1.2.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "88":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xsetroot-1.1.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "89":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xvinfo-1.1.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "90":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xwd-1.0.7.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "91":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xwininfo-1.1.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "92":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xwud-1.0.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "93":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xcursor-themes-1.0.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "94":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-util-1.3.2.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "95":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["encodings-1.0.5.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "96":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-alias-1.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+
+        "97":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-adobe-utopia-type1-1.0.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "98":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-bh-ttf-1.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "99":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-bh-type1-1.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "100":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-ibm-type1-1.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "101":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-misc-ethiopic-1.0.3.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "102":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["font-xfree86-type1-1.0.4.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "103":{
+                "group": "05-xorg",
+                "build_script": "7.260-XKeyboardConfig.sh",
+                "archives": ["xkeyboard-config-2.29.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "104":{
+                "group": "05-xorg",
+                "build_script": "7.270-pixman.sh",
+                "archives": ["pixman-0.38.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "105":{
+                "group": "05-xorg",
+                "build_script": "7.271-epoxy.sh",
+                "archives": ["libepoxy-1.5.4.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "106":{
+                "group": "05-xorg",
+                "build_script": "7.272-mtdev.sh",
+                "archives": ["mtdev-1.1.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "107":{
+                "group": "05-xorg",
+                "build_script": "7.280-xorg-server.sh",
+                "archives": ["xorg-server-1.20.7.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "108":{
+                "group": "05-xorg",
+                "build_script": "7.290-xorg-libevdev.sh",
+                "archives": ["libevdev-1.8.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "109":{
+                "group": "05-xorg",
+                "build_script": "7.300-xorg-Evdev.sh",
+                "archives": ["xf86-input-evdev-2.10.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "110":{
+                "group": "05-xorg",
+                "build_script": "7.300-xorg-Evdev.sh",
+                "archives": ["xf86-input-evdev-2.10.6.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "111":{
+                "group": "05-xorg",
+                "build_script": "7.310-libinput.sh",
+                "archives": ["libinput-1.15.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "112":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xf86-input-libinput-0.29.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "113":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xf86-input-synaptics-1.9.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "114":{
+                "group": "05-xorg",
+                "build_script": "7.320-xorg-Wacom.sh",
+                "archives": ["xf86-input-wacom-0.39.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "115":{
+                "group": "05-xorg",
+                "build_script": "7.330-twm.sh",
+                "archives": ["twm-1.0.10.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "116":{
+                "group": "05-xorg",
+                "build_script": "7.340-xterm.sh",
+                "archives": ["xterm-352.tgz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "117":{
+                "group": "05-xorg",
+                "build_script": "7.999-general.sh",
+                "archives": ["xclock-1.0.9.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "118":{
+                "group": "05-xorg",
+                "build_script": "7.350-xinit.sh",
+                "archives": ["xinit-1.4.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "119":{
+                "group": "05-xorg",
+                "build_script": "7.360-mozjs.sh",
+                "archives": ["mozjs-60.8.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        },
+        "120":{
+                "group": "05-xorg",
+                "build_script": "",
+                "archives": [""],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        }
+        "121":{
+                "group": "05-xorg",
+                "build_script": "7.3709-polkit.sh",
+                "archives": ["polkit-0.116.tar.gz"],
+                "patches": [],
+                "sources": {
+                        ""
+                }
+        }
+}
+

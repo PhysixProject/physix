@@ -2,59 +2,28 @@
 # Copyright (C) 2019 Travis Davies
 
 export BUILDROOT='/mnt/physix'
-export BR_SOURCE_DIR=$BUILDROOT/usr/src/physix/sources
-export SOURCE_DIR=/usr/src/physix/sources
-export LOG_DIR=/var/log/physix/build-logs/
+export BR_SOURCE_DIR=$BUILDROOT/opt/sources.physix/BUILDBOX
+#export SOURCE_DIR=/usr/src/physix/sources
+export SOURCE_DIR=/opt/sources.physix/BUILDBOX
+#export LOG_DIR=/var/log/physix/build-logs/
 
-[ -e /mnt/physix/build.conf ] && source /mnt/physix/build.conf
-[ -e /physix//build.conf ]    && source /physix//build.conf
+[ -e /mnt/physix/opt/physix/build.conf ] && source /mnt/physix/opt/physix/build.conf
+[ -e /opt/physix/build.conf ] && source /opt/physix/build.conf
 
 NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
 export NPROC
-
-function verify_tools() {
-	echo "Looking for required tools on host systemd..."
-	for TOOL in mkfs.ext3 gcc g++ make gawk bison ; do
-		which $TOOL
-		if [ $? -ne 0 ] ; then
-			echo "$TOOL Not Found."
-			exit 1
-		fi
-	done
-}
-
-function report() {
-	local MSG=$1
-	local NO_NEW_LINE=$2
-	local BR=''
-
-	echo -e "\e[93m[INFO]\e[0m $MSG"
-
-	# chroot context
-	if [ -r /var/physix/system-build-logs/build.log ] ; then
-		echo -e "[INFO] $MSG" >> /var/physix/system-build-logs/build.log
-	fi
-
-	# Non-chroot, not mounted
-	if [ -r '/mnt/physix/var/physix/system-build-logs/build.log' ] ; then
-		echo -e "[INFO] $MSG" >> /mnt/physix/var/physix/system-build-logs/build.log
-	else
-		echo -e "[INFO] $MSG" >> /tmp/physix-init-host-build.log
-	fi
-
-}
 
 function ok() {
         local MSG=$1
 	local BR=''
 	local TIME=`date "+%D %T"`
 
-	if [ -r '/mnt/physix/var/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
+	if [ -r '/mnt/physix/opt/logs.physix/' ] && [ -r '/mnt/physix/opt/physix/' ] ; then
 		BR=$BUILDROOT
 	fi
 
         echo -e "\e[92m[OK]\e[0m   $TIME : $MSG"
-        echo -e "[OK] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
+        #echo -e "[OK] $TIME : $MSG" >> $BR/opt/physix/logs.physix/physix-build.log
 }
 
 
@@ -62,12 +31,13 @@ function error() {
         local MSG=$1
 	local BR=''
 
-	if [ -r '/mnt/physix/var/physix/system-build-logs/' ] && [ -r '/mnt/physix/physix/' ] ; then
+	if [ -r '/mnt/physix/opt/logs.physix/' ] && [ -r '/mnt/opt/physix/' ] ; then
 		BR=$BUILDROOT
 	fi
 
         echo -e "\e[31m[ERROR]\e[0m $TIME :$MSG"
-        echo -e "[ERROR] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
+	#echo -e "[ERROR] $TIME : $MSG" >> $BR/opt/physix/logs.physix/physix-build.log
+        #echo -e "[ERROR] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
 }
 
 # Check, handle and log return code
@@ -79,7 +49,6 @@ function chroot_check() {
 	if [ $RTN -ne 0 ] ; then
 		error "$RTN:$MSG"
 		if [ $NOEXIT == "FALSE" ] ; then
-			grep '\[ERROR\]' /var/physix/system-build-logs/ > /var/physix/system-build-logs/err.log
 			exit 1
 		fi
 	else
@@ -108,48 +77,6 @@ function check() {
 }
 
 
-# Returns name of the directory contained in archive.
-# Assumes CWD is /sources
-function stripit() {
-	local NAME=$1
-	STRIPPED=''
-	local DN=''
-	DN=$(tar -tf $NAME | cut -d'/' -f1 | head -n 1)
-	if [ $? -ne 0 ] ; then
-		echo "[ERROR] stripit : tar -tf $NAME"
-		exit 1
-	fi
-	STRIPPED=$DN
-}
-
-# Returns name of the directory contained in archive.
-# Assumes it is run after unpack()
-function return_src_dir() {
-	local ARCHIVE=$1
-	local FLAG=${2:-''}
-	local BR=''
-	local TMP=''
-	SRC_DIR='NULL'
-
-	if [ "$FLAG" == "NCHRT" ] ; then
-		BR=$BUILDROOT
-	fi
-
-	if [ ! -e $BR/usr/src/physix/sources/$ARCHIVE ] ; then
-		echo "[ERROR] Not Found: $BR/usr/src/physix/sources/$ARCHIVE"
-		exit 1
-	fi
-
-	local ARCHIVE_PATH=`echo $BR/usr/src/physix/sources/$ARCHIVE | sed 's/\/\//\//g'`
-	TMP=$(tar -tf $ARCHIVE_PATH | cut -d'/' -f1 | head -n 1)
-	if [ $? -ne 0 ] && [ "$TMP"!="" ]; then
-		echo "[ERROR] return_src_dir(): tar -tf $NAME"
-		exit 1
-	fi
-	export SRC_DIR=$TMP
-}
-
-
 # Used by 3-config-base-sys.sh and beyond
 # Runs build scripts under /bin/bash
 function chroot-conf-build {
@@ -169,7 +96,7 @@ function chroot-conf-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin                     \
-		/bin/bash --login -c "/physix/build-scripts/base-config/$SCRIPT $PKG $IO_DIRECTION"
+		/bin/bash --login -c "/physix/build-scripts/03-base-config/$SCRIPT $PKG $IO_DIRECTION"
 }
 
 
@@ -185,55 +112,8 @@ function chroot-build {
 	chroot "$BUILDROOT" /tools/bin/env -i HOME=/root  TERM="$TERM" \
 		PS1='(physix chroot) \u:\w\$ '                         \
 		PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin          \
-		/tools/bin/bash --login +h -c "/physix/build-scripts/base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$TIME-$SCRIPT"
+		/tools/bin/bash --login +h -c "/physix/build-scripts/02-base/$SCRIPT $SRC0 $SRC1 &> /var/physix/system-build-logs/$TIME-$SCRIPT"
 
-}
-
-
-# Unpacks source archives.
-# Assumes chrooted env uless NCHRT Flag is passsed as arg 2
-function unpack() {
-	local PKG=$1
-	local OWNER=$2
-	local FLAG=$3
-	local SRCPATH="/usr/src/physix/sources/"
-	local DEST="/usr/src/physix/sources/"${4:-''}
-	local BR=''
-
-	if [ "$PKG" == "" ] ; then
-		error "Unpack() requires argument for package name"
-		exit 1
-	fi
-
-	if [ "$OWNER" == "" ] ; then
-		error "Unpack() requires argument for package ownership"
-		exit 1
-	fi
-
-	if [ "FLAG" == "" ] ; then
-		error "Unpack() requires flag argument to determine context of chroot environment"
-		exit 1
-	fi
-
-	if [ "$FLAG" == "NCHRT" ] ; then
-		BR=$BUILDROOT
-	fi
-
-	DIR_NAME=$(tar -tf $BR/$SRCPATH/$PKG | cut -d'/' -f1 | head -n 1)
-	local ARCHIVE_PATH=`echo $BR/$SRCPATH/$PKG | sed 's/\/\//\//g'`
-	local ARCHIVE_DEST=`echo $BR/$DEST | sed  's/\/\//\//g'`
-	if [ -d $ARCHIVE_DEST/$DIR_NAME ] ; then
-                cd $ARCHIVE_DEST && rm -rf ./$DIR_NAME
-        fi
-
-	tar xf $ARCHIVE_PATH -C $ARCHIVE_DEST
-	if [ $? -ne 0 ] ; then
-		error "tar xf $ARCHIVE_PATH -C $ARCHIVE_DEST"
-		exit 1
-	fi
-
-	chown --recursive $OWNER $ARCHIVE_DEST/$DIR_NAME
-	chmod 750 $ARCHIVE_DEST/$DIR_NAME
 }
 
 
