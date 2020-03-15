@@ -6,7 +6,7 @@ su physix -c 'patch -Np1 -i ../nss-3.45-standalone-1.patch'
 chroot_check $? "nss : patch"
 
 cd nss
-su physix -c 'make -j1 BUILD_OPT=1                  \
+su physix -c 'make -j1 BUILD_OPT=1    \
   NSPR_INCLUDE_DIR=/usr/include/nspr  \
   USE_SYSTEM_ZLIB=1                   \
   ZLIB_LIBS=-lz                       \

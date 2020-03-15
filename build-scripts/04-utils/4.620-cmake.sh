@@ -1,5 +1,5 @@
 #!/bin/bash
-source /physix/include.sh || exit 1
+source /opt/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&

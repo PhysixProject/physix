@@ -14,7 +14,7 @@ ln -svfin /usr/bin/rustc-1.35.0 /usr/bin/rustc
 chroot_check $? "mkdir /opt/rustc-*"
 
 
-su physix -c 'cp /opt/physix/build-scripts/utils/configs/rustc/config.toml .'
+su physix -c 'cp /opt/physix/build-scripts/04-utils/configs/rustc/config.toml .'
 chroot_check $? "Set ./config.toml"
 
 
@@ -35,11 +35,11 @@ chroot_check $? "chown ./install"
 cp -a install/* /
 chroot_check $? "cp install/*"
 
-cp /opt/physix/build-scripts/utils/configs/rustc/ld.so.conf /etc/ld.so.conf
+cp /opt/physix/build-scripts/04-utils/configs/rustc/ld.so.conf /etc/ld.so.conf
 chroot_check $? "Set /etc/ld.so.conf"
 ldconfig
 
-cp /opt/physix/build-scripts/utils/configs/rustc/rustc.sh /etc/profile.d/rustc.sh
+cp /opt/physix/build-scripts/04-utils/configs/rustc/rustc.sh /etc/profile.d/rustc.sh
 chroot_check $? "Set /etc/profile.d/rustc.sh"
 
 source /etc/profile.d/rustc.sh

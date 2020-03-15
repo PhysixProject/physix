@@ -92,7 +92,7 @@
         "10":{   
                 "group": "04-utils",
                 "build_script": "4.110-cracklib.sh",
-                "archives": ["cracklib-2.9.7.tar.bz2"],
+                "archives": ["cracklib-2.9.7.tar.bz2", "cracklib-words-2.9.7.bz2"],
                 "patches": [],
                 "sources": {
 			"http://physixproject.org/source/cracklib-2.9.7.tar.bz2":"0d68de25332cee5660850528a385427f",
@@ -297,7 +297,7 @@
                 "group": "04-utils",
                 "build_script": "4.550-zip.sh",
                 "archives": ["zip30.tar.gz"],
-                "patches": [""],
+                "patches": [],
                 "sources": {
 			"http://physixproject.org/source/zip30.tar.gz":"7b74551e63f8ee6aab6fbc86676c0d37"
 		}
@@ -378,9 +378,10 @@
                 "group": "04-utils",
                 "build_script": "4.410-docbook-nons.sh",
                 "archives": ["docbook-xsl-nons-1.79.2.tar.bz2"],
-                "patches": [],
+                "patches": ["docbook-xsl-nons-1.79.2-stack_fix-1.patch"],
                 "sources": {
-			"http://physixproject.org/source/docbook-xsl-nons-1.79.2.tar.bz2":"2666d1488d6ced1551d15f31d7ed8c38"
+			"http://physixproject.org/source/docbook-xsl-nons-1.79.2.tar.bz2":"2666d1488d6ced1551d15f31d7ed8c38",
+			"http://physixproject.org/source/docbook-xsl-nons-1.79.2-stack_fix-1.patch":"2666d1488d6ced1551d15f31d7ed8c38"
 		}
         },
         "42":{
@@ -405,10 +406,10 @@
         "44":{
                 "group": "04-utils",
                 "build_script": "4.450-bind-utils.sh",
-                "archives": ["binutils-2.32.tar.xz"],
+                "archives": ["bind-9.14.5.tar.gz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/binutils-2.32.tar.xz":"0d174cdaf85721c5723bf52355be41e6"
+			"http://physixproject.org/source/bind-9.14.5.tar.gz":"27e0a197104bf101051e55fea35c8a4f"
 		}
         },
         "45":{
@@ -460,9 +461,10 @@
                 "group": "04-utils",
                 "build_script": "4.540-autoconf.sh",
                 "archives": ["autoconf-2.13.tar.gz"],
-                "patches": [],
+                "patches": ["autoconf-2.13-consolidated_fixes-1.patch"],
                 "sources": {
-			"http://physixproject.org/source/autoconf-2.13.tar.gz":"9de56d4a161a723228220b0f425dc711"
+			"http://physixproject.org/source/autoconf-2.13.tar.gz":"9de56d4a161a723228220b0f425dc711",
+			"http://physixproject.org/source/autoconf-2.13-consolidated_fixes-1.patch":"9ceaee69e62767770eb473d5242db70d"
 		}
         },
         "51":{
@@ -486,8 +488,8 @@
         "53":{
                 "group": "04-utils",
                 "build_script": "4.620-cmake.sh",
-                "archives": [""],
-                "patches": "",
+                "archives": ["cmake-3.15.2.tar.gz"],
+                "patches": [],
                 "sources": {
 			"http://physixproject.org/source/cmake-3.15.2.tar.gz":"9ecf167edadb87e2d75cc89fded7aadb"
 		}
@@ -531,10 +533,12 @@
         "58":{
                 "group": "04-utils",
                 "build_script": "4.670-llvm.sh",
-                "archives": ["llvm-8.0.1.src.tar.xz"],
+                "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/llvm-8.0.1.src.tar.xz":"9a3b63df01c52556f7afb5617934e79e"
+			"http://physixproject.org/source/llvm-8.0.1.src.tar.xz":"9a3b63df01c52556f7afb5617934e79e",
+			"http://physixproject.org/source/cfe-8.0.1.src.tar.xz":"28db72b57ca99307259773e4ac74a6d3",
+			"http://physixproject.org/source/compiler-rt-8.0.1.src.tar.xz":"c251e582862f9fcc880802f8f2920096"
 		}
         },
         "59":{

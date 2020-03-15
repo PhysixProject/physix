@@ -348,7 +348,7 @@ def setup(config):
 
     ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/'])
     validate(ret_tpl, "Move physix repo to /mnt/physix/opt/")
-
+    # Set owner and perms of /opt/physix to physix:root 750
 
 #---------------------------------------------
 #---------------------------------------------
@@ -391,8 +391,6 @@ def build_toolchain(recipe, context, build_num=0):
 def build_recipe(recipe, context, build_num):
     """ Build recipe """
 
-    #pull_sources(recipe, "/opt/sources.physix")
-
     for i in range(build_num, len(recipe)):
         element = recipe[str(i)]
 
@@ -402,15 +400,14 @@ def build_recipe(recipe, context, build_num):
             error("refresh_build_box")
 
         unpack(element, context)
-        #if len(dir_list) == 0:
-        #    sources = ''
-        #else:
-        #    sources = " ".join(dir_list)
 
         """ Dir name of First tarball in list, is passed as arg to the 
             build script """
-        Z = "/mnt/physix/opt/sources.physix/BUILDBOX" + element["archives"][0]
-        build_src = top_most_dir(Z)
+        if element["archives"] != []:
+            bsp = "/opt/sources.physix/"+ str(element["archives"][0])
+            build_src = top_most_dir(bsp)
+        else:
+            build_src = ''
 
         subcmd = os.path.join('/opt/physix/build-scripts/',
                               str(element["group"]),
@@ -561,13 +558,16 @@ def run_cmd_live(cmd):
 # Output: string -  top most directory from archive
 #-----------------------------------------------------
 def top_most_dir(archive_path):
-    """ Return direcetory name encaped in tar archive """
+    """ Return name of directory encapsolated in the tar archive """
     archive_path = archive_path.strip().strip("\n")
     if not os.path.exists(archive_path):
         error("Expected path does not exist: " + archive_path)
     with tarfile.open(archive_path, mode='r') as archive:
-        return str(os.path.commonprefix(archive.getnames()))
-
+        tmd = str(os.path.commonprefix(archive.getnames()))
+        ''' Sometimes a path is returned '''
+        tmd_lst = tmd.split("/")
+        name_lst = list(filter(len, tmd_lst))
+        return str(name_lst[0])
 
 #---------------------------------------------
 #---------------------------------------------
@@ -650,8 +650,8 @@ def unpack(element, context):
 
     for archive in element["archives"]: 
         archive_path = src_path + archive
+        info('Unpacking:'+archive)
         if ('tar' in archive) or ('tgz' in archive):
-            info('Unpacking:'+archive)
             ret_tpl = run_cmd(['tar', 'xf', archive_path, '-C', bb_path])
             validate(ret_tpl, 'unpack to buildbox :' + archive_path)
         elif 'bz2' in archive:
@@ -686,9 +686,11 @@ if __name__ == '__main__':
     parser.add_option("-b", "--build-recipe", dest="build_recipe",
                       help="Build Recipe", metavar="")
     parser.add_option("-a", "--start", dest="start_number",
-                      help="build recipe starting at line N", metavar="")
+                      help="build recipe starting at line number A", metavar="")
     parser.add_option("-z", "--stop", dest="stop_number",
-                      help="build recipe no further than line N", metavar="")
+                      help="build recipe no further than line number Z", metavar="")
+    parser.add_option("-p", "--pull-sources", dest="pull_sources",
+                      help="Download sources from from/for a recipe", metavar="")
     parser.add_option("-f", "--file-snopshot", dest="file_snap",
                       help="Record md5sum of all files under core systemd directoryes", metavar="")
 
@@ -760,7 +762,7 @@ if __name__ == '__main__':
 
         info("------------------------------------")
         info("- Toolchain Build Completete!")
-        info("- Next Step: Build the toolchain.")
+        info("- Next Step: Build the Base System.")
         info("- ./physix-tool -s 02-base-system.json ")
         info("------------------------------------")
 
@@ -800,3 +802,14 @@ if __name__ == '__main__':
         RECIPE_NAME = str(options.build_recipe)
         RECIPE = load_recipe(RECIPE_NAME)
         build_recipe(RECIPE, "CHRT", START)
+
+
+    if options.pull_sources:
+        RECIPE_NAME = str(options.pull_sources)
+        RECIPE = load_recipe(RECIPE_NAME)
+        info("Downloading Sources: "+RECIPE_NAME)
+        pull_sources(recipe, "/mnt/physix/opt/sources.physix")
+
+
+
+
