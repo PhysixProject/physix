@@ -341,11 +341,6 @@ def setup(config):
     ret_tpl = run_cmd(['chmod', '750', sources_dir])
     validate(ret_tpl, "chmod 750 "+sources_dir)
 
-    info("Downloading Sources")
-    if config['CONF_UTILS'] != '':
-        recipe = load_recipe(config['CONF_UTILS'])
-        pull_sources(recipe, "/mnt/physix/opt/sources.physix")
-
     ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/'])
     validate(ret_tpl, "Move physix repo to /mnt/physix/opt/")
     # Set owner and perms of /opt/physix to physix:root 750
@@ -643,22 +638,35 @@ def unpack(element, context):
     if not os.path.exists(bb_path):
         os.mkdir(bb_path, 0o755)
 
+    # cp include.sh to BUILDBOX
+
+    # cp build.conf to BUILDBOX
+
     for patch in element["patches"]:
         patch_path = src_path + patch
         ret_tpl = run_cmd(['cp', patch_path, bb_path])
         validate(ret_tpl, 'move patch')
 
     for archive in element["archives"]: 
-        archive_path = src_path + archive
         info('Unpacking:'+archive)
+        archive_path = src_path + archive
+
+        if not os.path.exists(archive_path):
+            error("Archive not found: "+archive_path)
+
+        # Move archive to buildbox
+        # Then extract it in place
+
         if ('tar' in archive) or ('tgz' in archive):
             ret_tpl = run_cmd(['tar', 'xf', archive_path, '-C', bb_path])
             validate(ret_tpl, 'unpack to buildbox :' + archive_path)
         elif 'bz2' in archive:
             asrc = src_path + archive
             adest = bb_path + archive
+
             ret_tpl = run_cmd(['cp', asrc, bb_path])
             validate(ret_tpl, 'cp to BUILDBOX: ' + asrc)
+
             ret_tpl = run_cmd(['bunzip2', '-dk', adest])
             validate(ret_tpl, 'bunzip2: ' + adest)
 
@@ -794,6 +802,14 @@ if __name__ == '__main__':
         RECIPE = load_recipe(RECIPE_NAME)
         config_base_system(RECIPE, "NON-CHRT", START)
 
+        info("------------------------------------")
+        info("- Base System Configured!")
+        info("- Next Steps:")
+        info("- 1 . Pull Utility sources")
+        info("      physix-tool -p 04-utils.json")
+        info("- 2   reboot ") 
+        info("------------------------------------")
+
 
     if options.build_recipe:
         logging.basicConfig(filename='/opt/logs.physix/physix-build.log',
@@ -808,7 +824,7 @@ if __name__ == '__main__':
         RECIPE_NAME = str(options.pull_sources)
         RECIPE = load_recipe(RECIPE_NAME)
         info("Downloading Sources: "+RECIPE_NAME)
-        pull_sources(recipe, "/mnt/physix/opt/sources.physix")
+        pull_sources(RECIPE, "/opt/sources.physix")
 
 
 

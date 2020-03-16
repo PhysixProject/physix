@@ -45,7 +45,8 @@ will make more sense as to how the system is built.
    'physix-tool -s 02-base-system.json' 
 
 3. Configure the base system:
-   'physix-tool -s 03-config-base.json'
+   'physix-tool -c 03-config-base.json'
+
 
 
 
