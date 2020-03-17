@@ -2,6 +2,7 @@
 import os
 import sys
 import json
+import enum
 import tarfile
 import logging
 import datetime
@@ -9,21 +10,26 @@ import subprocess
 from optparse import OptionParser
 
 BUILDROOT = "/mnt/physix"
+FAILURE = 1
+SUCCESS = 0
 
 #---------------------------------------------
 # INIT FUNCTIONS
 #---------------------------------------------
-def validate(rtn, msg, report=False):
-    """ Verify return code and log appropriate message """
-    rcode = int(rtn[0])
+def validate(rtn_tpl, msg, report=False):
+    """ Log appropriate message based on return code"""
+    rtn = False 
+    rcode = int(rtn_tpl[0])
+
     if rcode == 0:
+        rtn = True
         if report == True:
             ok(msg)
-        else:
-            return
 
     if rcode != 0:
         error(msg)
+
+    return rtn
 
 
 def info(msg):
@@ -37,7 +43,6 @@ def error(msg):
     msg = "\033[0;31;48m [ERROR] \033[0m " + msg
     print(msg)
     logging.error(msg)
-    sys.exit(1)
 
 
 # \e[92m[OK]\e[0m
@@ -90,8 +95,6 @@ def verify_checker(config):
         msg = "".join(["Found Existing partition(s) on: /dev/", root_dev,
                        "Please remove them and restart this opperation"])
         error(msg)
-        #error("Found Existing partition(s) on:
-        #/dev/"+root_dev+"\nPlease remove them and restart this opperation")
         return False
 
     return True
@@ -102,30 +105,34 @@ def verify_checker(config):
 def create_partitions(config):
     """ config : {} """
     root_device = "/dev/" + config["CONF_ROOT_DEVICE"]
-    root_device = root_device.strip("\n")
+    rtn = root_device = root_device.strip("\n")
 
     # UEFI 1
     uefi_size = config["CONF_UEFI_PART_SIZE"].strip("\n")
     #cmd = ["parted", root_device, "mkpart", "primary", "1", uefi_size]
     ret_tpl = run_cmd(["parted", root_device, "mkpart", "primary", "1", uefi_size])
-    validate(ret_tpl, "Create UEFI Partition")
+    if not validate(ret_tpl, "Create UEFI Partition"):
+        return False
 
     # BOOT PART
     boot_size = config["CONF_BOOT_PART_SIZE"].strip("\n")
     boot_boundery = str(int(uefi_size) + int(boot_size))
     #cmd = ['parted', root_device, "mkpart", "primary", uefi_size, boot_boundery]
     ret_tpl = run_cmd(['parted', root_device, "mkpart", "primary", uefi_size, boot_boundery])
-    validate(ret_tpl, "Create /boot Partition")
+    if not validate(ret_tpl, "Create /boot Partition"):
+        return False
 
     psize = config['CONF_PHYS_ROOT_PART_SIZE'].strip("\n")
     phys_boundery = str(int(boot_boundery) + int(psize))
     #cmd = ['parted', root_device, "mkpart", "primary", boot_boundery, phys_boundery]
     ret_tpl = run_cmd(['parted', root_device, "mkpart", "primary", boot_boundery, phys_boundery])
-    validate(ret_tpl, "Create ROOT Partition")
+    if not validate(ret_tpl, "Create ROOT Partition"):
+        return False
 
     #cmd = ['parted', root_device, 'set', '1', 'boot', 'on']
     ret_tpl = run_cmd(['parted', root_device, 'set', '1', 'boot', 'on'])
-    validate(ret_tpl, "Boot Flag Set to "+root_device)
+    if not validate(ret_tpl, "Boot Flag Set to "+root_device):
+        return False
 
     return True
 
@@ -138,36 +145,44 @@ def create_volumes(config):
     system_root = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n')
     system_root = system_root + "3"
     ret_tpl = run_cmd(['pvcreate', '-ff', '-y', system_root])
-    validate(ret_tpl, "Physical Volume Create: "+system_root)
+    if not validate(ret_tpl, "Physical Volume Create: "+system_root):
+        return False
 
     vol_group_name = config["CONF_VOL_GROUP_NAME"].strip("\n")
     #cmd = ['vgcreate', '-ff', vol_group_name, system_root]
     ret_tpl = run_cmd(['vgcreate', '-ff', vol_group_name, system_root])
-    validate(ret_tpl, "")
+    if not validate(ret_tpl, ""):
+        return False
 
     root_vol_size = str(config["CONF_LOGICAL_ROOT_SIZE"].strip('\n'))+"G"
     ret_tpl = run_cmd(['lvcreate', '--yes', '-L', root_vol_size, '-n', 'root', vol_group_name])
-    validate(ret_tpl, "Volume Create: root")
+    if not validate(ret_tpl, "Volume Create: root"):
+        return False
 
     home_vol_size = str(config["CONF_LOGICAL_HOME_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", home_vol_size, '-n', 'home', vol_group_name])
-    validate(ret_tpl, "Volume Create: home")
+    if not validate(ret_tpl, "Volume Create: home"):
+        return False
 
     var_vol_size = str(config["CONF_LOGICAL_VAR_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", var_vol_size, '-n', 'var', vol_group_name])
-    validate(ret_tpl, "Volume Create: var")
+    if not validate(ret_tpl, "Volume Create: var"):
+        return False
 
     usr_vol_size = str(config["CONF_LOGICAL_USR_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", usr_vol_size, '-n', 'usr', vol_group_name])
-    validate(ret_tpl, "Volume Create: usr")
+    if not validate(ret_tpl, "Volume Create: usr"):
+        return False
 
     opt_vol_size = str(config["CONF_LOGICAL_OPT_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", opt_vol_size, '-n', 'opt', vol_group_name])
-    validate(ret_tpl, "Volume Create: opt")
+    if not validate(ret_tpl, "Volume Create: opt"):
+        return False
 
     tmp_vol_size = str(config["CONF_LOGICAL_TMP_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", tmp_vol_size, '-n', 'tmp', vol_group_name])
-    validate(ret_tpl, "Volume Create: opt")
+    if not validate(ret_tpl, "Volume Create: opt"):
+        return False
 
     return True
 
@@ -182,35 +197,43 @@ def format_volumes(config):
 
     part1 = system_root + "1"
     ret_tpl = run_cmd(['mkfs.fat', part1])
-    validate(ret_tpl, "mkfs.fat: " + part1)
+    if not validate(ret_tpl, "mkfs.fat: " + part1):
+        return False
 
     part2 = system_root + "2"
     ret_tpl = run_cmd(['mkfs.ext2', part2])
-    validate(ret_tpl, "mkfs.ext2: " + part2)
+    if not validate(ret_tpl, "mkfs.ext2: " + part2):
+        return False
 
     physix_root = "/dev/mapper/" + vol_group_name + "-root"
     ret_tpl = run_cmd(['mkfs.ext4', physix_root])
-    validate(ret_tpl, "mkfs.ext4: " + physix_root)
+    if not validate(ret_tpl, "mkfs.ext4: " + physix_root):
+        return False
 
     physix_home = "/dev/mapper/" + vol_group_name + "-home"
     ret_tpl = run_cmd(['mkfs.ext4', physix_home])
-    validate(ret_tpl, "mkfs.ext4: " + physix_home)
+    if not validate(ret_tpl, "mkfs.ext4: " + physix_home):
+        return False
 
     physix_var = "/dev/mapper/" + vol_group_name + "-var"
     ret_tpl = run_cmd(['mkfs.ext4', physix_var])
-    validate(ret_tpl, "mkfs.ext4: " + physix_var)
+    if not validate(ret_tpl, "mkfs.ext4: " + physix_var):
+        return False
 
     physix_usr = "/dev/mapper/" + vol_group_name + "-usr"
     ret_tpl = run_cmd(['mkfs.ext4', physix_usr])
-    validate(ret_tpl, "mkfs.ext4: " + physix_usr)
+    if not validate(ret_tpl, "mkfs.ext4: " + physix_usr):
+        return False
 
     physix_opt = "/dev/mapper/" + vol_group_name + "-opt"
     ret_tpl = run_cmd(['mkfs.ext4', physix_opt])
-    validate(ret_tpl, "mkfs.ext4: " + physix_opt)
+    if not validate(ret_tpl, "mkfs.ext4: " + physix_opt):
+        return False
 
     physix_tmp = "/dev/mapper/" + vol_group_name + "-tmp"
     ret_tpl = run_cmd(['mkfs.ext4', physix_tmp])
-    validate(ret_tpl, "mkfs.ext4: " + physix_tmp)
+    if not validate(ret_tpl, "mkfs.ext4: " + physix_tmp):
+        return False
 
     return True
 
@@ -226,40 +249,98 @@ def mount_volumes(config):
 
     volume_root = "/dev/mapper/" + vol_group_name + "-root"
     ret_tpl = run_cmd(['mount', volume_root, BUILDROOT])
-    validate(ret_tpl, "Mount: "+volume_root)
+    if not validate(ret_tpl, "Mount: "+volume_root):
+        return False
 
     mnt_point = BUILDROOT + "/home"
     os.mkdir(mnt_point, 0o755)
     volume_home = "/dev/mapper/" + vol_group_name + "-home"
     ret_tpl = run_cmd(['mount', volume_home, mnt_point])
-    validate(ret_tpl, "Mount: " + volume_home)
+    if not validate(ret_tpl, "Mount: " + volume_home):
+        return False
 
     var = BUILDROOT + "/var"
     os.mkdir(var, 0o755)
     volume_var = "/dev/mapper/" + vol_group_name + "-var"
     mnt_point = BUILDROOT + "/var"
     ret_tpl = run_cmd(['mount', volume_var, mnt_point])
-    validate(ret_tpl, "Mount: " + volume_var)
+    if not validate(ret_tpl, "Mount: " + volume_var):
+        return False
 
     usr = BUILDROOT + "/usr"
     os.mkdir(usr, 0o755)
     volume_usr = "/dev/mapper/" + vol_group_name + "-usr"
     mnt_point = BUILDROOT + "/usr"
     ret_tpl = run_cmd(['mount', volume_usr, mnt_point])
-    validate(ret_tpl, "Mount: " + volume_usr)
+    if not validate(ret_tpl, "Mount: " + volume_usr):
+        return False
 
     opt = BUILDROOT + "/opt"
     os.mkdir(opt, 0o755)
     volume_opt = "/dev/mapper/" + vol_group_name + "-opt"
     mnt_point = BUILDROOT + "/opt"
     ret_tpl = run_cmd(['mount', volume_opt, mnt_point])
-    validate(ret_tpl, "Mount: " + volume_opt)
+    if not validate(ret_tpl, "Mount: " + volume_opt):
+        return False
 
     boot = BUILDROOT + "/boot"
     os.mkdir(boot, 0o755)
     boot_part = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n') + "2"
     ret_tpl = run_cmd(['mount', boot_part, boot])
-    validate(ret_tpl, "Mount: " + boot_part)
+    if not validate(ret_tpl, "Mount: " + boot_part):
+        return False
+
+    return True
+
+
+def get_sources_prefix(context):
+    if context == "CHRT":
+        return '/opt/sources.physix/'
+    elif context == "NON-CHRT":
+        return '/mnt/physix/opt/sources.physix/'
+    else:
+        error("get_sources_prefix: Unknown context")
+        return False
+
+def get_physix_prefix(context):
+    if context == "CHRT":
+        return '/opt/physix/'
+    elif context == "NON-CHRT":
+        return '/mnt/physix/opt/physix/'
+    else:
+        error("get_physix_prefix: Unknown context")
+        return False
+
+
+def verify_file_md5(fname, rmd5, context):
+    prefix = get_sources_prefix(context)
+    fname = prefix + fname
+
+    ret_tpl = run_cmd(['md5sum', fname])
+    if ret_tpl[0] == 0:
+        cmpr_md5 = ret_tpl[1].split(' ')[0]
+        cmpr_md5 = cmpr_md5.replace("b'", "")
+        if cmpr_md5 == rmd5:
+            ok("MD5 Verified: "+fname+" : "+cmpr_md5)
+            return True
+        else:
+            error("MD5 Verified: "+fname+" : "+cmpr_md5 +":"+rmd5)
+    return False
+
+
+#----------------------------------------------------
+#----------------------------------------------------
+def verify_recipe_md5(recipe, context):
+    for i in range(len(recipe['build_queue'])):
+        element = recipe[str(i)]
+        sources = element['sources']
+
+        for url in sources.keys():
+            rmd5 = sources[url]
+            archv_name = url.split("/")[-1]
+
+            if not verify_file_md5(archv_name, rmd5, context):
+                return False
 
     return True
 
@@ -269,10 +350,7 @@ def mount_volumes(config):
 def pull_sources(recipe, dest):
     """ Download sources """
     dir_prefix = '--directory-prefix=' + dest
-    rsize = len(recipe)
-
-    #if not os.path.exists("/mnt/physix/opt/sources.physix/"):
-    #    os.mkdir("/mnt/physix/opt/sources.physix/", 0o755)
+    rsize = len(recipe['build_queue'])
 
     if not os.path.exists(dest):
         os.mkdir(dest, 0o755)
@@ -288,13 +366,61 @@ def pull_sources(recipe, dest):
     for url in pull_lst:
         if url:
             ret_tpl = run_cmd(['wget', '-q', '--continue', dir_prefix, url])
-            validate(ret_tpl, "Download:"+url, True)
+            if not validate(ret_tpl, "Download: "+url, True):
+                return False
 
+    return True
+
+
+def setup_build_env(element, context):
+    """ Setup build directory. Returns boolean on success/failure """
+    src_prefix = get_sources_prefix(context)
+    if src_prefix == False:
+        return False
+    #bb_path = src_prefix + "BUILDBOX"
+    bb_path = os.path.join(src_prefix, "BUILDBOX")
+
+    if not refresh_build_box(context):
+        error("refresh_build_box")
+        return False
+
+    physix_prefix = get_physix_prefix(context)
+    if physix_prefix == False:
+        return False 
+
+    # cp include.sh to BUILDBOX
+    #include = physix_prefix + "include.sh"
+    include = os.path.join(physix_prefix, "include.sh")
+    ret_tpl = run_cmd(['cp', include, bb_path])
+    if not validate(ret_tpl, 'Copy include.sh to BUILDBOX'):
+        return False
+
+    # cp build.conf to BUILDBOX
+    #buildconf = physix_prefix + "build.conf"
+    buildconf =  os.path.join(physix_prefix, "build.conf")
+    ret_tpl = run_cmd(['cp', buildconf, bb_path])
+    if not validate(ret_tpl, 'Copy build.conf to BUILDBOX'):
+        return False
+
+    for patch in element["patches"]:
+        #patch_path = src_path + patch
+        patch_path = os.path.join(src_prefix, patch)
+        ret_tpl = run_cmd(['cp', patch_path, bb_path])
+        if not validate(ret_tpl, 'Copy patch to BUILDBOX'):
+            return False
+
+    for archive in element["archives"]:
+        #archive_path = src_path + archive
+        archive_path = os.path.join(src_prefix, archive)
+        ret_tpl = run_cmd(['cp', archive_path, bb_path])
+        if not validate(ret_tpl, 'Copy archive to BUILDBOX'):
+            return False
+    return True
 
 #---------------------------------------------
 #--------------------------------------------
 def setup(config):
-    """ Setup environment for systemd build """
+    """ Setup environment for system build """
     if not os.path.exists(BUILDROOT+"/opt/logs.physix"):
         os.mkdir(BUILDROOT+"/opt/logs.physix", 777)
     if not os.path.exists(BUILDROOT+"/opt/sources.physix"):
@@ -302,73 +428,89 @@ def setup(config):
 
     # First find bash
     ret_tpl = run_cmd(['ln', '-sfv', '/usr/bin/bash', '/usr/bin/sh'])
-    validate(ret_tpl, "link bash to 'sh/bash'")
+    if not validate(ret_tpl, "link bash to 'sh/bash'"):
+        return False
 
     # First find gawk
     ret_tpl = run_cmd(['ln', '-sfv', '/usr/bin/gawk', '/usr/bin/awk'])
-    validate(ret_tpl, "link gawk to 'awk/gawk'")
+    if not validate(ret_tpl, "link gawk to 'awk/gawk'"):
+        return False
 
     # First find bison
     ret_tpl = run_cmd(['ln', '-sfv', '/usr/bin/bison', '/usr/bin/yacc'])
-    validate(ret_tpl, "link gawk to 'yacc/bison'")
+    if not validate(ret_tpl, "link gawk to 'yacc/bison'"):
+        return False
 
     tools = BUILDROOT+"/tools"
     ret_tpl = run_cmd(['ln', '-sfv', tools, '/'])
-    validate(ret_tpl, "link tools dir")
+    if not validate(ret_tpl, "link tools dir"):
+        return False
 
     (rtn, out, err) = run_cmd(['grep', 'physix', '/etc/passwd'])
     if int(rtn) != 0:
         ret_tpl = run_cmd(['useradd', '-s', '/bin/bash', '-m', 'physix'])
-        validate(ret_tpl, "useradd physix")
+        if not validate(ret_tpl, "useradd physix"):
+            return False
 
     src = str(os.getcwd()) + "/build-scripts/03-base-config/configs/physix-bashrc"
     dest = "/home/physix/.bashrc"
     ret_tpl = run_cmd(['cp', src, dest])
-    validate(ret_tpl, "set physix user's .bashrc file")
+    if not validate(ret_tpl, "set physix user's .bashrc file"):
+        return False
 
     tools_dir = BUILDROOT + "/tools"
     os.mkdir(tools_dir, 0o755)
     ret_tpl = run_cmd(['chown', '-v', 'physix', tools_dir])
-    validate(ret_tpl, "chown "+tools_dir)
+    if not validate(ret_tpl, "chown "+tools_dir):
+        return False
 
     ret_tpl = run_cmd(['chmod', '750', tools_dir])
-    validate(ret_tpl, "chmod 770 "+tools_dir)
+    if not validate(ret_tpl, "chmod 770 "+tools_dir):
+        return False
 
     sources_dir = BUILDROOT + "/opt/sources.physix"
     ret_tpl = run_cmd(['chown', '-v', 'physix', sources_dir])
-    validate(ret_tpl, "chown "+sources_dir)
+    if not validate(ret_tpl, "chown "+sources_dir):
+        return False
 
     ret_tpl = run_cmd(['chmod', '750', sources_dir])
-    validate(ret_tpl, "chmod 750 "+sources_dir)
+    if not validate(ret_tpl, "chmod 750 "+sources_dir):
+        return False
 
     ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/'])
-    validate(ret_tpl, "Move physix repo to /mnt/physix/opt/")
+    if not validate(ret_tpl, "Move physix repo to /mnt/physix/opt/"):
+        return False
     # Set owner and perms of /opt/physix to physix:root 750
+
+    return True
 
 #---------------------------------------------
 #---------------------------------------------
 def build_toolchain(recipe, context, build_num=0):
     """ Build the temorary toolchain from recipe """
-    pull_sources(recipe, "/mnt/physix/opt/sources.physix")
 
-    for i in range(build_num, len(recipe)):
-        element = recipe[str(i)]
+    for i in range(build_num, len(recipe['build_queue'])):
+        buildq = recipe['build_queue']
+        build_id = str(buildq[i])
+        element  = recipe[build_id]
 
         stat = " ".join(["Build [", str(i), "/", str(len(recipe)), "] Toolchain" ] )
         info(stat)
-        if not refresh_build_box("NON-CHRT"):
-            error("refresh_build_box")
+
+        if not setup_build_env(element, context):
+            return False
 
         ''' Fails on error '''
-        unpack(element, context)
-        
+        if False == unpack(element, context):
+            return FAILURE
+
         """ Dir name of First tarball in list is passed as arg to the 
             build script """
+        build_src = ''
         if element["archives"] != []:
-            bsp = "/mnt/physix/opt/sources.physix/"+ str(element["archives"][0])
+            #bsp = "/mnt/physix/opt/sources.physix/"+ str(element["archives"][0])
+            bsp = os.path.join(get_physix_prefix(context), str(element["archives"][0]))
             build_src = top_most_dir(bsp)
-        else:
-            build_src = ''
 
         subcmd = os.path.join('/mnt/physix/opt/physix/build-scripts/',
                               str(element["group"]),
@@ -378,7 +520,10 @@ def build_toolchain(recipe, context, build_num=0):
 
         info("Building " + str(cmd))
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
-        validate(ret_tpl, "Build: " + str(cmd), True)
+        if not validate(ret_tpl, "Build: " + str(cmd), True):
+            return FAILURE
+
+    return True
 
 
 #---------------------------------------------
@@ -386,13 +531,16 @@ def build_toolchain(recipe, context, build_num=0):
 def build_recipe(recipe, context, build_num):
     """ Build recipe """
 
-    for i in range(build_num, len(recipe)):
-        element = recipe[str(i)]
+    for i in range(build_num, len(recipe['build_queue'])):
+        buildq = recipe['build_queue']
+        build_id = str(buildq[i])
+        element  = recipe[build_id]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(recipe)), "]" ] )
+        stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "]" ] )
         info(stat)
-        if not refresh_build_box("CHRT"):
-            error("refresh_build_box")
+
+        if not setup_build_env(element, context):
+            return False
 
         unpack(element, context)
 
@@ -410,8 +558,11 @@ def build_recipe(recipe, context, build_num):
         cmd = [subcmd, build_src]
 
         info("Executing Build: " + "[" + str(build_num) + "] " + str(cmd))
+        #os.chdir('/opt/sources.physix/BUILDBOX')
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), context)
-        validate(ret_tpl, "Build: "+str(cmd), True)
+        #os.chdir('/opt/physix')
+        if not validate(ret_tpl, "Build: "+str(cmd), True):
+            return False
 
 
 #---------------------------------------------
@@ -427,17 +578,19 @@ def build_base(recipe, context, build_num):
         ret_tpl = run_cmd_log(cmd, "2.000-base-build-prep.sh", "")
         validate(ret_tpl, "Build: " + str(cmd))
 
-    pull_sources(recipe, "/mnt/physix/opt/sources.physix")
-
-    for i in range(build_num, len(recipe)):
+    for i in range(build_num, len(recipe['build_queue'])):
         element = recipe[str(i)]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(recipe)), "] Base System" ] )
+        stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "] Base System" ] )
         info(stat)
-        if not refresh_build_box("NON-CHRT"):
-            error("\nRefresh_BUILDBOX")
 
-        unpack(element, context)
+        if not setup_build_env(element, context):
+            error("Failed to stup build_env")
+            return False
+
+        if False == unpack(element, context):
+            error("Failed to unpack")
+            return False
 
         """ Dir name of First tarball in list, is passed as arg to the 
             build script """
@@ -452,7 +605,8 @@ def build_base(recipe, context, build_num):
                build_src]
         info("Executing Build: " + "[" + str(build_num) + "] " + str(cmd))
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
-        validate(ret_tpl, "Build: " + str(cmd), True)
+        if not validate(ret_tpl, "Build: " + str(cmd), True):
+            return False
 
 
 #---------------------------------------------
@@ -460,15 +614,16 @@ def build_base(recipe, context, build_num):
 #---------------------------------------------
 def config_base_system(recipe, context, build_num):
     """ Configure the base system from recipe """
-    pull_sources(recipe, "/mnt/physix/opt/sources.physix")
 
-    for i in range(build_num, len(recipe)):
+    for i in range(build_num, len(recipe['build_queue'])):
         element = recipe[str(i)]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(recipe)), "] Config Base System" ])
+        stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "] Config Base System" ])
         info(stat)
-        if not refresh_build_box("NON-CHRT"):
-            error("refresh_build_box")
+
+        if not setup_build_env(element, context):
+            error("Failed to stup build_env")
+            return False
 
         """ Fails on error """
         unpack(element, context)
@@ -564,17 +719,43 @@ def top_most_dir(archive_path):
         name_lst = list(filter(len, tmd_lst))
         return str(name_lst[0])
 
+
+
+def common_prefix(archive_name, context):
+    src_prefix = get_sources_prefix(context)
+    tmpdir = src_prefix + "BUILDBOX/tmp/"
+    p = src_prefix + "BUILDBOX/" + archive_name
+    q = tmpdir + archive_name
+
+    if os.path.exists(tmpdir):
+        run_cmd(['rm', 'r', tmpdir])
+    run_cmd(['mkdir', tmpdir])
+
+    if ('tar' in archive_name) or ('tgz' in archive_name):
+        ret_tpl = run_cmd(['tar', 'xf', p, '-C', tmpdir])
+        if not validate(ret_tpl, 'unpack to buildbox :' + archive_name):
+            return False
+    elif 'bz2' in archive:
+        ''' Not a tar arvhive, but a straight bz2 compressed file '''
+        ret_tpl = run_cmd(['cp', p, q])
+        if not validate(ret_tpl, 'cp bz2 to tmp'):
+            return False
+        ret_tpl = run_cmd(['bunzip2', '-dk', q])
+        if not validate(ret_tpl, 'bunzip2: ' + q):
+            return False
+
+
+    lst = os.listdir(tmpdir)
+    return lst
+
+
 #---------------------------------------------
 #---------------------------------------------
 def refresh_build_box(context):
     """ Remove and Re-create BUILDBOX """
 
-    if context == "CHRT":
-        bb_path = "/opt/sources.physix/BUILDBOX"
-    elif context == "NON-CHRT":
-        bb_path = "/mnt/physix/opt/sources.physix/BUILDBOX"
-    else:
-        error("in the dirt")
+    prefix = get_sources_prefix(context)
+    bb_path = prefix + "BUILDBOX"
 
     if os.path.exists(bb_path):
         ret_tpl = run_cmd(['rm', '-r', bb_path])
@@ -628,58 +809,230 @@ def unpack(element, context):
 
     # Archives are stored in 1 or 2 paths, depending on
     # whether executed in chrooted or non-chrooted context
-    if context == "CHRT":
-        src_path = "/opt/sources.physix/"
-        bb_path = "/opt/sources.physix/BUILDBOX/"
-    else:
-        src_path = '/mnt/physix/opt/sources.physix/'
-        bb_path = '/mnt/physix/opt/sources.physix/BUILDBOX/'
+    src_path = get_sources_prefix(context)
+    bb_path = src_path + "BUILDBOX/"
 
     if not os.path.exists(bb_path):
-        os.mkdir(bb_path, 0o755)
-
-    # cp include.sh to BUILDBOX
-
-    # cp build.conf to BUILDBOX
-
-    for patch in element["patches"]:
-        patch_path = src_path + patch
-        ret_tpl = run_cmd(['cp', patch_path, bb_path])
-        validate(ret_tpl, 'move patch')
+        error("Build Env Nnt Found")
+        return False
 
     for archive in element["archives"]: 
         info('Unpacking:'+archive)
-        archive_path = src_path + archive
+        archive_path = bb_path + archive
 
         if not os.path.exists(archive_path):
-            error("Archive not found: "+archive_path)
-
-        # Move archive to buildbox
-        # Then extract it in place
+            error("Archive not found in BUILDBOX: "+archive_path)
+            return False
 
         if ('tar' in archive) or ('tgz' in archive):
             ret_tpl = run_cmd(['tar', 'xf', archive_path, '-C', bb_path])
-            validate(ret_tpl, 'unpack to buildbox :' + archive_path)
+            if not validate(ret_tpl, 'unpack to buildbox :' + archive_path):
+                error("Tar Failure")
+                return False
         elif 'bz2' in archive:
-            asrc = src_path + archive
-            adest = bb_path + archive
+            ''' Not a tar arvhive, but a straight bz2 compressed file '''
+            #asrc = src_path + archive
+            #adest = bb_path + archive
 
-            ret_tpl = run_cmd(['cp', asrc, bb_path])
-            validate(ret_tpl, 'cp to BUILDBOX: ' + asrc)
+            #ret_tpl = run_cmd(['cp', asrc, bb_path])
+            #if not validate(ret_tpl, 'cp to BUILDBOX: ' + asrc):
+            #    return False
 
-            ret_tpl = run_cmd(['bunzip2', '-dk', adest])
-            validate(ret_tpl, 'bunzip2: ' + adest)
+            #ret_tpl = run_cmd(['bunzip2', '-dk', adest])
+            #if not validate(ret_tpl, 'bunzip2: ' + adest):
+            #    return False
+            ret_tpl = run_cmd(['bunzip2', '-dk', archive_path])
+            if not validate(ret_tpl, 'bunzip2: ' + archive_path):
+                error("unzip failure")
+                return False
+
 
     # ASSIGN OWNERSHIP TO 'physix'
     ret_tpl = run_cmd(['chown', '--recursive', 'physix:root', bb_path])
-    validate(ret_tpl, "")
+    if not validate(ret_tpl, ""):
+        error("Failed to chown BUILDBOX")
+        return False
 
     return True
 
 
-if __name__ == '__main__':
+def do_partition_init(options):
+    logging.basicConfig(filename='/tmp/physix-build.log', level=logging.DEBUG)
+    
+    BUILD_CONFIG = load_build_config(options.build_conf)
 
-    START = 0
+    # rename sysreq_check
+    if not verify_checker(BUILD_CONFIG):
+        error("Systemd Requirement check")
+        return FAILURE
+    ok("Systemd Requirement check")
+
+    info("Creating Partitions")
+    if not create_partitions(BUILD_CONFIG):
+        error("Creating Partitions")
+        return FAILURE
+    ok("Creating Partitions")
+
+    info("Creating Volumes")
+    if not create_volumes(BUILD_CONFIG):
+        error("Creating Volumes")
+        return FAILURE
+    ok("Create Volumes")
+
+    info("Formating Volumes")
+    if not format_volumes(BUILD_CONFIG):
+        error("Formating Volumes")
+        return FAILURE
+    ok("Format Volumes")
+
+    info("Mounting Volumes")
+    if not mount_volumes(BUILD_CONFIG):
+        error("Mounting Volumes")
+        return FAILURE
+    ok("Mounting Volumes")
+
+    if not setup(BUILD_CONFIG):
+        return FAILURE
+
+    info("------------------------------------")
+    info("- Build initialization completete!")
+    info("- Next Step: Build the toolchain.")
+    info("- 1. cd /mnt/physix/opt/physix")
+    info("- 2. ./physix-tool -t 01-toolchain.json")
+    info("------------------------------------")
+    return SUCCESS
+
+
+def do_toolchain_build(options):
+    start=0
+    if options.start_number:
+        START = int(options.start_number)
+
+    if os.path.exists("/tmp/physix-build.log"):
+        CMD = ['mv', '/tmp/physix-build.log', '/mnt/physix/opt/logs.physix/']
+        if (run_cmd(CMD))[1] != 0:
+            ok("Relocated physix-build.log to /mnt/physix/opt/logs.physix/")
+    logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
+                            level=logging.DEBUG)
+    info("build toolchain...")
+    RECIPE_NAME = str(options.toolchain_conf)
+    RECIPE = load_recipe(RECIPE_NAME)
+
+    if not pull_sources(RECIPE, "/mnt/physix/opt/sources.physix"):
+        return FAILURE
+
+    if not verify_recipe_md5(RECIPE, "NON-CHRT"):
+        return FAILURE
+
+    if not build_toolchain(RECIPE, "NON-CHRT", start):
+        return FAILURE
+
+    info("------------------------------------")
+    info("- Toolchain Build Completete!")
+    info("- Next Step: Build the Base System.")
+    info("- ./physix-tool -s 02-base-system.json ")
+    info("------------------------------------")
+    return SUCCESS
+
+
+def do_base_build(options):
+    start=0
+    if options.start_number:
+        START = int(options.start_number)
+
+    logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
+                            level=logging.DEBUG)
+    info("Building Base System...")
+    RECIPE_NAME = str(options.base_conf)
+    RECIPE = load_recipe(RECIPE_NAME)
+
+    if not pull_sources(RECIPE, "/mnt/physix/opt/sources.physix"):
+        return FAILURE
+
+    if not verify_recipe_md5(RECIPE, "NON-CHRT"):
+        return FAILURE
+
+    if not build_base(RECIPE, "NON-CHRT", start):
+        return FAILURE
+
+    info("------------------------------------")
+    info("- Base System Build Completete!")
+    info("- Next Step: Build the toolchain.")
+    info("- 1. ./physix-tool -c 03-config-base.json")
+    info("------------------------------------")
+    return SUCCESS
+
+
+def do_config_base(options):
+    start=0
+    if options.start_number:
+        start = int(options.start_number)
+
+    logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
+                            level=logging.DEBUG)
+    info("Configure Base System...")
+    info("Building Base System...")
+    RECIPE_NAME = str(options.configure_base_conf)
+    RECIPE = load_recipe(RECIPE_NAME)
+    if not config_base_system(RECIPE, "NON-CHRT", start):
+        return FAILURE
+
+    info("------------------------------------")
+    info("- Base System Configured!")
+    info("- Next Steps:")
+    info("- 1 . Pull Utility sources:")
+    info("        physix-tool -p 04-utilities.json")
+    info("- 2   reboot ")
+    info("------------------------------------")
+    return SUCCESS
+
+
+def do_build_recipe(options):
+    start=0
+    if options.start_number:
+        start = int(options.start_number)
+
+    logging.basicConfig(filename='/opt/logs.physix/physix-build.log',
+                            level=logging.DEBUG)
+    info("Building Recipe")
+    RECIPE_NAME = str(options.build_recipe)
+    RECIPE = load_recipe(RECIPE_NAME)
+    if not build_recipe(RECIPE, "CHRT", start):
+        return FAILURE
+
+    info("------------------------------------")
+    info("- Build Complete")
+    info("------------------------------------")
+    return SUCCESS
+
+
+def do_pull_sources(options):
+    """ "Determint path of sources.physix and call pull_sources() """
+    context = 'NON-CHRT'
+    dest = "/mnt/physix/opt/sources.physix"
+
+    if not os.path.exists(dest):
+        dest = "/opt/sources.physix"
+        context = "CHRT"
+        if not os.path.exists(dest):
+            error("Pull Sources: Invalid Destination")
+            return FAILURE
+
+    info("Downloading Sources to: "+dest)
+    recipe_name = str(options.pull_sources)
+    recipe = load_recipe(recipe_name)
+    if not pull_sources(recipe, dest):
+        return FAILURE
+
+    if not verify_recipe_md5(recipe, context):
+        return FAILURE
+
+    return SUCCESS
+    
+
+def main():
+
+    #START = 0
 
     parser = OptionParser()
     parser.add_option("-i", "--build-init", dest="build_conf",
@@ -709,123 +1062,25 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     print(str(options))
 
-
     if options.build_conf:
-        logging.basicConfig(filename='/tmp/physix-build.log', level=logging.DEBUG)
-
-        BUILD_CONFIG = load_build_config(options.build_conf)
-
-        # rename sysreq_check
-        if not verify_checker(BUILD_CONFIG):
-            error("Systemd Requirement check")
-        ok("Systemd Requirement check")
-
-        info("Creating Partitions")
-        if not create_partitions(BUILD_CONFIG):
-            error("Creating Partitions")
-        ok("Creating Partitions")
-
-        info("Create Volumes")
-        if not create_volumes(BUILD_CONFIG):
-            error("Create Volumes")
-        ok("Create Volumes")
-
-        info("Format Volumes")
-        if not format_volumes(BUILD_CONFIG):
-            error("Format Volumes")
-        ok("Format Volumes")
-
-        info("Mounting Volumes")
-        if not mount_volumes(BUILD_CONFIG):
-            error("Mounting Volumes")
-        ok("Mounting Volumes")
-
-        setup(BUILD_CONFIG)
-
-        info("------------------------------------")
-        info("- Build initialization completete!")
-        info("- Next Step: Build the toolchain.")
-        info("- 1. cd /mnt/physix/opt/physix")
-        info("- 2. ./physix-tool -t 01-toolchain.json")
-        info("------------------------------------")
-
-
-
-    if options.start_number:
-        START = int(options.start_number)
-
-
+        sys.exit(do_partition_init(options))
 
     if options.toolchain_conf:
-        if os.path.exists("/tmp/physix-build.log"):
-            CMD = ['mv', '/tmp/physix-build.log', '/mnt/physix/opt/logs.physix/']
-            if (run_cmd(CMD))[1] != 0:
-                ok("Relocated physix-build.log to /mnt/physix/opt/logs.physix/")
-        logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
-                            level=logging.DEBUG)
-        info("build toolchain...")
-        RECIPE_NAME = str(options.toolchain_conf)
-        RECIPE = load_recipe(RECIPE_NAME)
-        build_toolchain(RECIPE, "NON-CHRT", START)
-
-        info("------------------------------------")
-        info("- Toolchain Build Completete!")
-        info("- Next Step: Build the Base System.")
-        info("- ./physix-tool -s 02-base-system.json ")
-        info("------------------------------------")
-
-
+        sys.exit(do_toolchain_build(options))
 
     if options.base_conf:
-        logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
-                            level=logging.DEBUG)
-        info("Building Base System...")
-        RECIPE_NAME = str(options.base_conf)
-        RECIPE = load_recipe(RECIPE_NAME)
-        build_base(RECIPE, "NON-CHRT", START)
-
-        info("------------------------------------")
-        info("- Base System Build Completete!")
-        info("- Next Step: Build the toolchain.")
-        info("- 1. ./physix-tool -c 03-config-base.json")
-        info("------------------------------------")
-
-
-
+        sys.exit(do_base_build(options))
 
     if options.configure_base_conf:
-        logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
-                            level=logging.DEBUG)
-        info("Configure Base System...")
-        info("Building Base System...")
-        RECIPE_NAME = str(options.configure_base_conf)
-        RECIPE = load_recipe(RECIPE_NAME)
-        config_base_system(RECIPE, "NON-CHRT", START)
-
-        info("------------------------------------")
-        info("- Base System Configured!")
-        info("- Next Steps:")
-        info("- 1 . Pull Utility sources")
-        info("      physix-tool -p 04-utils.json")
-        info("- 2   reboot ") 
-        info("------------------------------------")
-
+        sys.exit(do_config_base(options))
 
     if options.build_recipe:
-        logging.basicConfig(filename='/opt/logs.physix/physix-build.log',
-                            level=logging.DEBUG)
-        info("Building Recipe")
-        RECIPE_NAME = str(options.build_recipe)
-        RECIPE = load_recipe(RECIPE_NAME)
-        build_recipe(RECIPE, "CHRT", START)
-
+        sys.exit(do_build_recipe(options))
 
     if options.pull_sources:
-        RECIPE_NAME = str(options.pull_sources)
-        RECIPE = load_recipe(RECIPE_NAME)
-        info("Downloading Sources: "+RECIPE_NAME)
-        pull_sources(RECIPE, "/opt/sources.physix")
+        sys.exit(do_pull_sources(options))
 
 
-
+if __name__ == '__main__':
+    main()
 

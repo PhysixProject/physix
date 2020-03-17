@@ -13,7 +13,7 @@ su physix -c 'cmake -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_DEFAULT_LIBDIR=lib ..'
 chroot_check $? "cmake"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 make install 

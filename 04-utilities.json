@@ -1,4 +1,12 @@
 {
+	"build_queue": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
+			11 ,12, 13, 14, 15, 16, 17, 18, 19, 20, 
+			21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 
+			31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 
+			41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 
+			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
+			61, 62, 63, 64, 65],
+
 	"0":{
 		"group": "04-utils",
 		"build_script": "4.000-openssh.sh",
@@ -381,7 +389,7 @@
                 "patches": ["docbook-xsl-nons-1.79.2-stack_fix-1.patch"],
                 "sources": {
 			"http://physixproject.org/source/docbook-xsl-nons-1.79.2.tar.bz2":"2666d1488d6ced1551d15f31d7ed8c38",
-			"http://physixproject.org/source/docbook-xsl-nons-1.79.2-stack_fix-1.patch":"2666d1488d6ced1551d15f31d7ed8c38"
+			"http://physixproject.org/source/docbook-xsl-nons-1.79.2-stack_fix-1.patch":"8457bd6ee6b06fbc6dc540e1b096f766"
 		}
         },
         "42":{

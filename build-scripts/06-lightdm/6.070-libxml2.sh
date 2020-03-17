@@ -8,7 +8,7 @@ su physix -c './configure --prefix=/usr  \
               --with-history             \
               --with-python=/usr/bin/python3'
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 make install

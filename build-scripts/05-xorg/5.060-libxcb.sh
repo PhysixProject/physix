@@ -10,7 +10,7 @@ su physix -c "./configure $XORG_CONFIG      \
             --without-doxygen \
             --docdir='${datadir}'/doc/libxcb-1.13.1"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "libxcb :config / make"
 
 make install

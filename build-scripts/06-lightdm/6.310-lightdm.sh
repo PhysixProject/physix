@@ -25,10 +25,10 @@ su physix -c './configure                  \
               --with-greeter-user=lightdm   \
               --with-greeter-session=lightdm-gtk-greeter \
               --docdir=/usr/share/doc/lightdm-1.30.0'
-chroot_check $? "configure"
+chroot_check $? "configure lightdm"
 
-su physix -c 'make'
-chroot_check $? "make"
+su physix -c "make -j$NPROC"
+chroot_check $? "make lightdm"
 
 make install                                                  &&
 cp tests/src/lightdm-session /usr/bin                         &&
@@ -55,15 +55,15 @@ su physix -c './configure                   \
               --disable-libindicator        \
               --disable-static              \
               --docdir=/usr/share/doc/lightdm-gtk-greeter-2.0.6'
+chroot_check $? "configure lightdm-greeter"
 
-su physix -c 'make'
-chroot_check $? "make"
+su physix -c "make -j$NPROC"
+chroot_check $? "make lightdm-greeter"
 
 make install
-chroot_check $? "make install"
+chroot_check $? "make install lightdm-greeter"
 
 cp -v /opt/physix/build-scripts/06-lightdm/configs/lightdm/lightdm.service /lib/systemd/system/
-
 chroot_check $? "setup /lib/systemd/system/"
 
 systemctl enable lightdm

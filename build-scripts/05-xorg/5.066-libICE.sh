@@ -6,7 +6,7 @@ cd $SOURCE_DIR/$1 || exit 3
 su physix -c "./configure $XORG_CONFIG ICE_LIBS=-lpthread"
 chroot_check $? "configure" 
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make "
 
 make install

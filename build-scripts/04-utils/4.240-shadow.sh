@@ -52,7 +52,11 @@ cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/su /etc/pam.d/       
 cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/ssh /etc/pam.d/             &&
 cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/groupadd /etc/pam.d/        &&
 cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/useradd /etc/pam.d/         &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/passwd /etc/pam.d/
+cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/passwd /etc/pam.d/          &&
+cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-auth /etc/pam.d/     &&
+cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-account /etc/pam.d/  &&
+cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-session /etc/pam.d/  &&
+cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-password /etc/pam.d/
 chroot_check $? "Writing /etc/pam.d/ config files"
 
 

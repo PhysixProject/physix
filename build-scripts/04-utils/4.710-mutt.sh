@@ -20,7 +20,7 @@ su physix -c 'cp -v doc/manual.txt{,.shipped} &&
             --enable-sidebar'
 chroot_check $? "mutt : configure"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "mutt : make"
 
 make install &&

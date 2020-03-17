@@ -1,11 +1,4 @@
 
-0. pkgs should be downloaded to /usr/src/sources.physix
-   - Owned by physix
-
-1. And the physix repo should be rooted at /usr/src/physix
-   - Ensures that the repo is located in a dir only access by root
-   - Ensures root is the owner 
-
 2. For the moment, docbook zip pkgs have been repackaqged as ta tar.gz
    to fit the process, but this case could be handled.
 

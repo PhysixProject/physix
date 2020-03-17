@@ -15,7 +15,7 @@ cd $SOURCE_DIR/$1 || exit 1
 su physix -c './configure --prefix=/usr'
 chroot_check $? "configure"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 make install

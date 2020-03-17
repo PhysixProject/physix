@@ -6,7 +6,7 @@ cd $SOURCE_DIR/$1 || exit 3
 su physix -c "./configure $XORG_CONFIG"
 chroot_check $? "xcb: configure and make"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "xcb : make"
 
 make install

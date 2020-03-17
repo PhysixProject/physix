@@ -3,9 +3,7 @@
 
 export BUILDROOT='/mnt/physix'
 export BR_SOURCE_DIR=$BUILDROOT/opt/sources.physix/BUILDBOX
-#export SOURCE_DIR=/usr/src/physix/sources
 export SOURCE_DIR=/opt/sources.physix/BUILDBOX
-#export LOG_DIR=/var/log/physix/build-logs/
 
 [ -e /mnt/physix/opt/physix/build.conf ] && source /mnt/physix/opt/physix/build.conf
 [ -e /opt/physix/build.conf ] && source /opt/physix/build.conf

@@ -12,7 +12,7 @@ chroot_check $? "autoreconf"
 su physix -c './configure --prefix=/usr --sysconfdir=/etc'
 chroot_check $? "configure"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 make docdir=/usr/share/doc install &&

@@ -12,7 +12,7 @@ chroot_check $? "screen : configure"
 
 su physix -c 'sed -i -e "s%/usr/local/etc/screenrc%/etc/screenrc%" {etc,doc}/*'
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "screen : make"
 
 make install &&

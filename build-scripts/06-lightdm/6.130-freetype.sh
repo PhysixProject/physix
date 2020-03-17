@@ -11,7 +11,7 @@ chroot_check $? 'sed 2'
 su physix -c './configure --prefix=/usr --enable-freetype-config --disable-static'
 chroot_check $? 'configure'
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 make install 

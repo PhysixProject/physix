@@ -8,7 +8,7 @@ cd ./build
 su physix -c './configure --prefix=/usr'
 chroot_check $? "configure"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 make install

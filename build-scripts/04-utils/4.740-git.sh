@@ -5,7 +5,7 @@ cd $SOURCE_DIR/$1 || exit 1
 su physix -c './configure --prefix=/usr --with-gitconfig=/etc/gitconfig'
 chroot_check $? "git : configure"
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "git : make"
 
 make install
