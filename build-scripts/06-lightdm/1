@@ -6,12 +6,12 @@ cd ./build
 su physix -c "meson --prefix=/usr     \
               -Dcolord=yes      \
               -Dgtk_doc=false   \
-              -Dman=false        \
+              #-Dman=true        \
               -Dbroadway_backend=true .."
 chroot_check $? "configure"
 
-#su physix -c "sed -i 's/'--nonet'//' build.ninja"
-#chroot_check $? "Remove --nonet"
+su physix -c "sed -i 's/'--nonet'//' build.ninja"
+chroot_check $? "Remove --nonet"
 
 su physix -c 'ninja'
 chroot_check $? "ninja"

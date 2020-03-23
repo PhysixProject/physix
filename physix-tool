@@ -508,8 +508,7 @@ def build_toolchain(recipe, context, build_num=0):
             build script """
         build_src = ''
         if element["archives"] != []:
-            #bsp = "/mnt/physix/opt/sources.physix/"+ str(element["archives"][0])
-            bsp = os.path.join(get_physix_prefix(context), str(element["archives"][0]))
+            bsp = os.path.join(get_sources_prefix(context), str(element["archives"][0]))
             build_src = top_most_dir(bsp)
 
         subcmd = os.path.join('/mnt/physix/opt/physix/build-scripts/',

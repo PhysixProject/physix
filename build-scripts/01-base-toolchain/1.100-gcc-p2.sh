@@ -36,10 +36,6 @@ case $(uname -m) in
   ;;
 esac
 
-#mv -v ../$2 ./mpfr
-#mv -v ../$3 ./gmp
-#mv -v ../$4 ./mpc
-
 mkdir -v build
 cd       build
 

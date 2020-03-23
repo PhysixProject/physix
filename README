@@ -27,13 +27,16 @@ will make more sense as to how this collection of scripts are organised.
 Installation:
 =============
 IT IS HIGHLY RECCOMENED to use a sepperate storage device other than your host
-system's. This prevents overwriting your host systems grubi/UEFI and rendering it
-non-bootable. Also, make sure to read through the LFS book before hand. It
-will make more sense as to how the system is built.
+system's. This prevents overwriting your host systems grub/UEFI and rendering it
+non-bootable. 
 
-* Prepare to build:
-   Edit the build.conf file. Most values can be left to default, with the exception
-   of those marked as required. 
+
+== INSTALL ==
+Prepare to build:
+   * Edit the build.conf file. Most values can be left to default, with the exception
+     of those marked as required. An example of my build.conf can be found in 
+     Documentation/build.conf-EXAMPLE
+   * Make sure the storage media you plan to install to, has no existing partitions.
 
 0. Disk Partitioning:
    'physix-tool -i build.config'
@@ -47,8 +50,26 @@ will make more sense as to how the system is built.
 3. Configure the base system:
    'physix-tool -c 03-config-base.json'
 
+4. Pull source code for utilities:
+   'physix-tool -p 04-utilities.json'
 
+5. Reboot into your new base system, login as root
 
+6. Build the utilities software group.
+    cd to /opt/physix
+    physix-tool -b 04-utilities.json 
+
+7. Download xorg sources and Build xorg recipe:
+    physix-tool -p 05-xorg.json
+    physix-tool -b 05-xorg.json
+
+8. Download Lightdm sources and build it:
+    physix-tool -p 06.lightdm.json
+    physix-tool -b 06.lightdm.json
+
+9. Download LXDE sources and build it:
+    physix-tool -p 07-lxde.json
+    physix-tool -b 07-lxde.json
 
 
 NOTE on Test Suites:
