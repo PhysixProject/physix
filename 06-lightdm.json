@@ -361,7 +361,7 @@
         "39":{   
                 "group": "06-lightdm",
                 "build_script": "6.310-lightdm.sh",
-                "archives": ["lightdm-1.30.0.tar.xz"],
+                "archives": ["lightdm-1.30.0.tar.xz", "lightdm-gtk-greeter-2.0.6.tar.gz"],
                 "patches": [],
                 "sources": {
 			"http://physixproject.org/source/lightdm/lightdm-1.30.0.tar.xz":"c566ea595f2b81e68684be9f8dbcbb42",

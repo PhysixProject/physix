@@ -35,6 +35,7 @@ fi
 
 grep -q physix /etc/passwd
 if [ $? -ne 0 ] ; then
+	#TODO: useradd -m -u 6000 physix
 	useradd -m physix
 	chroot_check $? "useradd physix"
 
