@@ -69,7 +69,7 @@
         "7":{   
                 "group": "06-lightdm",
                 "build_script": "6.060-libpng.sh",
-                "archives": ["libpng-1.6.37.tar.xz"],
+                "archives": ["libpng-1.6.37.tar.xz", "libpng-1.6.37-apng.patch.gz"],
                 "patches": [],
                 "sources": {
 			"http://physixproject.org/source/lightdm/libpng-1.6.37.tar.xz":"015e8e15db1eecde5f2eb9eb5b6e59e9",
