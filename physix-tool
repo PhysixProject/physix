@@ -540,8 +540,8 @@ def build_recipe(recipe, context, build_num):
         stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "]" ] )
         info(stat)
 
-        if not setup_build_env(element, context):
-            return False
+        if setup_build_env(element, context):
+            return FAILURE
 
         unpack(element, context)
 
@@ -562,8 +562,8 @@ def build_recipe(recipe, context, build_num):
         #os.chdir('/opt/sources.physix/BUILDBOX')
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), context)
         #os.chdir('/opt/physix')
-        if not validate(ret_tpl, "Build: "+str(cmd), True):
-            return False
+        if validate(ret_tpl, "Build: "+str(cmd), True):
+            return FAILURE
 
 
 #---------------------------------------------
@@ -981,7 +981,7 @@ def do_build_recipe(options):
     info("Building Recipe")
     RECIPE_NAME = str(options.build_recipe)
     RECIPE = load_recipe(RECIPE_NAME)
-    if not build_recipe(RECIPE, "CHRT", start):
+    if build_recipe(RECIPE, "CHRT", start):
         return FAILURE
 
     info("------------------------------------")
