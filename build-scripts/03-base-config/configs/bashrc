@@ -1,6 +1,7 @@
 # .bashrc
 
 alias bb='cd ..'
+alias lsg='ls | grep '
 
 PS1='# Physix # '
 
