@@ -22,4 +22,6 @@ cat > ~/.xinitrc << "EOF"
 startlxde
 EOF
 
+cp /usr/share/xsessions/LXDE.desktop /usr/share/xsessions/default.desktop
+chroot_check $? "Set default desktop config"
 
