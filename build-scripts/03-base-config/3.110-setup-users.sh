@@ -20,6 +20,9 @@ if [ $CONF_GEN_USER ] ; then
 	if [ $? -ne 0 ] ; then
 		useradd -m $CONF_GEN_USER
 		chroot_check $? "Create user $CONF_GEN_USER"
+
+		chmod 700 /home/$CONF_GEN_USER
+		chroot_check $? "chmod 700 /home/$CONF_GEN_USER"
 	fi
 
 	cp /opt/physix/build-scripts/03-base-config/configs/user_profile /home/$CONF_GEN_USER/.profile
@@ -38,6 +41,9 @@ if [ $? -ne 0 ] ; then
 	#TODO: useradd -m -u 6000 physix
 	useradd -m physix
 	chroot_check $? "useradd physix"
+
+	chmod 700 /home/physix
+	chroot_check $? "chmod 700 /home/physix"
 
 	cp /opt/physix/build-scripts/03-base-config/configs/user_profile /home/physix/.profile &&
 	chown physix:physix /home/physix/.profile
