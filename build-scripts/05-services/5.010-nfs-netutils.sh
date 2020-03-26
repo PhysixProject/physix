@@ -11,14 +11,14 @@ if [ $? -ne 0 ] ; then
 fi
 
 
-su physix -c './configure --prefix=/usr \
-            --sysconfdir=/etc \
-            --sbindir=/sbin   \
-            --disable-gss'
+su physix -c './configure --prefix=/usr  \
+              --sysconfdir=/etc          \
+              --sbindir=/sbin            \
+              --disable-gss'
 chroot_check $? "configure"
 
 
-su physix -c 'make'
+su physix -c "make -j$NPROC"
 chroot_check $? "make"
 
 
