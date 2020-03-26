@@ -109,7 +109,6 @@ def create_partitions(config):
 
     # UEFI 1
     uefi_size = config["CONF_UEFI_PART_SIZE"].strip("\n")
-    #cmd = ["parted", root_device, "mkpart", "primary", "1", uefi_size]
     ret_tpl = run_cmd(["parted", root_device, "mkpart", "primary", "1", uefi_size])
     if validate(ret_tpl, "Create UEFI Partition"):
         return FAILURE
@@ -117,19 +116,16 @@ def create_partitions(config):
     # BOOT PART
     boot_size = config["CONF_BOOT_PART_SIZE"].strip("\n")
     boot_boundery = str(int(uefi_size) + int(boot_size))
-    #cmd = ['parted', root_device, "mkpart", "primary", uefi_size, boot_boundery]
     ret_tpl = run_cmd(['parted', root_device, "mkpart", "primary", uefi_size, boot_boundery])
     if validate(ret_tpl, "Create /boot Partition"):
         return FAILURE
 
     psize = config['CONF_PHYS_ROOT_PART_SIZE'].strip("\n")
     phys_boundery = str(int(boot_boundery) + int(psize))
-    #cmd = ['parted', root_device, "mkpart", "primary", boot_boundery, phys_boundery]
     ret_tpl = run_cmd(['parted', root_device, "mkpart", "primary", boot_boundery, phys_boundery])
     if validate(ret_tpl, "Create ROOT Partition"):
         return FAILURE
 
-    #cmd = ['parted', root_device, 'set', '1', 'boot', 'on']
     ret_tpl = run_cmd(['parted', root_device, 'set', '1', 'boot', 'on'])
     if validate(ret_tpl, "Boot Flag Set to "+root_device):
         return FAILURE
@@ -149,7 +145,6 @@ def create_volumes(config):
         return FAILURE
 
     vol_group_name = config["CONF_VOL_GROUP_NAME"].strip("\n")
-    #cmd = ['vgcreate', '-ff', vol_group_name, system_root]
     ret_tpl = run_cmd(['vgcreate', '-ff', vol_group_name, system_root])
     if validate(ret_tpl, ""):
         return FAILURE
@@ -192,8 +187,7 @@ def format_volumes(config):
     """ Format lvm volumes and partitions """
 
     system_root = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n')
-    # this should not be necessary. build_config should take care of this.
-    vol_group_name = config["CONF_VOL_GROUP_NAME"].strip('\n')
+    vol_group_name = config["CONF_VOL_GROUP_NAME"]
 
     part1 = system_root + "1"
     ret_tpl = run_cmd(['mkfs.fat', part1])
@@ -377,7 +371,6 @@ def setup_build_env(element, context):
     src_prefix = get_sources_prefix(context)
     if src_prefix == False:
         return FAILURE
-    #bb_path = src_prefix + "BUILDBOX"
     bb_path = os.path.join(src_prefix, "BUILDBOX")
 
     if not refresh_build_box(context):
@@ -388,22 +381,17 @@ def setup_build_env(element, context):
     if physix_prefix == False:
         return FAILURE
 
-    # cp include.sh to BUILDBOX
-    #include = physix_prefix + "include.sh"
     include = os.path.join(physix_prefix, "include.sh")
     ret_tpl = run_cmd(['cp', include, bb_path])
     if validate(ret_tpl, 'Copy include.sh to BUILDBOX'):
         return FAILURE
 
-    # cp build.conf to BUILDBOX
-    #buildconf = physix_prefix + "build.conf"
     buildconf =  os.path.join(physix_prefix, "build.conf")
     ret_tpl = run_cmd(['cp', buildconf, bb_path])
     if validate(ret_tpl, 'Copy build.conf to BUILDBOX'):
         return FAILURE
 
     for patch in element["patches"]:
-        #patch_path = src_path + patch
         patch_path = os.path.join(src_prefix, patch)
         ret_tpl = run_cmd(['cp', patch_path, bb_path])
         if validate(ret_tpl, 'Copy patch to BUILDBOX'):
@@ -482,7 +470,6 @@ def setup(config):
     ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/'])
     if validate(ret_tpl, "Move physix repo to /mnt/physix/opt/"):
         return FAILURE
-    # Set owner and perms of /opt/physix to physix:root 750
 
     return SUCCESS 
 
@@ -680,7 +667,6 @@ def run_cmd_log(cmd, name, context):
 #---------------------------------------------
 def run_cmd(cmd):
     """ Run command, return caputured I/O Streams """
-    #info("\nRunning: " + str(cmd))
     out = ''
     err = ''
     try:
@@ -816,16 +802,6 @@ def unpack(element, context):
                 return FAILURE
         elif 'bz2' in archive:
             ''' Not a tar arvhive, but a straight bz2 compressed file '''
-            #asrc = src_path + archive
-            #adest = bb_path + archive
-
-            #ret_tpl = run_cmd(['cp', asrc, bb_path])
-            #if not validate(ret_tpl, 'cp to BUILDBOX: ' + asrc):
-            #    return False
-
-            #ret_tpl = run_cmd(['bunzip2', '-dk', adest])
-            #if not validate(ret_tpl, 'bunzip2: ' + adest):
-            #    return False
             ret_tpl = run_cmd(['bunzip2', '-dk', archive_path])
             if validate(ret_tpl, 'bunzip2: ' + archive_path):
                 error("unzip failure")
@@ -1015,8 +991,6 @@ def do_pull_sources(options):
     
 
 def main():
-
-    #START = 0
 
     parser = OptionParser()
     parser.add_option("-i", "--build-init", dest="build_conf",
