@@ -1,6 +1,6 @@
 {
 
-	"build_queue":[0, 1],
+	"build_queue":[0, 1, 2, 3, 4],
 
 	"0":{
 		"group": "05-services",
@@ -13,13 +13,39 @@
 	},
         "1":{
                 "group": "05-services",
+                "build_script": "5.001-rpcsvc-proto.sh",
+                "archives": ["rpcsvc-proto-1.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/rpcsvc-proto-1.4.tar.gz":"df1022ccc5d0aff30b8e505735b4a98b"
+                }
+        },
+        "2":{
+                "group": "05-services",
+                "build_script": "5.002-krb.sh",
+                "archives": ["krb5-1.18.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/krb5-1.18.tar.gz":"69a5b165dac5754a5094627ee6df0def"
+                }
+        },
+        "3":{
+                "group": "05-services",
+                "build_script": "5.003-keyutils.sh",
+                "archives": ["keyutils-1.6.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/keyutils-1.6.1.tar.bz2":"919af7f33576816b423d537f8a8692e8"
+                }
+        },
+        "4":{
+                "group": "05-services",
                 "build_script": "5.010-nfs-netutils.sh",
                 "archives": ["nfs-utils-2.4.3.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/services/libnfsidmap-0.26.tar.bz2":"2c0cf0e2b1665d51fa9a783679494888"
+                        "http://physixproject.org/source/services/nfs-utils-2.4.3.tar.xz":"06020c76f531ed97f3145514901e0e7c"
                 }
         }
-
 }
 
