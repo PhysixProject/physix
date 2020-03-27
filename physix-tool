@@ -52,6 +52,24 @@ def ok(msg):
     logging.info(msg)
 
 
+def set_build_lock():
+    if not os.path.exists('/run/lock/buildbox.lock'):
+        rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
+        return validate(rtn_tpl,"Set /run/lock/buildbox.lock")
+    else:
+        error("buildbox.lock Already set.")
+        return FAILURE
+
+
+def unset_build_lock():
+    if os.path.exists('/run/lock/buildbox.lock'):
+        rtn_tpl = run_cmd(['rm', '/run/lock/buildbox.lock'])
+        return validate(rtn_tpl,"buildbox.lock removed")
+    else:
+        error("buildbox.lock not Set.")
+        return FAILURE
+
+
 def load_recipe(cfg):
     """ Read in recipe as dict """
     with open(cfg) as file_desc:
@@ -527,6 +545,9 @@ def build_recipe(recipe, context, build_num):
         stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "]" ] )
         info(stat)
 
+        if set_build_lock():
+            return FAILURE
+
         if setup_build_env(element, context):
             return FAILURE
 
@@ -550,7 +571,12 @@ def build_recipe(recipe, context, build_num):
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), context)
         #os.chdir('/opt/physix')
         if validate(ret_tpl, "Build: "+str(cmd), True):
+            unset_build_lock()
             return FAILURE
+
+        if unset_build_lock():
+            return FAILURE
+
 
 
 #---------------------------------------------
