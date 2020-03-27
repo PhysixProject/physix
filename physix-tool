@@ -25,9 +25,9 @@ def validate(rtn_tpl, msg, report=True):
         return SUCCESS
  
     error(msg)
-    error(str(rtn_tpl[0]))
-    error(str(rtn_tpl[1]))
-    error(str(rtn_tpl[2]))
+    error("RTN:"+str(rtn_tpl[0]))
+    error("stdout:"+str(rtn_tpl[1]))
+    error("stderr:"+str(rtn_tpl[2]))
     return FAILURE
 
 
