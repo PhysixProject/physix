@@ -101,7 +101,10 @@ def load_build_config(cfg):
 #---------------------------------------------
 def verify_checker(config):
     """ config : {} """
-    for tool in ['mkfs.ext3', 'gcc', 'g++', 'make', 'gawk', 'bison']:
+
+    filesystem = config['CONF_ROOTPART_FS']
+    mkfs  = "mkfs." + filesystem
+    for tool in ['mkfs.fat', 'mkfs.ext2', mkfs, 'gcc', 'g++', 'make', 'gawk', 'bison']:
         ret_tpl = run_cmd(['which', tool])
         if validate(ret_tpl, "Check: "+ tool):
             return FAILURE
@@ -199,12 +202,16 @@ def create_volumes(config):
 
     return SUCCESS
 
+
 #---------------------------------------------
 #---------------------------------------------
 def format_volumes(config):
     """ Format lvm volumes and partitions """
 
-    system_root = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n')
+    filesystem = config['CONF_ROOTPART_FS']
+    mkfs_cmd  = "mkfs." + filesystem
+
+    system_root = "/dev/" + config["CONF_ROOT_DEVICE"]
     vol_group_name = config["CONF_VOL_GROUP_NAME"]
 
     part1 = system_root + "1"
@@ -218,43 +225,44 @@ def format_volumes(config):
         return FAILURE
 
     physix_root = "/dev/mapper/" + vol_group_name + "-root"
-    ret_tpl = run_cmd(['mkfs.ext4', physix_root])
-    if validate(ret_tpl, "mkfs.ext4: " + physix_root):
+    ret_tpl = run_cmd([mkfs_cmd, physix_root])
+    if validate(ret_tpl, mkfs_cmd+":"+physix_root):
         return FAILURE
 
     physix_home = "/dev/mapper/" + vol_group_name + "-home"
-    ret_tpl = run_cmd(['mkfs.ext4', physix_home])
-    if validate(ret_tpl, "mkfs.ext4: " + physix_home):
+    ret_tpl = run_cmd([mkfs_cmd, physix_home])
+    if validate(ret_tpl, mkfs_cmd+":"+physix_home):
         return FAILURE
 
     physix_var = "/dev/mapper/" + vol_group_name + "-var"
-    ret_tpl = run_cmd(['mkfs.ext4', physix_var])
-    if validate(ret_tpl, "mkfs.ext4: " + physix_var):
+    ret_tpl = run_cmd([mkfs_cmd, physix_var])
+    if validate(ret_tpl, mkfs_cmd+""+physix_var):
         return FAILURE
 
     physix_usr = "/dev/mapper/" + vol_group_name + "-usr"
-    ret_tpl = run_cmd(['mkfs.ext4', physix_usr])
-    if validate(ret_tpl, "mkfs.ext4: " + physix_usr):
+    ret_tpl = run_cmd([mkfs_cmd, physix_usr])
+    if validate(ret_tpl, mkfs_cmd+":"+physix_usr):
         return FAILURE
 
     physix_opt = "/dev/mapper/" + vol_group_name + "-opt"
-    ret_tpl = run_cmd(['mkfs.ext4', physix_opt])
-    if validate(ret_tpl, "mkfs.ext4: " + physix_opt):
+    ret_tpl = run_cmd([mkfs_cmd, physix_opt])
+    if validate(ret_tpl, mkfs_cmd+":"+ physix_opt):
         return FAILURE
 
     physix_tmp = "/dev/mapper/" + vol_group_name + "-tmp"
-    ret_tpl = run_cmd(['mkfs.ext4', physix_tmp])
-    if validate(ret_tpl, "mkfs.ext4: " + physix_tmp):
+    ret_tpl = run_cmd([mkfs_cmd, physix_tmp])
+    if validate(ret_tpl, mkfs_cmd+":"+physix_tmp):
         return FAILURE
 
     return SUCCESS
+
 
 #---------------------------------------------
 #--------------------------------------------
 def mount_volumes(config):
     """ Mount volumes and partitions """
 
-    vol_group_name = "physix"
+    vol_group_name = config["CONF_VOL_GROUP_NAME"]
 
     if not os.path.exists(BUILDROOT):
         os.mkdir(BUILDROOT, 755)
@@ -313,6 +321,7 @@ def get_sources_prefix(context):
     else:
         error("get_sources_prefix: Unknown context")
         return False
+
 
 def get_physix_prefix(context):
     if context == "CHRT":
