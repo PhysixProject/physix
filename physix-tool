@@ -1052,6 +1052,11 @@ def main():
                       action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
 
+
+    if 0 != os.geteuid():
+        error("User not permitted. Exiting.")
+        return FAILURE
+
     (options, args) = parser.parse_args()
     print(str(options))
 
