@@ -4,12 +4,6 @@
 source /opt/physix/include.sh || exit 1
 
 # This should be dynamically set.
-#SET_ROOT=`cat /physix/build.conf | grep CONF_GRUB_SET_ROOT | cut -d'=' -f2`
-#ROOT_DEV=`cat /physix/build.conf | grep CONF_ROOT_DEVICE | cut -d'=' -f2`
-#ROOT_PART=`cat /physix/build.conf | grep CONF_ROOT_PARTITION | cut -d'=' -f2`
-#ROOT_PART='\/dev\/'$ROOT_PART
-
-# This should be dynamically set.
 SET_ROOT=`echo $CONF_GRUB_SET_ROOT | cut -d'=' -f2`
 ROOT_DEV=`echo $CONF_ROOT_DEVICE | cut -d'=' -f2`
 ROOT_PART=`echo $CONF_ROOT_PARTITION | cut -d'=' -f2`
