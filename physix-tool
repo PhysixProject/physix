@@ -602,7 +602,9 @@ def build_base(recipe, context, build_num):
             return FAILURE
 
     for i in range(build_num, len(recipe['build_queue'])):
-        element = recipe[str(i)]
+        buildq = recipe['build_queue']
+        build_id = str(buildq[i])
+        element  = recipe[build_id]
 
         stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "] Base System" ] )
         info(stat)
