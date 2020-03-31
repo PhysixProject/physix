@@ -2,6 +2,7 @@
 import os
 import sys
 import json
+import sqlite3
 import tarfile
 import logging
 import datetime
@@ -11,6 +12,119 @@ from optparse import OptionParser
 BUILDROOT = "/mnt/physix"
 FAILURE = 1
 SUCCESS = 0
+
+#---------------------------------------------
+# DB Functions
+#---------------------------------------------
+def get_db_connection():
+    ''' Return db connection object 
+        Return None on error '''
+    conn = None
+    try:
+        conn = sqlite3.connect('/opt/DB.physix')
+        if setup_table(conn):
+            '''error()'''
+            error("Failed: Set Table")
+            return None
+    except Exception as e:
+        error(str(e))
+        return None
+    return conn
+
+
+def get_stack_table_size(conn):
+    ''' Return Integer: Number of rows of STACK Table 
+        return None on error '''
+    try:
+        sql_count = "SELECT COUNT(*) FROM STACK;"
+        c = conn.cursor()
+        c.execute(sql_count)
+        ret = c.fetchall()
+        if len(ret) != 0:
+            if len(ret[0]) != 0:
+                return int(ret[0][0])
+        return None
+    except Exception as e:
+        error(e)
+        return None
+
+
+def setup_table(conn):
+    """ If table doese not exist, create it
+        If table does not have init row, create it 
+        return SUCCESS/FAILURE """
+
+    sql_create_stack_table = """ CREATE TABLE IF NOT EXISTS STACK (
+                                        ID integer PRIMARY KEY AUTOINCREMENT,
+                                        SP text,
+                                        TIME text NOT NULL,
+                                        OP text NOT NULL,
+                                        COMMITID text,
+                                        SNAPID text,
+                                        PKG text,
+                                        SCRIPT text
+                                    ); """
+
+    try:
+        c = conn.cursor()
+        c.execute(sql_create_stack_table)
+        conn.commit()
+    except Exception as e:
+        error(e)
+        return FAILURE
+
+    tsize = get_stack_table_size(conn)
+    if tsize != None and tsize == 0:
+        init_row = row_factory('*', "INIT", 'INIT', 'INIT', 'INIT', 'INIT')
+        insert_row(conn, init_row)
+    return SUCCESS
+
+
+def row_factory(sp, op, commit, snapid, pkg, script):
+    ''' Return String: a new entry for insertion  '''
+    date = format(datetime.datetime.now())
+
+    #ret_tpl = run_cmd(['git', 'log', '--oneline', '-n', '1'])
+    #cid = ''
+    #if validate(ret_tpl,'git commit ID'):
+    #    commit = str(ret_tpl[1])
+        
+    return (sp, date, op, commit, snapid, pkg, script)
+
+def insert_row(conn, data):
+    sql = ''' INSERT INTO STACK (SP,TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?,?) '''
+    try:
+        cur = conn.cursor()
+        cur.execute(sql, data)
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+    return SUCCESS
+
+
+def get_sp_key(conn):
+    ''' Return initeger: row key of stack pointer 
+        Return None on error'''
+    row = ''
+
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM STACK WHERE SP='*'")
+        row = cur.fetchall()
+
+        if type(row) == list and len(row) == 1:
+            tpl = row[0]
+            if type(tpl) == tuple and len(tpl) == 7:
+                return int(tpl[0])
+            else:
+                error("Unexpected tuple size")
+                return None
+    except Exception as e:
+        errpr(e)
+        return None
+
+
 
 #---------------------------------------------
 # INIT FUNCTIONS
@@ -581,6 +695,14 @@ def build_recipe(recipe, context, build_num):
         if validate(ret_tpl, "Build: "+str(cmd), True):
             unset_build_lock()
             return FAILURE
+
+        db = get_db_connection()
+        if db:
+            entry = row_factory('', 'BUILD', '123456', '', build_src, str(element["build_script"]))
+            if insert_row(db, entry):
+                error("DB: Failed to insert entry")
+                return FAILURE
+            db.close()
 
         if unset_build_lock():
             return FAILURE
