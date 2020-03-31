@@ -2,7 +2,7 @@
 source /opt/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-su physix -c './configure --prefix=/usr     \
+./configure --prefix=/usr     \
             --disable-static  \
             --enable-fts5     \
             CFLAGS="-g -O2                    \
@@ -12,10 +12,10 @@ su physix -c './configure --prefix=/usr     \
             -DSQLITE_ENABLE_UNLOCK_NOTIFY=1   \
             -DSQLITE_ENABLE_DBSTAT_VTAB=1     \
             -DSQLITE_SECURE_DELETE=1          \
-            -DSQLITE_ENABLE_FTS3_TOKENIZER=1"'
+            -DSQLITE_ENABLE_FTS3_TOKENIZER=1"
 chroot_check $? "configure"
 
-su physix -c 'make'
+make
 chroot_check $? "make"
 
 make install

@@ -5,7 +5,7 @@
 			31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 
 			41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
-			61, 62, 63, 64, 65],
+			61, 62, 63, 64],
 
 	"0":{
 		"group": "04-utils",
@@ -266,15 +266,6 @@
         },
         "28":{
                 "group": "04-utils",
-                "build_script": "4.265-sqlite.sh",
-                "archives": ["sqlite-autoconf-3310100.tar.gz"],
-                "patches": [],
-                "sources": {
-			"http://physixproject.org/source/sqlite-autoconf-3310100.tar.gz":"2d0a553534c521504e3ac3ad3b90f125"
-		}
-        },
-        "29":{
-                "group": "04-utils",
                 "build_script": "4.270-nspr.sh",
                 "archives": ["nspr-4.21.tar.gz"],
                 "patches": [],
@@ -282,7 +273,7 @@
 			"http://physixproject.org/source/nspr-4.21.tar.gz":"b865586f19912a50acc3755d8a45dbaa"
 		}
         },
-        "30":{
+        "29":{
                 "group": "04-utils",
                 "build_script": "4.290-nss.sh",
                 "archives": ["nss-3.45.tar.gz"],
@@ -292,7 +283,7 @@
 			"http://physixproject.org/source/nss-3.45-standalone-1.patch":"ee90a1dc6ae266ec6c842d8019a6ef48"
 		}
         },
-        "31":{
+        "30":{
                 "group": "04-utils",
                 "build_script": "4.280-unzip.sh",
                 "archives": ["unzip60.tar.gz"],
@@ -301,7 +292,7 @@
 			"http://physixproject.org/source/unzip60.tar.gz":"62b490407489521db863b523a7f86375"
 		}
         },
-        "32":{
+        "31":{
                 "group": "04-utils",
                 "build_script": "4.550-zip.sh",
                 "archives": ["zip30.tar.gz"],
@@ -310,7 +301,7 @@
 			"http://physixproject.org/source/zip30.tar.gz":"7b74551e63f8ee6aab6fbc86676c0d37"
 		}
         },
-        "33":{
+        "32":{
                 "group": "04-utils",
                 "build_script": "4.330-cryptsetup.sh",
                 "archives": ["cryptsetup-2.0.6.tar.xz"],
@@ -319,7 +310,7 @@
 			"http://physixproject.org/source/cryptsetup-2.0.6.tar.xz":"ec03e09cbe978a19fa6d6194ac642bae"
 		}
         },
-        "34":{
+        "33":{
                 "group": "04-utils",
                 "build_script": "4.340-lsof.sh",
                 "archives": ["lsof_4.91.tar.gz"],
@@ -328,7 +319,7 @@
 			"http://physixproject.org/source/lsof_4.91.tar.gz":"10e1353aa4bf2fd5bbed65db9ef6fd47"
 		}
         },
-        "35":{
+        "34":{
                 "group": "04-utils",
                 "build_script": "4.350-time.sh",
                 "archives": ["time-1.9.tar.gz"],
@@ -337,7 +328,7 @@
 			"http://physixproject.org/source/time-1.9.tar.gz":"d2356e0fe1c0b85285d83c6b2ad51b5f"
 		}
         },
-        "36":{
+        "35":{
                 "group": "04-utils",
                 "build_script": "4.360-tree.sh",
                 "archives": ["tree-1.8.0.tgz"],
@@ -346,7 +337,7 @@
 			"http://physixproject.org/source/tree-1.8.0.tgz":"715191c7f369be377fc7cc8ce0ccd835"
 		}
         },
-        "37":{
+        "36":{
                 "group": "04-utils",
                 "build_script": "4.370-which.sh",
                 "archives": ["which-2.21.tar.gz"],
@@ -355,7 +346,7 @@
 			"http://physixproject.org/source/which-2.21.tar.gz":"097ff1a324ae02e0a3b0369f07a7544a"
 		}
         },
-        "38":{
+        "37":{
                 "group": "04-utils",
                 "build_script": "4.380-PCRE.sh",
                 "archives": ["pcre-8.43.tar.bz2"],
@@ -364,7 +355,7 @@
 			"http://physixproject.org/source/pcre-8.43.tar.bz2":"636222e79e392c3d95dcc545f24f98c4"
 		}
         },
-        "39":{
+        "38":{
                 "group": "04-utils",
                 "build_script": "4.390-libxml2.sh",
                 "archives": ["libxml2-2.9.9.tar.gz"],
@@ -373,7 +364,7 @@
 			"http://physixproject.org/source/libxml2-2.9.9.tar.gz":"c04a5a0a042eaa157e8e8c9eabe76bd6"
 		}
         },
-        "40":{
+        "39":{
                 "group": "04-utils",
                 "build_script": "4.400-libxslt.sh",
                 "archives": ["libxslt-1.1.33.tar.gz"],
@@ -382,7 +373,7 @@
 			"http://physixproject.org/source/libxslt-1.1.33.tar.gz":"b3bd254a03e46d58f8ad1e4559cd2c2f"
 		}
         },
-        "41":{
+        "40":{
                 "group": "04-utils",
                 "build_script": "4.410-docbook-nons.sh",
                 "archives": ["docbook-xsl-nons-1.79.2.tar.bz2"],
@@ -392,7 +383,7 @@
 			"http://physixproject.org/source/docbook-xsl-nons-1.79.2-stack_fix-1.patch":"8457bd6ee6b06fbc6dc540e1b096f766"
 		}
         },
-        "42":{
+        "41":{
                 "group": "04-utils",
                 "build_script": "4.420-glib260.sh",
                 "archives": ["glib-2.60.6.tar.xz"],
@@ -402,7 +393,7 @@
 			"http://physixproject.org/source/glib-2.60.6-skip_warnings-1.patch":"6252d5c0b400558908b8a41b772c9794"
 		}
         },
-        "43":{
+        "42":{
                 "group": "04-utils",
                 "build_script": "4.440-pciutils.sh",
                 "archives": ["pciutils-3.6.2.tar.xz"],
@@ -411,7 +402,7 @@
 			"http://physixproject.org/source/pciutils-3.6.2.tar.xz":"77963796d1be4f451b83e6da28ba4f82"
 		}
         },
-        "44":{
+        "43":{
                 "group": "04-utils",
                 "build_script": "4.450-bind-utils.sh",
                 "archives": ["bind-9.14.5.tar.gz"],
@@ -420,7 +411,7 @@
 			"http://physixproject.org/source/bind-9.14.5.tar.gz":"27e0a197104bf101051e55fea35c8a4f"
 		}
         },
-        "45":{
+        "44":{
                 "group": "04-utils",
                 "build_script": "4.470-libevent.sh",
                 "archives": ["libevent-2.1.11-stable.tar.gz"],
@@ -429,7 +420,7 @@
 			"http://physixproject.org/source/libevent-2.1.11-stable.tar.gz":"7f35cfe69b82d879111ec0d7b7b1c531"
 		}
         },
-        "46":{
+        "45":{
                 "group": "04-utils",
                 "build_script": "4.490-rsync.sh",
                 "archives": ["rsync-3.1.3.tar.gz"],
@@ -438,7 +429,7 @@
 			"http://physixproject.org/source/rsync-3.1.3.tar.gz":"1581a588fde9d89f6bc6201e8129afaf"
 		}
         },
-        "47":{
+        "46":{
                 "group": "04-utils",
                 "build_script": "4.500-traceroute.sh",
                 "archives": ["traceroute-2.1.0.tar.gz"],
@@ -447,7 +438,7 @@
 			"http://physixproject.org/source/traceroute-2.1.0.tar.gz":"84d329d67abc3fb83fc8cb12aeaddaba"
 		}
         },
-        "48":{
+        "47":{
                 "group": "04-utils",
                 "build_script": "4.520-parted.sh",
                 "archives": ["parted-3.2.tar.xz"],
@@ -456,7 +447,7 @@
 			"http://physixproject.org/source/parted-3.2.tar.xz":"0247b6a7b314f8edeb618159fa95f9cb"
 		}
         },
-        "49":{
+        "48":{
                 "group": "04-utils",
                 "build_script": "4.530-dosfstools.sh",
                 "archives": ["dosfstools-4.1.tar.xz"],
@@ -465,7 +456,7 @@
 			"http://physixproject.org/source/dosfstools-4.1.tar.xz":"07a1050db1a898e9a2e03b0c4569c4bd"
 		}
         },
-        "50":{
+        "49":{
                 "group": "04-utils",
                 "build_script": "4.540-autoconf.sh",
                 "archives": ["autoconf-2.13.tar.gz"],
@@ -475,7 +466,7 @@
 			"http://physixproject.org/source/autoconf-2.13-consolidated_fixes-1.patch":"9ceaee69e62767770eb473d5242db70d"
 		}
         },
-        "51":{
+        "50":{
                 "group": "04-utils",
                 "build_script": "4.600-libuv.sh",
                 "archives": ["libuv-v1.31.0.tar.gz"],
@@ -484,7 +475,7 @@
 			"http://physixproject.org/source/libuv-v1.31.0.tar.gz":"54bf343151ee2ee2d3d4befc2ca4f840"
 		}
         },
-        "52":{
+        "51":{
                 "group": "04-utils",
                 "build_script": "4.610-libarchive.sh",
                 "archives": ["libarchive-3.4.0.tar.gz"],
@@ -493,7 +484,7 @@
 			"http://physixproject.org/source/libarchive-3.4.0.tar.gz":"6046396255bd7cf6d0f6603a9bda39ac"
 		}
         },
-        "53":{
+        "52":{
                 "group": "04-utils",
                 "build_script": "4.620-cmake.sh",
                 "archives": ["cmake-3.15.2.tar.gz"],
@@ -502,7 +493,7 @@
 			"http://physixproject.org/source/cmake-3.15.2.tar.gz":"9ecf167edadb87e2d75cc89fded7aadb"
 		}
         },
-        "54":{
+        "53":{
                 "group": "04-utils",
                 "build_script": "4.630-npth.sh",
                 "archives": ["npth-1.6.tar.bz2"],
@@ -511,7 +502,7 @@
 			"http://physixproject.org/source/npth-1.6.tar.bz2":"375d1a15ad969f32d25f1a7630929854"
 		}
         },
-        "55":{
+        "54":{
                 "group": "04-utils",
                 "build_script": "4.640-pinentry.sh",
                 "archives": ["pinentry-1.1.0.tar.bz2"],
@@ -520,7 +511,7 @@
 			"http://physixproject.org/source/pinentry-1.1.0.tar.bz2":"3829315cb0a1e9cedc05ffe6def7a2c6"
 		}
         },
-        "56":{
+        "55":{
                 "group": "04-utils",
                 "build_script": "4.650-gnupg.sh",
                 "archives": ["gnupg-2.2.17.tar.bz2"],
@@ -529,7 +520,7 @@
 			"http://physixproject.org/source/gnupg-2.2.17.tar.bz2":"1ba2d9b70c377f8e967742064c27a19c"
 		}
         },
-        "57":{
+        "56":{
                 "group": "04-utils",
                 "build_script": "4.660-libssh2.sh",
                 "archives": ["libssh2-1.9.0.tar.gz"],
@@ -538,7 +529,7 @@
 			"http://physixproject.org/source/libssh2-1.9.0.tar.gz":"1beefafe8963982adc84b408b2959927"
 		}
         },
-        "58":{
+        "57":{
                 "group": "04-utils",
                 "build_script": "4.670-llvm.sh",
                 "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
@@ -549,7 +540,7 @@
 			"http://physixproject.org/source/compiler-rt-8.0.1.src.tar.xz":"c251e582862f9fcc880802f8f2920096"
 		}
         },
-        "59":{
+        "58":{
                 "group": "04-utils",
                 "build_script": "4.680-rust.sh",
                 "archives": ["rustc-1.35.0-src.tar.gz"],
@@ -558,7 +549,7 @@
 			"http://physixproject.org/source/rustc-1.35.0-src.tar.gz":"f43af67a139ce21ff5f530bbd2f486aa"
 		}
         },
-        "60":{
+        "59":{
                 "group": "04-utils",
                 "build_script": "4.690-ICU.sh",
                 "archives": ["icu4c-64_2-src.tgz"],
@@ -567,7 +558,7 @@
 			"http://physixproject.org/source/icu4c-64_2-src.tgz":"a3d18213beec454e3cdec9a3116d6b05"
 		}
         },
-        "61":{
+        "60":{
                 "group": "04-utils",
                 "build_script": "4.700-python.sh",
                 "archives": ["Python-2.7.16.tar.xz"],
@@ -576,7 +567,7 @@
 			"http://physixproject.org/source/Python-2.7.16.tar.xz":"30157d85a2c0479c09ea2cbe61f2aaf5"
 		}
         },
-        "62":{
+        "61":{
                 "group": "04-utils",
                 "build_script": "4.710-mutt.sh",
                 "archives": ["mutt-1.12.1.tar.gz"],
@@ -585,7 +576,7 @@
 			"http://physixproject.org/source/mutt-1.12.1.tar.gz":"f77586a895f12d19de9c5250a4dfd034"
 		}
         },
-        "63":{
+        "62":{
                 "group": "04-utils",
                 "build_script": "4.720-tmux.sh",
                 "archives": ["tmux-2.9a.tar.gz"],
@@ -594,7 +585,7 @@
 			"http://physixproject.org/source/tmux-2.9a.tar.gz":"f0564dbf4cf6b301c4845219d27ed3ad"
 		}
         },
-        "64":{
+        "63":{
                 "group": "04-utils",
                 "build_script": "4.730-screen.sh",
                 "archives": ["screen-4.6.2.tar.gz"],
@@ -603,7 +594,7 @@
 			"http://physixproject.org/source/screen-4.6.2.tar.gz":"a0f529d3333b128dfaa324d978ba73a8"
 		}
         },
-        "65":{
+        "64":{
                 "group": "04-utils",
                 "build_script": "4.740-git.sh",
                 "archives": ["git-2.23.0.tar.xz"],
