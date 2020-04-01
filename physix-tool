@@ -125,6 +125,21 @@ def get_sp_key(conn):
         return None
 
 
+def list_stack(conn):
+    stack_lst = []
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM STACK")
+        stack_lst = cur.fetchall()
+    except Exception as e:
+        error(e)
+        return FAILURE
+
+    info("Stack Size: "+str(len(stack_lst)))
+    for i in stack_lst:
+        print(str(i))
+    return SUCCESS
+
 
 #---------------------------------------------
 # INIT FUNCTIONS
@@ -1124,6 +1139,15 @@ def do_build_recipe(options):
     return SUCCESS
 
 
+def do_list_stack(options):
+    conn = get_db_connection()
+    if list_stack(conn):
+        error("list_stack fail")
+    conn.close()
+    return SUCCESS
+
+
+
 def do_pull_sources(options):
     """ "Determint path of sources.physix and call pull_sources() """
     context = 'NON-CHRT'
@@ -1158,8 +1182,7 @@ def main():
     parser.add_option("-s", "--build-base-system", dest="base_conf",
                       help="Build the Base System. ", metavar="")
     parser.add_option("-c", "--base-system-config", dest="configure_base_conf",
-                      help="Configure Base system.",
-                      metavar="")
+                      help="Configure Base system.", metavar="")
     parser.add_option("-b", "--build-recipe", dest="build_recipe",
                       help="Build Recipe", metavar="")
     parser.add_option("-a", "--start", dest="start_number",
@@ -1170,7 +1193,8 @@ def main():
                       help="Download sources from from/for a recipe", metavar="")
     parser.add_option("-f", "--file-snopshot", dest="file_snap",
                       help="Record md5sum of all files under core systemd directoryes", metavar="")
-
+    parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
+                      help="List state of system stack", metavar="")
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
@@ -1200,6 +1224,10 @@ def main():
 
     if options.pull_sources:
         sys.exit(do_pull_sources(options))
+
+    if options.list_stack:
+        sys.exit(do_list_stack(options))
+
 
 
 if __name__ == '__main__':
