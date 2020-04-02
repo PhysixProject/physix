@@ -136,8 +136,8 @@ def list_stack(conn):
         return FAILURE
 
     info("Stack Size: "+str(len(stack_lst)))
-    for i in stack_lst:
-        print(str(i))
+    for i in range(len(stack_lst)-1, -1, -1):
+        print(str(stack_lst[i]))
     return SUCCESS
 
 
