@@ -5,6 +5,7 @@ cd $SOURCE_DIR/$1 || exit 1
 install  -v -m700 -d /var/lib/sshd &&
 chown    -v root:sys /var/lib/sshd &&
 
+#TODO setup as part of /etc/passwd
 groupadd -g 50 sshd        &&
 useradd  -c 'sshd PrivSep' \
          -d /var/lib/sshd  \
@@ -13,13 +14,13 @@ useradd  -c 'sshd PrivSep' \
          -u 50 sshd
 chroot_check $? "openssh : useradd sshd" NOEXIT
 
-su physix -c './configure --prefix=/usr    \
+./configure --prefix=/usr    \
                --sysconfdir=/etc/ssh       \
                --with-md5-passwords        \
-               --with-privsep-path=/var/lib/sshd'
+               --with-privsep-path=/var/lib/sshd
 chroot_check $? "openssh : configure"
 
-su physix -c 'make'
+make
 chroot_check $? "openssh : make"
 
 make install &&
