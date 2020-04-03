@@ -313,11 +313,6 @@ def create_volumes(config):
     if validate(ret_tpl, "Volume Create: var"):
         return FAILURE
 
-    #usr_vol_size = str(config["CONF_LOGICAL_USR_SIZE"].strip('\n')) + "G"
-    #ret_tpl = run_cmd(["lvcreate", '--yes', "-L", usr_vol_size, '-n', 'usr', vol_group_name])
-    #if validate(ret_tpl, "Volume Create: usr"):
-    #    return FAILURE
-
     opt_vol_size = str(config["CONF_LOGICAL_OPT_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", opt_vol_size, '-n', 'opt', vol_group_name])
     if validate(ret_tpl, "Volume Create: opt"):
@@ -367,11 +362,6 @@ def format_volumes(config):
     if validate(ret_tpl, mkfs_cmd+""+physix_var):
         return FAILURE
 
-    #physix_usr = "/dev/mapper/" + vol_group_name + "-usr"
-    #ret_tpl = run_cmd([mkfs_cmd, physix_usr])
-    #if validate(ret_tpl, mkfs_cmd+":"+physix_usr):
-    #    return FAILURE
-
     physix_opt = "/dev/mapper/" + vol_group_name + "-opt"
     ret_tpl = run_cmd([mkfs_cmd, physix_opt])
     if validate(ret_tpl, mkfs_cmd+":"+ physix_opt):
@@ -414,14 +404,6 @@ def mount_volumes(config):
     ret_tpl = run_cmd(['mount', volume_var, mnt_point])
     if validate(ret_tpl, "Mount: " + volume_var):
         return FAILURE
-
-    #usr = BUILDROOT + "/usr"
-    #os.mkdir(usr, 0o755)
-    #volume_usr = "/dev/mapper/" + vol_group_name + "-usr"
-    #mnt_point = BUILDROOT + "/usr"
-    #ret_tpl = run_cmd(['mount', volume_usr, mnt_point])
-    #if validate(ret_tpl, "Mount: " + volume_usr):
-    #    return FAILURE
 
     opt = BUILDROOT + "/opt"
     os.mkdir(opt, 0o755)
