@@ -390,6 +390,20 @@ def mount_volumes(config):
     if validate(ret_tpl, "Mount: "+volume_root):
         return FAILURE
 
+    btrfs_subvolume = BUILDROOT + "/" + "physix_stack-0"
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'create', btrfs_subvolume])
+    if validate(ret_tpl, "Create  subvolume: physix_stack-0 on physix-root"):
+        return FAILURE
+
+    ret_tpl = run_cmd(['umount', '/mnt/physix'])
+    if validate(ret_tpl, "unmount /mnt/physix"):
+        return FAILURE
+
+    volume_root = "/dev/mapper/" + vol_group_name + "-root"
+    ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=physix_stack-0', volume_root, '/mnt/physix'])
+    if validate(ret_tpl, "Mount physix-root subvolume: physix_stack-0"):
+        return FAILURE
+
     mnt_point = BUILDROOT + "/home"
     os.mkdir(mnt_point, 0o755)
     volume_home = "/dev/mapper/" + vol_group_name + "-home"
