@@ -4,7 +4,7 @@
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-/dev/mapper/VOL_GROUP_MARKER-root /      FS_MARKER subvol=physix_stack-0 defaults   0 1
+/dev/mapper/VOL_GROUP_MARKER-root /      FS_MARKER  defaults   0 1
 UUID=BOOT_UUID_MARKER   /boot  ext2   defaults   0 2
 /dev/mapper/VOL_GROUP_MARKER-home /home  FS_MARKER  defaults   0 2  
 /dev/mapper/VOL_GROUP_MARKER-var  /var   FS_MARKER  defaults   0 2

@@ -22,21 +22,60 @@ def get_db_connection():
     conn = None
     try:
         conn = sqlite3.connect('/opt/DB.physix')
-        if setup_table(conn):
-            '''error()'''
-            error("Failed: Set Table")
-            return None
     except Exception as e:
         error(str(e))
         return None
     return conn
 
 
-def get_stack_table_size(conn):
+def get_name_current_stack(conn):
+    sql = "SELECT STACK_NAME FROM STACK_INDEX WHERE SP='*';"
+    try:
+        c = conn.cursor()
+        c.execute(sql)
+        ret = c.fetchall()
+        if ret:
+            return ret
+    except Exception as e:
+        error(str(e))
+        return None
+    return None
+
+
+def get_id_current_stack(conn):
+    sql = "SELECT ID FROM STACK_INDEX WHERE SP='*';"
+    try:
+        c = conn.cursor()
+        c.execute(sql)
+        ret = c.fetchall()
+        if ret:
+            return ret
+    except Exception as e:
+        error(str(e))
+        return None
+    return None
+
+
+def change_current_stack(conn, oldid, newid):
+    update_old = "UPDATE STACK_INDEX SET SP='' WHERE ID="+oldid+";"
+    update_new = "UPDATE STACK_INDEX SET SP='*' WHERE ID="+newid+";" 
+    try:
+        c = conn.cursor()
+        c.execute(update_old)
+        c.execute(update_new)
+        c.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+    return SUCCESS
+ 
+
+
+def get_stack_table_size(conn, table_name):
     ''' Return Integer: Number of rows of STACK Table 
         return None on error '''
     try:
-        sql_count = "SELECT COUNT(*) FROM STACK;"
+        sql_count = "SELECT COUNT(*) FROM " + table_name + ";"
         c = conn.cursor()
         c.execute(sql_count)
         ret = c.fetchall()
@@ -49,50 +88,80 @@ def get_stack_table_size(conn):
         return None
 
 
-def setup_table(conn):
-    """ If table doese not exist, create it
+def init_db_tables():
+    """ If table does not exist, create it
         If table does not have init row, create it 
         return SUCCESS/FAILURE """
 
-    sql_create_stack_table = """ CREATE TABLE IF NOT EXISTS STACK (
-                                        ID integer PRIMARY KEY AUTOINCREMENT,
-                                        SP text,
-                                        TIME text NOT NULL,
-                                        OP text NOT NULL,
-                                        COMMITID text,
-                                        SNAPID text,
-                                        PKG text,
-                                        SCRIPT text
-                                    ); """
-
+    conn = None
     try:
-        c = conn.cursor()
-        c.execute(sql_create_stack_table)
+        conn = sqlite3.connect('/mnt/physix/opt/DB.physix')
+    except Exception as e:
+        error(str(e))
+        return FAILURE 
+
+    sql_create_init_stack = """ CREATE TABLE IF NOT EXISTS STACK_0 (
+                                    ID integer PRIMARY KEY AUTOINCREMENT,
+                                    SP text,
+                                    TIME text NOT NULL,
+                                    OP text NOT NULL,
+                                    COMMITID text,
+                                    SNAPID text,
+                                    PKG text,
+                                    SCRIPT text); """
+    try:
+        cur = conn.cursor()
+        cur.execute(sql_create_init_stack, "")
         conn.commit()
     except Exception as e:
-        error(e)
+        error(str(e))
         return FAILURE
 
-    tsize = get_stack_table_size(conn)
-    if tsize != None and tsize == 0:
-        init_row = row_factory('*', "INIT", 'INIT', 'INIT', 'INIT', 'INIT')
-        insert_row(conn, init_row)
+    
+    sql = ''' INSERT INTO STACK_0 (SP,TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?,?) ''' 
+    init_values = ('*', "INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
+    try:
+        cur = conn.cursor()
+        cur.execute(sql, init_values)
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+
+
+    sql_create_stack_table = """ CREATE TABLE IF NOT EXISTS STACK_INDEX (
+                                    ID integer PRIMARY KEY AUTOINCREMENT,
+                                    SP text,
+                                    STACK_NAME text); """
+    try:
+        cur = conn.cursor()
+        cur.execute(sql_create_stack_table, "")
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+
+
+    sql = ''' INSERT INTO STACK_INDEX (SP,STACK_NAME) VALUES(?,?) '''
+    init_values = ('*', 'STACK_0')
+    try:
+        cur = conn.cursor()
+        cur.execute(sql, init_values)
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+
     return SUCCESS
 
 
 def row_factory(sp, op, commit, snapid, pkg, script):
     ''' Return String: a new entry for insertion  '''
     date = format(datetime.datetime.now())
-
-    #ret_tpl = run_cmd(['git', 'log', '--oneline', '-n', '1'])
-    #cid = ''
-    #if validate(ret_tpl,'git commit ID'):
-    #    commit = str(ret_tpl[1])
-        
     return (sp, date, op, commit, snapid, pkg, script)
 
-def insert_row(conn, data):
-    sql = ''' INSERT INTO STACK (SP,TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?,?) '''
+
+def exec_sql(conn, sql, data):
     try:
         cur = conn.cursor()
         cur.execute(sql, data)
@@ -121,15 +190,18 @@ def get_sp_key(conn):
                 error("Unexpected tuple size")
                 return None
     except Exception as e:
-        errpr(e)
+        error(e)
         return None
 
 
 def list_stack(conn):
+    stack_name = get_name_current_stack(conn)[0][0]
+    info("stack::"+str(stack_name))
+
     stack_lst = []
     try:
         cur = conn.cursor()
-        cur.execute("SELECT * FROM STACK")
+        cur.execute("SELECT * FROM "+stack_name)
         stack_lst = cur.fetchall()
     except Exception as e:
         error(e)
@@ -137,8 +209,38 @@ def list_stack(conn):
 
     info("Stack Size: "+str(len(stack_lst)))
     for i in range(len(stack_lst)-1, -1, -1):
-        print(str(stack_lst[i]))
+        prim_key = str(stack_lst[i][0])
+        sp       = str(stack_lst[i][1])
+        date     = str(stack_lst[i][2])
+        op       = str(stack_lst[i][3])
+        commit   = str(stack_lst[i][4])
+        snap     = str(stack_lst[i][5])
+        pkg      = str(stack_lst[i][6])
+        script   = str(stack_lst[i][7])
+
+        listing = " ".join([prim_key, sp, date, op, snap, pkg, script])
+        print('{:<4s} {:<4s} {:<4s} {:<4s} {:<30s} {:<30s}'.format(prim_key, date, op, snap, pkg, script ))
     return SUCCESS
+
+
+def list_stack_index(conn):
+    stack_lst = []
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM STACK_INDEX")
+        stack_lst = cur.fetchall()
+    except Exception as e:
+        error(e)
+        return FAILURE
+
+    for i in range(len(stack_lst)-1, -1, -1):
+        prim_key   = str(stack_lst[i][0])
+        sp         = str(stack_lst[i][1])
+        stack_name = str(stack_lst[i][2])
+
+        listing = " ".join([prim_key, sp, stack_name])
+        print('{:<4s} {:<4s} {:<4s}'.format(prim_key, sp, stack_name))
+
 
 
 #---------------------------------------------
@@ -375,6 +477,21 @@ def format_volumes(config):
     return SUCCESS
 
 
+def get_subvol_id(mount_point, stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', mount_point])
+    if validate(ret_tpl, "List subvolumes for mountpoint:" + mount_point):
+        return None
+
+    output = ret_tpl[1]
+    lst = output.split(' ')
+    if len(lst) == 9:
+        vol_id = str(lst[1])
+        return vol_id
+    else:
+        error("Unexpected String size.")
+        return None
+
+
 #---------------------------------------------
 #--------------------------------------------
 def mount_volumes(config):
@@ -390,18 +507,25 @@ def mount_volumes(config):
     if validate(ret_tpl, "Mount: "+volume_root):
         return FAILURE
 
-    btrfs_subvolume = BUILDROOT + "/" + "physix_stack-0"
+    btrfs_subvolume = BUILDROOT + "/" + "STACK_0"
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'create', btrfs_subvolume])
-    if validate(ret_tpl, "Create  subvolume: physix_stack-0 on physix-root"):
+    if validate(ret_tpl, "Create  subvolume: STACK_0 on physix-root"):
         return FAILURE
+
+    vol_id = get_subvol_id(BUILDROOT, "STACK_0")
+    if vol_id == None:
+        return FAILURE
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'set-default', vol_id, BUILDROOT])
+    if validate(ret_tpl, "btrfs subvolume set-default:"+vol_id):
+         return FAILURE
 
     ret_tpl = run_cmd(['umount', '/mnt/physix'])
     if validate(ret_tpl, "unmount /mnt/physix"):
         return FAILURE
 
     volume_root = "/dev/mapper/" + vol_group_name + "-root"
-    ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=physix_stack-0', volume_root, '/mnt/physix'])
-    if validate(ret_tpl, "Mount physix-root subvolume: physix_stack-0"):
+    ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=STACK_0', volume_root, '/mnt/physix'])
+    if validate(ret_tpl, "Mount physix-root subvolume: STACK_0"):
         return FAILURE
 
     mnt_point = BUILDROOT + "/home"
@@ -709,8 +833,10 @@ def build_recipe(recipe, context, build_num):
 
         db = get_db_connection()
         if db:
+            stack_name = get_name_current_stack(db)[0][0]
             entry = row_factory('', 'BUILD', '123456', '', build_src, str(element["build_script"]))
-            if insert_row(db, entry):
+            sql = "INSERT INTO "+ stack_name + " (SP,TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?,?) "
+            if exec_sql(db, sql, entry):
                 error("DB: Failed to insert entry")
                 return FAILURE
             db.close()
@@ -841,8 +967,8 @@ def run_cmd(cmd):
     try:
         p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         rtn = int(p.returncode)
-        out = str(p.stdout)
-        err = str(p.stderr)
+        out = str(p.stdout.decode('utf-8'))
+        err = str(p.stderr.decode('utf-8'))
     except Exception as exc:
         error("[Exceotion] Opperation Failed:\n "+str(exc))
 
@@ -1106,6 +1232,10 @@ def do_config_base(options):
     if config_base_system(RECIPE, "NON-CHRT", start):
         return FAILURE
 
+    if init_db_tables():
+        error("Initialization of DB tables")
+        return FAILURE
+
     info("------------------------------------")
     info("- Base System Configured!")
     info("- Next Steps:")
@@ -1138,9 +1268,18 @@ def do_build_recipe(options):
 def do_list_stack(options):
     conn = get_db_connection()
     if list_stack(conn):
-        error("list_stack fail")
+        error("list_stack failed")
     conn.close()
     return SUCCESS
+
+
+def do_list_stack_index(options):
+    conn = get_db_connection()
+    if list_stack_index(conn):
+        error("list_stack_index failed")
+    conn.close()
+    return SUCCESS
+
 
 
 
@@ -1191,6 +1330,8 @@ def main():
                       help="Record md5sum of all files under core systemd directoryes", metavar="")
     parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
                       help="List state of system stack", metavar="")
+    parser.add_option("-I", "--list-stack-index", action="store_true", dest="list_stack_index",
+                      help="List state of system stack", metavar="")
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
@@ -1201,7 +1342,6 @@ def main():
         return FAILURE
 
     (options, args) = parser.parse_args()
-    print(str(options))
 
     if options.build_conf:
         sys.exit(do_partition_init(options))
@@ -1223,6 +1363,9 @@ def main():
 
     if options.list_stack:
         sys.exit(do_list_stack(options))
+
+    if options.list_stack_index:
+        sys.exit(do_list_stack_index(options))
 
 
 
