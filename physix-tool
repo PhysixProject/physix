@@ -16,12 +16,15 @@ SUCCESS = 0
 #---------------------------------------------
 # DB Functions
 #---------------------------------------------
-def get_db_connection():
+def get_db_connection(chroot=''):
     ''' Return db connection object 
         Return None on error '''
+
+    db_path = '/opt/DB.physix'
     conn = None
+
     try:
-        conn = sqlite3.connect('/opt/DB.physix')
+        conn = sqlite3.connect(db_path)
     except Exception as e:
         error(str(e))
         return None
@@ -35,27 +38,44 @@ def get_name_current_stack(conn):
         c.execute(sql)
         ret = c.fetchall()
         if ret:
-            return ret
+            return ret[0][0]
     except Exception as e:
         error(str(e))
         return None
     return None
 
 
+# Not used yet, will be used when flipping stacks
 def get_id_current_stack(conn):
+    '''Return integer: primary key of table '''
     sql = "SELECT ID FROM STACK_INDEX WHERE SP='*';"
     try:
         c = conn.cursor()
         c.execute(sql)
         ret = c.fetchall()
         if ret:
-            return ret
+            return ret[0][0]
     except Exception as e:
         error(str(e))
         return None
     return None
 
 
+def index_already_exists(conn, stack_name):
+    ''' Check if stack name already exists in table. '''
+    sql = "SELECT COUNT(*) FROM STACK_INDEX WHERE STACK_NAME=\'"+stack_name+"\';"
+    try:
+        c = conn.cursor()
+        c.execute(sql)
+        ret = c.fetchall()
+        return ret[0][0]
+    except Exception as e:
+        error(str(e))
+        return -1
+    return 1
+
+
+# Not used yet
 def change_current_stack(conn, oldid, newid):
     update_old = "UPDATE STACK_INDEX SET SP='' WHERE ID="+oldid+";"
     update_new = "UPDATE STACK_INDEX SET SP='*' WHERE ID="+newid+";" 
@@ -68,9 +88,9 @@ def change_current_stack(conn, oldid, newid):
         error(str(e))
         return FAILURE
     return SUCCESS
- 
 
 
+# NOT used.
 def get_stack_table_size(conn, table_name):
     ''' Return Integer: Number of rows of STACK Table 
         return None on error '''
@@ -102,7 +122,6 @@ def init_db_tables():
 
     sql_create_init_stack = """ CREATE TABLE IF NOT EXISTS STACK_0 (
                                     ID integer PRIMARY KEY AUTOINCREMENT,
-                                    SP text,
                                     TIME text NOT NULL,
                                     OP text NOT NULL,
                                     COMMITID text,
@@ -118,8 +137,8 @@ def init_db_tables():
         return FAILURE
 
     
-    sql = ''' INSERT INTO STACK_0 (SP,TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?,?) ''' 
-    init_values = ('*', "INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
+    sql = ''' INSERT INTO STACK_0 (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) ''' 
+    init_values = ("INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
     try:
         cur = conn.cursor()
         cur.execute(sql, init_values)
@@ -155,10 +174,8 @@ def init_db_tables():
     return SUCCESS
 
 
-def row_factory(sp, op, commit, snapid, pkg, script):
-    ''' Return String: a new entry for insertion  '''
-    date = format(datetime.datetime.now())
-    return (sp, date, op, commit, snapid, pkg, script)
+def date():
+    return str(format(datetime.datetime.now()))
 
 
 def exec_sql(conn, sql, data):
@@ -172,30 +189,8 @@ def exec_sql(conn, sql, data):
     return SUCCESS
 
 
-def get_sp_key(conn):
-    ''' Return initeger: row key of stack pointer 
-        Return None on error'''
-    row = ''
-
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM STACK WHERE SP='*'")
-        row = cur.fetchall()
-
-        if type(row) == list and len(row) == 1:
-            tpl = row[0]
-            if type(tpl) == tuple and len(tpl) == 7:
-                return int(tpl[0])
-            else:
-                error("Unexpected tuple size")
-                return None
-    except Exception as e:
-        error(e)
-        return None
-
-
 def list_stack(conn):
-    stack_name = get_name_current_stack(conn)[0][0]
+    stack_name = get_name_current_stack(conn)
     info("stack::"+str(stack_name))
 
     stack_lst = []
@@ -210,15 +205,14 @@ def list_stack(conn):
     info("Stack Size: "+str(len(stack_lst)))
     for i in range(len(stack_lst)-1, -1, -1):
         prim_key = str(stack_lst[i][0])
-        sp       = str(stack_lst[i][1])
-        date     = str(stack_lst[i][2])
-        op       = str(stack_lst[i][3])
-        commit   = str(stack_lst[i][4])
-        snap     = str(stack_lst[i][5])
-        pkg      = str(stack_lst[i][6])
-        script   = str(stack_lst[i][7])
+        date     = str(stack_lst[i][1])
+        op       = str(stack_lst[i][2])
+        commit   = str(stack_lst[i][3])
+        snap     = str(stack_lst[i][4])
+        pkg      = str(stack_lst[i][5])
+        script   = str(stack_lst[i][6])
 
-        listing = " ".join([prim_key, sp, date, op, snap, pkg, script])
+        listing = " ".join([prim_key, date, op, snap, pkg, script])
         print('{:<4s} {:<4s} {:<4s} {:<4s} {:<30s} {:<30s}'.format(prim_key, date, op, snap, pkg, script ))
     return SUCCESS
 
@@ -833,9 +827,10 @@ def build_recipe(recipe, context, build_num):
 
         db = get_db_connection()
         if db:
-            stack_name = get_name_current_stack(db)[0][0]
-            entry = row_factory('', 'BUILD', '123456', '', build_src, str(element["build_script"]))
-            sql = "INSERT INTO "+ stack_name + " (SP,TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?,?) "
+            stack_name = get_name_current_stack(db)
+            #entry = row_factory('', 'BUILD', '123456', '', build_src, str(element["build_script"]))
+            entry = (date(), 'BUILD', '123456', '', build_src, str(element["build_script"]))
+            sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
             if exec_sql(db, sql, entry):
                 error("DB: Failed to insert entry")
                 return FAILURE
@@ -1281,8 +1276,6 @@ def do_list_stack_index(options):
     return SUCCESS
 
 
-
-
 def do_pull_sources(options):
     """ "Determint path of sources.physix and call pull_sources() """
     context = 'NON-CHRT'
@@ -1305,7 +1298,81 @@ def do_pull_sources(options):
         return FAILURE
 
     return SUCCESS
-    
+
+
+def do_snapshot(options):
+    mntpoint = '/opt/.tmp/mnt/'
+    snap_name = options.snapshot
+
+    if not os.path.exists(mntpoint):
+        ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
+        if validate(ret_tpl, "mkdir "+mntpoint):
+            return FAILURE
+
+    db  = get_db_connection()    
+    if db:
+        curr_stack = get_name_current_stack(db)
+        info(str(curr_stack))
+    else:
+        error("DB connection == None")
+        return FAILURE
+
+    if 0 != index_already_exists(db, snap_name):
+        error("Stack: "+snap_name+" Already Exits.")
+        return FAILURE
+
+    # Just in case it is already mounted.
+    ret_tpl = run_cmd(['umount', mntpoint])
+
+    # Mount the root of the FS 
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', '/dev/mapper/physix-root', mntpoint])
+    if validate(ret_tpl, "Mount physix-root to tmp mount point"):
+        return FAILURE
+
+    curr_stack_path = mntpoint + curr_stack
+    snap_stack_path = mntpoint + snap_name
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'snapshot', curr_stack_path, snap_stack_path])
+    if validate(ret_tpl, "Record Snapshot:"+snap_name):
+        ret_tpl = run_cmd(['umount', mntpoint])
+        validate(ret_tpl, "umount mntpoint")
+        return FAILURE
+
+    entry = (date(), 'SNAPSHOT', '123456', snap_name, '', '')
+    sql = "INSERT INTO "+ curr_stack + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
+    if exec_sql(db, sql, entry):
+        error("DB: Failed to record snapshot to stack"+curr_stack)
+        return FAILURE
+
+    sql = ''' INSERT INTO STACK_INDEX (SP,STACK_NAME) VALUES(?,?) '''
+    entry = ('', snap_name)
+    if exec_sql(db, sql, entry):
+        error("DB: Failed to record snapshot to STACK_INDEX")
+        return FAILURE 
+ 
+    sql_create_table = " CREATE TABLE IF NOT EXISTS "+ snap_name  +" ( \
+                                ID integer PRIMARY KEY AUTOINCREMENT,  \
+                                TIME text NOT NULL,                    \
+                                OP text NOT NULL,                      \
+                                COMMITID text,                         \
+                                SNAPID text,                           \
+                                PKG text,                              \
+                                SCRIPT text); "
+    if exec_sql(db, sql_create_table, ""):
+        error("DB: Failed to record snapshot to STACK_INDEX")
+        return FAILURE
+
+    sql_copy_table = "INSERT INTO "+ snap_name +" SELECT * FROM " + curr_stack + ";"
+    info(sql_copy_table)
+    if exec_sql(db, sql_copy_table, ""):
+        error("DB: Failed to record snapshot to STACK_INDEX")
+        return FAILURE
+
+    ret_tpl = run_cmd(['umount', mntpoint])
+    if validate(ret_tpl, "umount mntpoint after taking snapshot"):
+        return FAILURE
+
+    return SUCCESS
+
 
 def main():
 
@@ -1330,8 +1397,12 @@ def main():
                       help="Record md5sum of all files under core systemd directoryes", metavar="")
     parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
                       help="List state of system stack", metavar="")
-    parser.add_option("-I", "--list-stack-index", action="store_true", dest="list_stack_index",
+    parser.add_option("-L", "--list-stack-index", action="store_true", dest="list_stack_index",
                       help="List state of system stack", metavar="")
+
+    parser.add_option("-r", "--record-snapshot", dest="snapshot",
+                      help="Build temp toolchain.", metavar="")
+
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
@@ -1367,6 +1438,8 @@ def main():
     if options.list_stack_index:
         sys.exit(do_list_stack_index(options))
 
+    if options.snapshot:
+        sys.exit(do_snapshot(options))
 
 
 if __name__ == '__main__':
