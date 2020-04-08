@@ -1300,9 +1300,25 @@ def do_pull_sources(options):
     return SUCCESS
 
 
+
+def name_is_valid(name):
+    if '-' in snap_name:
+        error("Snapshot Name can not contain '-' character")
+        return False
+
+    if name[0].isdigit():
+        error("Snatpshot Name can not start with numerical digit")
+        return False
+
+    return True
+
+
 def do_snapshot(options):
     mntpoint = '/opt/.tmp/mnt/'
     snap_name = options.snapshot
+
+    if not name_is_valid(snap_name):
+        return FAILURE
 
     if not os.path.exists(mntpoint):
         ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
@@ -1312,7 +1328,6 @@ def do_snapshot(options):
     db  = get_db_connection()    
     if db:
         curr_stack = get_name_current_stack(db)
-        info(str(curr_stack))
     else:
         error("DB connection == None")
         return FAILURE
