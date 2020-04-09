@@ -31,86 +31,36 @@ def get_db_connection(chroot=''):
     return conn
 
 
-def get_name_current_stack(conn):
-    sql = "SELECT STACK_NAME FROM STACK_INDEX WHERE SP='*';"
-    try:
-        c = conn.cursor()
-        c.execute(sql)
-        ret = c.fetchall()
-        if ret:
-            return ret[0][0]
-    except Exception as e:
-        error(str(e))
-        return None
-    return None
-
-
-# Not used yet, will be used when flipping stacks
-def get_id_current_stack(conn):
-    '''Return integer: primary key of table '''
-    sql = "SELECT ID FROM STACK_INDEX WHERE SP='*';"
-    try:
-        c = conn.cursor()
-        c.execute(sql)
-        ret = c.fetchall()
-        if ret:
-            return ret[0][0]
-    except Exception as e:
-        error(str(e))
-        return None
-    return None
-
-
-def index_already_exists(conn, stack_name):
-    ''' Check if stack name already exists in table. '''
-    sql = "SELECT COUNT(*) FROM STACK_INDEX WHERE STACK_NAME=\'"+stack_name+"\';"
-    try:
-        c = conn.cursor()
-        c.execute(sql)
-        ret = c.fetchall()
-        return ret[0][0]
-    except Exception as e:
-        error(str(e))
-        return -1
-    return 1
-
-
-# Not used yet
-def change_current_stack(conn, oldid, newid):
-    update_old = "UPDATE STACK_INDEX SET SP='' WHERE ID="+oldid+";"
-    update_new = "UPDATE STACK_INDEX SET SP='*' WHERE ID="+newid+";" 
-    try:
-        c = conn.cursor()
-        c.execute(update_old)
-        c.execute(update_new)
-        c.commit()
-    except Exception as e:
-        error(str(e))
+def get_name_current_stack():
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'show', '/'])
+    if validate(ret_tpl, "btrfs subvolume show /"):
         return FAILURE
-    return SUCCESS
+    std_out = ret_tpl[1]
+    
+    parsed_lst = std_out.split('\n')
+    if parsed_lst[0]:
+        return str(parsed_lst[0])
+    else:
+        return None
 
 
-# NOT used.
-def get_stack_table_size(conn, table_name):
-    ''' Return Integer: Number of rows of STACK Table 
-        return None on error '''
-    try:
-        sql_count = "SELECT COUNT(*) FROM " + table_name + ";"
-        c = conn.cursor()
-        c.execute(sql_count)
-        ret = c.fetchall()
-        if len(ret) != 0:
-            if len(ret[0]) != 0:
-                return int(ret[0][0])
-        return None
-    except Exception as e:
-        error(e)
-        return None
+def index_already_exists(stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
+    if validate(ret_tpl, "btrfs subvolume list /"):
+        return FAILURE
+    std_out = ret_tpl[1]
+
+    parsed_lst = std_out.split('\n')
+    for entry in parsed_lst:
+        datums = entry.split(' ')
+        if len(datums) == 9:
+            if str(stack_name) == str(datums[8]):
+                return True
+    return False
 
 
 def init_db_tables():
-    """ If table does not exist, create it
-        If table does not have init row, create it 
+    """ Create initial STACK_0 Table and initialize it
         return SUCCESS/FAILURE """
 
     conn = None
@@ -147,30 +97,6 @@ def init_db_tables():
         error(str(e))
         return FAILURE
 
-
-    sql_create_stack_table = """ CREATE TABLE IF NOT EXISTS STACK_INDEX (
-                                    ID integer PRIMARY KEY AUTOINCREMENT,
-                                    SP text,
-                                    STACK_NAME text); """
-    try:
-        cur = conn.cursor()
-        cur.execute(sql_create_stack_table, "")
-        conn.commit()
-    except Exception as e:
-        error(str(e))
-        return FAILURE
-
-
-    sql = ''' INSERT INTO STACK_INDEX (SP,STACK_NAME) VALUES(?,?) '''
-    init_values = ('*', 'STACK_0')
-    try:
-        cur = conn.cursor()
-        cur.execute(sql, init_values)
-        conn.commit()
-    except Exception as e:
-        error(str(e))
-        return FAILURE
-
     return SUCCESS
 
 
@@ -190,7 +116,7 @@ def exec_sql(conn, sql, data):
 
 
 def list_stack(conn):
-    stack_name = get_name_current_stack(conn)
+    stack_name = get_name_current_stack()
     info("stack::"+str(stack_name))
 
     stack_lst = []
@@ -215,26 +141,6 @@ def list_stack(conn):
         listing = " ".join([prim_key, date, op, snap, pkg, script])
         print('{:<4s} {:<4s} {:<4s} {:<4s} {:<30s} {:<30s}'.format(prim_key, date, op, snap, pkg, script ))
     return SUCCESS
-
-
-def list_stack_index(conn):
-    stack_lst = []
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM STACK_INDEX")
-        stack_lst = cur.fetchall()
-    except Exception as e:
-        error(e)
-        return FAILURE
-
-    for i in range(len(stack_lst)-1, -1, -1):
-        prim_key   = str(stack_lst[i][0])
-        sp         = str(stack_lst[i][1])
-        stack_name = str(stack_lst[i][2])
-
-        listing = " ".join([prim_key, sp, stack_name])
-        print('{:<4s} {:<4s} {:<4s}'.format(prim_key, sp, stack_name))
-
 
 
 #---------------------------------------------
@@ -827,8 +733,7 @@ def build_recipe(recipe, context, build_num):
 
         db = get_db_connection()
         if db:
-            stack_name = get_name_current_stack(db)
-            #entry = row_factory('', 'BUILD', '123456', '', build_src, str(element["build_script"]))
+            stack_name = get_name_current_stack()
             entry = (date(), 'BUILD', '123456', '', build_src, str(element["build_script"]))
             sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
             if exec_sql(db, sql, entry):
@@ -1268,14 +1173,6 @@ def do_list_stack(options):
     return SUCCESS
 
 
-def do_list_stack_index(options):
-    conn = get_db_connection()
-    if list_stack_index(conn):
-        error("list_stack_index failed")
-    conn.close()
-    return SUCCESS
-
-
 def do_pull_sources(options):
     """ "Determint path of sources.physix and call pull_sources() """
     context = 'NON-CHRT'
@@ -1302,7 +1199,7 @@ def do_pull_sources(options):
 
 
 def name_is_valid(name):
-    if '-' in snap_name:
+    if '-' in name:
         error("Snapshot Name can not contain '-' character")
         return False
 
@@ -1327,12 +1224,12 @@ def do_snapshot(options):
 
     db  = get_db_connection()    
     if db:
-        curr_stack = get_name_current_stack(db)
+        curr_stack = get_name_current_stack()
     else:
         error("DB connection == None")
         return FAILURE
 
-    if 0 != index_already_exists(db, snap_name):
+    if index_already_exists(snap_name):
         error("Stack: "+snap_name+" Already Exits.")
         return FAILURE
 
@@ -1357,12 +1254,6 @@ def do_snapshot(options):
     if exec_sql(db, sql, entry):
         error("DB: Failed to record snapshot to stack"+curr_stack)
         return FAILURE
-
-    sql = ''' INSERT INTO STACK_INDEX (SP,STACK_NAME) VALUES(?,?) '''
-    entry = ('', snap_name)
-    if exec_sql(db, sql, entry):
-        error("DB: Failed to record snapshot to STACK_INDEX")
-        return FAILURE 
  
     sql_create_table = " CREATE TABLE IF NOT EXISTS "+ snap_name  +" ( \
                                 ID integer PRIMARY KEY AUTOINCREMENT,  \
@@ -1373,13 +1264,13 @@ def do_snapshot(options):
                                 PKG text,                              \
                                 SCRIPT text); "
     if exec_sql(db, sql_create_table, ""):
-        error("DB: Failed to record snapshot to STACK_INDEX")
+        error("DB: Failed to record snapshot:"+snap_name)
         return FAILURE
 
     sql_copy_table = "INSERT INTO "+ snap_name +" SELECT * FROM " + curr_stack + ";"
     info(sql_copy_table)
     if exec_sql(db, sql_copy_table, ""):
-        error("DB: Failed to record snapshot to STACK_INDEX")
+        error("DB: Failed to copy data from curr_tack to new snapshot")
         return FAILURE
 
     ret_tpl = run_cmd(['umount', mntpoint])
@@ -1411,8 +1302,6 @@ def main():
     parser.add_option("-f", "--file-snopshot", dest="file_snap",
                       help="Record md5sum of all files under core systemd directoryes", metavar="")
     parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
-                      help="List state of system stack", metavar="")
-    parser.add_option("-L", "--list-stack-index", action="store_true", dest="list_stack_index",
                       help="List state of system stack", metavar="")
 
     parser.add_option("-r", "--record-snapshot", dest="snapshot",
@@ -1449,9 +1338,6 @@ def main():
 
     if options.list_stack:
         sys.exit(do_list_stack(options))
-
-    if options.list_stack_index:
-        sys.exit(do_list_stack_index(options))
 
     if options.snapshot:
         sys.exit(do_snapshot(options))
