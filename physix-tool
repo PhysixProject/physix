@@ -396,7 +396,7 @@ def get_subvol_id(mount_point, stack_name):
 #--------------------------------------------
 def mount_volumes(config):
     """ Mount volumes and partitions """
-
+    filesystem = config['CONF_ROOTPART_FS']
     vol_group_name = config["CONF_VOL_GROUP_NAME"]
 
     if not os.path.exists(BUILDROOT):
@@ -407,26 +407,27 @@ def mount_volumes(config):
     if validate(ret_tpl, "Mount: "+volume_root):
         return FAILURE
 
-    btrfs_subvolume = BUILDROOT + "/" + "STACK_0"
-    ret_tpl = run_cmd(['btrfs', 'subvolume', 'create', btrfs_subvolume])
-    if validate(ret_tpl, "Create  subvolume: STACK_0 on physix-root"):
-        return FAILURE
+    if filesystem == 'btrfs':
+        btrfs_subvolume = BUILDROOT + "/" + "STACK_0"
+        ret_tpl = run_cmd(['btrfs', 'subvolume', 'create', btrfs_subvolume])
+        if validate(ret_tpl, "Create  subvolume: STACK_0 on physix-root"):
+            return FAILURE
 
-    vol_id = get_subvol_id(BUILDROOT, "STACK_0")
-    if vol_id == None:
-        return FAILURE
-    ret_tpl = run_cmd(['btrfs', 'subvolume', 'set-default', vol_id, BUILDROOT])
-    if validate(ret_tpl, "btrfs subvolume set-default:"+vol_id):
-         return FAILURE
+        vol_id = get_subvol_id(BUILDROOT, "STACK_0")
+        if vol_id == None:
+            return FAILURE
+        ret_tpl = run_cmd(['btrfs', 'subvolume', 'set-default', vol_id, BUILDROOT])
+        if validate(ret_tpl, "btrfs subvolume set-default:"+vol_id):
+             return FAILURE
 
-    ret_tpl = run_cmd(['umount', '/mnt/physix'])
-    if validate(ret_tpl, "unmount /mnt/physix"):
-        return FAILURE
+        ret_tpl = run_cmd(['umount', '/mnt/physix'])
+        if validate(ret_tpl, "unmount /mnt/physix"):
+            return FAILURE
 
-    volume_root = "/dev/mapper/" + vol_group_name + "-root"
-    ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=STACK_0', volume_root, '/mnt/physix'])
-    if validate(ret_tpl, "Mount physix-root subvolume: STACK_0"):
-        return FAILURE
+        volume_root = "/dev/mapper/" + vol_group_name + "-root"
+        ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=STACK_0', volume_root, '/mnt/physix'])
+        if validate(ret_tpl, "Mount physix-root subvolume: STACK_0"):
+            return FAILURE
 
     mnt_point = BUILDROOT + "/home"
     os.mkdir(mnt_point, 0o755)
