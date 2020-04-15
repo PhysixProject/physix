@@ -10,7 +10,9 @@ ROOT_PART=`echo $CONF_ROOT_PARTITION | cut -d'=' -f2`
 ROOT_PART='\/dev\/'$ROOT_PART
 
 
-grub-install /dev/$ROOT_DEV
+# This might fail due to Error:'will not proceed with blocklists'
+# Can be forced with --force
+grub-install --target=i386-pc /dev/$ROOT_DEV
 chroot_check $? "grub-install /dev/$ROOT_DEV"
 
 cp -v /opt/physix/build-scripts/03-base-config/configs/lvm-grub.cfg /boot/grub/grub.cfg
