@@ -258,6 +258,8 @@ def create_partitions(config):
     root_device = "/dev/" + config["CONF_ROOT_DEVICE"]
     rtn = root_device = root_device.strip("\n")
 
+    #TODO: Use dd to zero out initial Gig of disk space
+
     # UEFI 1
     uefi_size = config["CONF_UEFI_PART_SIZE"].strip("\n")
     ret_tpl = run_cmd(["parted", root_device, "mkpart", "primary", "1", uefi_size])
