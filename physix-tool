@@ -31,7 +31,26 @@ def get_db_connection(chroot=''):
     return conn
 
 
+def root_fs_type():
+    ret_tpl = run_cmd(['lsblk', '-o', 'MOUNTPOINT,FSTYPE'])
+    if validate(ret_tpl, "Determine root FS type"):
+        return FAILURE
+    std_out = ret_tpl[1]
+
+    lst = std_out.split('\n')
+    info("lst"+str(lst))
+    for line in lst:
+        LST = ' '.join(line).split()
+        if len(LST) != 2:
+            continue
+        if LST[0] == '/':
+            return LST[1]
+
+
 def get_name_current_stack():
+    if 'btrfs' != root_fs_type():
+        return 'STACK_0'
+
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'show', '/'])
     if validate(ret_tpl, "btrfs subvolume show /"):
         return FAILURE
@@ -1215,6 +1234,10 @@ def do_snapshot(options):
     mntpoint = '/opt/.tmp/mnt/'
     snap_name = options.snapshot
 
+    #TODO: Verify root fs is btrfs
+    if 'btrfs' != root_fs_type():
+        return FAILURE
+
     if not name_is_valid(snap_name):
         return FAILURE
 
@@ -1300,8 +1323,6 @@ def main():
                       help="build recipe no further than line number Z", metavar="")
     parser.add_option("-p", "--pull-sources", dest="pull_sources",
                       help="Download sources from from/for a recipe", metavar="")
-    parser.add_option("-f", "--file-snopshot", dest="file_snap",
-                      help="Record md5sum of all files under core systemd directoryes", metavar="")
     parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
                       help="List state of system stack", metavar="")
 
