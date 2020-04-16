@@ -1235,8 +1235,8 @@ def do_snapshot(options):
     mntpoint = '/opt/.tmp/mnt/'
     snap_name = options.snapshot
 
-    #TODO: Verify root fs is btrfs
     if 'btrfs' != root_fs_type():
+        error("File system snapshots are not available for " + str(root_fs_type()))
         return FAILURE
 
     if not name_is_valid(snap_name):
