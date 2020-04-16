@@ -12,7 +12,7 @@ ROOT_PART='\/dev\/'$ROOT_PART
 
 # This might fail due to Error:'will not proceed with blocklists'
 # Can be forced with --force
-grub-install --target=i386-pc /dev/$ROOT_DEV
+grub-install --target=i386-pc --force /dev/$ROOT_DEV
 chroot_check $? "grub-install /dev/$ROOT_DEV"
 
 cp -v /opt/physix/build-scripts/03-base-config/configs/lvm-grub.cfg /boot/grub/grub.cfg
