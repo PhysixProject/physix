@@ -1,8 +1,17 @@
 
+0. Implement boot via UEFI. 
+   Current tracking branch: efi   
+
+1. Create Documentation for creating a bootable ISO Image.
+
 2. For the moment, docbook zip pkgs have been repackaqged as ta tar.gz
    to fit the process, but this case could be handled.
 
-3. build_recipe() should change its working dir and execute from within
-   the build dir. This way, build scripts do not take an argument and 
-   can avoid calling absolute paths in reference with itself.
+3. Add htop to Utilities
+
+4. Add more installable packages. 
+
+5. Implement Gnome. 
+   Current Tracking branch: gnome
+
 
