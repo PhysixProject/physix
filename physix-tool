@@ -38,7 +38,6 @@ def root_fs_type():
     std_out = ret_tpl[1]
 
     lst = std_out.split('\n')
-    info("lst"+str(lst))
     for line in lst:
         LST = ' '.join(line).split()
         if len(LST) != 2:
