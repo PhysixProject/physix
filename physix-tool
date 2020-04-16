@@ -37,13 +37,13 @@ def root_fs_type():
         return FAILURE
     std_out = ret_tpl[1]
 
-    lst = std_out.split('\n')
-    for line in lst:
-        LST = ' '.join(line).split()
-        if len(LST) != 2:
+    for line in std_out.split('\n'):
+        split_line = line.split(' ')
+        result = list(filter(lambda x: x != "", split_line))
+        if len(result) != 2:
             continue
-        if LST[0] == '/':
-            return LST[1]
+        if result[0] == '/':
+            return result[1]
 
 
 def get_name_current_stack():
