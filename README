@@ -12,7 +12,7 @@ applicable law.
 
 Purpose:
 ==========
-Physix is an Automated, Build-From-Source, Linux Distribution. 
+Physix is an Experimental, Automated, Build-From-Source, Linux Distribution.
 It is derived from the Linux From scratch (LFS) technical books.
 
 
@@ -44,10 +44,10 @@ Prepare to build:
 		  └─EMG-data                   253:2    0 145.6G  0 lvm
 
 
-              ******** USE EXTREME CAUSION ********
+              ******** USE EXTREME CAUTION ********
               For the sake of documentation, lets install Physix on device sdb.
               From the lsblk output, this device has 3 partitions and 1 LVM disk
-              volume called 'data', under the group 'EMG'. To remove them, use 
+              volume called 'data', under the volume-group 'EMG'. To remove them, use
               the lvremove tool to remove all volumes under the 'EMG' volume group.
               $# lvremove EMG
 
