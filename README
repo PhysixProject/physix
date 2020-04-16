@@ -12,31 +12,76 @@ applicable law.
 
 Purpose:
 ==========
-The Physix Project has 2 goals.
-Goal 1: Physix is an Automated, Build-From-Source, Linux Distribution. 
+Physix is an Automated, Build-From-Source, Linux Distribution. 
 It is derived from the Linux From scratch (LFS) technical books.
-http://www.linuxfromscratch.org
 
-Goal 2: Physix is a OS build system. 
-
-IT IS HIGHLY RECCOMENED to use a sepperate storage device other than your host
-system's. This prevents overwriting your host systems grub and rendering it
-non-bootable. Also, make sure to read throught the LFS book before hand. It
-will make more sense as to how this collection of scripts are organised.
 
 Installation:
 =============
-IT IS HIGHLY RECCOMENED to use a sepperate storage device other than your host
-system's. This prevents overwriting your host systems grub/UEFI and rendering it
-non-bootable. 
-
-
-== INSTALL ==
 Prepare to build:
-   * Edit the build.conf file. Most values can be left to default, with the exception
-     of those marked as required. An example of my build.conf can be found in 
-     Documentation/build.conf-EXAMPLE
-   * Make sure the storage media you plan to install to, has no existing partitions.
+	P1: Make sure the storage media you plan to install to, has no existing partitions.
+            The 'lsblk' tool provides a view of your device tree.
+	    For example, the output below dispays 4 important facts to understand.
+		1. The names of storage devices on the system (sda, sdb).
+		2. The partitions on each device.
+                3. The lvm volumes located on third partition of both devices..
+		4. The mountpoints suggest the system is currently running Debian.
+
+		NAME                           MAJ:MIN RM   SIZE  RO TYPE MOUNTPOINT
+		sda                              8:0     0 465.8G  0 disk
+		├─sda1                           8:1     0   512M  0 part /boot/efi
+		├─sda2                           8:2     0   244M  0 part /boot
+		└─sda3                           8:3     0   465G  0 part
+		  ├─debian--vg-root              254:0   0  23.3G  0 lvm  /
+		  ├─debian--vg-swap_1            254:1   0  31.9G  0 lvm  [SWAP]
+		  ├─debian--vg-var               254:8   0   9.3G  0 lvm  /var
+		  ├─debian--vg-tmp               254:9   0   1.9G  0 lvm  /tmp
+		  └─debian--vg-home              254:10  0 398.7G  0 lvm  /home
+		sdb                               8:16   0 232.9G  0 disk
+		├─sdb1                            8:17   0   600M  0 part
+		├─sdb2                            8:18   0     1G  0 part
+		└─sdb3                            8:19   0 231.3G  0 part
+		  └─EMG-data                   253:2    0 145.6G  0 lvm
+
+
+              ******** USE EXTREME CAUSION ********
+              For the sake of documentation, lets install Physix on device sdb.
+              From the lsblk output, this device has 3 partitions and 1 LVM disk
+              volume called 'data', under the group 'EMG'. To remove them, use 
+              the lvremove tool to remove all volumes under the 'EMG' volume group.
+              $# lvremove EMG
+
+              Once the EMG-data volume is removed, the remaining 3 partition need to be deleted.
+              This can be done with the 'parted' tool.
+              $# parted /dev/sdb rm 1
+              $# parted /dev/sdb rm 2
+              $# parted /dev/sdb rm 3
+
+              Running lsblk again should show nothing under the sdb device.
+
+        P2: Edit the build.conf file. Most values can be left to default, with the exception
+            of those labeled as 'MANDATORY CONFIGS'. An example build.conf can be found in
+            Documentation/build.conf-EXAMPLE
+
+            CONF_ROOT_DEVICE=  Device NAME which new system will be installed. In referece to the
+                               above example, this would be set to 'sdb'
+
+            CONF_GRUB_SET_ROOT=  This option specifies the name and partition used to configure
+                the GRUB bootloader. It is IMPORTANT to set this correctly.
+                It usually takes the form of '(hd0,2)', which indicates
+                Storage Disk 1, Partition 2. This config/value is defined
+                by you systemd BIOS, so if unsure, consult the BIOS config.
+
+	    CONF_GEN_USER=  login name of the a general user other than root, to be
+                            created during installation
+
+            CONF_IP_ADDRESS= IP Address of the system at first boot.
+
+            CONF_NAMESERVER= NOT IMPLEMENTED
+
+            CONF_DEFAULT_ROUTE= IP Address of you local netowkrs router
+
+
 
 0. Disk Partitioning:
    'physix-tool -i build.config'
