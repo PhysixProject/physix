@@ -7,9 +7,14 @@
 2. For the moment, docbook zip pkgs have been repackaqged as ta tar.gz
    to fit the process, but this case could be handled.
 
-3. Add htop to Utilities
+3. Needed software:
+   - nfsutils
+   - Linux testing project
+   - java
+   - htop
+   - BCC
 
-4. Add more installable packages. 
+4. Implement Advanced Linux Sound Architecture (ALSA)
 
 5. Implement Gnome. 
    Current Tracking branch: gnome
