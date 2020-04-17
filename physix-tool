@@ -1127,6 +1127,7 @@ def do_base_build(options):
     RECIPE = load_recipe(RECIPE_NAME)
 
     if verify_recipe_md5(RECIPE, "NON-CHRT"):
+        error("verify_recipe_md5")
         return FAILURE
 
     if build_base(RECIPE, "NON-CHRT", start):
