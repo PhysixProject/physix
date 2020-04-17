@@ -5,7 +5,7 @@
 			31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 
 			41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
-			61, 62],
+			61, 62, 63],
 
         "0":{   
                 "group": "04-utils",
@@ -584,6 +584,15 @@
                 "sources": {
 			"http://physixproject.org/source/screen-4.6.2.tar.gz":"a0f529d3333b128dfaa324d978ba73a8"
 		}
-        }
+        },
+	"63":{
+		"group": "04-utils",
+		"build_script": "4.740-htop.sh",
+		"archives": ["htop-2.2.0.tar.gz"],
+		"patches": [],
+		"sources": {
+			"http://physixproject.org/source/htop-2.2.0.tar.gz":"7edaf501e9d117b2acad49bebde9be03"
+		}
+	}
 }
 
