@@ -101,10 +101,10 @@
         "10":{
                 "group": "02-base",
                 "build_script": "2.110-binutils.sh",
-                "archives": ["binutils-2.32.tar.xz"],
+                "archives": ["binutils-2.34.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/binutils-2.32.tar.xz":"0d174cdaf85721c5723bf52355be41e6"
+			"http://physixproject.org/source/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
                 }
         },
         "11":{

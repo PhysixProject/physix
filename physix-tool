@@ -252,7 +252,7 @@ def verify_checker(config):
 
     filesystem = config['CONF_ROOTPART_FS']
     mkfs  = "mkfs." + filesystem
-    for tool in ['mkfs.fat', 'mkfs.ext2', mkfs, 'gcc', 'g++', 'make', 'gawk', 'bison']:
+    for tool in ['mkfs.fat', 'mkfs.ext2', mkfs, 'gcc', 'g++', 'make', 'gawk', 'bison', 'texindex']:
         ret_tpl = run_cmd(['which', tool])
         if validate(ret_tpl, "Check: "+ tool):
             return FAILURE
