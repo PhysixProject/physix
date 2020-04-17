@@ -1126,9 +1126,6 @@ def do_base_build(options):
     RECIPE_NAME = str(options.base_conf)
     RECIPE = load_recipe(RECIPE_NAME)
 
-    if pull_sources(RECIPE, "/mnt/physix/opt/sources.physix"):
-        return FAILURE
-
     if verify_recipe_md5(RECIPE, "NON-CHRT"):
         return FAILURE
 
