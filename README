@@ -13,7 +13,7 @@ applicable law.
 Purpose:
 ==========
 Physix is an Experimental, Automated, Build-From-Source, Linux Distribution.
-It is derived from the Linux From scratch (LFS) technical books.
+It is derived from the Linux From scratch (LFS+BLFS) technical books.
 
 
 Installation:
@@ -84,37 +84,45 @@ Prepare to build:
 
 
 0. Disk Partitioning:
-   'physix-tool -i build.config'
+   physix-tool -i build.config
 
 1. Build the temporary toolchain:
-   'physix-tool -t 01-toolchain.json' 
+   - Pull/Download sources:
+      physix-tool -p 01-toolchain.json
+   - Compile toolchain
+      physix-tool -t 01-toolchain.json 
 
 2. Build the base systemd:
-   'physix-tool -s 02-base-system.json' 
+   - Pull/Download sources:
+      physix-tool -p 02-base-system.json
+   - Compile Base system
+      physix-tool -s 02-base-system.json
 
 3. Configure the base system:
-   'physix-tool -c 03-config-base.json'
+      physix-tool -c 03-config-base.json'
 
-4. Pull source code for utilities:
-   'physix-tool -p 04-utilities.json'
+4. Pull source code for utilities. This done
+   prior to reboot because the base system can not 
+   wget to the web, yet.
+      physix-tool -p 04-utilities.json'
 
 5. Reboot into your new base system, login as root
 
 6. Build the utilities software group.
-    cd to /opt/physix
-    physix-tool -b 04-utilities.json 
+      cd /opt/physix
+      physix-tool -b 04-utilities.json
 
 7. Download xorg sources and Build xorg recipe:
-    physix-tool -p 05-xorg.json
-    physix-tool -b 05-xorg.json
+      physix-tool -p 05-xorg.json
+      physix-tool -b 05-xorg.json
 
 8. Download Lightdm sources and build it:
-    physix-tool -p 06.lightdm.json
-    physix-tool -b 06.lightdm.json
+      physix-tool -p 06.lightdm.json
+      physix-tool -b 06.lightdm.json
 
 9. Download LXDE sources and build it:
-    physix-tool -p 07-lxde.json
-    physix-tool -b 07-lxde.json
+      physix-tool -p 07-lxde.json
+      physix-tool -b 07-lxde.json
 
 
 NOTE on Test Suites:
