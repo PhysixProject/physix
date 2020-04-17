@@ -1081,7 +1081,8 @@ def do_partition_init(options):
     info("- Build initialization completete!")
     info("- Next Step: Build the toolchain.")
     info("- 1. cd /mnt/physix/opt/physix")
-    info("- 2. ./physix-tool -t 01-toolchain.json")
+    info("- 2. ./physix-tool -p 01-toolchain.json")
+    info("- 3. ./physix-tool -t 01-toolchain.json")
     info("------------------------------------")
     return SUCCESS
 
@@ -1111,7 +1112,8 @@ def do_toolchain_build(options):
     info("------------------------------------")
     info("- Toolchain Build Completete!")
     info("- Next Step: Build the Base System.")
-    info("- ./physix-tool -s 02-base-system.json ")
+    info("- ./physix-tool -p 02-base-system.json")
+    info("- ./physix-tool -s 02-base-system.json")
     info("------------------------------------")
     return SUCCESS
 
