@@ -1101,9 +1101,6 @@ def do_toolchain_build(options):
     RECIPE_NAME = str(options.toolchain_conf)
     RECIPE = load_recipe(RECIPE_NAME)
 
-    if pull_sources(RECIPE, "/mnt/physix/opt/sources.physix"):
-        return FAILURE
-
     if verify_recipe_md5(RECIPE, "NON-CHRT"):
         return FAILURE
 
@@ -1223,7 +1220,6 @@ def do_pull_sources(options):
         return FAILURE
 
     return SUCCESS
-
 
 
 def name_is_valid(name):
