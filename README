@@ -79,7 +79,7 @@ Prepare to build:
 
             CONF_NAMESERVER= NOT IMPLEMENTED
 
-            CONF_DEFAULT_ROUTE= IP Address of you local netowkrs router
+            CONF_DEFAULT_ROUTE= IP Address of your local netowkr's router
 
 
 
@@ -125,17 +125,9 @@ Prepare to build:
       physix-tool -b 07-lxde.json
 
 
-NOTE on Test Suites:
-======================
-It is always a good idea to run the test suites. Several test suites encounter
-expected or known failures. The failed return code is checked for and reported
-by the 'check' and 'chroot_check' functions. In some cases, a 3rd argument is
-provided such that the Error will be logged but will not halt the build process.
-
-
 Contributions:
 ==============
 Contributions are very welcome! :)
 Please open an issue/task on github.
-Also see TODO.
+See TODO for what is needed.
 
