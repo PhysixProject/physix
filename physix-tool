@@ -277,7 +277,7 @@ def create_partitions(config):
     rtn = root_device = root_device.strip("\n")
 
     of = 'of='+root_device
-    ret_tpl = run_cmd(["dd", 'if=/dev/zero', of, 'bs=1M', 'count=256'])
+    ret_tpl = run_cmd(["dd", 'if=/dev/zero', of, 'bs=1M', 'count=5000'])
     if validate(ret_tpl, "Zero out beginning of device"):
         return FAILURE
 
