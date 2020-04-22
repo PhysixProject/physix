@@ -15,8 +15,8 @@ ROOT_PART='\/dev\/'$ROOT_PART
 grub-install --target=i386-pc --force /dev/$ROOT_DEV
 chroot_check $? "grub-install /dev/$ROOT_DEV"
 
-cp -v /opt/physix/build-scripts/03-base-config/configs/lvm-grub.cfg /boot/grub/grub.cfg
-chroot_check $? "cp grub.cfg"
+install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/lvm-grub.cfg  /boot/grub/grub.cfg
+chroot_check $? "Install grub.cfg"
 
 SED_CMD='s/SET_ROOT_MARKER/'$SET_ROOT'/g'
 sed -i $SED_CMD /boot/grub/grub.cfg
@@ -27,11 +27,10 @@ sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 if [ -e /boot/grub ] ; then
-        cp -v /opt/physix/build-scripts/03-base-config/configs/unicode.pf2 /boot/grub/fonts
-	chroot_check $? "cp -v /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts"
+	install --verbose --mode 444 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/unicode.pf2  /boot/grub/fonts/
+	chroot_check $? "install /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts"
 
-        cp -v /opt/physix/build-scripts/03-base-config/configs/physix-splash.png /boot/grub/
-        chroot_check $? "cp physix-splash.png /boot/grub/"
+	install --verbose --mode 444 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/physix-splash.png  /boot/grub/
+        chroot_check $? "install physix-splash.png /boot/grub/"
 fi
-
 
