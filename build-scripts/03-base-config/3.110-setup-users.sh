@@ -3,15 +3,12 @@
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
 
-#keep
 cp -v /opt/physix/build-scripts/03-base-config/configs/etc_profile /etc/profile
 chroot_check $? "Create /etc/profile"
 
-#keep
 cp -v /opt/physix/build-scripts/03-base-config/configs/user_profile /root/.profile
 chroot_check $? "Create /root/.profile"
 
-#keep
 cp -v /opt/physix/build-scripts/03-base-config/configs/etc_bashrc /root/.bashrc
 chroot_check $? "Create /root/.bashrc"
 
