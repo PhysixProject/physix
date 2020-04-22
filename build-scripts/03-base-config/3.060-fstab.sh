@@ -5,8 +5,8 @@ source /opt/physix/include.sh || exit 1
 
 BOOT=`blkid /dev/"$CONF_ROOT_DEVICE"2 | cut -d'"' -f2`
 
-cp -v /opt/physix/build-scripts/03-base-config/configs/etc_fstab /etc/fstab
-chroot_check $? "system config : cp -v etc_fstab /etc/fstab "
+install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/etc_fstab  /etc/fstab 
+chroot_check $? "install /etc/fstab"
 
 SED_CMD='s/BOOT_UUID_MARKER/'$BOOT'/g'
 sed -i $SED_CMD /etc/fstab
