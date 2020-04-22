@@ -1,0 +1,6 @@
+NAME="Physix"
+VERSION="systemd"
+ID=physix
+PRETTY_NAME="Physix-systemd"
+VERSION_CODENAME="Physix"
+

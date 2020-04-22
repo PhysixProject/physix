@@ -1,0 +1,5 @@
+DISTRIB_ID="Physix"
+DISTRIB_RELEASE="Physix-systemd"
+DISTRIB_CODENAME="Physix"
+DISTRIB_DESCRIPTION="Physix"
+

@@ -3,24 +3,9 @@
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
 
-echo 9.0-systemd > /etc/physix-release
-chroot_check $? "system config : set /etc/physix-release "
-
-cat > /etc/os-release << "EOF"
-NAME="Physix"
-VERSION="systemd"
-ID=physix
-PRETTY_NAME="Physix-systemd"
-VERSION_CODENAME="Physix"
-EOF
+install --verbose --mode 444 --owner root --group root  /opt/physix/build-scripts/03-base-config/configs/os-release  /etc/os-release
 chroot_check $? "system config : set /etc/os-release"
 
-cat > /etc/lsb-release << "EOF"
-DISTRIB_ID="Physix"
-DISTRIB_RELEASE="Physix-systemd"
-DISTRIB_CODENAME="Physix"
-DISTRIB_DESCRIPTION="Physix"
-EOF
+install --verbose --mode 444 --owner root --group root  /opt/physix/build-scripts/03-base-config/configs/lsb-release  /etc/lsb-release
 chroot_check $? "system config : set /etc/lsb-release "
-
 
