@@ -3,13 +3,13 @@
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
 
-cp -v /opt/physix/build-scripts/03-base-config/configs/etc_profile /etc/profile
+install --verbose --mode 644 --owner root --group root  /opt/physix/build-scripts/03-base-config/configs/etc_profile  /etc/profile
 chroot_check $? "Create /etc/profile"
 
-cp -v /opt/physix/build-scripts/03-base-config/configs/user_profile /root/.profile
+install --verbose --mode 644 --owner root --group root  /opt/physix/build-scripts/03-base-config/configs/user_profile  /root/.profile
 chroot_check $? "Create /root/.profile"
 
-cp -v /opt/physix/build-scripts/03-base-config/configs/etc_bashrc /root/.bashrc
+install --verbose --mode 644 --owner root --group root  /opt/physix/build-scripts/03-base-config/configs/etc_bashrc  /root/.bashrc
 chroot_check $? "Create /root/.bashrc"
 
 if [ $CONF_GEN_USER ] ; then
@@ -22,36 +22,24 @@ if [ $CONF_GEN_USER ] ; then
 		chroot_check $? "chmod 700 /home/$CONF_GEN_USER"
 	fi
 
-	cp /opt/physix/build-scripts/03-base-config/configs/user_profile /home/$CONF_GEN_USER/.profile
+	install --verbose --mode 644 --owner $CONF_GEN_USER --group $CONF_GEN_USER /opt/physix/build-scripts/03-base-config/configs/user_profile  /home/$CONF_GEN_USER/.profile
 	chroot_check $? "Create /home/$CONF_GEN_USER/.profile"
-	chown $CONF_GEN_USER:$CONF_GEN_USER /home/$CONF_GEN_USER/.profile
-	chroot_check $? "chown /home/$CONF_GEN_USER/.profile"
 
-	cp /opt/physix/build-scripts/03-base-config/configs/etc_bashrc /home/$CONF_GEN_USER/.bashrc
-	chroot_check $? "Create /home/$CONF_GEN_USER/.bashrc"
-	chown $CONF_GEN_USER:$CONF_GEN_USER /home/$CONF_GEN_USER/.bashrc
+	install --verbose --mode 644 --owner $CONF_GEN_USER --group $CONF_GEN_USER /opt/physix/build-scripts/03-base-config/configs/etc_bashrc  /home/$CONF_GEN_USER/.bashrc
 	chroot_check $? "chown /home/$CONF_GEN_USER/.bashrc"
 fi
 
 if [ ! -e /home/physix ] ; then
-	mkdir /home/physix
-	chroot_check $? "mkdir /home/physix"
-
-	chmod 700 /home/physix
-	chroot_check $? "chmod 700 /home/physix"
-
-        chown physix:physix /home/physix
-        chroot_check $? "chown physix:physix  /home/physix"
+	install --verbose --mode 700 --owner physix --group physix --directory /home/physix
+	chroot_check $? "Create /home/physix"
 
 	chown physix:physix /opt/sources.physix
 	chroot_check $? "chown physix:physix  /opt/sources.physix"
 fi
 
-cp /opt/physix/build-scripts/03-base-config/configs/user_profile /home/physix/.profile &&
-chown physix:physix /home/physix/.profile
+install --verbose --mode 700 --owner physix --group physix  /opt/physix/build-scripts/03-base-config/configs/user_profile  /home/physix/.profile
 chroot_check $? "setup physix profile"
 
-cp /opt/physix/build-scripts/03-base-config/configs/etc_bashrc /home/physix/.bashrc &&
-chown physix:physix /home/physix/.bashrc
+install --verbose --mode 700 --owner physix --group physix  /opt/physix/build-scripts/03-base-config/configs/etc_bashrc  /home/physix/.bashrc
 chroot_check $? "setup physix bashrc"
 
