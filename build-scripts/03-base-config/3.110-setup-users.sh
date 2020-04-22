@@ -39,6 +39,9 @@ if [ ! -e /home/physix ] ; then
 
 	chmod 700 /home/physix
 	chroot_check $? "chmod 700 /home/physix"
+
+        chown physix:physix /home/physix
+        chroot_check $? "chown physix:physix  /home/physix"
 fi
 
 cp /opt/physix/build-scripts/03-base-config/configs/user_profile /home/physix/.profile &&
