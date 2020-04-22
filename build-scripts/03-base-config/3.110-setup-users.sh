@@ -34,7 +34,7 @@ if [ $CONF_GEN_USER ] ; then
 fi
 
 if [ ! -e /home/physix ] ; then
-	mkdir -p /home/physix
+	mkdir /home/physix
 	chroot_check $? "mkdir /home/physix"
 
 	chmod 700 /home/physix
@@ -42,6 +42,9 @@ if [ ! -e /home/physix ] ; then
 
         chown physix:physix /home/physix
         chroot_check $? "chown physix:physix  /home/physix"
+
+	chown physix:physix /opt/sources.physix
+	chroot_check $? "chown physix:physix  /opt/sources.physix"
 fi
 
 cp /opt/physix/build-scripts/03-base-config/configs/user_profile /home/physix/.profile &&
@@ -51,5 +54,4 @@ chroot_check $? "setup physix profile"
 cp /opt/physix/build-scripts/03-base-config/configs/etc_bashrc /home/physix/.bashrc &&
 chown physix:physix /home/physix/.bashrc
 chroot_check $? "setup physix bashrc"
-
 
