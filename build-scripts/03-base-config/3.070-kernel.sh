@@ -28,14 +28,14 @@ chroot_check $? "/boot/config-5.2.8.physix.x86_64"
 install -d /usr/share/doc/linux-5.2.8
 chroot_check $? "system config: kernel : install kernel doc"
 
-install --verbose --mode 644 --owner root --group root Documentation/*  /usr/share/doc/linux-5.2.8
-chroot_check $? "cp -r Documentation/* /usr/share/doc/linux-5.2.8"
+cp -rp Documentation/*  /usr/share/doc/linux-5.2.8
+chroot_check $? "install Documentation/* /usr/share/doc/linux-5.2.8"
 
 install --verbose --mode 755 --directory /etc/modprobe.d
-chroot_check $? "system config: kernel : install -v -m755 -d /etc/modprobe.d"
+chroot_check $? "Create /etc/modprobe.d"
 
 install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/usb.conf  /etc/modprobe.d/usb.conf
-chroot_check $? "system config: kernel : /etc/modprobe.d/usb.conf"
+chroot_check $? "Install /etc/modprobe.d/usb.conf"
 
 mkinitrd /boot/initrd-5.2.8.physix.x86_64 5.2.8
 chroot_check $? "Install mkinitrd"
