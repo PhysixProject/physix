@@ -12,7 +12,8 @@ applicable law.
 
 Purpose:
 ==========
-Physix is an Experimental, Automated, Build-From-Source, Linux Distribution.
+Physix is an Experimental, Automated, Build-From-Source, Linux Distribution 
+for i386, and x86_64.
 It is derived from the Linux From scratch (LFS+BLFS) technical books.
 
 
