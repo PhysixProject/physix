@@ -37,6 +37,6 @@ chroot_check $? "Create /etc/modprobe.d"
 install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/usb.conf  /etc/modprobe.d/usb.conf
 chroot_check $? "Install /etc/modprobe.d/usb.conf"
 
-mkinitrd /boot/initrd-5.2.8.physix.x86_64 5.2.8
+mkinitrd --force /boot/initrd-5.2.8.physix.x86_64 5.2.8
 chroot_check $? "Install mkinitrd"
 
