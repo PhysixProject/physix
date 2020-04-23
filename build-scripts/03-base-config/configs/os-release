@@ -1,6 +1,7 @@
 NAME="Physix"
-VERSION="systemd"
+VERSION="BETA"
 ID=physix
-PRETTY_NAME="Physix-systemd"
-VERSION_CODENAME="Physix"
+PRETTY_NAME="Physix Project"
+VERSION_CODENAME="Covid-19"
+HOME_URL="https://github.com/PhysixProject/physix.git"
 
