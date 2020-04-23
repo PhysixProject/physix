@@ -34,14 +34,7 @@ chroot_check $? "cp -r Documentation/* /usr/share/doc/linux-5.2.8"
 install --verbose --mode 755 --directory /etc/modprobe.d
 chroot_check $? "system config: kernel : install -v -m755 -d /etc/modprobe.d"
 
-cat > /etc/modprobe.d/usb.conf << "EOF"
-# Begin /etc/modprobe.d/usb.conf
-
-install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
-install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
-
-# End /etc/modprobe.d/usb.conf
-EOF
+install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/usb.conf  /etc/modprobe.d/usb.conf
 chroot_check $? "system config: kernel : /etc/modprobe.d/usb.conf"
 
 mkinitrd /boot/initrd-5.2.8.physix.x86_64 5.2.8
