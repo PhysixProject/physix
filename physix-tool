@@ -486,6 +486,14 @@ def mount_volumes(config):
     if validate(ret_tpl, "Mount: " + boot_part):
         return FAILURE
 
+    tmp = BUILDROOT + "/tmp"
+    os.mkdir(tmp, 0o755)
+    volume_tmp = "/dev/mapper/" + vol_group_name + "-tmp"
+    mnt_point = BUILDROOT + "/tmp"
+    ret_tpl = run_cmd(['mount', volume_tmp, mnt_point])
+    if validate(ret_tpl, "Mount: " + volume_tmp):
+        return FAILURE
+
     return SUCCESS
 
 
