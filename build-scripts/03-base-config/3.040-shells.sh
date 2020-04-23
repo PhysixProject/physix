@@ -3,12 +3,12 @@
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 3
 
-cp -v /opt/physix/build-scripts/03-base-config/configs/etc_shells /etc/shells
+install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/etc_shells  /etc/shells
 chroot_check $? "Setup /etc/shells"
 
-cp /opt/physix/build-scripts/03-base-config/configs/etc_bashrc /etc/bashrc
+install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/etc_bashrc  /etc/bashrc
 chroot_check $? "Ssetup /etc/bashrc"
 
-mkdir -p /etc/profile.d/
+install --verbose --mode 644 --owner root --group root --directory /etc/profile.d/
 chroot_check $? "Setup /etc/profile.d/"
 
