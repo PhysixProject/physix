@@ -20,6 +20,10 @@ It is derived from the Linux From scratch (LFS+BLFS) technical books.
 Installation:
 =============
 Prepare to build:
+	P0: Physix requires a minimum of 62 Gigabytes of storage space. Storage volumes sizes
+            can be adjusted in build.conf, however keep in mind that file systems have organizational
+            overhead; so available space will not be exact.
+
 	P1: Make sure the storage media you plan to install to, has no existing partitions.
             The 'lsblk' tool provides a view of your device tree.
 	    For example, the output below dispays 4 important facts to understand.
