@@ -10,27 +10,35 @@ of GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
 applicable law.
 
 
-Purpose:
+Definition:
 ==========
 Physix is an Experimental, Automated, Build-From-Source, Linux Distribution 
 for i386, and x86_64.
-It is derived from the Linux From scratch (LFS+BLFS) technical books.
+It is derived from the Linux From Scratch (LFS+BLFS) technical books.
 
 
 Installation:
 =============
-Prepare to build:
-	P0: Physix requires a minimum of 62 Gigabytes of storage space. Storage volumes sizes
-            can be adjusted in build.conf, however keep in mind that file systems have organizational
+
+   Prequisites:
+	P0: i386 and/or x86_64 CpU
+
+	P1: 62 Gigabytes of blank storage space. Storage volumes sizes can be adjusted in 
+            build.conf, however keep in mind that file systems have organizational
             overhead; so available space will not be exact.
 
-	P1: Make sure the storage media you plan to install to, has no existing partitions.
-            The 'lsblk' tool provides a view of your device tree.
-	    For example, the output below dispays 4 important facts to understand.
-		1. The names of storage devices on the system (sda, sdb).
-		2. The partitions on each device.
-                3. The lvm volumes located on third partition of both devices..
-		4. The mountpoints suggest the system is currently running Debian.
+	P2: No existing partitions/volumes should be present on the storage device. 
+
+
+   Device Setup: 
+	If your target installation device is NOT blank, use the following steps to remove existing 
+        partitions and volumes from the device. If your device is already blank, skip the Device Setup steps
+        and go to the Build Configuration steps.
+         
+        D0: Use the 'lsblk' tool to view the device tree.
+	    The following example shows output of the 'lsblk' tool, depicting the host system's
+                device (sda) and the target installation device (sdb).
+
 
 		NAME                           MAJ:MIN RM   SIZE  RO TYPE MOUNTPOINT
 		sda                              8:0     0 465.8G  0 disk
@@ -48,23 +56,39 @@ Prepare to build:
 		└─sdb3                            8:19   0 231.3G  0 part
 		  └─EMG-data                   253:2    0 145.6G  0 lvm
 
+		In the preceding example, notice the following information: 
+                1. The names of the storage devices on the system (sda, sdb).
+                2. The existing partitions on each device (sda1, sda2, sda3, sdb1, sdb2, sdb3).
+                3. The lvm volumes located on the third partition of each device
+                   (debian--vg... for sda3, and EMG-data for sdb).
+                4. The mountpoints suggest the system is currently running Debian.
 
+
+
+	  D1:
               ******** USE EXTREME CAUTION ********
-              For the sake of documentation, lets install Physix on device sdb.
-              From the lsblk output, this device has 3 partitions and 1 LVM disk
-              volume called 'data', under the volume-group 'EMG'. To remove them, use
-              the lvremove tool to remove all volumes under the 'EMG' volume group.
-              $# lvremove EMG
+	      The following operations will destroy all existing data on your target 
+              installation device.
+	      *************************************
 
-              Once the EMG-data volume is removed, the remaining 3 partition need to be deleted.
-              This can be done with the 'parted' tool.
-              $# parted /dev/sdb rm 1
-              $# parted /dev/sdb rm 2
-              $# parted /dev/sdb rm 3
+	     Use the 'lvremove' tool to remove all volumes from your target installation device.
+              For example, to remove all volumes from device sdb: 
+                $# lvremove EMG
 
-              Running lsblk again should show nothing under the sdb device.
+	      In the preceding example, this would remove all volume under EMG volume group.
 
-        P2: Edit the build.conf file. Most values can be left to default, with the exception
+            D2: Use the 'parted' tool to delete all remaining partitions.
+              For example, to delete all partitions from device sdb:
+                $# parted /dev/sdb rm 1
+                $# parted /dev/sdb rm 2
+                $# parted /dev/sdb rm 3
+
+               Running lsblk again should show nothing under the sdb device.
+
+
+   Build Configuration:
+
+        B0: Edit the build.conf file. Most values can be left to default, with the exception
             of those labeled as 'MANDATORY CONFIGS'. An example build.conf can be found in
             Documentation/build.conf-EXAMPLE
 
@@ -84,50 +108,51 @@ Prepare to build:
 
             CONF_NAMESERVER= NOT IMPLEMENTED
 
-            CONF_DEFAULT_ROUTE= IP Address of your local netowkr's router
+            CONF_DEFAULT_ROUTE= IP Address of your local network's router
 
 
 
-0. Disk Partitioning:
-   physix-tool -i build.config
+   System Build:
 
-1. Build the temporary toolchain:
-   - Pull/Download sources:
-      physix-tool -p 01-toolchain.json
-   - Compile toolchain
-      physix-tool -t 01-toolchain.json 
+       S0. Disk Partitioning:
+           physix-tool -i build.config
 
-2. Build the base systemd:
-   - Pull/Download sources:
-      physix-tool -p 02-base-system.json
-   - Compile Base system
-      physix-tool -s 02-base-system.json
+       S1. Build the temporary toolchain:
+           - Pull/Download sources:
+             physix-tool -p 01-toolchain.json
+           - Compile toolchain
+             physix-tool -t 01-toolchain.json 
 
-3. Configure the base system:
-      physix-tool -c 03-config-base.json'
+       S2. Build the base systemd:
+           - Pull/Download sources:
+             physix-tool -p 02-base-system.json
+           - Compile Base system
+             physix-tool -s 02-base-system.json
 
-4. Pull source code for utilities. This done
-   prior to reboot because the base system can not 
-   wget to the web, yet.
-      physix-tool -p 04-utilities.json'
+       S3. Configure the base system:
+           physix-tool -c 03-config-base.json'
 
-5. Reboot into your new base system, login as root
+       S4. Pull source code for utilities. This is done prior to reboot 
+           because the base system can not wget to the web, yet.
+           physix-tool -p 04-utilities.json'
 
-6. Build the utilities software group.
-      cd /opt/physix
-      physix-tool -b 04-utilities.json
+       S5. Reboot into your new base system, login as root
 
-7. Download xorg sources and Build xorg recipe:
-      physix-tool -p 05-xorg.json
-      physix-tool -b 05-xorg.json
+       S6. Build the utilities software group.
+           cd /opt/physix
+           physix-tool -b 04-utilities.json
 
-8. Download Lightdm sources and build it:
-      physix-tool -p 06.lightdm.json
-      physix-tool -b 06.lightdm.json
+       S7. Download xorg sources and Build xorg recipe:
+           physix-tool -p 05-xorg.json
+           physix-tool -b 05-xorg.json
 
-9. Download LXDE sources and build it:
-      physix-tool -p 07-lxde.json
-      physix-tool -b 07-lxde.json
+       S8. Download Lightdm sources and build it:
+           physix-tool -p 06.lightdm.json
+           physix-tool -b 06.lightdm.json
+
+       S9. Download LXDE sources and build it:
+           physix-tool -p 07-lxde.json
+           physix-tool -b 07-lxde.json
 
 
 Contributions:
