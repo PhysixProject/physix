@@ -10,6 +10,13 @@ of GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
 applicable law.
 
 
+Errata:
+=======
+The software used in Physix is constantly being updated. The best way to see fixes to
+errors. warnings, and security exploits is to contribute a patch or communicate the need
+for an update by opening a task on github.
+
+
 Definition:
 ==========
 Physix is an Experimental, Automated, Build-From-Source, Linux Distribution 
