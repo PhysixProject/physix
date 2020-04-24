@@ -8,10 +8,10 @@ source ~/.bashrc
 make mrproper
 check $? "make mrproper"
 
-make INSTALL_HDR_PATH=dest headers_install
+make headers
 check $? "Linux make headers"
 
-cp -rv dest/include/* /tools/include
+cp -rv usr/include/* /tools/include
 check $? "cp -rv dest/include/* /tools/include"
 
 

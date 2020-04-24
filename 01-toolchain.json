@@ -17,22 +17,22 @@
 	"1":{
 		"group": "01-base-toolchain",
 		"build_script": "1.050-gcc-p1.sh",
-		"archives": ["gcc-9.2.0.tar.xz", "mpfr-4.0.2.tar.xz", "gmp-6.1.2.tar.xz", "mpc-1.1.0.tar.gz"],
+		"archives": ["gcc-9.2.0.tar.xz", "mpfr-4.0.2.tar.xz", "gmp-6.2.0.tar.xz", "mpc-1.1.0.tar.gz"],
 		"patches": [],
 		"sources":{
 			"http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78",
 			"http://physixproject.org/source/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8",
-			"http://physixproject.org/source/gmp-6.1.2.tar.xz":"f58fa8001d60c4c77595fbbb62b63c1d",
+			"http://physixproject.org/source/gmp-6.2.0.tar.xz":"a325e3f09e6d91e62101e59f9bda3ec1",
 			"http://physixproject.org/source/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
 		}
 	},
 	"2":{
                "group": "01-base-toolchain",
                "build_script": "1.060-linux-api-headers.sh",
-               "archives": ["linux-5.2.8.tar.xz"],
+               "archives": ["linux-5.5.3.tar.xz"],
                "patches": [],
                "sources": {
-                        "http://physixproject.org/source/linux-5.2.8.tar.xz":"602dd0ecb8646e539fefb2beb6eb6fe0"
+                        "http://physixproject.org/source/linux-5.5.3.tar.xz":"3ea50025d8c679a327cf2fc225d81a46"
                 }
 	},
 	"3":{
@@ -65,12 +65,12 @@
         "6":{
                 "group": "01-base-toolchain",
                 "build_script": "1.100-gcc-p2.sh",
-                "archives": ["gcc-9.2.0.tar.xz", "mpfr-4.0.2.tar.xz","gmp-6.1.2.tar.xz","mpc-1.1.0.tar.gz"],
+                "archives": ["gcc-9.2.0.tar.xz", "mpfr-4.0.2.tar.xz","gmp-6.2.0.tar.xz","mpc-1.1.0.tar.gz"],
                 "patches": [],
 	        "sources": {
                         "http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78",
 			"http://physixproject.org/source/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8",
-			"http://physixproject.org/source/gmp-6.1.2.tar.xz":"f58fa8001d60c4c77595fbbb62b63c1d",
+			"http://physixproject.org/source/gmp-6.2.0.tar.xz":"a325e3f09e6d91e62101e59f9bda3ec1",
 			"http://physixproject.org/source/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
 		}
                 

@@ -8,7 +8,7 @@ source ~/.bashrc
 mv -v ../mpfr-4.0.2 mpfr
 check $? "pull in mpfr"
 
-mv -v ../gmp-6.1.2 gmp
+mv -v ../gmp-6.2.0 gmp
 check $? "pull in gmp"
 
 mv -v ../mpc-1.1.0 mpc
@@ -53,7 +53,6 @@ cd       build
     --disable-threads                              \
     --disable-libatomic                            \
     --disable-libgomp                              \
-    --disable-libmpx                               \
     --disable-libquadmath                          \
     --disable-libssp                               \
     --disable-libvtv                               \
