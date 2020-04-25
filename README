@@ -18,10 +18,33 @@ for an update by opening a task on github.
 
 
 Definition:
-==========
-Physix is an Experimental, Automated, Build-From-Source, Linux Distribution 
-for i386, and x86_64.
-It is derived from the Linux From Scratch (LFS+BLFS) technical books.
+===========
+Physix is an Experimental, Automated, Build-From-Source, Linux Distribution
+for i386, and x86_64. It is derived from the Linux From Scratch (LFS+BLFS)
+technical books.
+
+
+What Physix Currently Provides:
+==============================
+ * physix-tool: A command line tool used for building the system from config
+   files / build-recipes. Read the recipe files for information about what software
+   it builds and installs.
+
+ * A minimal base system, built from recipes: 01-toolchain.json, 02-base-system.json,
+   and 03-config-base.json
+
+ * Standard Uitilites built from: 04-utilities.json
+
+ * X Windows Display server: 05-xorg.json
+
+ * Display Manager: 06-lightdm.json
+
+ * Lightweight X11 Desktop Environment (LXDE): 07-lxde.json
+
+ * X11 Applications: 08-xapps.json
+   Currently VERY minimal:
+    - Xterm
+    - Firefox
 
 
 Installation:
