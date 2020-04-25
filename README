@@ -24,6 +24,14 @@ for i386, and x86_64. It is derived from the Linux From Scratch (LFS+BLFS)
 technical books.
 
 
+Who should use Physix?
+======================
+The target audience for this project are Linux Enthusiasts with medium
+or higher level of expeirnece using *nix, and some experience in Python
+and Bash programming. It is recommended that you have at least a general
+understanding of the Linux From Scratch book.
+
+
 What Physix Currently Provides:
 ==============================
  * physix-tool: A command line tool used for building the system from config
