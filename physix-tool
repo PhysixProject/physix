@@ -1098,7 +1098,7 @@ def do_partition_init(options):
 def do_toolchain_build(options):
     start=0
     if options.start_number:
-        START = int(options.start_number)
+        start = int(options.start_number)
 
     if os.path.exists("/tmp/physix-build.log"):
         CMD = ['mv', '/tmp/physix-build.log', '/mnt/physix/opt/logs.physix/']

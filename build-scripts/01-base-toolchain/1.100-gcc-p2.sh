@@ -8,7 +8,7 @@ source ~/.bashrc
 mv -v ../mpfr-4.0.2 mpfr
 check $? "pull in mpfr"
 
-mv -v ../gmp-6.1.2 gmp
+mv -v ../gmp-6.2.0 gmp
 check $? "pull in gmp"
 
 mv -v ../mpc-1.1.0 mpc
@@ -35,6 +35,11 @@ case $(uname -m) in
         -i.orig gcc/config/i386/t-linux64
   ;;
 esac
+
+sed -e '1161 s|^|//|' \
+    -i libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.cc
+check $? "sed: sanitizer_platform_limits_posix.cc"
+
 
 mkdir -v build
 cd       build
