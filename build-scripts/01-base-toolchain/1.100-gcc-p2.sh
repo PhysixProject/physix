@@ -5,14 +5,19 @@ source /mnt/physix/opt/physix/include.sh || exit 1
 cd $BR_SOURCE_DIR/$1 || exit 1
 source ~/.bashrc
 
-mv -v ../mpfr-4.0.2 mpfr
+
+MPFR=`find ../ -maxdepth 1 -type d  | grep mpfr`
+mv -v $MPFR mpfr
 check $? "pull in mpfr"
 
-mv -v ../gmp-6.2.0 gmp
+GMP=`find ../ -maxdepth 1 -type d  | grep gmp`
+mv -v $GMP gmp
 check $? "pull in gmp"
 
-mv -v ../mpc-1.1.0 mpc
+MPC=`find ../ -maxdepth 1 -type d  | grep mpc`
+mv -v $MPC mpc
 check $? "pull in  mpc"
+
 
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > `dirname $($BUILDROOT_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
 
