@@ -62,7 +62,7 @@ Installation:
 	P0: i386 and/or x86_64 CpU
 
 	P1: 62 Gigabytes of blank storage space. Storage volumes sizes can be adjusted in 
-            build.conf, however keep in mind that file systems have organizational
+            physix.conf, however keep in mind that file systems have organizational
             overhead; so available space will not be exact.
 
 	P2: No existing partitions/volumes should be present on the storage device. 
@@ -126,9 +126,9 @@ Installation:
 
    Build Configuration:
 
-        B0: Edit the build.conf file. Most values can be left to default, with the exception
-            of those labeled as 'MANDATORY CONFIGS'. An example build.conf can be found in
-            Documentation/build.conf-EXAMPLE
+        B0: Edit the physix.conf file. Most values can be left to default, with the exception
+            of those labeled as 'MANDATORY CONFIGS'. An example physix.conf can be found in
+            Documentation/physix.conf-EXAMPLE
 
             CONF_ROOT_DEVICE=  Device NAME which new system will be installed. In referece to the
                                above example, this would be set to 'sdb'
@@ -153,7 +153,7 @@ Installation:
    System Build:
 
        S0. Disk Partitioning:
-           physix-tool -i build.config
+           physix-tool -i physix.conf
 
        S1. Build the temporary toolchain:
            - Pull/Download sources:

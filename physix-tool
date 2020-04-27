@@ -224,7 +224,7 @@ def load_recipe(cfg):
         return json.load(file_desc)
 
 
-def load_build_config(cfg):
+def load_physix_config(cfg):
     """ cfg : string """
     config = {}
     with open(cfg, "r") as file_desc:
@@ -597,9 +597,9 @@ def setup_build_env(element, context):
     if validate(ret_tpl, 'Copy include.sh to BUILDBOX'):
         return FAILURE
 
-    buildconf =  os.path.join(physix_prefix, "build.conf")
+    buildconf =  os.path.join(physix_prefix, "physix.conf")
     ret_tpl = run_cmd(['cp', buildconf, bb_path])
-    if validate(ret_tpl, 'Copy build.conf to BUILDBOX'):
+    if validate(ret_tpl, 'Copy physix.conf to BUILDBOX'):
         return FAILURE
 
     for patch in element["patches"]:
@@ -1050,7 +1050,7 @@ def unpack(element, context):
 def do_partition_init(options):
     logging.basicConfig(filename='/tmp/physix-build.log', level=logging.DEBUG)
     
-    BUILD_CONFIG = load_build_config(options.build_conf)
+    BUILD_CONFIG = load_physix_config(options.physix_conf)
 
     # rename sysreq_check
     if verify_checker(BUILD_CONFIG):
@@ -1320,7 +1320,7 @@ def do_snapshot(options):
 def main():
 
     parser = OptionParser()
-    parser.add_option("-i", "--build-init", dest="build_conf",
+    parser.add_option("-i", "--build-init", dest="physix_conf",
                       help="Initialize system build process.", metavar="")
     parser.add_option("-t", "--build-toolchain", dest="toolchain_conf",
                       help="Build temp toolchain.", metavar="")
@@ -1353,7 +1353,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    if options.build_conf:
+    if options.physix_conf:
         sys.exit(do_partition_init(options))
 
     if options.toolchain_conf:
