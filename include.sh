@@ -5,8 +5,8 @@ export BUILDROOT='/mnt/physix'
 export BR_SOURCE_DIR=$BUILDROOT/opt/sources.physix/BUILDBOX
 export SOURCE_DIR=/opt/sources.physix/BUILDBOX
 
-[ -e /mnt/physix/opt/physix/build.conf ] && source /mnt/physix/opt/physix/build.conf
-[ -e /opt/physix/build.conf ] && source /opt/physix/build.conf
+[ -e /mnt/physix/opt/physix/physix.conf ] && source /mnt/physix/opt/physix/physix.conf
+[ -e /opt/physix/physix.conf ] && source /opt/physix/physix.conf
 
 NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
 export NPROC
