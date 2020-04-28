@@ -32,6 +32,36 @@ and Bash programming. It is recommended that you have at least a general
 understanding of the Linux From Scratch book.
 
 
+Conceptual Project Design:
+==========================
+The system is devided into software groups. Software groups are collections
+of source code which are compiled in-order, so that all dependencies are met.
+Software groups are defined as config files called recipes.
+
+The system is built using a command line tool called 'physix-tool', which
+uses the recipes as its instructions.
+
+ - Recipes:       JSON files which define information about all packages that
+                  make up a software group. This includes md5sum of source code,
+                  download URL, associated patches, license, and most importantly
+                  the build script. The recipe names are prefixed by a number to
+                  signify build order.
+
+ - Build Scripts: Are the command line instructions to build each software
+                  project. These scripts are organized by the software group they
+                  belong to in the build-scripts directory. Like the naming scheme
+                  of the recipes, build scripts are also ordered by number for the same
+                  reason.
+
+ - service configs: System services (such as PAM, httpd, openssh, etc...) use configs which
+                    are installed in /etc and elsewhere. These configs are located within
+                    the config directory under its associated software group directory
+                    (e.g. build-scripts/04-utils/configs/linux-pam/ )
+
+When upgrading to a newer version of a source package, the recipe, build script, and
+associated service configs are the key pieces to change.
+
+
 What Physix Currently Provides:
 ==============================
  * physix-tool: A command line tool used for building the system from config
