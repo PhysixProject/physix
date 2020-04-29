@@ -1129,7 +1129,7 @@ def do_toolchain_build(options):
 def do_base_build(options):
     start=0
     if options.start_number:
-        START = int(options.start_number)
+        start = int(options.start_number)
 
     logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
                             level=logging.DEBUG)
