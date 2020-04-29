@@ -1,0 +1,79 @@
+{
+
+	"build_queue":[0, 1, 2, 3, 4, 5, 6, 7],
+
+	"0":{
+		"group": "05-services",
+		"build_script": "5.000-libnfsidmap.sh",
+		"archives": ["libnfsidmap-0.26.tar.bz2"],
+		"patches": [],
+		"sources": {
+			"http://physixproject.org/source/services/libnfsidmap-0.26.tar.bz2":"2c0cf0e2b1665d51fa9a783679494888"
+		}
+	},
+        "1":{
+                "group": "05-services",
+                "build_script": "5.001-rpcsvc-proto.sh",
+                "archives": ["rpcsvc-proto-1.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/rpcsvc-proto-1.4.tar.gz":"df1022ccc5d0aff30b8e505735b4a98b"
+                }
+        },
+        "2":{
+                "group": "05-services",
+                "build_script": "5.002-krb.sh",
+                "archives": ["krb5-1.18.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/krb5-1.18.tar.gz":"69a5b165dac5754a5094627ee6df0def"
+                }
+        },
+        "3":{
+                "group": "05-services",
+                "build_script": "5.003-keyutils.sh",
+                "archives": ["keyutils-1.6.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/keyutils-1.6.1.tar.bz2":"919af7f33576816b423d537f8a8692e8"
+                }
+        },
+        "4":{
+                "group": "05-services",
+                "build_script": "5.010-nfs-netutils.sh",
+                "archives": ["nfs-utils-2.4.3.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/nfs-utils-2.4.3.tar.xz":"06020c76f531ed97f3145514901e0e7c"
+                }
+        },
+        "5":{
+                "group": "05-services",
+                "build_script": "5.011-apr.sh",
+                "archives": ["apr-1.7.0.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/apr-1.7.0.tar.bz2":"7a14a83d664e87599ea25ff4432e48a7"
+                }
+        },
+        "6":{
+                "group": "05-services",
+                "build_script": "5.012-apr-utils.sh",
+                "archives": ["apr-util-1.6.1.tar.bz2"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/services/apr-util-1.6.1.tar.bz2":"8ff5dc36fa39a2a3db1df196d3ed6086"
+                }
+        },
+        "7":{
+                "group": "05-services",
+                "build_script": "5.013-http.sh",
+                "archives": ["httpd-2.4.41.tar.bz2"],
+                "patches": ["httpd-2.4.41-blfs_layout-1.patch"],
+                "sources": {
+                        "http://physixproject.org/source/services/httpd-2.4.41.tar.bz2":"dfc674f8f454e3bc2d4ccd73ad3b5f1e",
+			"http://physixproject.org/source/services/httpd-2.4.41-blfs_layout-1.patch":"a001c8c4d41c38d65b90a86e9b5061bc"
+                }
+        }
+}
+
