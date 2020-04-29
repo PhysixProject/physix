@@ -7,11 +7,17 @@ import tarfile
 import logging
 import datetime
 import subprocess
+from signal import signal, SIGINT
 from optparse import OptionParser
 
 BUILDROOT = "/mnt/physix"
 FAILURE = 1
 SUCCESS = 0
+
+def handler(signal_received, frame):
+    ''' Handle SIGIN/CTRL-C '''
+    print('SIGINT or CTRL-C detected. Exiting... ')
+    sys.exit(0)
 
 #---------------------------------------------
 # DB Functions
@@ -1379,5 +1385,6 @@ def main():
 
 
 if __name__ == '__main__':
+    signal(SIGINT, handler)
     main()
 
