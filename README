@@ -89,13 +89,19 @@ Installation:
 =============
 
    Prequisites:
-	P0: i386 and/or x86_64 CpU
+	P0: Since there is not YET a bootable ISO image, a host system is required to 
+            install from. During development, Debian 10.2 and Fedora 30 was used 
+            extensively, and thus is reccomended. See LFS host requirements for more
+            explicit reciperements. 
+            http://www.linuxfromscratch.org/lfs/view/stable-systemd/chapter02/hostreqs.html
 
-	P1: 62 Gigabytes of blank storage space. Storage volumes sizes can be adjusted in 
+	P1: i386 and/or x86_64 CPU
+
+	P2: 62 Gigabytes of blank storage space. Storage volumes sizes can be adjusted in 
             physix.conf, however keep in mind that file systems have organizational
             overhead; so available space will not be exact.
 
-	P2: No existing partitions/volumes should be present on the storage device. 
+	P3: No existing partitions/volumes should be present on the storage device. 
 
 
    Device Setup: 
