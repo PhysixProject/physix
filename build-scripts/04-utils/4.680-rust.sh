@@ -1,6 +1,6 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-source /opt/physix/physix.conf || exit 1
+source /etc/physix.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 su physix -c 'ping -q -c 3  8.8.8.8'
