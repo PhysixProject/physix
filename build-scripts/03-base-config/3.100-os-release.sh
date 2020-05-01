@@ -7,5 +7,8 @@ install --verbose --mode 444 --owner root --group root  /opt/physix/build-script
 chroot_check $? "system config : set /etc/os-release"
 
 install --verbose --mode 444 --owner root --group root  /opt/physix/build-scripts/03-base-config/configs/lsb-release  /etc/lsb-release
-chroot_check $? "system config : set /etc/lsb-release "
+chroot_check $? "system config : set /etc/lsb-release"
+
+install --verbose --mode 444 --owner root --group root /opt/physix/physix.conf /etc/physix.conf
+chroot_check $? "Install /etc/physix.conf"
 
