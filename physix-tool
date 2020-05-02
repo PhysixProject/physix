@@ -83,6 +83,21 @@ def index_already_exists(stack_name):
     return False
 
 
+def get_snap_id(stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
+    if validate(ret_tpl, "btrfs subvolume list /"):
+        return None
+    std_out = ret_tpl[1]
+
+    parsed_lst = std_out.split('\n')
+    for entry in parsed_lst:
+        datums = entry.split(' ')
+        if len(datums) == 9:
+            if str(stack_name) == str(datums[8]):
+                return str(datums[1])
+    return None 
+
+
 def init_db_tables():
     """ Create initial STACK_0 Table and initialize it
         return SUCCESS/FAILURE """
@@ -1323,6 +1338,22 @@ def do_snapshot(options):
     return SUCCESS
 
 
+def do_set_default_snapshot(options):
+    ''' Set the FS snapshot to boot from during the next reboot '''
+    snap_name = options.defsnap
+
+    snap_id = get_snap_id(snap_name)
+    if snap_id == None:
+        return FAILURE
+
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'set-default', snap_id, '/'])
+    if validate(ret_tpl, "Set Default Snapshot:"+snap_name, True):
+        return FAILURE
+
+    info("Next reboot will boot from: "+snap_name)
+    return SUCCESS
+
+
 def main():
 
     parser = OptionParser()
@@ -1344,10 +1375,10 @@ def main():
                       help="Download sources from from/for a recipe", metavar="")
     parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
                       help="List state of system stack", metavar="")
-
     parser.add_option("-r", "--record-snapshot", dest="snapshot",
                       help="Build temp toolchain.", metavar="")
-
+    parser.add_option("-d", "--default-snapshot", dest="defsnap",
+                      help="Set Default snapshot to boot from.", metavar="")
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
@@ -1383,6 +1414,8 @@ def main():
     if options.snapshot:
         sys.exit(do_snapshot(options))
 
+    if options.defsnap:
+        sys.exit(do_set_default_snapshot(options))
 
 if __name__ == '__main__':
     signal(SIGINT, handler)
