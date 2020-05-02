@@ -1264,6 +1264,36 @@ def name_is_valid(name):
     return True
 
 
+def do_list_snapshots():
+    mntpoint = '/opt/.tmp/mnt/'
+
+    if 'btrfs' != root_fs_type():
+        error("File system snapshots are not available for " + str(root_fs_type()))
+        return FAILURE
+
+    if not os.path.exists(mntpoint):
+        ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
+        if validate(ret_tpl, "mkdir "+mntpoint):
+            return FAILURE
+
+    # Just in case it is already mounted.
+    ret_tpl = run_cmd(['umount', mntpoint])
+
+    # Mount the root of the FS
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', '/dev/mapper/physix-root', mntpoint])
+    if validate(ret_tpl, "Mount physix-root to tmp mount point"):
+        return FAILURE
+
+    dir_listing = os.listdir(mntpoint)
+    print("Available Snapshots:")
+    for snap_name in dir_listing:
+        print ("  "+snap_name)
+
+    ret_tpl = run_cmd(['umount', mntpoint])
+    if validate(ret_tpl, "Mount physix-root to tmp mount point"):
+        return FAILURE
+
+
 def do_snapshot(options):
     mntpoint = '/opt/.tmp/mnt/'
     snap_name = options.snapshot
@@ -1375,6 +1405,8 @@ def main():
                       help="Download sources from from/for a recipe", metavar="")
     parser.add_option("-l", "--list-stack", action="store_true", dest="list_stack",
                       help="List state of system stack", metavar="")
+    parser.add_option("-L", "--list-snapshots", action="store_true", dest="list_snaps",
+                      help="List state of system stack", metavar="")
     parser.add_option("-r", "--record-snapshot", dest="snapshot",
                       help="Build temp toolchain.", metavar="")
     parser.add_option("-d", "--default-snapshot", dest="defsnap",
@@ -1410,6 +1442,9 @@ def main():
 
     if options.list_stack:
         sys.exit(do_list_stack(options))
+
+    if options.list_snaps:
+        sys.exit(do_list_snapshots())
 
     if options.snapshot:
         sys.exit(do_snapshot(options))
