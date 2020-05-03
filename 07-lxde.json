@@ -2,7 +2,7 @@
 
 	"build_queue": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
 			11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
-			21, 22, 23, 24, 25],
+			21, 22, 23, 24, 25, 26],
 
 	"0":{
 		"group": "07-lxde",
@@ -238,6 +238,15 @@
                 "patches": [],
                 "sources": {
                         "http://physixproject.org/source/lxde/lxterminal-0.3.2.tar.xz":"62e57c3aafb831505cc1638b2b737cc9"
+                }
+        },
+        "26":{
+                "group": "07-lxde",
+                "build_script": "7.260-gome-screenshot.sh",
+                "archives": ["gnome-screenshot-3.34.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/lxde/gnome-screenshot-3.34.0.tar.xz":"779f12548d72d12a5275d5e8563d9855"
                 }
         }
 }
