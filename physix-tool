@@ -710,12 +710,12 @@ def setup(config):
 def build_toolchain(recipe, context, build_num=0):
     """ Build the temorary toolchain from recipe """
 
-    for i in range(build_num, len(recipe['build_queue'])):
-        buildq = recipe['build_queue']
+    buildq = recipe['build_queue']
+    for i in range(build_num, len(buildq)):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
-        stat = " ".join(["Build [", str(i), "/", str(len(recipe)), "] Toolchain" ] )
+        stat = " ".join(["Build [", str(i), "/", str(len(buildq)), "] Toolchain" ] )
         info(stat)
 
         if setup_build_env(element, context):
