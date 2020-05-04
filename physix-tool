@@ -1337,6 +1337,7 @@ def do_snapshot(options):
         validate(ret_tpl, "umount mntpoint")
         return FAILURE
 
+    #TODO: implement get_commit_id, so we can stop using 123456
     entry = (date(), 'SNAPSHOT', '123456', snap_name, '', '')
     sql = "INSERT INTO "+ curr_stack + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
     if exec_sql(db, sql, entry):
