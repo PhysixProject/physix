@@ -1,6 +1,6 @@
 {
 	"build_queue": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-			11, 12, 13],
+			11, 12, 13, 14, 15],
 
 	"0":{
 		"group": "08-xapps",
@@ -67,6 +67,33 @@
         },
         "7":{
                 "group": "08-xapps",
+                "build_script": "9.051-libcanberra.sh",
+                "archives": ["libcanberra-0.30.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/Xapps/libcanberra-0.30.tar.xz":"34cb7e4430afaf6f447c4ebdb9b42072"
+                }
+        },
+        "8":{
+                "group": "08-xapps",
+                "build_script": "9.052-desktop-file-utils.sh",
+                "archives": ["desktop-file-utils-0.24.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/Xapps/desktop-file-utils-0.24.tar.xz":"9364b82e14cfcad881161aa7ea5257ae"
+                }
+        },
+	"9":{
+                "group": "08-xapps",
+                "build_script": "9.053-gnome-screenshot.sh",
+                "archives": ["gnome-screenshot-3.34.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/Xapps/gnome-screenshot-3.34.0.tar.xz":"779f12548d72d12a5275d5e8563d9855"
+                }
+        },
+        "10":{
+                "group": "08-xapps",
                 "build_script": "9.060-libsndfile.sh",
                 "archives": ["libsndfile-1.0.28.tar.gz"],
                 "patches": [],
@@ -74,7 +101,7 @@
                         "http://physixproject.org/source/Xapps/libsndfile-1.0.28.tar.gz":"646b5f98ce89ac60cdb060fcd398247c"
                 }
         },
-        "8":{
+        "11":{
                 "group": "08-xapps",
                 "build_script": "9.080-speex.sh",
                 "archives": ["speex-1.2.0.tar.gz","speexdsp-1.2rc3.tar.gz"],
@@ -84,7 +111,7 @@
 			"http://physixproject.org/source/Xapps/speexdsp-1.2rc3.tar.gz":"70d9d31184f7eb761192fd1ef0b73333"
                 }
         },
-        "9":{
+        "12":{
                 "group": "08-xapps",
                 "build_script": "9.090-pulse-audio.sh",
                 "archives": ["pulseaudio-12.2.tar.xz"],
@@ -93,7 +120,7 @@
                         "http://physixproject.org/source/Xapps/pulseaudio-12.2.tar.xz":"c42f1f1465e8df9859d023dc184734bf"
                 }
         },
-        "10":{
+        "13":{
                 "group": "08-xapps",
                 "build_script": "9.100-cbingen.sh",
                 "archives": ["cbindgen-0.9.0.tar.gz"],
@@ -102,7 +129,7 @@
                         "http://physixproject.org/source/Xapps/cbindgen-0.9.0.tar.gz":"81cb95f5c254fdcbba01a105cf41372f"
                 }
         },
-        "11":{
+        "14":{
                 "group": "08-xapps",
                 "build_script": "9.120-libwebp.sh",
                 "archives": ["libwebp-1.0.3.tar.gz"],
@@ -111,7 +138,7 @@
                         "http://physixproject.org/source/Xapps/libwebp-1.0.3.tar.gz":"906ad85daaaa2eac97c8aa2dec9e8b77"
                 }
         },
-        "12":{
+        "15":{
                 "group": "08-xapps",
                 "build_script": "9.130-yasm.sh",
                 "archives": ["yasm-1.3.0.tar.gz"],
@@ -120,7 +147,7 @@
                         "http://physixproject.org/source/Xapps/yasm-1.3.0.tar.gz":"fc9e586751ff789b34b1f21d572d96af"
                 }
         },
-        "13":{
+        "16":{
                 "group": "08-xapps",
                 "build_script": "9.140-firefox.sh",
                 "archives": ["firefox-68.5.0esr.source.tar.xz"],
