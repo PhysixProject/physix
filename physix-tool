@@ -715,7 +715,7 @@ def build_toolchain(recipe, context, build_num=0):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
-        stat = " ".join(["Build [", str(i), "/", str(len(buildq)), "] Toolchain" ] )
+        stat = " ".join(["Build [", str(i), "/", str(int(len(buildq)-1)), "] Toolchain" ] )
         info(stat)
 
         if setup_build_env(element, context):
@@ -756,7 +756,7 @@ def build_recipe(recipe, context, build_num):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(buildq)), "]"])
+        stat = " ".join(["Building [", str(i), "/", str(int(len(buildq)-1)), "]"])
         info(stat)
 
         if set_build_lock():
@@ -822,7 +822,7 @@ def build_base(recipe, context, build_num):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(buildq)), "] Base System" ] )
+        stat = " ".join(["Building [", str(i), "/", str(int(len(buildq)-1)), "] Base System" ] )
         info(stat)
 
         if setup_build_env(element, context):
@@ -856,10 +856,12 @@ def build_base(recipe, context, build_num):
 def config_base_system(recipe, context, build_num):
     """ Configure the base system from recipe """
 
+    buildq = recipe['build_queue']
     for i in range(build_num, len(recipe['build_queue'])):
-        element = recipe[str(i)]
+        build_id = str(buildq[i])
+        element  = recipe[build_id]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "] Config Base System" ])
+        stat = " ".join(["Building [", str(i), "/", str(int(len(buildq)-1)), "] Config Base System" ])
         info(stat)
 
         if setup_build_env(element, context):
