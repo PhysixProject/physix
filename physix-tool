@@ -817,12 +817,12 @@ def build_base(recipe, context, build_num):
         if validate(ret_tpl, "Build: " + str(cmd)):
             return FAILURE
 
-    for i in range(build_num, len(recipe['build_queue'])):
-        buildq = recipe['build_queue']
+    buildq = recipe['build_queue']
+    for i in range(build_num, len(buildq)):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "] Base System" ] )
+        stat = " ".join(["Building [", str(i), "/", str(len(buildq)), "] Base System" ] )
         info(stat)
 
         if setup_build_env(element, context):
