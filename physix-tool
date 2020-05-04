@@ -751,12 +751,12 @@ def build_toolchain(recipe, context, build_num=0):
 def build_recipe(recipe, context, build_num):
     """ Build recipe """
 
-    for i in range(build_num, len(recipe['build_queue'])):
-        buildq = recipe['build_queue']
+    buildq = recipe['build_queue']
+    for i in range(build_num, len(buildq)):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
-        stat = " ".join(["Building [", str(i), "/", str(len(recipe['build_queue'])), "]" ] )
+        stat = " ".join(["Building [", str(i), "/", str(len(buildq)), "]"])
         info(stat)
 
         if set_build_lock():
