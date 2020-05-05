@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
+source /opt/physix/physix.conf
 
 # This should be dynamically set.
 SET_ROOT=`echo $CONF_GRUB_SET_ROOT | cut -d'=' -f2`

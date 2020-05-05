@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
+source /opt/physix/physix.conf || exit 1
 
 BOOT=`blkid /dev/"$CONF_ROOT_DEVICE"2 | cut -d'"' -f2`
 

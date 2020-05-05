@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
+source /opt/physix/physix.conf || exit 1
 
 IFACE=`ip link | grep 'state UP' | awk -F: '{print $2}' | tr -d '[:space:]'`
 MAC=`cat /sys/class/net/$IFACE/address`

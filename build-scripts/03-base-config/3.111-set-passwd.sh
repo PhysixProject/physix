@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
+source /opt/physix/physix.conf || exit 1
 
 passwd root
 chroot_check $? "Set root passwd"
