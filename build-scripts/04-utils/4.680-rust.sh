@@ -7,7 +7,13 @@ su physix -c 'ping -q -c 3  8.8.8.8'
 chroot_check $? "Ping: Internet Reachable"
 # If this fails, try: 'ip route add default via <your-router-ip-addr>'
 
-[ ! -e /usr/bin/rustc-1.35.0 ] || rm -rf /usr/bin/rustc-1.35.0
+if [ -e /usr/bin/rustc-1.35.0 ] ; then
+	rm -r /usr/bin/rustc-1.35.0
+fi
+
+if [ -e /usr/bin/rustc ] ; then
+	rm /usr/bin/rustc
+fi
 
 mkdir /usr/bin/rustc-1.35.0  &&
 ln -svfin /usr/bin/rustc-1.35.0 /usr/bin/rustc
