@@ -1113,8 +1113,8 @@ def do_partition_init(options):
     info("- Build initialization completete!")
     info("- Next Step: Build the toolchain.")
     info("- 1. cd /mnt/physix/opt/physix")
-    info("- 2. ./physix-tool -p 01-toolchain.json")
-    info("- 3. ./physix-tool -t 01-toolchain.json")
+    info("- 2. ./catalyst -p 01-toolchain.json")
+    info("- 3. ./catalyst -t 01-toolchain.json")
     info("------------------------------------")
     return SUCCESS
 
@@ -1144,8 +1144,8 @@ def do_toolchain_build(options):
     info("------------------------------------")
     info("- Toolchain Build Completete!")
     info("- Next Step: Build the Base System.")
-    info("- ./physix-tool -p 02-base-system.json")
-    info("- ./physix-tool -s 02-base-system.json")
+    info("- ./catalyst -p 02-base-system.json")
+    info("- ./catalyst -s 02-base-system.json")
     info("------------------------------------")
     return SUCCESS
 
@@ -1171,7 +1171,7 @@ def do_base_build(options):
     info("------------------------------------")
     info("- Base System Build Completete!")
     info("- Next Step: Build the toolchain.")
-    info("- 1. ./physix-tool -c 03-config-base.json")
+    info("- 1. ./catalyst -c 03-config-base.json")
     info("------------------------------------")
     return SUCCESS
 
@@ -1198,7 +1198,7 @@ def do_config_base(options):
     info("- Base System Configured!")
     info("- Next Steps:")
     info("- 1. Pull Utility sources:")
-    info("      ./physix-tool -p 04-utilities.json")
+    info("      ./catalyst -p 04-utilities.json")
     info("- 2. reboot ")
     info("------------------------------------")
     return SUCCESS

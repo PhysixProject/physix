@@ -38,7 +38,7 @@ The system is devided into software groups. Software groups are collections
 of source code which are compiled in-order, so that all dependencies are met.
 Software groups are defined as config files called recipes.
 
-The system is built using a command line tool called 'physix-tool', which
+The system is built using a command line tool called 'catalyst', which
 uses the recipes as its instructions.
 
  - Recipes:       JSON files which define information about all packages that
@@ -64,7 +64,7 @@ associated service configs are the key pieces to change.
 
 What Physix Currently Provides:
 ==============================
- * physix-tool: A command line tool used for building the system from config
+ * catalyst: A command line tool used for building the system from config
    files / build-recipes. Read the recipe files for information about what software
    it builds and installs.
 
@@ -189,44 +189,44 @@ Installation:
    System Build:
 
        S0. Disk Partitioning:
-           physix-tool -i physix.conf
+           catalyst -i physix.conf
 
        S1. Build the temporary toolchain:
            - Pull/Download sources:
-             physix-tool -p 01-toolchain.json
+             catalyst -p 01-toolchain.json
            - Compile toolchain
-             physix-tool -t 01-toolchain.json 
+             catalyst -t 01-toolchain.json
 
        S2. Build the base systemd:
            - Pull/Download sources:
-             physix-tool -p 02-base-system.json
+             catalyst -p 02-base-system.json
            - Compile Base system
-             physix-tool -s 02-base-system.json
+             catalyst -s 02-base-system.json
 
        S3. Configure the base system:
-           physix-tool -c 03-config-base.json'
+           catalyst -c 03-config-base.json'
 
        S4. Pull source code for utilities. This is done prior to reboot 
            because the base system can not wget to the web, yet.
-           physix-tool -p 04-utilities.json'
+           catalyst -p 04-utilities.json'
 
        S5. Reboot into your new base system, login as root
 
        S6. Build the utilities software group.
            cd /opt/physix
-           physix-tool -b 04-utilities.json
+           catalyst -b 04-utilities.json
 
        S7. Download xorg sources and Build xorg recipe:
-           physix-tool -p 05-xorg.json
-           physix-tool -b 05-xorg.json
+           catalyst -p 05-xorg.json
+           catalyst -b 05-xorg.json
 
        S8. Download Lightdm sources and build it:
-           physix-tool -p 06.lightdm.json
-           physix-tool -b 06.lightdm.json
+           catalyst -p 06.lightdm.json
+           catalyst -b 06.lightdm.json
 
        S9. Download LXDE sources and build it:
-           physix-tool -p 07-lxde.json
-           physix-tool -b 07-lxde.json
+           catalyst -p 07-lxde.json
+           catalyst -b 07-lxde.json
 
 
 Contributions:
