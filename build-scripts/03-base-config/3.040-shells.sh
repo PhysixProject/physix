@@ -9,6 +9,6 @@ chroot_check $? "Setup /etc/shells"
 install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/etc_bashrc  /etc/bashrc
 chroot_check $? "Ssetup /etc/bashrc"
 
-install --verbose --mode 644 --owner root --group root --directory /etc/profile.d/
+install --verbose --mode 655 --owner root --group root --directory /etc/profile.d/
 chroot_check $? "Setup /etc/profile.d/"
 
