@@ -707,11 +707,11 @@ def setup(config):
 
 #---------------------------------------------
 #---------------------------------------------
-def build_toolchain(recipe, context, build_num=0):
+def build_toolchain(recipe, context, start, stop):
     """ Build the temorary toolchain from recipe """
 
     buildq = recipe['build_queue']
-    for i in range(build_num, len(buildq)):
+    for i in range(start, stop):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
@@ -748,11 +748,10 @@ def build_toolchain(recipe, context, build_num=0):
 
 #---------------------------------------------
 #---------------------------------------------
-def build_recipe(recipe, context, build_num):
+def build_recipe(recipe, context, start, stop):
     """ Build recipe """
-
     buildq = recipe['build_queue']
-    for i in range(build_num, len(buildq)):
+    for i in range(start, stop):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
@@ -780,7 +779,7 @@ def build_recipe(recipe, context, build_num):
                               str(element["build_script"]))
         cmd = [subcmd, build_src]
 
-        info("Executing Build: " + "[" + str(build_num) + "] " + str(cmd))
+        info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
         #os.chdir('/opt/sources.physix/BUILDBOX')
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), context)
         #os.chdir('/opt/physix')
@@ -802,23 +801,22 @@ def build_recipe(recipe, context, build_num):
             return FAILURE
 
 
-
 #---------------------------------------------
 # Input: string - recipe : Recipe file path
 # Input: string - chroot or non chroot context
 # Input: int - Start building from recipe at line number
 #---------------------------------------------
-def build_base(recipe, context, build_num):
+def build_base(recipe, context, start, stop):
     """ Build base system from recipe """
 
-    if build_num == 0:
+    if start == 0:
         cmd = ['/mnt/physix/opt/physix/build-scripts/02-base/2.000-base-build-prep.sh']
         ret_tpl = run_cmd_log(cmd, "2.000-base-build-prep.sh", "")
         if validate(ret_tpl, "Build: " + str(cmd)):
             return FAILURE
 
     buildq = recipe['build_queue']
-    for i in range(build_num, len(buildq)):
+    for i in range(start, stop):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
@@ -844,7 +842,7 @@ def build_base(recipe, context, build_num):
         cmd = ['/mnt/physix/opt/physix/build-scripts/02-base/000-chroot_stub.sh',
                str(element["build_script"]),
                build_src]
-        info("Executing Build: " + "[" + str(build_num) + "] " + str(cmd))
+        info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
         if validate(ret_tpl, "Build: " + str(cmd), True):
             return FAILURE
@@ -853,11 +851,11 @@ def build_base(recipe, context, build_num):
 #---------------------------------------------
 # Sees system as /mnt/physix/opt/physix
 #---------------------------------------------
-def config_base_system(recipe, context, build_num):
+def config_base_system(recipe, context, start, stop):
     """ Configure the base system from recipe """
 
     buildq = recipe['build_queue']
-    for i in range(build_num, len(recipe['build_queue'])):
+    for i in range(start, stop):
         build_id = str(buildq[i])
         element  = recipe[build_id]
 
@@ -883,7 +881,7 @@ def config_base_system(recipe, context, build_num):
         cmd = ['/mnt/physix/opt/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
                str(element["build_script"]),
                build_src]
-        info("Executing Build: " + "[" + str(build_num) + "] " + str(cmd))
+        info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
         ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
         if validate(ret_tpl, "Build: "+str(cmd), True):
             return FAILURE
@@ -963,7 +961,6 @@ def top_most_dir(archive_path):
         tmd_lst = tmd.split("/")
         name_lst = list(filter(len, tmd_lst))
         return str(name_lst[0])
-
 
 
 def common_prefix(archive_name, context):
@@ -1120,7 +1117,9 @@ def do_partition_init(options):
 
 
 def do_toolchain_build(options):
-    start=0
+    start = 0
+    stop = 0
+
     if options.start_number:
         start = int(options.start_number)
 
@@ -1134,11 +1133,17 @@ def do_toolchain_build(options):
     RECIPE_NAME = str(options.toolchain_conf)
     RECIPE = load_recipe(RECIPE_NAME)
 
+    result = verify_build_bounderies(options, RECIPE)
+    if result == (None, None):
+        return FAILURE
+    start = result[0]
+    stop = result[1]
+
     if verify_recipe_md5(RECIPE, "NON-CHRT"):
         error("verify_recipe_md5")
         return FAILURE
 
-    if build_toolchain(RECIPE, "NON-CHRT", start):
+    if build_toolchain(RECIPE, "NON-CHRT", start, stop):
         return FAILURE
 
     info("------------------------------------")
@@ -1151,7 +1156,8 @@ def do_toolchain_build(options):
 
 
 def do_base_build(options):
-    start=0
+    start = 0
+    stop = 0
     if options.start_number:
         start = int(options.start_number)
 
@@ -1161,11 +1167,17 @@ def do_base_build(options):
     RECIPE_NAME = str(options.base_conf)
     RECIPE = load_recipe(RECIPE_NAME)
 
+    result = verify_build_bounderies(options, RECIPE)
+    if result == (None, None):
+        return FAILURE
+    start = result[0]
+    stop = result[1]
+
     if verify_recipe_md5(RECIPE, "NON-CHRT"):
         error("verify_recipe_md5")
         return FAILURE
 
-    if build_base(RECIPE, "NON-CHRT", start):
+    if build_base(RECIPE, "NON-CHRT", start, stop):
         return FAILURE
 
     info("------------------------------------")
@@ -1177,7 +1189,8 @@ def do_base_build(options):
 
 
 def do_config_base(options):
-    start=0
+    start = 0
+    stop = 0
     if options.start_number:
         start = int(options.start_number)
 
@@ -1187,7 +1200,14 @@ def do_config_base(options):
     info("Building Base System...")
     RECIPE_NAME = str(options.configure_base_conf)
     RECIPE = load_recipe(RECIPE_NAME)
-    if config_base_system(RECIPE, "NON-CHRT", start):
+
+    result = verify_build_bounderies(options, RECIPE)
+    if result == (None, None):
+        return FAILURE
+    start = result[0]
+    stop = result[1]
+
+    if config_base_system(RECIPE, "NON-CHRT", start, stop):
         return FAILURE
 
     if init_db_tables():
@@ -1204,17 +1224,49 @@ def do_config_base(options):
     return SUCCESS
 
 
-def do_build_recipe(options):
-    start=0
+def verify_build_bounderies(options, RECIPE):
+    start = 0
+    stop = 0
+
+    buildq = RECIPE['build_queue']
     if options.start_number:
         start = int(options.start_number)
+    else:
+        start = 0
+
+    if options.stop_number:
+        stop = int(options.stop_number)
+    else:
+        stop = len(buildq)
+
+    if not (start >= 0 and start <= len(buildq)):
+        error("Invalid start number")
+        return (None,None)
+    if not (stop >= start and stop <= len(buildq)):
+        error("Invalid stop number")
+        return (None,None)
+
+    return (start, stop)
+
+
+def do_build_recipe(options):
+    start = 0
+    stop = 0
 
     logging.basicConfig(filename='/opt/logs.physix/physix-build.log',
                             level=logging.DEBUG)
     info("Building Recipe")
     RECIPE_NAME = str(options.build_recipe)
     RECIPE = load_recipe(RECIPE_NAME)
-    if build_recipe(RECIPE, "CHRT", start):
+
+    result = verify_build_bounderies(options, RECIPE)
+    if result == (None, None):
+        return FAILURE
+    start = result[0]
+    stop = result[1]
+
+    info("Building: "+ str(start) + "-" + str(stop))
+    if build_recipe(RECIPE, "CHRT", start, stop):
         return FAILURE
 
     info("------------------------------------")
