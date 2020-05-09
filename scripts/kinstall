@@ -1,0 +1,50 @@
+#!/bin/bash
+
+LABEL=$1
+if [ -z $LABEL ] ; then
+	echo "No Lebel Provided... Exiting." 
+	exit 1
+fi
+
+ENTRY_NAME=$2
+if [ -z $ENTRY_NAME ] ; then
+        echo "No ENTRY_NAME Provided... Exiting."
+        exit 1
+fi
+
+if [ -e ./arch/x86/boot/bzImage ] ; then 
+	install --verbose --mode 644 --owner root --group root ./arch/x86/boot/bzImage  /boot/vmlinuz-$LABEL.physix.x86_64
+	if [ $? -ne 0 ] ; then 
+		echo "Kernel Image Not found"
+		exit 1
+	fi
+fi
+
+if [ -e ./System.map ] ; then
+	install --verbose --mode 644 --owner root --group root ./System.map  /boot/System.map-$LABEL
+	if [ $? -ne 0 ] ; then
+	       echo "System.map Not found" 
+	       exit 1
+	fi
+fi
+
+if [ -e .config ] ; then
+	install --verbose --mode 644 --owner root --group root .config  /boot/config-$LABEL.physix.x86_64
+	if [ $? -ne 0 ] ; then 
+		echo "Failed config install" 
+		exit 1
+	fi
+fi
+
+mkinitrd --force /boot/initrd-$LABEL.physix.x86_64 $LABEL
+if [ $? -ne 0 ] ; then
+	echo "mkinitrd failed"
+	exit 1
+fi
+
+echo "menuentry \"Physix GNU/Linux (systemd), Linux $ENTRY_NAME-physix\" {             
+        linux /vmlinuz-$LABEL.physix.x86_64 root=/dev/mapper/physix-root ro     
+        initrd /initrd-$LABEL.physix.x86_64
+}" >> /boot/grub/grub.cfg
+
+
