@@ -85,6 +85,25 @@ What Physix Currently Provides:
     - Firefox
 
 
+Estimated Build Time:
+=====================
+To provide an idea of the time required to build each software
+group, these estimates were collected using a system running
+an Intel i7-4790 (4 Core, 2 threads/core) with 32G Memory.
+
+01-toolchain.json   :  50 Minutes
+02-base-system.json : 168 Minutes
+03-config-base.json :   5 Minutes
+04-utilities.json   : 130 Minutes
+05-services.json    :   2 Minutes
+05-xorg.json        :  36 Minutes
+06-lightdm.json     :  19 Minutes
+07-lxde.json        :   4 Minutes
+08-Xapps.json       :  80 Minutes
+----------------------------------
+Summation           :  ~8.25 hours
+
+
 Installation:
 =============
 
