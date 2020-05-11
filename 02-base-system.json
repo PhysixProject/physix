@@ -7,7 +7,7 @@
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
 			61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 
 			71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-			81, 82],
+			81, 82, 83, 84],
 
 	"0":{
 		"group": "02-base",
@@ -758,6 +758,24 @@
                 "sources": {
                         "http://physixproject.org/source/openssh-8.0p1.tar.gz":"bf050f002fe510e1daecd39044e1122d"
                 }
+        },
+        "83":{
+                "group": "02-base",
+                "build_script": "2.850-tcl.sh",
+                "archives": ["tcl8.6.10-src.tar.gz", "tcl8.6.10-html.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/tcl8.6.10-src.tar.gz":"97c55573f8520bcab74e21bfd8d0aadc",
+			"http://physixproject.org/source/tcl8.6.10-html.tar.gz":"a012711241ba3a5bd4a04e833001d489"
+                }
+        },
+        "84":{
+                "group": "02-base",
+                "build_script": "2.860-expect.sh",
+                "archives": ["expect5.45.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/expect5.45.4.tar.gz":"00fce8de158422f5ccd2666512329bd2"
+                }
         }
-
 }
