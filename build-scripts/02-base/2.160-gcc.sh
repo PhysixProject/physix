@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
 source /opt/physix/include.sh || exit 1
+source /opt/physix/physix.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 case $(uname -m) in
@@ -32,8 +33,11 @@ chroot_check $? "system-build : gcc : make "
 ulimit -s 32768
 rm ../gcc/testsuite/g++.dg/pr83239.C
 chown -Rv nobody .
-#su nobody -s /bin/bash -c "PATH=$PATH make -k check"
-#../contrib/test_summary
+
+if [ "$CONF_RUN_ALL_TEST_SUITE"=="y" ] ; then
+    su nobody -s /bin/bash -c "PATH=$PATH make -k check"
+    ../contrib/test_summary
+fi
 
 make install
 chroot_check $? "system-build : gcc  : make install"
