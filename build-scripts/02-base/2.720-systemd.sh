@@ -71,4 +71,7 @@ chroot_check $? "systemd : rm -fv /usr/lib/lib{blkid,uuid,mount}.so*"
 rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf
 chroot_check $? "systemd : rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf"
 
+#By Default systemd install links default to graphical.target
+unlink /lib/systemd/system/default.target
+ln -s  /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
