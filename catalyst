@@ -37,6 +37,19 @@ def get_db_connection(chroot=''):
     return conn
 
 
+def get_curr_commit_id():
+    ''' Return commit id of git repo '''
+    ret_tpl = run_cmd(['git', 'log', '--oneline'])
+    if validate(ret_tpl, "git log --oneline"):
+        return None
+
+    output = ret_tpl[1]
+    lst = output.split(' ')
+    if len(lst) < 1:
+        return None
+    return str(lst[0])
+
+
 def root_fs_type():
     ret_tpl = run_cmd(['lsblk', '-o', 'MOUNTPOINT,FSTYPE'])
     if validate(ret_tpl, "Determine root FS type"):
@@ -168,6 +181,7 @@ def list_stack(conn):
         return FAILURE
 
     info("Stack Size: "+str(len(stack_lst)))
+    print('{:<4s} {:<4s} {:<4s} {:<4s} {:<4s} {:<30s} {:<30s}'.format('prim_key', 'date', 'op', 'commit', 'snap', 'pkg', 'script'))
     for i in range(len(stack_lst)-1, -1, -1):
         prim_key = str(stack_lst[i][0])
         date     = str(stack_lst[i][1])
@@ -178,7 +192,7 @@ def list_stack(conn):
         script   = str(stack_lst[i][6])
 
         listing = " ".join([prim_key, date, op, snap, pkg, script])
-        print('{:<4s} {:<4s} {:<4s} {:<4s} {:<30s} {:<30s}'.format(prim_key, date, op, snap, pkg, script ))
+        print('{:<4s} {:<4s} {:<4s} {:<4s} {:<4s} {:<30s} {:<30s}'.format(prim_key, date, op, commit, snap, pkg, script ))
     return SUCCESS
 
 
@@ -750,6 +764,12 @@ def build_toolchain(recipe, context, start, stop):
 #---------------------------------------------
 def build_recipe(recipe, context, start, stop):
     """ Build recipe """
+
+    commit_id = get_curr_commit_id()
+    if commit_id == None:
+        error("Could not retrieve git commit id. Exiting.")
+        return FAILURE
+
     buildq = recipe['build_queue']
     for i in range(start, stop):
         build_id = str(buildq[i])
@@ -790,7 +810,7 @@ def build_recipe(recipe, context, start, stop):
         db = get_db_connection()
         if db:
             stack_name = get_name_current_stack()
-            entry = (date(), 'BUILD', '123456', '', build_src, str(element["build_script"]))
+            entry = (date(), 'BUILD', commit_id, '', build_src, str(element["build_script"]))
             sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
             if exec_sql(db, sql, entry):
                 error("DB: Failed to insert entry")
@@ -1365,6 +1385,11 @@ def do_snapshot(options):
         if validate(ret_tpl, "mkdir "+mntpoint):
             return FAILURE
 
+    commit_id = get_curr_commit_id()
+    if commit_id == None:
+        error("Could not retrieve git commit id. Exiting.")
+        return FAILURE
+
     db  = get_db_connection()    
     if db:
         curr_stack = get_name_current_stack()
@@ -1395,8 +1420,7 @@ def do_snapshot(options):
         validate(ret_tpl, "umount mntpoint")
         return FAILURE
 
-    #TODO: implement get_commit_id, so we can stop using 123456
-    entry = (date(), 'SNAPSHOT', '123456', snap_name, '', '')
+    entry = (date(), 'SNAPSHOT', commit_id, snap_name, '', '')
     sql = "INSERT INTO "+ curr_stack + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
     if exec_sql(db, sql, entry):
         error("DB: Failed to record snapshot to stack"+curr_stack)
