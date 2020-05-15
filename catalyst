@@ -153,7 +153,8 @@ def init_db_tables():
 
 
 def date():
-    return str(format(datetime.datetime.now()))
+    d = datetime.datetime.now()
+    return str(d.strftime("%m/%d/%y-%H:%M:%S"))
 
 
 def exec_sql(conn, sql, data):
