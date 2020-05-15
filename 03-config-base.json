@@ -3,14 +3,14 @@
 	"build_queue" : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 
 	"0":{
-		"group": "base-config",
+		"group": "03-base-config",
 		"build_script": "3.020-set-hostname.sh",
 		"archives": [],
 		"patches": "",
 		"sources": {}
 	},
 	"1":{
-		"group": "base-config",
+		"group": "03-base-config",
 		"build_script": "3.030-network-conf.sh",
 		"archives": [],
 		"patches": [],
@@ -18,7 +18,7 @@
 		}
 	},
 	"2":{
-               "group": "base-config",
+               "group": "03-base-config",
                "build_script": "3.040-shells.sh",
                "archives": [],
                "patches": [],
@@ -26,21 +26,21 @@
                 }
 	},
 	"3":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.050-disable-clrscrn.sh",
                 "archives": [],
                 "patches": [],
                 "sources": {}
 	},
 	"4":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.060-fstab.sh",
                 "archives": [],
                 "patches": [],
                 "sources": {}
 	},
 	"5":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.070-kernel.sh",
                 "archives": ["linux-5.2.8.tar.xz"],
                 "patches": [],
@@ -49,7 +49,7 @@
 		}
 	},
         "6":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.080-grub.sh",
                 "archives": [],
                 "patches": [],
@@ -57,21 +57,21 @@
                 
         },
         "7":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.100-os-release.sh",
                 "archives": [],
                 "patches": [],
                 "sources": {}
         },
         "8":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.105-set-resolv-conf.sh",
                 "archives": [],
                 "patches": [],
                 "sources": {}
         },
         "9":{
-                "group": "base-config",
+                "group": "03-base-config",
                 "build_script": "3.110-setup-users.sh",
                 "archives": [],
                 "patches": [],
