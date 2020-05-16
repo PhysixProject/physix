@@ -3,7 +3,6 @@ HOWTO Compile the Linux Kernel on Physix:
 =========================================
 make menuconfig
 make
-make install
 make modules
 make modules_install
 
