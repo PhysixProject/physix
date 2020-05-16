@@ -40,3 +40,6 @@ chroot_check $? "Install /etc/modprobe.d/usb.conf"
 mkinitrd --force /boot/initrd-5.2.8.physix.x86_64 5.2.8
 chroot_check $? "Install mkinitrd"
 
+install --verbose --mode 644 --owner root --group root /opt/physix/scripts/kinstall  /usr/local/bin
+chroot_check $? "Install kinstall"
+
