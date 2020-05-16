@@ -17,8 +17,4 @@ find /usr/lib /usr/libexec -name \*.la -delete
 rm -vf /dummy.log
 rm -vf /dummy.c
 rm -vf /a.out
-#rm -vf /sources
-#rm -vf /tools
-
-#mv -v /sources.tar /usr/src
 
