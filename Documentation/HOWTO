@@ -1,0 +1,12 @@
+
+HOWTO Compile the Linux Kernel on Physix:
+=========================================
+make menuconfig
+make
+make install
+make modules
+make modules_install
+
+kinstall <version> <label>
+   Example: kinstall 5.2.8 TestKernel
+
