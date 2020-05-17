@@ -116,10 +116,15 @@ def exec_sql(conn, sql, data):
         error(str(e))
         return FAILURE
     return SUCCESS
+#---------------------------------------------
+# End of DB Functions
+#---------------------------------------------
+
+
 
 
 #---------------------------------------
-# Utilities
+# Utility Functions
 #--------------------------------------
 def info(msg):
     """ write info message to log """
@@ -368,8 +373,6 @@ def verify_file_md5(fname, rmd5, context):
     return False
 
 
-#----------------------------------------------------
-#----------------------------------------------------
 def verify_recipe_md5(recipe, context):
     for i in range(len(recipe['build_queue'])):
         element = recipe[str(i)]
@@ -423,8 +426,7 @@ def run_cmd(cmd):
     #info("Returning:" + str(rtn))
     return rtn
 
-#-----------------------------------------------------
-#-----------------------------------------------------
+
 def run_cmd_live(cmd):
     """ run commmand, don't capture output  """
     try:
@@ -433,7 +435,6 @@ def run_cmd_live(cmd):
     except Exception as exc:
         error("[ERROR] run_cmd Execption."+str(exc)),
     return (rtn, "", "")
-
 
 
 def top_most_dir(archive_path):
@@ -457,8 +458,32 @@ def name_is_valid(name):
     if name[0].isdigit():
         error("Snatpshot Name can not start with numerical digit")
         return False
+    return True
+
+
+def refresh_build_box(context):
+    """ Remove and Re-create BUILDBOX """
+
+    prefix = get_sources_prefix(context)
+    bb_path = prefix + "BUILDBOX"
+
+    if os.path.exists(bb_path):
+        ret_tpl = run_cmd(['rm', '-r', bb_path])
+        validate(ret_tpl, '')
+
+        os.mkdir(bb_path, 0o700)
+        ret_tpl = run_cmd(['mkdir', '-p', bb_path])
+        validate(ret_tpl, "mkdir bb_path: " + bb_path)
+
+        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
+        validate(ret_tpl, "chown physix " + bb_path)
+    else:
+        os.mkdir(bb_path, 0o700)
+        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
+        validate(ret_tpl, "chown physix " + bb_path)
 
     return True
+
 
 #-------------------------------------
 # End utilities 
@@ -467,7 +492,7 @@ def name_is_valid(name):
 
 
 #---------------------------------------------
-# Opperations
+# Opperation Functions
 #---------------------------------------------
 def create_partitions(config):
     """ config : {} """
@@ -509,8 +534,6 @@ def create_partitions(config):
     return SUCCESS
 
 
-#---------------------------------------------
-#---------------------------------------------
 def create_volumes(config):
     """ Create lvm volumes """
 
@@ -553,8 +576,6 @@ def create_volumes(config):
     return SUCCESS
 
 
-#---------------------------------------------
-#---------------------------------------------
 def format_volumes(config):
     """ Format lvm volumes and partitions """
 
@@ -602,8 +623,6 @@ def format_volumes(config):
     return SUCCESS
 
 
-#---------------------------------------------
-#--------------------------------------------
 def mount_volumes(config):
     """ Mount volumes and partitions """
     filesystem = config['CONF_ROOTPART_FS']
@@ -680,8 +699,6 @@ def mount_volumes(config):
     return SUCCESS
 
 
-#----------------------------------------------------
-#---------------------------------------------------
 def pull_sources(recipe, dest):
     """ Download sources """
     dir_prefix = '--directory-prefix=' + dest
@@ -746,8 +763,7 @@ def setup_build_env(element, context):
             return FAILURE
     return SUCCESS
 
-#---------------------------------------------
-#--------------------------------------------
+
 def setup(config):
     """ Setup environment for system build """
     if not os.path.exists(BUILDROOT+"/opt"):
@@ -814,8 +830,7 @@ def setup(config):
 
     return SUCCESS 
 
-#---------------------------------------------
-#---------------------------------------------
+
 def build_toolchain(recipe, context, start, stop):
     """ Build the temorary toolchain from recipe """
 
@@ -855,8 +870,6 @@ def build_toolchain(recipe, context, start, stop):
     return SUCCESS
 
 
-#---------------------------------------------
-#---------------------------------------------
 def build_recipe(recipe, context, start, stop):
     """ Build recipe """
 
@@ -963,9 +976,6 @@ def build_base(recipe, context, start, stop):
             return FAILURE
 
 
-#---------------------------------------------
-# Sees system as /mnt/physix/opt/physix
-#---------------------------------------------
 def config_base_system(recipe, context, start, stop):
     """ Configure the base system from recipe """
 
@@ -1007,9 +1017,10 @@ def config_base_system(recipe, context, start, stop):
     run_cmd_live(cmd)
 
 #---------------------------------------------
-# End opperations
+# End opperation Functions
 #--------------------------------------------
 
+#This is not called by anything
 def common_prefix(archive_name, context):
     src_prefix = get_sources_prefix(context)
     tmpdir = src_prefix + "BUILDBOX/tmp/"
@@ -1033,35 +1044,9 @@ def common_prefix(archive_name, context):
         if not validate(ret_tpl, 'bunzip2: ' + q):
             return False
 
-
     lst = os.listdir(tmpdir)
     return lst
 
-
-#---------------------------------------------
-#---------------------------------------------
-def refresh_build_box(context):
-    """ Remove and Re-create BUILDBOX """
-
-    prefix = get_sources_prefix(context)
-    bb_path = prefix + "BUILDBOX"
-
-    if os.path.exists(bb_path):
-        ret_tpl = run_cmd(['rm', '-r', bb_path])
-        validate(ret_tpl, '')
-
-        os.mkdir(bb_path, 0o700)
-        ret_tpl = run_cmd(['mkdir', '-p', bb_path])
-        validate(ret_tpl, "mkdir bb_path: " + bb_path)
-
-        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
-        validate(ret_tpl, "chown physix " + bb_path)
-    else:
-        os.mkdir(bb_path, 0o700)
-        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
-        validate(ret_tpl, "chown physix " + bb_path)
-
-    return True
 
 
 #---------------------------------------------
