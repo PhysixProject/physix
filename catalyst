@@ -448,6 +448,18 @@ def top_most_dir(archive_path):
         name_lst = list(filter(len, tmd_lst))
         return str(name_lst[0])
 
+
+def name_is_valid(name):
+    if '-' in name:
+        error("Snapshot Name can not contain '-' character")
+        return False
+
+    if name[0].isdigit():
+        error("Snatpshot Name can not start with numerical digit")
+        return False
+
+    return True
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -1341,17 +1353,6 @@ def do_pull_sources(options):
 
     return SUCCESS
 
-
-def name_is_valid(name):
-    if '-' in name:
-        error("Snapshot Name can not contain '-' character")
-        return False
-
-    if name[0].isdigit():
-        error("Snatpshot Name can not start with numerical digit")
-        return False
-
-    return True
 
 
 def do_list_snapshots():
