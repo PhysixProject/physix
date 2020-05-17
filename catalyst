@@ -66,6 +66,48 @@ def list_stack(conn):
     return SUCCESS
 
 
+def init_db_tables():
+    """ Create initial STACK_0 Table and initialize it
+        return SUCCESS/FAILURE """
+
+    conn = None
+    try:
+        conn = sqlite3.connect('/mnt/physix/opt/.DB.physix')
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+
+    sql_create_init_stack = """ CREATE TABLE IF NOT EXISTS STACK_0 (
+                                    ID integer PRIMARY KEY AUTOINCREMENT,
+                                    TIME text NOT NULL,
+                                    OP text NOT NULL,
+                                    COMMITID text,
+                                    SNAPID text,
+                                    PKG text,
+                                    SCRIPT text); """
+    try:
+        cur = conn.cursor()
+        cur.execute(sql_create_init_stack, "")
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+
+
+    sql = ''' INSERT INTO STACK_0 (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) '''
+    init_values = ("INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
+    try:
+        cur = conn.cursor()
+        cur.execute(sql, init_values)
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+
+    return SUCCESS
+
+
+
 def get_curr_commit_id():
     ''' Return commit id of git repo '''
     ret_tpl = run_cmd(['git', 'log', '--oneline'])
@@ -139,46 +181,6 @@ def get_snap_id(stack_name):
                 return str(datums[1])
     return None 
 
-
-def init_db_tables():
-    """ Create initial STACK_0 Table and initialize it
-        return SUCCESS/FAILURE """
-
-    conn = None
-    try:
-        conn = sqlite3.connect('/mnt/physix/opt/.DB.physix')
-    except Exception as e:
-        error(str(e))
-        return FAILURE 
-
-    sql_create_init_stack = """ CREATE TABLE IF NOT EXISTS STACK_0 (
-                                    ID integer PRIMARY KEY AUTOINCREMENT,
-                                    TIME text NOT NULL,
-                                    OP text NOT NULL,
-                                    COMMITID text,
-                                    SNAPID text,
-                                    PKG text,
-                                    SCRIPT text); """
-    try:
-        cur = conn.cursor()
-        cur.execute(sql_create_init_stack, "")
-        conn.commit()
-    except Exception as e:
-        error(str(e))
-        return FAILURE
-
-    
-    sql = ''' INSERT INTO STACK_0 (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) ''' 
-    init_values = ("INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
-    try:
-        cur = conn.cursor()
-        cur.execute(sql, init_values)
-        conn.commit()
-    except Exception as e:
-        error(str(e))
-        return FAILURE
-
-    return SUCCESS
 
 
 def date():
