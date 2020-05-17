@@ -19,6 +19,7 @@ def handler(signal_received, frame):
     print('SIGINT or CTRL-C detected. Exiting... ')
     sys.exit(0)
 
+
 #---------------------------------------------
 # DB Functions
 #---------------------------------------------
@@ -93,7 +94,6 @@ def init_db_tables():
         error(str(e))
         return FAILURE
 
-
     sql = ''' INSERT INTO STACK_0 (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) '''
     init_values = ("INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
     try:
@@ -141,6 +141,7 @@ def ok(msg):
     print(msg)
     logging.info(msg)
 
+
 def date():
     d = datetime.datetime.now()
     return str(d.strftime("%m/%d/%y-%H:%M:%S"))
@@ -159,7 +160,6 @@ def validate(rtn_tpl, msg, report=False):
     error("stdout:"+str(rtn_tpl[1]))
     error("stderr:"+str(rtn_tpl[2]))
     return FAILURE
-
 
 
 def get_curr_commit_id():
@@ -236,10 +236,6 @@ def get_snap_id(stack_name):
     return None 
 
 
-
-#---------------------------------------------
-# INIT FUNCTIONS
-#---------------------------------------------
 def set_build_lock():
     if not os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
@@ -285,8 +281,6 @@ def load_physix_config(cfg):
     return config
 
 
-#---------------------------------------------
-#---------------------------------------------
 def verify_checker(config):
     """ config : {} """
 
@@ -323,7 +317,29 @@ def verify_sfwr_group(group_name, recipe_name):
     return SUCCESS
 
 
+def get_subvol_id(mount_point, stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', mount_point])
+    if validate(ret_tpl, "List subvolumes for mountpoint:" + mount_point):
+        return None
+
+    output = ret_tpl[1]
+    lst = output.split(' ')
+    if len(lst) == 9:
+        vol_id = str(lst[1])
+        return vol_id
+    else:
+        error("Unexpected String size.")
+        return None
+
+
+#-------------------------------------
+# End utilities 
+#-------------------------------------
+
+
+
 #---------------------------------------------
+# Opperations
 #---------------------------------------------
 def create_partitions(config):
     """ config : {} """
@@ -457,20 +473,9 @@ def format_volumes(config):
 
     return SUCCESS
 
-
-def get_subvol_id(mount_point, stack_name):
-    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', mount_point])
-    if validate(ret_tpl, "List subvolumes for mountpoint:" + mount_point):
-        return None
-
-    output = ret_tpl[1]
-    lst = output.split(' ')
-    if len(lst) == 9:
-        vol_id = str(lst[1])
-        return vol_id
-    else:
-        error("Unexpected String size.")
-        return None
+#---------------------------------------------
+# End opperations
+#--------------------------------------------
 
 
 #---------------------------------------------
