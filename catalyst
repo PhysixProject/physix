@@ -485,6 +485,30 @@ def refresh_build_box(context):
     return True
 
 
+def verify_build_bounderies(options, RECIPE):
+    start = 0
+    stop = 0
+
+    buildq = RECIPE['build_queue']
+    if options.start_number:
+        start = int(options.start_number)
+    else:
+        start = 0
+
+    if options.stop_number:
+        stop = int(options.stop_number)
+    else:
+        stop = len(buildq)
+
+    if not (start >= 0 and start <= len(buildq)):
+        error("Invalid start number")
+        return (None,None)
+    if not (stop >= start and stop <= len(buildq)):
+        error("Invalid stop number")
+        return (None,None)
+
+    return (start, stop)
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -1254,31 +1278,6 @@ def do_config_base(options):
     info("- 2. reboot ")
     info("------------------------------------")
     return SUCCESS
-
-
-def verify_build_bounderies(options, RECIPE):
-    start = 0
-    stop = 0
-
-    buildq = RECIPE['build_queue']
-    if options.start_number:
-        start = int(options.start_number)
-    else:
-        start = 0
-
-    if options.stop_number:
-        stop = int(options.stop_number)
-    else:
-        stop = len(buildq)
-
-    if not (start >= 0 and start <= len(buildq)):
-        error("Invalid start number")
-        return (None,None)
-    if not (stop >= start and stop <= len(buildq)):
-        error("Invalid stop number")
-        return (None,None)
-
-    return (start, stop)
 
 
 def do_build_recipe(options):
