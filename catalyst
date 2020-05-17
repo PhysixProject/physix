@@ -121,6 +121,26 @@ def exec_sql(conn, sql, data):
 #---------------------------------------
 # Utilities
 #--------------------------------------
+def info(msg):
+    """ write info message to log """
+    print("\033[0;33;48m [INFO] \033[0m " + msg)
+    logging.info(msg)
+
+
+def error(msg):
+    """ write error message to log """
+    msg = "\033[0;31;48m [ERROR] \033[0m " + msg
+    print(msg)
+    logging.error(msg)
+
+
+# \e[92m[OK]\e[0m
+def ok(msg):
+    """ write success message to log """
+    msg = "\033[0;32;48m [OK] \033[0m   " + msg
+    print(msg)
+    logging.info(msg)
+
 def date():
     d = datetime.datetime.now()
     return str(d.strftime("%m/%d/%y-%H:%M:%S"))
@@ -220,29 +240,6 @@ def get_snap_id(stack_name):
 #---------------------------------------------
 # INIT FUNCTIONS
 #---------------------------------------------
-
-
-def info(msg):
-    """ write info message to log """
-    print("\033[0;33;48m [INFO] \033[0m " + msg)
-    logging.info(msg)
-
-
-def error(msg):
-    """ write error message to log """
-    msg = "\033[0;31;48m [ERROR] \033[0m " + msg
-    print(msg)
-    logging.error(msg)
-
-
-# \e[92m[OK]\e[0m
-def ok(msg):
-    """ write success message to log """
-    msg = "\033[0;32;48m [OK] \033[0m   " + msg
-    print(msg)
-    logging.info(msg)
-
-
 def set_build_lock():
     if not os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
