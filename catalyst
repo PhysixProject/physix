@@ -37,6 +37,35 @@ def get_db_connection(chroot=''):
     return conn
 
 
+def list_stack(conn):
+    stack_name = get_name_current_stack()
+    info("stack::"+str(stack_name))
+
+    stack_lst = []
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM "+stack_name)
+        stack_lst = cur.fetchall()
+    except Exception as e:
+        error(e)
+        return FAILURE
+
+    info("Stack Size: "+str(len(stack_lst)))
+    print('{:<6s} {:<17s} {:<10s} {:<10} {:<10s} {:<30s} {:<30s}'.format('key', 'DATE', 'OP', 'COMMIT', 'SNAP', 'PKG', 'SCRIPT' ))
+    for i in range(len(stack_lst)-1, -1, -1):
+        prim_key = str(stack_lst[i][0])
+        date     = str(stack_lst[i][1])
+        op       = str(stack_lst[i][2])
+        commit   = str(stack_lst[i][3])
+        snap     = str(stack_lst[i][4])
+        pkg      = str(stack_lst[i][5])
+        script   = str(stack_lst[i][6])
+
+        listing = " ".join([prim_key, date, op, snap, pkg, script])
+        print('{:<6s} {:<17s} {:<10s} {:<10s} {:<10s} {:<30s} {:<30s}'.format(prim_key, date, op, commit, snap, pkg, script ))
+    return SUCCESS
+
+
 def get_curr_commit_id():
     ''' Return commit id of git repo '''
     ret_tpl = run_cmd(['git', 'log', '--oneline'])
@@ -165,35 +194,6 @@ def exec_sql(conn, sql, data):
     except Exception as e:
         error(str(e))
         return FAILURE
-    return SUCCESS
-
-
-def list_stack(conn):
-    stack_name = get_name_current_stack()
-    info("stack::"+str(stack_name))
-
-    stack_lst = []
-    try:
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM "+stack_name)
-        stack_lst = cur.fetchall()
-    except Exception as e:
-        error(e)
-        return FAILURE
-
-    info("Stack Size: "+str(len(stack_lst)))
-    print('{:<6s} {:<17s} {:<10s} {:<10} {:<10s} {:<30s} {:<30s}'.format('key', 'DATE', 'OP', 'COMMIT', 'SNAP', 'PKG', 'SCRIPT' ))
-    for i in range(len(stack_lst)-1, -1, -1):
-        prim_key = str(stack_lst[i][0])
-        date     = str(stack_lst[i][1])
-        op       = str(stack_lst[i][2])
-        commit   = str(stack_lst[i][3])
-        snap     = str(stack_lst[i][4])
-        pkg      = str(stack_lst[i][5])
-        script   = str(stack_lst[i][6])
-
-        listing = " ".join([prim_key, date, op, snap, pkg, script])
-        print('{:<6s} {:<17s} {:<10s} {:<10s} {:<10s} {:<30s} {:<30s}'.format(prim_key, date, op, commit, snap, pkg, script ))
     return SUCCESS
 
 
