@@ -385,6 +385,29 @@ def verify_recipe_md5(recipe, context):
     return SUCCESS
 
 
+def run_cmd_log(cmd, name, context):
+    """ run command and log I/O to log file  """
+    date = format(datetime.datetime.now())
+    date = date.replace(":", "-").replace(" ", "-")
+    log_name = date + "-" + name
+    rtn = FAILURE
+
+    if context == "CHRT":
+        log_path = "/opt/logs.physix/" + log_name
+    else:
+        log_path = "/mnt/physix/opt/logs.physix/" + log_name
+
+    with open(log_path, "w") as file_desc:
+        try:
+            p = subprocess.run(cmd, stdout=file_desc, stderr=file_desc)
+            rtn = int(p.returncode)
+        except Exception as exc:
+            error("[ERROR] Opperation Failed:"+str(exc)),
+
+    return (rtn, "", "")
+
+
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -603,11 +626,6 @@ def mount_volumes(config):
         return FAILURE
 
     return SUCCESS
-
-
-#---------------------------------------------
-# End opperations
-#--------------------------------------------
 
 
 #----------------------------------------------------
@@ -936,30 +954,12 @@ def config_base_system(recipe, context, start, stop):
            '3.111-set-passwd.sh']
     run_cmd_live(cmd)
 
+#---------------------------------------------
+# End opperations
+#--------------------------------------------
 
 #---------------------------------------------
 #---------------------------------------------
-def run_cmd_log(cmd, name, context):
-    """ run command and log I/O to log file  """
-    date = format(datetime.datetime.now())
-    date = date.replace(":", "-").replace(" ", "-")
-    log_name = date + "-" + name
-    rtn = FAILURE
-
-    if context == "CHRT":
-        log_path = "/opt/logs.physix/" + log_name
-    else:
-        log_path = "/mnt/physix/opt/logs.physix/" + log_name
-
-    with open(log_path, "w") as file_desc:
-        try:
-            p = subprocess.run(cmd, stdout=file_desc, stderr=file_desc)
-            rtn = int(p.returncode)
-        except Exception as exc:
-            error("[ERROR] Opperation Failed:"+str(exc)),
-
-    return (rtn, "", "")
-
 
 #---------------------------------------------
 #---------------------------------------------
