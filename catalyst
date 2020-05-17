@@ -1088,33 +1088,6 @@ def config_base_system(recipe, context, start, stop):
     run_cmd_live(cmd)
 
 
-#This is not called by anything
-def common_prefix(archive_name, context):
-    src_prefix = get_sources_prefix(context)
-    tmpdir = src_prefix + "BUILDBOX/tmp/"
-    p = src_prefix + "BUILDBOX/" + archive_name
-    q = tmpdir + archive_name
-
-    if os.path.exists(tmpdir):
-        run_cmd(['rm', 'r', tmpdir])
-    run_cmd(['mkdir', tmpdir])
-
-    if ('tar' in archive_name) or ('tgz' in archive_name):
-        ret_tpl = run_cmd(['tar', 'xf', p, '-C', tmpdir])
-        if not validate(ret_tpl, 'unpack to buildbox :' + archive_name):
-            return False
-    elif 'bz2' in archive:
-        ''' Not a tar arvhive, but a straight bz2 compressed file '''
-        ret_tpl = run_cmd(['cp', p, q])
-        if not validate(ret_tpl, 'cp bz2 to tmp'):
-            return False
-        ret_tpl = run_cmd(['bunzip2', '-dk', q])
-        if not validate(ret_tpl, 'bunzip2: ' + q):
-            return False
-
-    lst = os.listdir(tmpdir)
-    return lst
-
 
 def do_partition_init(options):
     logging.basicConfig(filename='/tmp/physix-build.log', level=logging.DEBUG)
