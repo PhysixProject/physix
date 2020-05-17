@@ -342,6 +342,16 @@ def get_sources_prefix(context):
         return False
 
 
+def get_physix_prefix(context):
+    if context == "CHRT":
+        return '/opt/physix/'
+    elif context == "NON-CHRT":
+        return '/mnt/physix/opt/physix/'
+    else:
+        error("get_physix_prefix: Unknown context")
+        return False
+
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -561,19 +571,10 @@ def mount_volumes(config):
 
     return SUCCESS
 
+
 #---------------------------------------------
 # End opperations
 #--------------------------------------------
-def get_physix_prefix(context):
-    if context == "CHRT":
-        return '/opt/physix/'
-    elif context == "NON-CHRT":
-        return '/mnt/physix/opt/physix/'
-    else:
-        error("get_physix_prefix: Unknown context")
-        return False
-
-
 def verify_file_md5(fname, rmd5, context):
     prefix = get_sources_prefix(context)
     fname = prefix + fname
