@@ -407,6 +407,33 @@ def run_cmd_log(cmd, name, context):
     return (rtn, "", "")
 
 
+def run_cmd(cmd):
+    """ Run command, return caputured I/O Streams """
+    out = ''
+    err = ''
+    try:
+        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        rtn = int(p.returncode)
+        out = str(p.stdout.decode('utf-8'))
+        err = str(p.stderr.decode('utf-8'))
+    except Exception as exc:
+        error("[Exceotion] Opperation Failed:\n "+str(exc))
+
+    rtn = (int(rtn), str(out), str(err))
+    #info("Returning:" + str(rtn))
+    return rtn
+
+#-----------------------------------------------------
+#-----------------------------------------------------
+def run_cmd_live(cmd):
+    """ run commmand, don't capture output  """
+    try:
+        proc = subprocess.run(cmd)
+        rtn = int(proc.returncode)
+    except Exception as exc:
+        error("[ERROR] run_cmd Execption."+str(exc)),
+    return (rtn, "", "")
+
 
 #-------------------------------------
 # End utilities 
@@ -957,38 +984,6 @@ def config_base_system(recipe, context, start, stop):
 #---------------------------------------------
 # End opperations
 #--------------------------------------------
-
-#---------------------------------------------
-#---------------------------------------------
-
-#---------------------------------------------
-#---------------------------------------------
-def run_cmd(cmd):
-    """ Run command, return caputured I/O Streams """
-    out = ''
-    err = ''
-    try:
-        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        rtn = int(p.returncode)
-        out = str(p.stdout.decode('utf-8'))
-        err = str(p.stderr.decode('utf-8'))
-    except Exception as exc:
-        error("[Exceotion] Opperation Failed:\n "+str(exc))
-
-    rtn = (int(rtn), str(out), str(err))
-    #info("Returning:" + str(rtn))
-    return rtn
-
-#-----------------------------------------------------
-#-----------------------------------------------------
-def run_cmd_live(cmd):
-    """ run commmand, don't capture output  """
-    try:
-        proc = subprocess.run(cmd)
-        rtn = int(proc.returncode)
-    except Exception as exc:
-        error("[ERROR] run_cmd Execption."+str(exc)),
-    return (rtn, "", "")
 
 
 #-----------------------------------------------------
