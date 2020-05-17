@@ -107,6 +107,17 @@ def init_db_tables():
     return SUCCESS
 
 
+def exec_sql(conn, sql, data):
+    try:
+        cur = conn.cursor()
+        cur.execute(sql, data)
+        conn.commit()
+    except Exception as e:
+        error(str(e))
+        return FAILURE
+    return SUCCESS
+
+
 
 def get_curr_commit_id():
     ''' Return commit id of git repo '''
@@ -186,17 +197,6 @@ def get_snap_id(stack_name):
 def date():
     d = datetime.datetime.now()
     return str(d.strftime("%m/%d/%y-%H:%M:%S"))
-
-
-def exec_sql(conn, sql, data):
-    try:
-        cur = conn.cursor()
-        cur.execute(sql, data)
-        conn.commit()
-    except Exception as e:
-        error(str(e))
-        return FAILURE
-    return SUCCESS
 
 
 #---------------------------------------------
