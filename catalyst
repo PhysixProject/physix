@@ -332,6 +332,16 @@ def get_subvol_id(mount_point, stack_name):
         return None
 
 
+def get_sources_prefix(context):
+    if context == "CHRT":
+        return '/opt/sources.physix/'
+    elif context == "NON-CHRT":
+        return '/mnt/physix/opt/sources.physix/'
+    else:
+        error("get_sources_prefix: Unknown context")
+        return False
+
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -554,19 +564,6 @@ def mount_volumes(config):
 #---------------------------------------------
 # End opperations
 #--------------------------------------------
-
-
-
-def get_sources_prefix(context):
-    if context == "CHRT":
-        return '/opt/sources.physix/'
-    elif context == "NON-CHRT":
-        return '/mnt/physix/opt/sources.physix/'
-    else:
-        error("get_sources_prefix: Unknown context")
-        return False
-
-
 def get_physix_prefix(context):
     if context == "CHRT":
         return '/opt/physix/'
