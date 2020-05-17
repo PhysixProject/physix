@@ -352,6 +352,39 @@ def get_physix_prefix(context):
         return False
 
 
+def verify_file_md5(fname, rmd5, context):
+    prefix = get_sources_prefix(context)
+    fname = prefix + fname
+
+    ret_tpl = run_cmd(['md5sum', fname])
+    if ret_tpl[0] == 0:
+        cmpr_md5 = ret_tpl[1].split(' ')[0]
+        cmpr_md5 = cmpr_md5.replace("b'", "")
+        if cmpr_md5 == rmd5:
+            ok("MD5 Verified: "+fname+" : "+cmpr_md5)
+            return True
+        else:
+            error("MD5 Verified: "+fname+" : "+cmpr_md5 +":"+rmd5)
+    return False
+
+
+#----------------------------------------------------
+#----------------------------------------------------
+def verify_recipe_md5(recipe, context):
+    for i in range(len(recipe['build_queue'])):
+        element = recipe[str(i)]
+        sources = element['sources']
+
+        for url in sources.keys():
+            rmd5 = sources[url]
+            archv_name = url.split("/")[-1]
+
+            if not verify_file_md5(archv_name, rmd5, context):
+                return FAILURE
+
+    return SUCCESS
+
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -575,37 +608,6 @@ def mount_volumes(config):
 #---------------------------------------------
 # End opperations
 #--------------------------------------------
-def verify_file_md5(fname, rmd5, context):
-    prefix = get_sources_prefix(context)
-    fname = prefix + fname
-
-    ret_tpl = run_cmd(['md5sum', fname])
-    if ret_tpl[0] == 0:
-        cmpr_md5 = ret_tpl[1].split(' ')[0]
-        cmpr_md5 = cmpr_md5.replace("b'", "")
-        if cmpr_md5 == rmd5:
-            ok("MD5 Verified: "+fname+" : "+cmpr_md5)
-            return True
-        else:
-            error("MD5 Verified: "+fname+" : "+cmpr_md5 +":"+rmd5)
-    return False
-
-
-#----------------------------------------------------
-#----------------------------------------------------
-def verify_recipe_md5(recipe, context):
-    for i in range(len(recipe['build_queue'])):
-        element = recipe[str(i)]
-        sources = element['sources']
-
-        for url in sources.keys():
-            rmd5 = sources[url]
-            archv_name = url.split("/")[-1]
-
-            if not verify_file_md5(archv_name, rmd5, context):
-                return FAILURE
-
-    return SUCCESS
 
 
 #----------------------------------------------------
