@@ -509,6 +509,53 @@ def verify_build_bounderies(options, RECIPE):
 
     return (start, stop)
 
+
+def unpack(element, context):
+    """ Move extract archives, and patches to BUILDBOX dir """
+    dir_list = []
+    archive_list = []
+
+    if element['archives'] == []:
+        return []
+
+    # Archives are stored in 1 or 2 paths, depending on
+    # whether executed in chrooted or non-chrooted context
+    src_path = get_sources_prefix(context)
+    bb_path = src_path + "BUILDBOX/"
+
+    if not os.path.exists(bb_path):
+        error("Build Env Nnt Found")
+        return FAILURE
+
+    for archive in element["archives"]:
+        info('Unpacking:'+archive)
+        archive_path = bb_path + archive
+
+        if not os.path.exists(archive_path):
+            error("Archive not found in BUILDBOX: "+archive_path)
+            return FAILURE
+
+        if ('tar' in archive) or ('tgz' in archive):
+            ret_tpl = run_cmd(['tar', 'xf', archive_path, '-C', bb_path])
+            if validate(ret_tpl, 'unpack to buildbox :' + archive_path):
+                error("Tar Failure")
+                return FAILURE
+        elif 'bz2' in archive:
+            ''' Not a tar arvhive, but a straight bz2 compressed file '''
+            ret_tpl = run_cmd(['bunzip2', '-dk', archive_path])
+            if validate(ret_tpl, 'bunzip2: ' + archive_path):
+                error("unzip failure")
+                return FAILURE
+
+    # ASSIGN OWNERSHIP TO 'physix'
+    ret_tpl = run_cmd(['chown', '--recursive', 'physix:root', bb_path])
+    if validate(ret_tpl, "chown bbox"):
+        error("Failed to chown BUILDBOX")
+        return FAILURE
+
+    return SUCCESS
+
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -1040,9 +1087,6 @@ def config_base_system(recipe, context, start, stop):
            '3.111-set-passwd.sh']
     run_cmd_live(cmd)
 
-#---------------------------------------------
-# End opperation Functions
-#--------------------------------------------
 
 #This is not called by anything
 def common_prefix(archive_name, context):
@@ -1070,58 +1114,6 @@ def common_prefix(archive_name, context):
 
     lst = os.listdir(tmpdir)
     return lst
-
-
-
-#---------------------------------------------
-# This is hard to read. re-write better
-# input: element:dict, context:string
-# output: list of directory names from extracted tarbballs
-#---------------------------------------------
-def unpack(element, context):
-    """ Move extract archives, and patches to BUILDBOX dir """
-    dir_list = []
-    archive_list = []
-
-    if element['archives'] == []:
-        return []
-
-    # Archives are stored in 1 or 2 paths, depending on
-    # whether executed in chrooted or non-chrooted context
-    src_path = get_sources_prefix(context)
-    bb_path = src_path + "BUILDBOX/"
-
-    if not os.path.exists(bb_path):
-        error("Build Env Nnt Found")
-        return FAILURE
-
-    for archive in element["archives"]: 
-        info('Unpacking:'+archive)
-        archive_path = bb_path + archive
-
-        if not os.path.exists(archive_path):
-            error("Archive not found in BUILDBOX: "+archive_path)
-            return FAILURE
-
-        if ('tar' in archive) or ('tgz' in archive):
-            ret_tpl = run_cmd(['tar', 'xf', archive_path, '-C', bb_path])
-            if validate(ret_tpl, 'unpack to buildbox :' + archive_path):
-                error("Tar Failure")
-                return FAILURE
-        elif 'bz2' in archive:
-            ''' Not a tar arvhive, but a straight bz2 compressed file '''
-            ret_tpl = run_cmd(['bunzip2', '-dk', archive_path])
-            if validate(ret_tpl, 'bunzip2: ' + archive_path):
-                error("unzip failure")
-                return FAILURE
-
-    # ASSIGN OWNERSHIP TO 'physix'
-    ret_tpl = run_cmd(['chown', '--recursive', 'physix:root', bb_path])
-    if validate(ret_tpl, "chown bbox"):
-        error("Failed to chown BUILDBOX")
-        return FAILURE
-
-    return SUCCESS
 
 
 def do_partition_init(options):
@@ -1465,6 +1457,10 @@ def do_set_default_snapshot(options):
 
     info("Next reboot will boot from: "+snap_name)
     return SUCCESS
+
+#---------------------------------------------
+# End opperation Functions
+#--------------------------------------------
 
 
 def main():
