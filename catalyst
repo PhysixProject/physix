@@ -121,10 +121,24 @@ def exec_sql(conn, sql, data):
 #---------------------------------------
 # Utilities
 #--------------------------------------
-
 def date():
     d = datetime.datetime.now()
     return str(d.strftime("%m/%d/%y-%H:%M:%S"))
+
+
+def validate(rtn_tpl, msg, report=False):
+    """ Log appropriate message based on return code"""
+    rcode = int(rtn_tpl[0])
+    if rcode == SUCCESS:
+        if report == True:
+            ok(msg)
+        return SUCCESS
+
+    error(msg)
+    error("RTN:"+str(rtn_tpl[0]))
+    error("stdout:"+str(rtn_tpl[1]))
+    error("stderr:"+str(rtn_tpl[2]))
+    return FAILURE
 
 
 
@@ -206,19 +220,6 @@ def get_snap_id(stack_name):
 #---------------------------------------------
 # INIT FUNCTIONS
 #---------------------------------------------
-def validate(rtn_tpl, msg, report=False):
-    """ Log appropriate message based on return code"""
-    rcode = int(rtn_tpl[0])
-    if rcode == SUCCESS:
-        if report == True:
-            ok(msg)
-        return SUCCESS
- 
-    error(msg)
-    error("RTN:"+str(rtn_tpl[0]))
-    error("stdout:"+str(rtn_tpl[1]))
-    error("stderr:"+str(rtn_tpl[2]))
-    return FAILURE
 
 
 def info(msg):
