@@ -435,6 +435,19 @@ def run_cmd_live(cmd):
     return (rtn, "", "")
 
 
+
+def top_most_dir(archive_path):
+    """ Return name of directory encapsolated in the tar archive """
+    archive_path = archive_path.strip().strip("\n")
+    if not os.path.exists(archive_path):
+        error("Expected path does not exist: " + archive_path)
+    with tarfile.open(archive_path, mode='r') as archive:
+        tmd = str(os.path.commonprefix(archive.getnames()))
+        ''' Sometimes a path is returned '''
+        tmd_lst = tmd.split("/")
+        name_lst = list(filter(len, tmd_lst))
+        return str(name_lst[0])
+
 #-------------------------------------
 # End utilities 
 #-------------------------------------
@@ -984,24 +997,6 @@ def config_base_system(recipe, context, start, stop):
 #---------------------------------------------
 # End opperations
 #--------------------------------------------
-
-
-#-----------------------------------------------------
-# Input: string - path to archive
-# Output: string -  top most directory from archive
-#-----------------------------------------------------
-def top_most_dir(archive_path):
-    """ Return name of directory encapsolated in the tar archive """
-    archive_path = archive_path.strip().strip("\n")
-    if not os.path.exists(archive_path):
-        error("Expected path does not exist: " + archive_path)
-    with tarfile.open(archive_path, mode='r') as archive:
-        tmd = str(os.path.commonprefix(archive.getnames()))
-        ''' Sometimes a path is returned '''
-        tmd_lst = tmd.split("/")
-        name_lst = list(filter(len, tmd_lst))
-        return str(name_lst[0])
-
 
 def common_prefix(archive_name, context):
     src_prefix = get_sources_prefix(context)
