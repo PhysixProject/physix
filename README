@@ -235,19 +235,24 @@ Installation:
 
        S5. Reboot into your new base system, login as root
 
-       S6. Build the utilities software group.
+       S6. [Recommended] If the system was built using btrfs, it is a good
+           idea to take a snapshot of your system's current state. This will
+           enable you to revert the system back to this point later.
+           catalyst -r <SNAPSHOT-NAME>
+
+       S7. Build the utilities software group.
            cd /opt/physix
            catalyst -b 04-utilities.json
 
-       S7. Download xorg sources and Build xorg recipe:
+       S8. Download xorg sources and Build xorg recipe:
            catalyst -p 05-xorg.json
            catalyst -b 05-xorg.json
 
-       S8. Download Lightdm sources and build it:
+       S9. Download Lightdm sources and build it:
            catalyst -p 06.lightdm.json
            catalyst -b 06.lightdm.json
 
-       S9. Download LXDE sources and build it:
+       S10. Download LXDE sources and build it:
            catalyst -p 07-lxde.json
            catalyst -b 07-lxde.json
 
