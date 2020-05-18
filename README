@@ -71,6 +71,10 @@ What Physix Currently Provides:
  * A minimal base system, built from recipes: 01-toolchain.json, 02-base-system.json,
    and 03-config-base.json
 
+*  File System Snapshots: The default file system is Btrfs which provides snapshots
+   of the file system's state to be recorded. This allows for returning the system
+   to a previously known state.
+
  * Standard Uitilites built from: 04-utilities.json
 
  * X Windows Display server: 05-xorg.json
