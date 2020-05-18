@@ -87,7 +87,7 @@
         },
         "9":{   
                 "group": "06-lightdm",
-                "build_script": "6.070-libxml2.sh",
+                "build_script": "6.073-libxml2.sh",
                 "archives": ["libxml2-2.9.9.tar.gz"],
                 "patches": [],
                 "sources": {
@@ -288,7 +288,7 @@
         },
         "31":{   
                 "group": "06-lightdm",
-                "build_script": "6.143-librsvg.sh",
+                "build_script": "6.265-librsvg.sh",
                 "archives": ["librsvg-2.44.14.tar.xz"],
                 "patches": [],
                 "sources": {
