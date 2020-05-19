@@ -548,7 +548,7 @@ def unpack(element, context):
                 return FAILURE
 
     # ASSIGN OWNERSHIP TO 'physix'
-    ret_tpl = run_cmd(['chown', '--recursive', 'physix:root', bb_path])
+    ret_tpl = run_cmd(['chown', '--recursive', 'physix:physix', bb_path])
     if validate(ret_tpl, "chown bbox"):
         error("Failed to chown BUILDBOX")
         return FAILURE
