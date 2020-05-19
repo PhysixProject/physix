@@ -316,10 +316,10 @@
         "34":{
                 "group": "06-lightdm",
                 "build_script": "6.280-gtk.sh",
-                "archives": ["gtk+-3.24.10.tar.xz"],
+                "archives": ["gtk+-3.24.20.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/lightdm/gtk+-3.24.10.tar.xz":"1b9f49a500a104a3e40f8d8eb7e6ce96"
+                        "http://physixproject.org/source/lightdm/gtk+-3.24.20.tar.xz":"1b9f49a500a104a3e40f8d8eb7e6ce96"
                 }
         },	
         "35":{   
