@@ -42,10 +42,10 @@
 	"5":{
                 "group": "03-base-config",
                 "build_script": "3.070-kernel.sh",
-                "archives": ["linux-5.2.8.tar.xz"],
+                "archives": ["linux-5.4.41.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/linux-5.2.8.tar.xz":"602dd0ecb8646e539fefb2beb6eb6fe0"
+			"http://physixproject.org/source/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
 		}
 	},
         "6":{
