@@ -1404,7 +1404,6 @@ def do_snapshot(options):
         return FAILURE
 
     sql_copy_table = "INSERT INTO "+ snap_name +" SELECT * FROM " + curr_stack + ";"
-    info(sql_copy_table)
     if exec_sql(db, sql_copy_table, ""):
         error("DB: Failed to copy data from curr_tack to new snapshot")
         return FAILURE
@@ -1413,6 +1412,7 @@ def do_snapshot(options):
     if validate(ret_tpl, "umount mntpoint after taking snapshot"):
         return FAILURE
 
+    ok("System Snapshot Successful: "+snap_name)
     return SUCCESS
 
 
