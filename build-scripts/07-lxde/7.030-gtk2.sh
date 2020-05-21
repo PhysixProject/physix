@@ -15,4 +15,6 @@ chroot_check $? "make"
 make install
 chroot_check $? "make install"
 
+gtk-query-immodules-2.0 --update-cache
+chroot_check $? "gtk-query-immodules-2.0"
 
