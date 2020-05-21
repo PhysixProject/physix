@@ -227,7 +227,8 @@ Installation:
              catalyst -s 02-base-system.json
 
        S3. Configure the base system:
-           catalyst -c 03-config-base.json'
+           catalyst -p 03-config-base.json
+           catalyst -c 03-config-base.json
 
        S4. Pull source code for utilities. This is done prior to reboot 
            because the base system can not wget to the web, yet.
