@@ -16,6 +16,11 @@ chroot_check $? "make"
 make install
 chroot_check $? "make install"
 
+gtk-query-immodules-3.0 --update-cache
+chroot_check $? "gtk-query-immodules-3.0"
+
+glib-compile-schemas /usr/share/glib-2.0/schemas
+chroot_check $? "glib-compile-schemas"
 
 mkdir -vp ~/.config/gtk-3.0
 cat > ~/.config/gtk-3.0/settings.ini << "EOF"
