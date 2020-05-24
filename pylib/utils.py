@@ -1,0 +1,447 @@
+#!/usr/bin/python3
+import os
+import sys
+import json
+import sqlite3
+import tarfile
+import logging
+import datetime
+import subprocess
+from signal import signal, SIGINT
+from optparse import OptionParser
+
+import db
+
+FAILURE = 1
+SUCCESS = 0
+
+def info(msg):
+    """ write info message to log """
+    print("\033[0;33;48m [INFO] \033[0m " + msg)
+    logging.info(msg)
+
+
+def error(msg):
+    """ write error message to log """
+    msg = "\033[0;31;48m [ERROR] \033[0m " + msg
+    print(msg)
+    logging.error(msg)
+
+
+# \e[92m[OK]\e[0m
+def ok(msg):
+    """ write success message to log """
+    msg = "\033[0;32;48m [OK] \033[0m   " + msg
+    print(msg)
+    logging.info(msg)
+
+
+def date():
+    d = datetime.datetime.now()
+    return str(d.strftime("%m/%d/%y-%H:%M:%S"))
+
+
+def validate(rtn_tpl, msg, report=False):
+    """ Log appropriate message based on return code"""
+    rcode = int(rtn_tpl[0])
+    if rcode == SUCCESS:
+        if report == True:
+            ok(msg)
+        return SUCCESS
+
+    error(msg)
+    error("RTN:"+str(rtn_tpl[0]))
+    error("stdout:"+str(rtn_tpl[1]))
+    error("stderr:"+str(rtn_tpl[2]))
+    return FAILURE
+
+
+def get_curr_commit_id():
+    ''' Return commit id of git repo '''
+    ret_tpl = run_cmd(['git', 'log', '--oneline'])
+    if validate(ret_tpl, "git log --oneline"):
+        return None
+
+    output = ret_tpl[1]
+    lst = output.split(' ')
+    if len(lst) < 1:
+        return None
+    return str(lst[0])
+
+
+def root_fs_type():
+    ret_tpl = run_cmd(['lsblk', '-o', 'MOUNTPOINT,FSTYPE'])
+    if validate(ret_tpl, "Determine root FS type"):
+        return FAILURE
+    std_out = ret_tpl[1]
+
+    for line in std_out.split('\n'):
+        split_line = line.split(' ')
+        result = list(filter(lambda x: x != "", split_line))
+        if len(result) != 2:
+            continue
+        if result[0] == '/':
+            return result[1]
+
+
+def get_name_current_stack():
+    if 'btrfs' != root_fs_type():
+        return 'STACK_0'
+
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'show', '/'])
+    if validate(ret_tpl, "btrfs subvolume show /"):
+        return FAILURE
+    std_out = ret_tpl[1]
+    
+    parsed_lst = std_out.split('\n')
+    if parsed_lst[0]:
+        return str(parsed_lst[0])
+    else:
+        return None
+
+
+def index_already_exists(stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
+    if validate(ret_tpl, "btrfs subvolume list /"):
+        return FAILURE
+    std_out = ret_tpl[1]
+
+    parsed_lst = std_out.split('\n')
+    for entry in parsed_lst:
+        datums = entry.split(' ')
+        if len(datums) == 9:
+            if str(stack_name) == str(datums[8]):
+                return True
+    return False
+
+
+def get_snap_id(stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
+    if validate(ret_tpl, "btrfs subvolume list /"):
+        return None
+    std_out = ret_tpl[1]
+
+    parsed_lst = std_out.split('\n')
+    for entry in parsed_lst:
+        datums = entry.split(' ')
+        if len(datums) == 9:
+            if str(stack_name) == str(datums[8]):
+                return str(datums[1])
+    return None 
+
+
+def set_build_lock():
+    if not os.path.exists('/run/lock/buildbox.lock'):
+        rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
+        return validate(rtn_tpl,"Set /run/lock/buildbox.lock")
+    else:
+        error("buildbox.lock Already set.")
+        return FAILURE
+
+
+def unset_build_lock():
+    if os.path.exists('/run/lock/buildbox.lock'):
+        rtn_tpl = run_cmd(['rm', '/run/lock/buildbox.lock'])
+        return validate(rtn_tpl,"buildbox.lock removed")
+    else:
+        error("buildbox.lock not Set.")
+        return FAILURE
+
+
+def load_recipe(cfg):
+    """ Read in recipe as dict """
+    with open(cfg) as file_desc:
+        return json.load(file_desc)
+
+
+def load_physix_config(cfg):
+    """ cfg : string """
+    config = {}
+    with open(cfg, "r") as file_desc:
+        lines = file_desc.readlines()
+        for line in lines:
+            line = line.strip().strip().strip("\n")
+
+            if line.startswith('#') or len(line) == 0:
+                continue
+
+            lst = line.split("=")
+            if len(lst) != 2:
+                error("Unexpected Format")
+
+            cfg = str(lst[0])
+            val = str(lst[1])
+            config[cfg] = val
+    return config
+
+
+def verify_checker(config):
+    """ config : {} """
+
+    filesystem = config['CONF_ROOTPART_FS']
+    mkfs  = "mkfs." + filesystem
+    for tool in ['mkfs.fat', 'mkfs.ext2', mkfs, 'gcc', 'g++', 'make', 'gawk', 'bison', 'texi2any', 'parted']:
+        ret_tpl = run_cmd(['which', tool])
+        if validate(ret_tpl, "Check: "+ tool):
+            return FAILURE
+
+    root_dev = config["CONF_ROOT_DEVICE"]
+    devlst = os.listdir("/dev")
+    dev_count = sum(1 for ln in devlst if root_dev in ln)
+    if dev_count > 1:
+        msg = "".join(["Found Existing partition(s) on: /dev/", root_dev,
+                       "Please remove them and restart this opperation"])
+        error(msg)
+        return FAILURE
+
+    return SUCCESS
+
+
+def verify_sfwr_group(group_name, recipe_name):
+    ''' Verify the recipe for a software group can be built by  
+        the function it is passed to '''
+    RECIPE = load_recipe(recipe_name)
+    buildq = RECIPE['build_queue']
+    for i in range(len(buildq)):
+        build_id = str(buildq[i])
+        element  = RECIPE[build_id]
+        grp = element['group']
+        if grp != group_name:
+            return FAILURE
+    return SUCCESS
+
+
+def get_subvol_id(mount_point, stack_name):
+    ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', mount_point])
+    if validate(ret_tpl, "List subvolumes for mountpoint:" + mount_point):
+        return None
+
+    output = ret_tpl[1]
+    lst = output.split(' ')
+    if len(lst) == 9:
+        vol_id = str(lst[1])
+        return vol_id
+    else:
+        error("Unexpected String size.")
+        return None
+
+
+def get_sources_prefix(context):
+    if context == "CHRT":
+        return '/opt/sources.physix/'
+    elif context == "NON-CHRT":
+        return '/mnt/physix/opt/sources.physix/'
+    else:
+        error("get_sources_prefix: Unknown context")
+        return False
+
+
+def get_physix_prefix(context):
+    if context == "CHRT":
+        return '/opt/physix/'
+    elif context == "NON-CHRT":
+        return '/mnt/physix/opt/physix/'
+    else:
+        error("get_physix_prefix: Unknown context")
+        return False
+
+
+def verify_file_md5(fname, rmd5, context):
+    prefix = get_sources_prefix(context)
+    fname = prefix + fname
+
+    ret_tpl = run_cmd(['md5sum', fname])
+    if ret_tpl[0] == 0:
+        cmpr_md5 = ret_tpl[1].split(' ')[0]
+        cmpr_md5 = cmpr_md5.replace("b'", "")
+        if cmpr_md5 == rmd5:
+            ok("MD5 Verified: "+fname+" : "+cmpr_md5)
+            return True
+        else:
+            error("MD5 Verified: "+fname+" : "+cmpr_md5 +":"+rmd5)
+    return False
+
+
+def verify_recipe_md5(recipe, context):
+    for i in range(len(recipe['build_queue'])):
+        element = recipe[str(i)]
+        sources = element['sources']
+
+        for url in sources.keys():
+            rmd5 = sources[url]
+            archv_name = url.split("/")[-1]
+
+            if not verify_file_md5(archv_name, rmd5, context):
+                return FAILURE
+
+    return SUCCESS
+
+
+def run_cmd_log(cmd, name, context):
+    """ run command and log I/O to log file  """
+    date = format(datetime.datetime.now())
+    date = date.replace(":", "-").replace(" ", "-")
+    log_name = date + "-" + name
+    rtn = FAILURE
+
+    if context == "CHRT":
+        log_path = "/opt/logs.physix/" + log_name
+    else:
+        log_path = "/mnt/physix/opt/logs.physix/" + log_name
+
+    with open(log_path, "w") as file_desc:
+        try:
+            p = subprocess.run(cmd, stdout=file_desc, stderr=file_desc)
+            rtn = int(p.returncode)
+        except Exception as exc:
+            error("[ERROR] Opperation Failed:"+str(exc)),
+
+    return (rtn, "", "")
+
+
+def run_cmd(cmd):
+    """ Run command, return caputured I/O Streams """
+    out = ''
+    err = ''
+    try:
+        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        rtn = int(p.returncode)
+        out = str(p.stdout.decode('utf-8'))
+        err = str(p.stderr.decode('utf-8'))
+    except Exception as exc:
+        error("[Exceotion] Opperation Failed:\n "+str(exc))
+
+    rtn = (int(rtn), str(out), str(err))
+    #info("Returning:" + str(rtn))
+    return rtn
+
+
+def run_cmd_live(cmd):
+    """ run commmand, don't capture output  """
+    try:
+        proc = subprocess.run(cmd)
+        rtn = int(proc.returncode)
+    except Exception as exc:
+        error("[ERROR] run_cmd Execption."+str(exc)),
+    return (rtn, "", "")
+
+
+def top_most_dir(archive_path):
+    """ Return name of directory encapsolated in the tar archive """
+    archive_path = archive_path.strip().strip("\n")
+    if not os.path.exists(archive_path):
+        error("Expected path does not exist: " + archive_path)
+    with tarfile.open(archive_path, mode='r') as archive:
+        tmd = str(os.path.commonprefix(archive.getnames()))
+        ''' Sometimes a path is returned '''
+        tmd_lst = tmd.split("/")
+        name_lst = list(filter(len, tmd_lst))
+        return str(name_lst[0])
+
+
+def name_is_valid(name):
+    if '-' in name:
+        error("Snapshot Name can not contain '-' character")
+        return False
+
+    if name[0].isdigit():
+        error("Snatpshot Name can not start with numerical digit")
+        return False
+    return True
+
+
+def refresh_build_box(context):
+    """ Remove and Re-create BUILDBOX """
+
+    prefix = get_sources_prefix(context)
+    bb_path = prefix + "BUILDBOX"
+
+    if os.path.exists(bb_path):
+        ret_tpl = run_cmd(['rm', '-r', bb_path])
+        validate(ret_tpl, '')
+
+        os.mkdir(bb_path, 0o700)
+        ret_tpl = run_cmd(['mkdir', '-p', bb_path])
+        validate(ret_tpl, "mkdir bb_path: " + bb_path)
+
+        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
+        validate(ret_tpl, "chown physix " + bb_path)
+    else:
+        os.mkdir(bb_path, 0o700)
+        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
+        validate(ret_tpl, "chown physix " + bb_path)
+
+    return True
+
+
+def verify_build_bounderies(options, RECIPE):
+    start = 0
+    stop = 0
+
+    buildq = RECIPE['build_queue']
+    if options.start_number:
+        start = int(options.start_number)
+    else:
+        start = 0
+
+    if options.stop_number:
+        stop = int(options.stop_number)
+    else:
+        stop = len(buildq)
+
+    if not (start >= 0 and start <= len(buildq)):
+        error("Invalid start number")
+        return (None,None)
+    if not (stop >= start and stop <= len(buildq)):
+        error("Invalid stop number")
+        return (None,None)
+
+    return (start, stop)
+
+
+def unpack(element, context):
+    """ Move extract archives, and patches to BUILDBOX dir """
+    dir_list = []
+    archive_list = []
+
+    if element['archives'] == []:
+        return []
+
+    # Archives are stored in 1 or 2 paths, depending on
+    # whether executed in chrooted or non-chrooted context
+    src_path = get_sources_prefix(context)
+    bb_path = src_path + "BUILDBOX/"
+
+    if not os.path.exists(bb_path):
+        error("Build Env Nnt Found")
+        return FAILURE
+
+    for archive in element["archives"]:
+        info('Unpacking:'+archive)
+        archive_path = bb_path + archive
+
+        if not os.path.exists(archive_path):
+            error("Archive not found in BUILDBOX: "+archive_path)
+            return FAILURE
+
+        if ('tar' in archive) or ('tgz' in archive):
+            ret_tpl = run_cmd(['tar', 'xf', archive_path, '-C', bb_path])
+            if validate(ret_tpl, 'unpack to buildbox :' + archive_path):
+                error("Tar Failure")
+                return FAILURE
+        elif 'bz2' in archive:
+            ''' Not a tar arvhive, but a straight bz2 compressed file '''
+            ret_tpl = run_cmd(['bunzip2', '-dk', archive_path])
+            if validate(ret_tpl, 'bunzip2: ' + archive_path):
+                error("unzip failure")
+                return FAILURE
+
+    # ASSIGN OWNERSHIP TO 'physix'
+    ret_tpl = run_cmd(['chown', '--recursive', 'physix:physix', bb_path])
+    if validate(ret_tpl, "chown bbox"):
+        error("Failed to chown BUILDBOX")
+        return FAILURE
+
+    return SUCCESS
+
+
