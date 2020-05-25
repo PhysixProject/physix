@@ -384,8 +384,10 @@ def build_toolchain(recipe, context, start, stop):
         subcmd = " ".join([subcmd, build_src])
         cmd = ['su', 'physix', '-c', subcmd]
 
+        stack_script = "STACK_0-" + str(element["build_script"])
+
         info("Building " + str(cmd))
-        ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
+        ret_tpl = run_cmd_log(cmd, stack_script, "")
         if validate(ret_tpl, "Build: " + str(cmd), True):
             return FAILURE
 
@@ -429,9 +431,11 @@ def build_recipe(recipe, context, start, stop):
                               str(element["build_script"]))
         cmd = [subcmd, build_src]
 
+        stack_script = get_name_current_stack() + "-" + str(element["build_script"])
+
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
         #os.chdir('/opt/sources.physix/BUILDBOX')
-        ret_tpl = run_cmd_log(cmd, str(element["build_script"]), context)
+        ret_tpl = run_cmd_log(cmd, stack_script, context)
         #os.chdir('/opt/physix')
         if validate(ret_tpl, "Build: "+str(cmd), True):
             unset_build_lock()
@@ -489,11 +493,13 @@ def build_base(recipe, context, start, stop):
         else:
             build_src = ''
 
+        stack_script = "STACk_0-" + str(element["build_script"])
+
         cmd = ['/mnt/physix/opt/physix/build-scripts/02-base/000-chroot_stub.sh',
                str(element["build_script"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
+        ret_tpl = run_cmd_log(cmd, stack_script, "")
         if validate(ret_tpl, "Build: " + str(cmd), True):
             return FAILURE
 
@@ -525,11 +531,13 @@ def config_base_system(recipe, context, start, stop):
         else:
             build_src = ''
 
+        stack_script = "STACk_0-" + str(element["build_script"])
+
         cmd = ['/mnt/physix/opt/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
                str(element["build_script"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_log(cmd, str(element["build_script"]), "")
+        ret_tpl = run_cmd_log(cmd, stack_script, "")
         if validate(ret_tpl, "Build: "+str(cmd), True):
             return FAILURE
 

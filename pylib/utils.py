@@ -38,7 +38,7 @@ def ok(msg):
 
 def date():
     d = datetime.datetime.now()
-    return str(d.strftime("%m/%d/%y-%H:%M:%S"))
+    return str(d.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
 
 
 def validate(rtn_tpl, msg, report=False):
@@ -279,9 +279,9 @@ def verify_recipe_md5(recipe, context):
 
 def run_cmd_log(cmd, name, context):
     """ run command and log I/O to log file  """
-    date = format(datetime.datetime.now())
-    date = date.replace(":", "-").replace(" ", "-")
-    log_name = date + "-" + name
+    date_time = date()
+    date_time = date_time.replace(":", "-").replace(" ", "-").replace("/", "-")
+    log_name = date_time + "-" + name
     rtn = FAILURE
 
     if context == "CHRT":
