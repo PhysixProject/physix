@@ -31,10 +31,10 @@
 	"2":{
                "group": "01-base-toolchain",
                "build_script": "1.060-linux-api-headers.sh",
-               "archives": ["linux-5.5.3.tar.xz"],
+               "archives": ["linux-5.4.41.tar.xz"],
                "patches": [],
                "sources": {
-                        "http://physixproject.org/source/linux-5.5.3.tar.xz":"3ea50025d8c679a327cf2fc225d81a46"
+			"http://physixproject.org/source/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
                 },
 		"license":"GPLv2"
 	},
@@ -321,7 +321,7 @@
                 "archives": ["util-linux-2.34.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
+                    "http://physixproject.org/source/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
                 },
 		"license":"GPLv2 and GPLv2+ and LGPLv2+ and BSD with advertising and Public Domain"
         },

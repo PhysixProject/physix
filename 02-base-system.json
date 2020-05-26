@@ -19,10 +19,10 @@
 	"1":{
 		"group": "02-base",
 		"build_script": "2.020-linux-api-headers.sh",
-		"archives": ["linux-5.2.8.tar.xz"],
+		"archives": ["linux-5.4.41.tar.xz"],
 		"patches": [],
 		"sources":{
-			"http://physixproject.org/source/linux-5.2.8.tar.xz":"602dd0ecb8646e539fefb2beb6eb6fe0"
+			"http://physixproject.org/source/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
 		}
 	},
 	"2":{
