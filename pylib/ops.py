@@ -248,7 +248,15 @@ def mount_volumes(config):
 
 
 def pull_sources(recipe, dest):
-    """ Download sources """
+    """
+    Download sources defined in a recipe.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    recipe -- dict: config options
+    dest -- destination target path of sources
+    """
+
     dir_prefix = '--directory-prefix=' + dest
     rsize = len(recipe['build_queue'])
 
