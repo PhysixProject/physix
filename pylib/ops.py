@@ -914,6 +914,14 @@ def do_list_snapshots():
 
 
 def do_snapshot(options):
+    """
+    Write Btrfs File system snapshot to disk. Record event in DB.physix.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
     mntpoint = '/opt/.tmp/mnt/'
     snap_name = options.snapshot
 
