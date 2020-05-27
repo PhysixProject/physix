@@ -579,7 +579,18 @@ def build_base(recipe, context, start, stop):
 
 
 def config_base_system(recipe, context, start, stop):
-    """ Configure the base system from recipe """
+    """
+    Configure the base system from recipe.
+    Note: utilizes special case for setting user passwords.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    recipe -- dict: config that defines ordered list of sources and assiciated 
+              build instructions.
+    context -- string: used to determine path of build directory.
+    start -- integer: defines the position in the recipe to start building at.
+    stop -- integer: defines the position in the recipe to stop building at.
+    """
 
     buildq = recipe['build_queue']
     for i in range(start, stop):
