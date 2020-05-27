@@ -281,7 +281,15 @@ def pull_sources(recipe, dest):
 
 
 def setup_build_env(element, context):
-    """ Setup build directory. Returns boolean on success/failure """
+    """
+    Setup build directory.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    element -- dict: represents a package to be built
+    context -- string: used to determine path of build directory
+    """
+
     src_prefix = get_sources_prefix(context)
     if src_prefix == False:
         return FAILURE
