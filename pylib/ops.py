@@ -64,7 +64,13 @@ def create_partitions(config):
 
 
 def create_volumes(config):
-    """ Create lvm volumes """
+    """
+    Create LVM volumes.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    config -- dict: config options
+    """
 
     system_root = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n')
     system_root = system_root + "3"
@@ -106,7 +112,13 @@ def create_volumes(config):
 
 
 def format_volumes(config):
-    """ Format lvm volumes and partitions """
+    """
+    Format LVM volumes and partitions.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    config -- dict: config options
+    """
 
     filesystem = config['CONF_ROOTPART_FS']
     mkfs_cmd  = "mkfs." + filesystem
@@ -153,7 +165,14 @@ def format_volumes(config):
 
 
 def mount_volumes(config):
-    """ Mount volumes and partitions """
+    """
+    Mount volumes and partitions.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    config -- dict: config options
+    """
+
     filesystem = config['CONF_ROOTPART_FS']
     vol_group_name = config["CONF_VOL_GROUP_NAME"]
 
