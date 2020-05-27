@@ -16,10 +16,8 @@ SUCCESS = 0
 from utils import *
 
 
-def get_db_connection(chroot=''):
-    ''' Return db connection object 
-        Return None on error '''
-
+def get_db_connection():
+    """Return db connection object. Return None on error."""
     db_path = '/opt/.DB.physix'
     conn = None
 
