@@ -884,6 +884,11 @@ def do_pull_sources(options):
 
 
 def do_list_snapshots():
+    """
+    Mount the master subvolume, and read the names of the present snapshots.
+    Return SUCCESS/FAILURE
+    """
+
     mntpoint = '/opt/.tmp/mnt/'
 
     if 'btrfs' != root_fs_type():
