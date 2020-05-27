@@ -859,6 +859,14 @@ def do_build_recipe(options):
 
 
 def do_list_stack(options):
+    """
+    Initial function in code path for listing the system stack.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
     conn = get_db_connection()
     if list_stack(conn):
         error("list_stack failed")
