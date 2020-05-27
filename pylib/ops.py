@@ -953,11 +953,12 @@ def do_snapshot(options):
     if validate(ret_tpl, "Mount physix-root to tmp mount point"):
         return FAILURE
 
+    curr_stack_path = mntpoint + curr_stack
+    snap_stack_path = mntpoint + snap_name
+
     run_cmd(['sync'])
     run_cmd(['sync'])
 
-    curr_stack_path = mntpoint + curr_stack
-    snap_stack_path = mntpoint + snap_name
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'snapshot', curr_stack_path, snap_stack_path])
     if validate(ret_tpl, "Record Snapshot:"+snap_name):
         ret_tpl = run_cmd(['umount', mntpoint])
