@@ -454,7 +454,17 @@ def build_toolchain(recipe, context, start, stop):
 
 
 def build_recipe(recipe, context, start, stop):
-    """ Build recipe """
+    """
+    Build/install sources from  a recipe.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    recipe -- dict: config that defines ordered list of sources and assiciated 
+              build instructions.
+    context -- string: used to determine path of build directory.
+    start -- integer: defines the position in the recipe to start building at.
+    stop -- integer: defines the position in the recipe to stop building at.
+    """
 
     commit_id = get_curr_commit_id()
     if commit_id == None:
@@ -514,13 +524,18 @@ def build_recipe(recipe, context, start, stop):
             return FAILURE
 
 
-#---------------------------------------------
-# Input: string - recipe : Recipe file path
-# Input: string - chroot or non chroot context
-# Input: int - Start building from recipe at line number
-#---------------------------------------------
 def build_base(recipe, context, start, stop):
-    """ Build base system from recipe """
+    """
+    Build/install sources from base system recipe.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    recipe -- dict: config that defines ordered list of sources and assiciated 
+              build instructions.
+    context -- string: used to determine path of build directory.
+    start -- integer: defines the position in the recipe to start building at.
+    stop -- integer: defines the position in the recipe to stop building at.
+    """
 
     if start == 0:
         cmd = ['/mnt/physix/opt/physix/build-scripts/02-base/2.000-base-build-prep.sh']
