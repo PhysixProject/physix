@@ -17,7 +17,14 @@ from utils import *
 BUILDROOT = "/mnt/physix"
 
 def create_partitions(config):
-    """ config : {} """
+    """
+    Create partitions on disk.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    config -- dict: config options 
+    """
+
     root_device = "/dev/" + config["CONF_ROOT_DEVICE"]
     rtn = root_device = root_device.strip("\n")
 
