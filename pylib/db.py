@@ -30,8 +30,13 @@ def get_db_connection():
 
 
 def list_stack(conn):
+    """Read DB.physix stack table and output the entries. 
+       Return FAILUE/SUCCESS
+
+       Keyword arguments:
+       conn -- sqlite db object
+    """
     stack_name = get_name_current_stack()
-    info("stack::"+str(stack_name))
 
     stack_lst = []
     try:
@@ -42,6 +47,7 @@ def list_stack(conn):
         error(e)
         return FAILURE
 
+    info("stack::"+str(stack_name))
     info("Stack Size: "+str(len(stack_lst)))
     print('{:<6s} {:<20s} {:<10s} {:<10} {:<10s} {:<30s} {:<30s}'.format('key', 'DATE', 'OP', 'COMMIT', 'SNAP', 'PKG', 'SCRIPT' ))
     for i in range(len(stack_lst)-1, -1, -1):
