@@ -329,7 +329,14 @@ def setup_build_env(element, context):
 
 
 def setup(config):
-    """ Setup environment for system build """
+    """
+    Setup Base system environment in preperation for build.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    config -- dict: config options
+    """
+
     if not os.path.exists(BUILDROOT+"/opt"):
         os.mkdir(BUILDROOT+"/opt", 755)
     if not os.path.exists(BUILDROOT+"/opt/logs.physix"):
@@ -396,7 +403,17 @@ def setup(config):
 
 
 def build_toolchain(recipe, context, start, stop):
-    """ Build the temorary toolchain from recipe """
+    """
+    Build the temorary toolchain from recipe.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    recipe -- dict: config that defines ordered list of sources and assiciated 
+              build instructions.
+    context -- string: used to determine path of build directory.
+    start -- integer: defines the position in the recipe to start building at.
+    stop -- integer: defines the position in the recipe to stop building at.
+    """
 
     buildq = recipe['build_queue']
     for i in range(start, stop):
