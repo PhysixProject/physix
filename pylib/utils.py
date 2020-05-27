@@ -71,6 +71,10 @@ def get_curr_commit_id():
 
 
 def root_fs_type():
+    """ Return string: File System type of device mounted at /
+        Return FAILURE (1) on error
+    """
+
     ret_tpl = run_cmd(['lsblk', '-o', 'MOUNTPOINT,FSTYPE'])
     if validate(ret_tpl, "Determine root FS type"):
         return FAILURE
