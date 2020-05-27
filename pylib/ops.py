@@ -875,7 +875,14 @@ def do_list_stack(options):
 
 
 def do_pull_sources(options):
-    """ "Determint path of sources.physix and call pull_sources() """
+    """
+    Initial function in code path for downloading sources.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
     context = 'NON-CHRT'
     dest = "/mnt/physix/opt/sources.physix"
 
@@ -896,7 +903,6 @@ def do_pull_sources(options):
         return FAILURE
 
     return SUCCESS
-
 
 
 def do_list_snapshots():
