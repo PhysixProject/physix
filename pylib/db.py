@@ -65,8 +65,8 @@ def list_stack(conn):
 
 
 def init_db_tables():
-    """ Create initial STACK_0 Table and initialize it
-        return SUCCESS/FAILURE """
+    """Create initial STACK_0 Table and initialize it.
+       Returns SUCCESS/FAILURE"""
 
     conn = None
     try:
