@@ -36,6 +36,7 @@ def list_stack(conn):
        Keyword arguments:
        conn -- sqlite db object
     """
+
     stack_name = get_name_current_stack()
 
     stack_lst = []
@@ -105,6 +106,14 @@ def init_db_tables():
 
 
 def exec_sql(conn, sql, data):
+    """Executes an SQL query/command
+
+       Keyword arguments:
+       conn -- sqlite db object
+       sql -- string: sql query/command
+       data -- string:data assiciated with the sql string
+    """
+
     try:
         cur = conn.cursor()
         cur.execute(sql, data)
