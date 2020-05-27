@@ -996,9 +996,15 @@ def do_snapshot(options):
 
 
 def do_set_default_snapshot(options):
-    ''' Set the FS snapshot to boot from during the next reboot '''
-    snap_name = options.defsnap
+    """
+    Set the File System snapshot to boot from, at next reboot
+    Return SUCCESS/FAILURE
 
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
+    snap_name = options.defsnap
     snap_id = get_snap_id(snap_name)
     if snap_id == None:
         return FAILURE
