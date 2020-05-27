@@ -781,6 +781,14 @@ def do_base_build(options):
 
 
 def do_config_base(options):
+    """
+    Initial function in code path to build configuration recipe.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
     start = 0
     stop = 0
     if options.start_number:
