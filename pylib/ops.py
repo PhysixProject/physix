@@ -632,8 +632,19 @@ def config_base_system(recipe, context, start, stop):
     run_cmd_live(cmd)
 
 
-
 def do_partition_init(options):
+    """
+    High level function whcih calls lower functions that:
+      - create partitions
+      - create volumes
+      - format volumes
+      - mount volumes
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config
+    """
+
     logging.basicConfig(filename='/tmp/physix-build.log', level=logging.DEBUG)
     
     BUILD_CONFIG = load_physix_config(options.physix_conf)
