@@ -37,6 +37,7 @@ def ok(msg):
 
 
 def date():
+    """ Retrun Data-Time: Month/Day/Year-Hour:Minute:Sec """
     d = datetime.datetime.now()
     return str(d.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
 
