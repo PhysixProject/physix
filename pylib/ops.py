@@ -693,6 +693,14 @@ def do_partition_init(options):
 
 
 def do_toolchain_build(options):
+    """
+    Initial function in code path to build the toolchain.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
     start = 0
     stop = 0
 
