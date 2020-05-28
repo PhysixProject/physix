@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+
+import db
+
 import os
 import sys
 import json
@@ -9,8 +12,6 @@ import datetime
 import subprocess
 from signal import signal, SIGINT
 from optparse import OptionParser
-
-import db
 
 FAILURE = 1
 SUCCESS = 0
