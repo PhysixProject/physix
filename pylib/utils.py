@@ -353,6 +353,7 @@ def verify_recipe_md5(recipe, context):
         recipe -- dict 
         context -- string
     """
+
     for i in range(len(recipe['build_queue'])):
         element = recipe[str(i)]
         sources = element['sources']
@@ -368,7 +369,15 @@ def verify_recipe_md5(recipe, context):
 
 
 def run_cmd_log(cmd, name, context):
-    """ run command and log I/O to log file  """
+    """
+        Run command and log I/O to log file
+        Returns tuple: (int, str, str)
+
+        Keyword arguments:
+        cmd -- list:
+        name -- string: log name
+        context -- string: 'CHRT' or 'NON-CHRT'
+    """
     date_time = date()
     date_time = date_time.replace(":", "-").replace(" ", "-").replace("/", "-")
     log_name = date_time + "-" + name
