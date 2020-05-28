@@ -55,6 +55,8 @@ def main():
                       help="Build temp toolchain.", metavar="")
     parser.add_option("-d", "--default-snapshot", dest="defsnap",
                       help="Set Default snapshot to boot from.", metavar="")
+    parser.add_option("-D", "--delete-snapshot", dest="delete_snap",
+                      help="Delete snapshot from system.", metavar="")
     parser.add_option("-q", "--quiet",
                       action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
@@ -103,6 +105,10 @@ def main():
 
     if options.defsnap:
         sys.exit(do_set_default_snapshot(options))
+
+    if options.delete_snap:
+        sys.exit(do_delete_snapshot(options))
+
 
 if __name__ == '__main__':
     signal(SIGINT, handler)

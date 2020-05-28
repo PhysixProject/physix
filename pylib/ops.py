@@ -1035,6 +1035,65 @@ def do_snapshot(options):
     return SUCCESS
 
 
+def do_delete_snapshot(options):
+    """
+    Delete snapshot (btrfs subvolume) from File system and remove
+    entries of its existence from the stack stack table.
+    Return SUCCESS/FAILURE
+
+    Keyword arguments:
+    options -- dict: config options.
+    """
+
+    mntpoint = '/opt/.tmp/mnt/'
+    snap_name = options.delete_snap
+
+    # Check snap_name is not current running stack
+    curr_stack = get_name_current_stack()
+    if curr_stack == snap_name:
+        error("Can not delete currently running snapshot")
+        return FAILURE
+
+    # Check snap_name is not a next default stack
+
+    if not os.path.exists(mntpoint):
+        ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
+        if validate(ret_tpl, "mkdir "+mntpoint):
+            return FAILURE
+
+    db  = get_db_connection()
+    if db:
+        curr_stack = get_name_current_stack()
+    else:
+        error("DB connection == None")
+        return FAILURE
+
+    # Just in case it is already mounted.
+    ret_tpl = run_cmd(['umount', mntpoint])
+
+    # Mount the root of the FS 
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', '/dev/mapper/physix-root', mntpoint])
+    if validate(ret_tpl, "Mount physix-root to tmp mount point"):
+        return FAILURE
+
+    delete_snap_entry = "DELETE FROM " + curr_stack + " WHERE SNAPID=\"" + snap_name + "\";"
+    if exec_sql(db, delete_snap_entry, ""):
+        error("DB: Failed to delete snap entry" + snap_name)
+        return FAILURE
+
+    drop_table = "DROP TABLE " + snap_name + ";"
+    if exec_sql(db, drop_table, ""):
+        error("DB: Failed to drop table" + snap_name)
+        return FAILURE
+
+    snap_stack_path = mntpoint + snap_name
+    ret_tpl = run_cmd(['rm', '-r', snap_stack_path])
+    if validate(ret_tpl, "Remove Snapshot:"+snap_name):
+        ret_tpl = run_cmd(['umount', mntpoint])
+        validate(ret_tpl, "umount mntpoint")
+        return FAILURE
+
+
 def do_set_default_snapshot(options):
     """
     Set the File System snapshot to boot from, at next reboot
