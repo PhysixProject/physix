@@ -16,13 +16,13 @@ FAILURE = 1
 SUCCESS = 0
 
 def info(msg):
-    """ write info message to log """
+    """write info message to log"""
     print("\033[0;33;48m [INFO] \033[0m " + msg)
     logging.info(msg)
 
 
 def error(msg):
-    """ write error message to log """
+    """write error message to log"""
     msg = "\033[0;31;48m [ERROR] \033[0m " + msg
     print(msg)
     logging.error(msg)
@@ -30,20 +30,20 @@ def error(msg):
 
 # \e[92m[OK]\e[0m
 def ok(msg):
-    """ write success message to log """
+    """write success message to log"""
     msg = "\033[0;32;48m [OK] \033[0m   " + msg
     print(msg)
     logging.info(msg)
 
 
 def date():
-    """ Retrun Data-Time: Month/Day/Year-Hour:Minute:Sec """
+    """Retrun Data-Time: Month/Day/Year-Hour:Minute:Sec"""
     d = datetime.datetime.now()
     return str(d.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
 
 
 def validate(rtn_tpl, msg, report=False):
-    """ Log appropriate message based on return code"""
+    """Log appropriate message based on return code"""
     rcode = int(rtn_tpl[0])
     if rcode == SUCCESS:
         if report == True:
@@ -58,7 +58,7 @@ def validate(rtn_tpl, msg, report=False):
 
 
 def get_curr_commit_id():
-    ''' Return commit id of git repo '''
+    """Return commit id of git repo"""
     ret_tpl = run_cmd(['git', 'log', '--oneline'])
     if validate(ret_tpl, "git log --oneline"):
         return None
@@ -71,7 +71,8 @@ def get_curr_commit_id():
 
 
 def root_fs_type():
-    """ Return string: File System type of device mounted at /
+    """ 
+        Return string: File System type of device mounted at /
         Return FAILURE (1) on error
     """
 
@@ -90,6 +91,7 @@ def root_fs_type():
 
 
 def get_name_current_stack():
+    """Return string name of the currently mounted FS snapshot"""
     if 'btrfs' != root_fs_type():
         return 'STACK_0'
 
@@ -106,6 +108,7 @@ def get_name_current_stack():
 
 
 def index_already_exists(stack_name):
+    """Return boolean: if stack_name (snapshot) already exists"""
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
     if validate(ret_tpl, "btrfs subvolume list /"):
         return FAILURE
@@ -121,6 +124,13 @@ def index_already_exists(stack_name):
 
 
 def get_snap_id(stack_name):
+    """
+       Return btrfs snapshot ID
+       Returns None if it fails.
+
+       Keyword arguments:
+       stack_name -- string
+    """
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
     if validate(ret_tpl, "btrfs subvolume list /"):
         return None
@@ -136,9 +146,11 @@ def get_snap_id(stack_name):
 
 
 def set_build_lock():
-    """ Create a file on FS to indicate the BUILDBOX directory
+    """ 
+        Create a file on FS to indicate the BUILDBOX directory
         should not be modified because another process is most
         likely using it.
+        Return SUCCESS/FAILURE
     """
     if not os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
@@ -149,6 +161,10 @@ def set_build_lock():
 
 
 def unset_build_lock():
+    """
+    Remove lockfile from File system
+    Return SUCCESS/FAILURE
+    """
     if os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['rm', '/run/lock/buildbox.lock'])
         return validate(rtn_tpl,"buildbox.lock removed")
@@ -158,13 +174,23 @@ def unset_build_lock():
 
 
 def load_recipe(cfg):
-    """ Read in recipe as dict """
+    """
+        Read input recipe as dict
+
+        Keyword arguments:
+        cfg -- string: path to config file
+    """
     with open(cfg) as file_desc:
         return json.load(file_desc)
 
 
 def load_physix_config(cfg):
-    """ cfg : string """
+    """
+        Read input physix.conf as dict
+
+        Keyword arguments:
+        cfg -- string: path to config file
+    """
     config = {}
     with open(cfg, "r") as file_desc:
         lines = file_desc.readlines()
@@ -185,7 +211,12 @@ def load_physix_config(cfg):
 
 
 def verify_checker(config):
-    """ config : {} """
+    """
+        Read input physix.conf as dict
+
+        Keyword arguments:
+        config -- string: path to config file
+    """
 
     filesystem = config['CONF_ROOTPART_FS']
     mkfs  = "mkfs." + filesystem
@@ -207,8 +238,15 @@ def verify_checker(config):
 
 
 def verify_sfwr_group(group_name, recipe_name):
-    ''' Verify the recipe for a software group can be built by  
-        the function it is passed to '''
+    """
+        Verify the recipe for a software group can be built by  
+        the operational function it is passed to.
+        Return SUCCESS/FAILURE
+
+        Keyword arguments:
+        group_name -- string
+        recipe_name -- String
+    """
     RECIPE = load_recipe(recipe_name)
     buildq = RECIPE['build_queue']
     for i in range(len(buildq)):
