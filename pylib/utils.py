@@ -136,6 +136,10 @@ def get_snap_id(stack_name):
 
 
 def set_build_lock():
+    """ Create a file on FS to indicate the BUILDBOX directory
+        should not be modified because another process is most
+        likely using it.
+    """
     if not os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
         return validate(rtn_tpl,"Set /run/lock/buildbox.lock")
