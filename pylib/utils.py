@@ -399,7 +399,14 @@ def run_cmd_log(cmd, name, context):
 
 
 def run_cmd(cmd):
-    """ Run command, return caputured I/O Streams """
+    """
+        Run command return captured I/O
+        Returns tuple (return_code, stdout, stdin)
+
+        Keyword arguments:
+        cmd -- list: command to run
+    """
+
     out = ''
     err = ''
     try:
