@@ -848,6 +848,10 @@ def do_build_recipe(options):
     start = result[0]
     stop = result[1]
 
+    if verify_recipe_md5(RECIPE, "CHRT"):
+        error("verify_recipe_md5")
+        return FAILURE
+
     info("Building: "+ str(start) + "-" + str(stop))
     if build_recipe(RECIPE, "CHRT", start, stop):
         return FAILURE
