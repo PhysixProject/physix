@@ -320,25 +320,29 @@ def get_physix_prefix(context):
 
 def verify_file_md5(fname, rmd5, context):
     """
+        Generate md5sum of a fname and compare it against rmd5/
+        Returns boolean
+
         Keyword arguments:
-        fname -- string
-        rmd5 -- string
+        fname -- string: file name
+        rmd5 -- md5sum string 
         context -- string
     """
 
-    prefix = get_sources_prefix(context)
-    fname = prefix + fname
+    rbool = False
+    fname_path = get_sources_prefix(context) + fname
 
-    ret_tpl = run_cmd(['md5sum', fname])
-    if ret_tpl[0] == 0:
-        cmpr_md5 = ret_tpl[1].split(' ')[0]
+    (rtn, output, error) = run_cmd(['md5sum', fname_path])
+    if rtn == 0:
+        cmpr_md5 = output.split(' ')[0]
         cmpr_md5 = cmpr_md5.replace("b'", "")
         if cmpr_md5 == rmd5:
-            ok("MD5 Verified: "+fname+" : "+cmpr_md5)
-            return True
+            ok("MD5 Verified: " + fname + " : " + cmpr_md5)
+            rbool = True
         else:
-            error("MD5 Verified: "+fname+" : "+cmpr_md5 +":"+rmd5)
-    return False
+            error("MD5 Verification: " + fname + " : " + cmpr_md5 + ":" + rmd5)
+
+    return rbool
 
 
 def verify_recipe_md5(recipe, context):
