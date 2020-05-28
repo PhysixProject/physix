@@ -39,8 +39,8 @@ def ok(msg):
 
 def date():
     """Retrun Data-Time: Month/Day/Year-Hour:Minute:Sec"""
-    d = datetime.datetime.now()
-    return str(d.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
+    date_time = datetime.datetime.now()
+    return str(date_time.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
 
 
 def validate(rtn_tpl, msg, report=False):
@@ -72,7 +72,7 @@ def get_curr_commit_id():
 
 
 def root_fs_type():
-    """ 
+    """
         Return string: File System type of device mounted at /
         Return FAILURE (1) on error
     """
@@ -100,7 +100,7 @@ def get_name_current_stack():
     if validate(ret_tpl, "btrfs subvolume show /"):
         return FAILURE
     std_out = ret_tpl[1]
-    
+
     parsed_lst = std_out.split('\n')
     if parsed_lst[0]:
         return str(parsed_lst[0])
@@ -143,11 +143,11 @@ def get_snap_id(stack_name):
         if len(datums) == 9:
             if str(stack_name) == str(datums[8]):
                 return str(datums[1])
-    return None 
+    return None
 
 
 def set_build_lock():
-    """ 
+    """
         Create a file on FS to indicate the BUILDBOX directory
         should not be modified because another process is most
         likely using it.
@@ -155,7 +155,7 @@ def set_build_lock():
     """
     if not os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
-        return validate(rtn_tpl,"Set /run/lock/buildbox.lock")
+        return validate(rtn_tpl, "Set /run/lock/buildbox.lock")
     else:
         error("buildbox.lock Already set.")
         return FAILURE
@@ -168,7 +168,7 @@ def unset_build_lock():
     """
     if os.path.exists('/run/lock/buildbox.lock'):
         rtn_tpl = run_cmd(['rm', '/run/lock/buildbox.lock'])
-        return validate(rtn_tpl,"buildbox.lock removed")
+        return validate(rtn_tpl, "buildbox.lock removed")
     else:
         error("buildbox.lock not Set.")
         return FAILURE
@@ -220,8 +220,9 @@ def verify_checker(config):
     """
 
     filesystem = config['CONF_ROOTPART_FS']
-    mkfs  = "mkfs." + filesystem
-    for tool in ['mkfs.fat', 'mkfs.ext2', mkfs, 'gcc', 'g++', 'make', 'gawk', 'bison', 'texi2any', 'parted']:
+    mkfs = "mkfs." + filesystem
+    for tool in ['mkfs.fat', 'mkfs.ext2', mkfs, 'gcc', 'g++', 'make', 'gawk',
+                 'bison', 'texi2any', 'parted']:
         ret_tpl = run_cmd(['which', tool])
         if validate(ret_tpl, "Check: "+ tool):
             return FAILURE
@@ -240,7 +241,7 @@ def verify_checker(config):
 
 def verify_sfwr_group(group_name, recipe_name):
     """
-        Verify the recipe for a software group can be built by  
+        Verify the recipe for a software group can be built by
         the operational function it is passed to.
         Return SUCCESS/FAILURE
 
@@ -252,7 +253,7 @@ def verify_sfwr_group(group_name, recipe_name):
     buildq = RECIPE['build_queue']
     for i in range(len(buildq)):
         build_id = str(buildq[i])
-        element  = RECIPE[build_id]
+        element = RECIPE[build_id]
         grp = element['group']
         if grp != group_name:
             return FAILURE
@@ -465,10 +466,10 @@ def verify_build_bounderies(options, RECIPE):
 
     if not (start >= 0 and start <= len(buildq)):
         error("Invalid start number")
-        return (None,None)
+        return (None, None)
     if not (stop >= start and stop <= len(buildq)):
         error("Invalid stop number")
-        return (None,None)
+        return (None, None)
 
     return (start, stop)
 
@@ -517,5 +518,4 @@ def unpack(element, context):
         return FAILURE
 
     return SUCCESS
-
 
