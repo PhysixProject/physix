@@ -346,6 +346,13 @@ def verify_file_md5(fname, rmd5, context):
 
 
 def verify_recipe_md5(recipe, context):
+    """
+        Traverse through recipe file and verify md5sums of sources
+
+        Keyword arguments:
+        recipe -- dict 
+        context -- string
+    """
     for i in range(len(recipe['build_queue'])):
         element = recipe[str(i)]
         sources = element['sources']
