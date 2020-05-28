@@ -259,6 +259,15 @@ def verify_sfwr_group(group_name, recipe_name):
 
 
 def get_subvol_id(mount_point, stack_name):
+    """
+        Return ID of snapshot
+        Returns: Integer on Success, None on Failure
+
+        Keyword arguments:
+        mount_point -- string
+        stack_name -- String
+    """
+
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', mount_point])
     if validate(ret_tpl, "List subvolumes for mountpoint:" + mount_point):
         return None
@@ -274,6 +283,11 @@ def get_subvol_id(mount_point, stack_name):
 
 
 def get_sources_prefix(context):
+    """
+        Keyword arguments:
+        context -- string
+    """
+
     if context == "CHRT":
         return '/opt/sources.physix/'
     elif context == "NON-CHRT":
@@ -284,6 +298,11 @@ def get_sources_prefix(context):
 
 
 def get_physix_prefix(context):
+    """
+        Keyword arguments:
+        context -- string
+    """
+
     if context == "CHRT":
         return '/opt/physix/'
     elif context == "NON-CHRT":
@@ -294,6 +313,13 @@ def get_physix_prefix(context):
 
 
 def verify_file_md5(fname, rmd5, context):
+    """
+        Keyword arguments:
+        fname -- string
+        rmd5 -- string
+        context -- string
+    """
+
     prefix = get_sources_prefix(context)
     fname = prefix + fname
 
