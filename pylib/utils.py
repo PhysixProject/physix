@@ -301,17 +301,21 @@ def get_sources_prefix(context):
 
 def get_physix_prefix(context):
     """
+        Construct system path of physix direcotry
+        Return String on success, False on failure.
+
         Keyword arguments:
         context -- string
     """
 
+    rtn = False
     if context == "CHRT":
-        return '/opt/physix/'
+        rtn = '/opt/physix/'
     elif context == "NON-CHRT":
-        return '/mnt/physix/opt/physix/'
+        rtn = '/mnt/physix/opt/physix/'
     else:
         error("get_physix_prefix: Unknown context")
-        return False
+    return rtn
 
 
 def verify_file_md5(fname, rmd5, context):
