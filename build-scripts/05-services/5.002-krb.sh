@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 cd src || exit 1
 sed -i -e 's@\^u}@^u cols 300}@' tests/dejagnu/config/default.exp     &&

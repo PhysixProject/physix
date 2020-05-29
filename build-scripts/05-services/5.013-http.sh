@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 groupadd -g 25 apache &&
 useradd -c "Apache Server" -d /srv/www -g apache -s /bin/false -u 25 apache

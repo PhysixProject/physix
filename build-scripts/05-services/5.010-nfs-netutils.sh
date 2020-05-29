@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 [ grep nobody /etc/passwd ] && [ grep nogroup /etc/group ]
 if [ $? -ne 0 ] ; then
