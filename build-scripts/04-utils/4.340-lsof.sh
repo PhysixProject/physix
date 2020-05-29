@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 tar -xf lsof_4.91_src.tar  &&
 cd lsof_4.91_src           &&

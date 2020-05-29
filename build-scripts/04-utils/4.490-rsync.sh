@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 groupadd -g 48 rsyncd &&
 useradd -c "rsyncd Daemon" -d /home/rsync -g rsyncd \

@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 sed -e '/noinst_SCRIPTS = gpg-zip/c sbin_SCRIPTS += gpg-zip' \
     -i tools/Makefile.in

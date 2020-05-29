@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 sed '20,$ d' -i trust/trust-extract-compat.in &&
 cat >> trust/trust-extract-compat.in << "EOF"

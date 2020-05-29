@@ -1,6 +1,5 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
 install  -v -m700 -d /var/lib/sshd &&
 chown    -v root:sys /var/lib/sshd 
