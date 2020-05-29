@@ -1,6 +1,6 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
+
 
 su physix -c 'patch -Np1 -i ../libunique-1.1.6-upstream_fixes-1.patch'
 
