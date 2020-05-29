@@ -503,9 +503,9 @@ def build_recipe(recipe, context, start, stop):
         stack_script = get_name_current_stack() + "-" + str(element["build_script"])
 
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        #os.chdir('/opt/sources.physix/BUILDBOX')
+        os.chdir('/opt/sources.physix/BUILDBOX/'+build_src)
         ret_tpl = run_cmd_log(cmd, stack_script, context)
-        #os.chdir('/opt/physix')
+        os.chdir('/opt/physix')
         if validate(ret_tpl, "Build: "+str(cmd), True):
             unset_build_lock()
             return FAILURE
