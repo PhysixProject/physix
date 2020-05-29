@@ -1,6 +1,6 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
+
 
 # Disabling the install of the documentation because  
 # nasm-xdoc was not archvied correctly. If the tarball is called 

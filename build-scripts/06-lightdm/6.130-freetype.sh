@@ -1,6 +1,6 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
+
 
 su physix -c "sed -ri \"s:.*(AUX_MODULES.*valid):\1:\" modules.cfg"
 chroot_check $? 'sed 1'

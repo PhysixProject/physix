@@ -1,7 +1,7 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
-cd $SOURCE_DIR/$1 || exit 1
+
 
 su physix -c 'patch -Np1 -i ../sgml-common-0.6.3-manpage-1.patch'
 chroot_check $? "patch"
