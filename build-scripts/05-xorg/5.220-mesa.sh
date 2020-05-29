@@ -1,7 +1,7 @@
 #!/bin/bash -x
 source /opt/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
-cd $SOURCE_DIR/$1 || exit 1
+
 
 patch -Np1 -i ../../mesa-19.1.4-add_xdemos-1.patch
 #chroot_check $? "patch "

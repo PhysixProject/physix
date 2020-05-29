@@ -1,7 +1,7 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
-cd $SOURCE_DIR/$1 || exit 1
+
 
 su physix -c 'gzip -cd ../../libpng-1.6.37-apng.patch.gz | patch -p1'
 chroot_check $? "gzip"

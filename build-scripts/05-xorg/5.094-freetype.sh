@@ -1,7 +1,7 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
-cd $SOURCE_DIR/$1 || exit 3
+
 
 su physix -c 'sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg'
 chroot_check $? "sed modules.cfg"

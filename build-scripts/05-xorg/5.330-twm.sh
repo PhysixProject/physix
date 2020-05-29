@@ -1,7 +1,7 @@
 #!/bin/bash
 source /opt/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
-cd $SOURCE_DIR/$1 || exit 3
+
 
 su physix -c "sed -i -e '/^rcdir =/s,^\(rcdir = \).*,\1/etc/X11/app-defaults,' src/Makefile.in"
 chroot_check $? "sed 1"
