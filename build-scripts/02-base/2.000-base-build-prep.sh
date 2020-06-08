@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
-source /mnt/physix/opt/physix/include.sh || exit 1
+# Copyright (C) 2019 Tree Davies
+source /mnt/physix/opt/admin/physix/include.sh || exit 1
 
 #if [ ! -e /usr/src/tools ] ; then
 #	cp -r $BUILDROOT/tools $BUILDROOT/usr/src

@@ -18,7 +18,7 @@ from utils import *
 
 def get_db_connection():
     """Return db connection object. Return None on error."""
-    db_path = '/opt/.DB.physix'
+    db_path = '/opt/admin/.DB.physix'
     conn = None
 
     try:
@@ -71,7 +71,7 @@ def init_db_tables():
 
     conn = None
     try:
-        conn = sqlite3.connect('/mnt/physix/opt/.DB.physix')
+        conn = sqlite3.connect('/mnt/physix/opt/admin/.DB.physix')
     except Exception as e:
         error(str(e))
         return FAILURE

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 
 groupadd -fg 27 polkitd &&
@@ -24,6 +24,6 @@ chroot_check $? "make"
 make install
 chroot_check $? "make install"
 
-cp /opt/physix/build-scripts/05-xorg/configs/polkit/polkit-1  /etc/pam.d/
+cp /opt/admin/physix/build-scripts/05-xorg/configs/polkit/polkit-1  /etc/pam.d/
 chroot_check $? "wrote /etc/pam.d/polkit-1"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
-source /opt/physix/physix.conf || exit 1
+source /opt/admin/physix/include.sh || exit 1
+source /opt/admin/physix/physix.conf || exit 1
 
 GUSER=`echo $CONF_GEN_USER | cut -d'=' -f2`
 

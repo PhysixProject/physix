@@ -291,9 +291,9 @@ def get_sources_prefix(context):
     """
 
     if context == "CHRT":
-        return '/opt/sources.physix/'
+        return '/opt/admin/sources.physix/'
     elif context == "NON-CHRT":
-        return '/mnt/physix/opt/sources.physix/'
+        return '/mnt/physix/opt/admin/sources.physix/'
     else:
         error("get_sources_prefix: Unknown context")
         return False
@@ -310,9 +310,9 @@ def get_physix_prefix(context):
 
     rtn = False
     if context == "CHRT":
-        rtn = '/opt/physix/'
+        rtn = '/opt/admin/physix/'
     elif context == "NON-CHRT":
-        rtn = '/mnt/physix/opt/physix/'
+        rtn = '/mnt/physix/opt/admin/physix/'
     else:
         error("get_physix_prefix: Unknown context")
     return rtn
@@ -384,9 +384,9 @@ def run_cmd_log(cmd, name, context):
     rtn = FAILURE
 
     if context == "CHRT":
-        log_path = "/opt/logs.physix/" + log_name
+        log_path = "/opt/admin/logs.physix/" + log_name
     else:
-        log_path = "/mnt/physix/opt/logs.physix/" + log_name
+        log_path = "/mnt/physix/opt/admin/logs.physix/" + log_name
 
     with open(log_path, "w") as file_desc:
         try:

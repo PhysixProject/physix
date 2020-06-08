@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 #This sed prevents it compiling 2 programs (vsyasm and ytasm) 

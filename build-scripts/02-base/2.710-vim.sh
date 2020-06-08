@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
+# Copyright (C) 2019 Tree Davies
+source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 
@@ -42,8 +42,5 @@ endif
 " End /etc/vimrc
 EOF
 chroot_check $? "vim wrtie /etc/vimrc"
-
-#vim -c ':options'
-
 
 

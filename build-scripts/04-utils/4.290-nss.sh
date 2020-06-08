@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 su physix -c 'patch -Np1 -i ../nss-3.45-standalone-1.patch'
 chroot_check $? "nss : patch"

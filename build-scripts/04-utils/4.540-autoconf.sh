@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 su physix -c 'patch -Np1 -i ../autoconf-2.13-consolidated_fixes-1.patch '
 chroot_check $? "patch"

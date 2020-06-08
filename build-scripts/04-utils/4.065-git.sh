@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 ./configure --prefix=/usr --with-gitconfig=/etc/gitconfig --with-curl
 chroot_check $? "git : configure"

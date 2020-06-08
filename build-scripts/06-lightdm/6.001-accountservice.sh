@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 
 
@@ -22,7 +22,7 @@ chroot_check $? "ninja"
 ninja install
 chroot_check $? "ninja install"
 
-cp /opt/physix/build-scripts/05-xorg/configs/polkit/40-adm.rules  /etc/polkit-1/rules.d/
+cp /opt/admin/physix/build-scripts/05-xorg/configs/polkit/40-adm.rules  /etc/polkit-1/rules.d/
 chroot_check $? "Write /etc/polkit-1/rules.d/40-adm.rules"
 
 systemctl enable accounts-daemon

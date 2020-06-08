@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 groupadd -g 25 apache &&
 useradd -c "Apache Server" -d /srv/www -g apache -s /bin/false -u 25 apache
@@ -32,10 +32,10 @@ chmod 4754             /usr/lib/httpd/suexec &&
 chown -v -R apache:apache /srv/www
 chroot_check $? "make install"
 
-install -m644 /opt/physix/build-scripts/05-services/configs/httpd/httpd.service   /lib/systemd/system/httpd.service 
+install -m644 /opt/admin/physix/build-scripts/05-services/configs/httpd/httpd.service   /lib/systemd/system/httpd.service 
 chroot_check $? "Install /lib/systemd/system/httpd.service"
 
-install -m644 /opt/physix/build-scripts/05-services/configs/httpd/httpd.conf   /etc/httpd.conf
+install -m644 /opt/admin/physix/build-scripts/05-services/configs/httpd/httpd.conf   /etc/httpd.conf
 chroot_check $? "Install /etc/httpd.conf"
 
 

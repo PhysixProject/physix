@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 su physix -c "sed -i '/utsname.h/a#include <sys/sysmacros.h>' libparted/arch/linux.c"
 chroot_check $? "sed libparted/arch/linux.c"

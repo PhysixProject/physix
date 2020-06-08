@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 source /etc/physix.conf || exit 1
 
 su physix -c './configure --prefix=/usr --disable-static'

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 su physix -c 'tar -xf ../../Linux-PAM-1.3.1-docs.tar.xz --strip-components=1'
 chroot_check $? "Linux-PAM : untar doc tarball"
@@ -23,7 +23,7 @@ chroot_check $? "Linux-PAM : make"
 install -v -m755 -d /etc/pam.d &&
 chroot_check $? "Linux-PAM : install "
 
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/other.test /etc/pam.d/other
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/other.test /etc/pam.d/other
 chroot_check $? "Created /etc/pam.d/other for make check"
 
 make check
@@ -47,7 +47,7 @@ done
 install -vdm755 /etc/pam.d 
 chroot_check $? "Create /etc/pam.d"
 
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/other /etc/pam.d
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/other /etc/pam.d
 chroot_check $? "Writing /etc/pam.d/ config files"
 
 #These are the names provided in the book

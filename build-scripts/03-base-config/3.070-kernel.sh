@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 VERSION='5.4.41'
@@ -9,7 +9,7 @@ VERSION='5.4.41'
 make mrproper
 chroot_check $? "system config: kernel : make mr_proper"
 
-install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/linux_config-$VERSION  /opt/sources.physix/BUILDBOX/$1/.config
+install --verbose --mode 644 --owner root --group root /opt/admin/physix/build-scripts/03-base-config/configs/linux_config-$VERSION  /opt/admin/sources.physix/BUILDBOX/$1/.config
 chroot_check $? "Set Linux kernel config"
 
 make -j$NPROC
@@ -36,12 +36,12 @@ chroot_check $? "install Documentation/* /usr/share/doc/linux-$VERSION"
 install --verbose --mode 755 --directory /etc/modprobe.d
 chroot_check $? "Create /etc/modprobe.d"
 
-install --verbose --mode 644 --owner root --group root /opt/physix/build-scripts/03-base-config/configs/usb.conf  /etc/modprobe.d/usb.conf
+install --verbose --mode 644 --owner root --group root /opt/admin/physix/build-scripts/03-base-config/configs/usb.conf  /etc/modprobe.d/usb.conf
 chroot_check $? "Install /etc/modprobe.d/usb.conf"
 
 mkinitrd --force /boot/initrd-$VERSION.physix.x86_64 $VERSION
 chroot_check $? "Install mkinitrd"
 
-install --verbose --mode 744 --owner root --group root /opt/physix/scripts/kinstall  /usr/local/bin
+install --verbose --mode 744 --owner root --group root /opt/admin/physix/scripts/kinstall  /usr/local/bin
 chroot_check $? "Install kinstall"
 

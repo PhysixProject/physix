@@ -1,7 +1,7 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
+# Copyright (C) 2019 Tree Davies
+source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 patch -Np1 -i ../../glibc-2.30-fhs-1.patch
@@ -85,7 +85,7 @@ localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
 make localedata/install-locales
 chroot_check $? "6.09-glibc.sh make localedata/install-locales"
 
-cp -v /opt/physix/build-scripts/02-base/configs/etc_nsswitch.conf /etc/nsswitch.conf
+cp -v /opt/admin/physix/build-scripts/02-base/configs/etc_nsswitch.conf /etc/nsswitch.conf
 chroot_check $? "/etc/nsswitch.conf"
 
 tar -xf ../../tzdata2019b.tar.gz
@@ -107,7 +107,7 @@ unset ZONEINFO
 #tzselect
 cp -v /usr/share/zoneinfo/US/Pacific /etc/localtime
 
-cp -v /opt/physix/build-scripts/02-base/configs/etc_ld.so.conf  /etc/ld.so.conf
+cp -v /opt/admin/physix/build-scripts/02-base/configs/etc_ld.so.conf  /etc/ld.so.conf
 
 mkdir -pv /etc/ld.so.conf.d
 

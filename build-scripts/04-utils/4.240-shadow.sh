@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in &&
 find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \; &&
@@ -46,16 +46,16 @@ do
     chroot_check $? "shadow : sed functions"
 done
 
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/login /etc/pam.d/           &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/su /etc/pam.d/              &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/ssh /etc/pam.d/             &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/groupadd /etc/pam.d/        &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/useradd /etc/pam.d/         &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/passwd /etc/pam.d/          &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-auth /etc/pam.d/     &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-account /etc/pam.d/  &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-session /etc/pam.d/  &&
-cp -v /opt/physix/build-scripts/04-utils/configs/linux-pam/system-password /etc/pam.d/
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/login /etc/pam.d/           &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/su /etc/pam.d/              &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/ssh /etc/pam.d/             &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/groupadd /etc/pam.d/        &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/useradd /etc/pam.d/         &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/passwd /etc/pam.d/          &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/system-auth /etc/pam.d/     &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/system-account /etc/pam.d/  &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/system-session /etc/pam.d/  &&
+cp -v /opt/admin/physix/build-scripts/04-utils/configs/linux-pam/system-password /etc/pam.d/
 chroot_check $? "Writing /etc/pam.d/ config files"
 
 

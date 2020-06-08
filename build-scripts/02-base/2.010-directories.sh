@@ -1,7 +1,7 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
+# Copyright (C) 2019 Tree Davies
+source /opt/admin/physix/include.sh || exit 1
 
 mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
 chroot_check $? "6.05-directories mkdir -pv /{bin,boot,etc/{opt,sysconfig}"
@@ -42,10 +42,10 @@ ln -svf bash /bin/sh                &&
 ln -svf /proc/self/mounts /etc/mtab
 chroot_check $? "link bash/sh"
 
-cp /opt/physix/build-scripts/02-base/configs/etc_passwd /etc/passwd
+cp /opt/admin/physix/build-scripts/02-base/configs/etc_passwd /etc/passwd
 chroot_check $? "Wrote /etc/passwd"
 
-cp /opt/physix/build-scripts/02-base/configs/etc_group /etc/group
+cp /opt/admin/physix/build-scripts/02-base/configs/etc_group /etc/group
 chroot_check $? "wrote /etc/group"
 
 touch /var/log/{btmp,lastlog,faillog,wtmp} &&

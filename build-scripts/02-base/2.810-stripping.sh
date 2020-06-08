@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
+# Copyright (C) 2019 Tree Davies
+source /opt/admin/physix/include.sh || exit 1
 
 save_lib="ld-2.29.so libc-2.29.so libpthread-2.29.so libthread_db-1.0.so"
 

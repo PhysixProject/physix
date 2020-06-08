@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 cd src || exit 1
 sed -i -e 's@\^u}@^u cols 300}@' tests/dejagnu/config/default.exp     &&
@@ -43,7 +43,7 @@ install -v -dm755 /usr/share/doc/krb5-1.18 &&
 cp -vfr ../doc/*  /usr/share/doc/krb5-1.18
 chroot_check $? "make install"
 
-cp -v /opt/physix/build-scripts/05-services/configs/krb/krb5.conf /etc/
+cp -v /opt/admin/physix/build-scripts/05-services/configs/krb/krb5.conf /etc/
 chroot_check $? "Write krb5.conf"
 
 # /usr/sbin/krb5kdc

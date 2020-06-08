@@ -2,8 +2,8 @@
 # Copyright (C) 2019 Travis Davies
 
 export BUILDROOT='/mnt/physix'
-export BR_SOURCE_DIR=$BUILDROOT/opt/sources.physix/BUILDBOX
-export SOURCE_DIR=/opt/sources.physix/BUILDBOX
+export BR_SOURCE_DIR=$BUILDROOT/opt/admin/sources.physix/BUILDBOX
+export SOURCE_DIR=/opt/admin/sources.physix/BUILDBOX
 
 NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
 export NPROC

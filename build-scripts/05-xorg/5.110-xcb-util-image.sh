@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh
+source /opt/admin/physix/include.sh
 source /etc/profile.d/xorg.sh || exit 2
 
 

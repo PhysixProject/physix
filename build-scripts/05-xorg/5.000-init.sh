@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh
+source /opt/admin/physix/include.sh
 
 #rm -rf /usr/src/physix/sources
 #mkdir -p /usr/src/physix/sources && cd /usr/src/physix/sources/xc

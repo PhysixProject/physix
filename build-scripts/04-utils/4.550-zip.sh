@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 su physix -c 'make -f unix/Makefile generic_gcc'
 chroot_check $? "make"

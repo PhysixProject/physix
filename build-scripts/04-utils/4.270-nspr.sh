@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 cd nspr                                                     &&
 sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&

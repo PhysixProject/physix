@@ -1,8 +1,8 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
-source /opt/physix/physix.conf || exit 1
+source /opt/admin/physix/include.sh || exit 1
+source /opt/admin/physix/physix.conf || exit 1
 
 IFACE=`ip link | grep 'state UP' | awk -F: '{print $2}' | tr -d '[:space:]'`
 MAC=`cat /sys/class/net/$IFACE/address`
@@ -11,7 +11,7 @@ ID=`cat /sys/class/net/$IFACE/dev_id`
 
 
 # SETUP /etc/systemd/network/10-eth-static.network
-install -v -m644 /opt/physix/build-scripts/03-base-config/configs/etc_eth-static.network.cfg  /etc/systemd/network/10-eth-static.network
+install -v -m644 /opt/admin/physix/build-scripts/03-base-config/configs/etc_eth-static.network.cfg  /etc/systemd/network/10-eth-static.network
 SED_CMD='s/INTERFACE_MARKER/'$IFACE'/g'
 sed -i $SED_CMD /etc/systemd/network/10-eth-static.network
 chroot_check $? "Wrtie etc_eth-static.network.cfg"
@@ -35,7 +35,7 @@ chroot_check $? "Set DOMAIN: $CONF_DOMAIN"
 
 # SETUP /etc/systemd/network/10-ether0.link
 report "Creating /etc/systemd/network/10-ether0.link"
-install -v -m644 /opt/physix/build-scripts/03-base-config/configs/etc_network_10-ether0.link.cfg  /etc/systemd/network/10-ether0.link
+install -v -m644 /opt/admin/physix/build-scripts/03-base-config/configs/etc_network_10-ether0.link.cfg  /etc/systemd/network/10-ether0.link
 chroot_check $? "system config : network :  cp -v /physix/config_scripts/etc_network_10-ether0.linkf.cfg /etc/systemd/network/10-ether0.link"
 
 SED_CMD='s/MAC_ADDRESS_MARKER/'$MAC'/g'
@@ -45,7 +45,7 @@ chroot_check $? "Set MAC ADDRESS: $MAC"
 SED_CMD='s/INTERFACE_MARKER/'$IFACE'/g'
 sed -i $SED_CMD /etc/systemd/network/10-ether0.link
 chroot_check $? "Set IFACE: $IFACE"
-install -v -m644 /opt/physix/build-scripts/03-base-config/configs/etc_hosts.cfg  /etc/hosts
+install -v -m644 /opt/admin/physix/build-scripts/03-base-config/configs/etc_hosts.cfg  /etc/hosts
 chroot_check $? "system config : network : wrote /etc/hosts"
 
 # SETUP UDEV
@@ -65,6 +65,6 @@ for IFACE in `ls /sys/class/net` ; do
 	chroot_check $? "$ENTRY"
 done
 
-install -v -m644 /opt/physix/build-scripts/03-base-config/configs/motd  /etc/motd
+install -v -m644 /opt/admin/physix/build-scripts/03-base-config/configs/motd  /etc/motd
 chroot_check $? "cp -v /physix/build-scripts.config/configs/motd /etc/motd"
 

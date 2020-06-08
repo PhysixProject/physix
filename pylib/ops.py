@@ -98,14 +98,14 @@ def create_volumes(config):
     if validate(ret_tpl, "Volume Create: var"):
         return FAILURE
 
-    opt_vol_size = str(config["CONF_LOGICAL_OPT_SIZE"].strip('\n')) + "G"
-    ret_tpl = run_cmd(["lvcreate", '--yes', "-L", opt_vol_size, '-n', 'opt', vol_group_name])
-    if validate(ret_tpl, "Volume Create: opt"):
+    admin_vol_size = str(config["CONF_LOGICAL_ADMIN_SIZE"].strip('\n')) + "G"
+    ret_tpl = run_cmd(["lvcreate", '--yes', "-L", admin_vol_size, '-n', 'admin', vol_group_name])
+    if validate(ret_tpl, "Volume Create: admin"):
         return FAILURE
 
     tmp_vol_size = str(config["CONF_LOGICAL_TMP_SIZE"].strip('\n')) + "G"
     ret_tpl = run_cmd(["lvcreate", '--yes', "-L", tmp_vol_size, '-n', 'tmp', vol_group_name])
-    if validate(ret_tpl, "Volume Create: opt"):
+    if validate(ret_tpl, "Volume Create: tmp"):
         return FAILURE
 
     return SUCCESS
@@ -151,9 +151,9 @@ def format_volumes(config):
     if validate(ret_tpl, mkfs_cmd+""+physix_var):
         return FAILURE
 
-    physix_opt = "/dev/mapper/" + vol_group_name + "-opt"
-    ret_tpl = run_cmd([mkfs_cmd, physix_opt])
-    if validate(ret_tpl, mkfs_cmd+":"+ physix_opt):
+    physix_admin = "/dev/mapper/" + vol_group_name + "-admin"
+    ret_tpl = run_cmd([mkfs_cmd, physix_admin])
+    if validate(ret_tpl, mkfs_cmd+":"+ physix_admin):
         return FAILURE
 
     physix_tmp = "/dev/mapper/" + vol_group_name + "-tmp"
@@ -222,11 +222,13 @@ def mount_volumes(config):
         return FAILURE
 
     opt = BUILDROOT + "/opt"
+    opt_admin = opt + "/admin"
+    mnt_point = opt_admin
     os.mkdir(opt, 0o755)
-    volume_opt = "/dev/mapper/" + vol_group_name + "-opt"
-    mnt_point = BUILDROOT + "/opt"
-    ret_tpl = run_cmd(['mount', volume_opt, mnt_point])
-    if validate(ret_tpl, "Mount: " + volume_opt):
+    os.mkdir(opt_admin, 0o755)
+    volume_admin = "/dev/mapper/" + vol_group_name + "-admin"
+    ret_tpl = run_cmd(['mount', volume_admin, mnt_point])
+    if validate(ret_tpl, "Mount: " + volume_admin):
         return FAILURE
 
     boot = BUILDROOT + "/boot"
@@ -339,10 +341,12 @@ def setup(config):
 
     if not os.path.exists(BUILDROOT+"/opt"):
         os.mkdir(BUILDROOT+"/opt", 755)
-    if not os.path.exists(BUILDROOT+"/opt/logs.physix"):
-        os.mkdir(BUILDROOT+"/opt/logs.physix", 777)
-    if not os.path.exists(BUILDROOT+"/opt/sources.physix"):
-        os.mkdir(BUILDROOT+"/opt/sources.physix", 770)
+    if not os.path.exists(BUILDROOT+"/opt/admin"):
+        os.mkdir(BUILDROOT+"/opt/admin", 755)
+    if not os.path.exists(BUILDROOT+"/opt/admin/logs.physix"):
+        os.mkdir(BUILDROOT+"/opt/admin/logs.physix", 777)
+    if not os.path.exists(BUILDROOT+"/opt/admin/sources.physix"):
+        os.mkdir(BUILDROOT+"/opt/admin/sources.physix", 770)
 
     # First find bash
     ret_tpl = run_cmd(['ln', '-sfv', '/usr/bin/bash', '/usr/bin/sh'])
@@ -386,7 +390,7 @@ def setup(config):
     if validate(ret_tpl, "chmod 770 "+tools_dir):
         return FAILURE
 
-    sources_dir = BUILDROOT + "/opt/sources.physix"
+    sources_dir = BUILDROOT + "/opt/admin/sources.physix"
     ret_tpl = run_cmd(['chown', '-v', 'physix', sources_dir])
     if validate(ret_tpl, "chown "+sources_dir):
         return FAILURE
@@ -395,8 +399,8 @@ def setup(config):
     if validate(ret_tpl, "chmod 750 "+sources_dir):
         return FAILURE
 
-    ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/'])
-    if validate(ret_tpl, "Move physix repo to /mnt/physix/opt/"):
+    ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/admin'])
+    if validate(ret_tpl, "Move physix repo to /mnt/physix/opt/admin"):
         return FAILURE
 
     return SUCCESS 
@@ -437,7 +441,7 @@ def build_toolchain(recipe, context, start, stop):
             bsp = os.path.join(get_sources_prefix(context), str(element["archives"][0]))
             build_src = top_most_dir(bsp)
 
-        subcmd = os.path.join('/mnt/physix/opt/physix/build-scripts/',
+        subcmd = os.path.join('/mnt/physix/opt/admin/physix/build-scripts/',
                               str(element["group"]),
                               str(element["build_script"]))
         subcmd = " ".join([subcmd, build_src])
@@ -490,12 +494,12 @@ def build_recipe(recipe, context, start, stop):
         """ Dir name of First tarball in list, is passed as arg to the 
             build script """
         if element["archives"] != []:
-            bsp = "/opt/sources.physix/"+ str(element["archives"][0])
+            bsp = "/opt/admin/sources.physix/"+ str(element["archives"][0])
             build_src = top_most_dir(bsp)
         else:
             build_src = ''
 
-        subcmd = os.path.join('/opt/physix/build-scripts/',
+        subcmd = os.path.join('/opt/admin/physix/build-scripts/',
                               str(element["group"]),
                               str(element["build_script"]))
         cmd = [subcmd, build_src]
@@ -503,9 +507,9 @@ def build_recipe(recipe, context, start, stop):
         stack_script = get_name_current_stack() + "-" + str(element["build_script"])
 
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        os.chdir('/opt/sources.physix/BUILDBOX/'+build_src)
+        os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
         ret_tpl = run_cmd_log(cmd, stack_script, context)
-        os.chdir('/opt/physix')
+        os.chdir('/opt/admin/physix')
         if validate(ret_tpl, "Build: "+str(cmd), True):
             unset_build_lock()
             return FAILURE
@@ -538,7 +542,7 @@ def build_base(recipe, context, start, stop):
     """
 
     if start == 0:
-        cmd = ['/mnt/physix/opt/physix/build-scripts/02-base/2.000-base-build-prep.sh']
+        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/2.000-base-build-prep.sh']
         ret_tpl = run_cmd_log(cmd, "2.000-base-build-prep.sh", "")
         if validate(ret_tpl, "Build: " + str(cmd)):
             return FAILURE
@@ -562,14 +566,14 @@ def build_base(recipe, context, start, stop):
         """ Dir name of First tarball in list, is passed as arg to the 
             build script """
         if element["archives"] != []:
-            bsp = "/mnt/physix/opt/sources.physix/"+ str(element["archives"][0])
+            bsp = "/mnt/physix/opt/admin/sources.physix/"+ str(element["archives"][0])
             build_src = top_most_dir(bsp)
         else:
             build_src = ''
 
         stack_script = "STACk_0-" + str(element["build_script"])
 
-        cmd = ['/mnt/physix/opt/physix/build-scripts/02-base/000-chroot_stub.sh',
+        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/000-chroot_stub.sh',
                str(element["build_script"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
@@ -611,14 +615,14 @@ def config_base_system(recipe, context, start, stop):
         """ Dir name of First tarball in list, is passed as arg to the 
             build script """
         if element["archives"] != []:
-            bsp = "/mnt/physix/opt/sources.physix/"+ str(element["archives"][0])
+            bsp = "/mnt/physix/opt/admin/sources.physix/"+ str(element["archives"][0])
             build_src = top_most_dir(bsp)
         else:
             build_src = ''
 
         stack_script = "STACk_0-" + str(element["build_script"])
 
-        cmd = ['/mnt/physix/opt/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
+        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
                str(element["build_script"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
@@ -627,7 +631,7 @@ def config_base_system(recipe, context, start, stop):
             return FAILURE
 
     """ Special case for user to set password without logging"""
-    cmd = ['/mnt/physix/opt/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
+    cmd = ['/mnt/physix/opt/admin/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
            '3.111-set-passwd.sh']
     run_cmd_live(cmd)
 
@@ -685,7 +689,7 @@ def do_partition_init(options):
     info("------------------------------------")
     info("- Build initialization completete!")
     info("- Next Step: Build the toolchain.")
-    info("- 1. cd /mnt/physix/opt/physix")
+    info("- 1. cd /mnt/physix/opt/admin/physix")
     info("- 2. ./catalyst -p 01-toolchain.json")
     info("- 3. ./catalyst -t 01-toolchain.json")
     info("------------------------------------")
@@ -708,10 +712,10 @@ def do_toolchain_build(options):
         start = int(options.start_number)
 
     if os.path.exists("/tmp/physix-build.log"):
-        CMD = ['mv', '/tmp/physix-build.log', '/mnt/physix/opt/logs.physix/']
+        CMD = ['mv', '/tmp/physix-build.log', '/mnt/physix/opt/admin/logs.physix/']
         if (run_cmd(CMD))[1] != 0:
-            ok("Relocated physix-build.log to /mnt/physix/opt/logs.physix/")
-    logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
+            ok("Relocated physix-build.log to /mnt/physix/opt/admin/logs.physix/")
+    logging.basicConfig(filename='/mnt/physix/opt/admin/logs.physix/physix-build.log',
                             level=logging.DEBUG)
     info("build toolchain...")
     RECIPE_NAME = str(options.toolchain_conf)
@@ -753,7 +757,7 @@ def do_base_build(options):
     if options.start_number:
         start = int(options.start_number)
 
-    logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
+    logging.basicConfig(filename='/mnt/physix/opt/admin/logs.physix/physix-build.log',
                             level=logging.DEBUG)
     info("Building Base System...")
     RECIPE_NAME = str(options.base_conf)
@@ -794,7 +798,7 @@ def do_config_base(options):
     if options.start_number:
         start = int(options.start_number)
 
-    logging.basicConfig(filename='/mnt/physix/opt/logs.physix/physix-build.log',
+    logging.basicConfig(filename='/mnt/physix/opt/admin/logs.physix/physix-build.log',
                             level=logging.DEBUG)
     info("Configure Base System...")
     info("Building Base System...")
@@ -836,7 +840,7 @@ def do_build_recipe(options):
     start = 0
     stop = 0
 
-    logging.basicConfig(filename='/opt/logs.physix/physix-build.log',
+    logging.basicConfig(filename='/opt/admin/logs.physix/physix-build.log',
                             level=logging.DEBUG)
     info("Building Recipe")
     RECIPE_NAME = str(options.build_recipe)
@@ -888,10 +892,10 @@ def do_pull_sources(options):
     """
 
     context = 'NON-CHRT'
-    dest = "/mnt/physix/opt/sources.physix"
+    dest = "/mnt/physix/opt/admin/sources.physix"
 
     if not os.path.exists(dest):
-        dest = "/opt/sources.physix"
+        dest = "/opt/admin/sources.physix"
         context = "CHRT"
         if not os.path.exists(dest):
             error("Pull Sources: Invalid Destination")
@@ -915,7 +919,7 @@ def do_list_snapshots():
     Return SUCCESS/FAILURE
     """
 
-    mntpoint = '/opt/.tmp/mnt/'
+    mntpoint = '/opt/admin/.tmp/mnt/'
 
     if 'btrfs' != root_fs_type():
         error("File system snapshots are not available for " + str(root_fs_type()))
@@ -953,7 +957,7 @@ def do_snapshot(options):
     options -- dict: config options.
     """
 
-    mntpoint = '/opt/.tmp/mnt/'
+    mntpoint = '/opt/admin/.tmp/mnt/'
     snap_name = options.snapshot
 
     if 'btrfs' != root_fs_type():

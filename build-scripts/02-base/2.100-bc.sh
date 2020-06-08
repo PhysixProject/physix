@@ -1,7 +1,7 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
-source /opt/physix/include.sh || exit 1
+# Copyright (C) 2019 Tree Davies
+source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 PREFIX=/usr CC=gcc CFLAGS="-std=c99" ./configure.sh -G -O3

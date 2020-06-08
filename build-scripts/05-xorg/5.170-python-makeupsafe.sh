@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
 
 
@@ -8,5 +8,4 @@ chroot_check $? "python3 setup.py build"
 
 python3 setup.py install --optimize=1
 chroot_check $? "python3 setup.py install --optimize=1"
-
 

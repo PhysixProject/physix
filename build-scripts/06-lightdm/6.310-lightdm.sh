@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 
 grep -q lightdm /etc/group
@@ -63,7 +63,7 @@ chroot_check $? "make lightdm-greeter"
 make install
 chroot_check $? "make install lightdm-greeter"
 
-cp -v /opt/physix/build-scripts/06-lightdm/configs/lightdm/lightdm.service /lib/systemd/system/
+cp -v /opt/admin/physix/build-scripts/06-lightdm/configs/lightdm/lightdm.service /lib/systemd/system/
 chroot_check $? "setup /lib/systemd/system/"
 
 systemctl enable lightdm

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 su physix -c 'cp -r ../compiler-rt-8.0.1.src ./projects'
 chroot_check $? "cp -r ../compiler-rt-8.0.1.src ./projects"

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 install  -v -m700 -d /var/lib/sshd &&
 chown    -v root:sys /var/lib/sshd 
@@ -30,9 +30,9 @@ install -v -m644    INSTALL LICENCE OVERVIEW README* \
                     /usr/share/doc/openssh-8.0p1
 chroot_check $? "openssh : make install"
 
-install -m644 /opt/physix/build-scripts/04-utils/configs/openssh/sshd.service   /lib/systemd/system/sshd.service &&
-install -m644 /opt/physix/build-scripts/04-utils/configs/openssh/sshdat.service /lib/systemd/system/sshd@.service &&
-install -m644 /opt/physix/build-scripts/04-utils/configs/openssh/sshd.socket    /lib/systemd/system/sshd.socket &&
+install -m644 /opt/admin/physix/build-scripts/04-utils/configs/openssh/sshd.service   /lib/systemd/system/sshd.service &&
+install -m644 /opt/admin/physix/build-scripts/04-utils/configs/openssh/sshdat.service /lib/systemd/system/sshd@.service &&
+install -m644 /opt/admin/physix/build-scripts/04-utils/configs/openssh/sshd.socket    /lib/systemd/system/sshd.socket &&
 systemctl enable sshd.service
 chroot_check $? "systemctl enable sshd.service"
 

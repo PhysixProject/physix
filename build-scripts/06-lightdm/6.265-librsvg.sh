@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 
 su physix -c 'source ~/.profile && ./configure --prefix=/usr --enable-vala --disable-static --libdir=/usr/lib64'

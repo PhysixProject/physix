@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 sed -i 's/namespace/pkg_&/' src/Makefile.{am,in} src/mkstrtable.awk
 

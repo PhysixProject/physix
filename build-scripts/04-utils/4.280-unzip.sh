@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh || exit 1
 
 make -f unix/Makefile generic
 chroot_check $? "unzip : make generic"
