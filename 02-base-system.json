@@ -504,10 +504,10 @@
         "54":{
                 "group": "02-base",
                 "build_script": "2.540-dracut.sh",
-                "archives": ["dracut-049.tar.gz"],
+                "archives": ["dracut-050.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/dracut-049.tar.gz":"a43d54620a8fca3591003a66a16aefc3"
+                        "http://physixproject.org/source/dracut-050.tar.gz":"9df6a17bcbebb4296de9c68ea0a1c9c8"
                 }
         },
         "55":{
