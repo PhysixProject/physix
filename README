@@ -115,7 +115,7 @@ Installation:
 	P0: Since there is not YET a bootable ISO image, a host system is required to 
             install from. During development, Debian 10.2 and Fedora 30 was used 
             extensively, and thus is reccomended. See LFS host requirements for more
-            explicit reciperements. 
+            explicit requirements. 
             http://www.linuxfromscratch.org/lfs/view/stable-systemd/chapter02/hostreqs.html
 
 	P1: i386 and/or x86_64 CPU
