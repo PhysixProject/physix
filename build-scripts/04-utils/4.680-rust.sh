@@ -40,14 +40,15 @@ chroot_check $? "chown ./install"
 cp -a install/* /
 chroot_check $? "cp install/*"
 
-# cp /opt/admin/physix/build-scripts/04-utils/configs/rustc/ld.so.conf /etc/ld.so.conf
 install -v -m644 /opt/admin/physix/build-scripts/04-utils/configs/rustc/ld.so.conf /etc/ld.so.conf
 chroot_check $? "Set /etc/ld.so.conf"
 ldconfig
 
 install -v -m644 /opt/admin/physix/build-scripts/04-utils/configs/rustc/rustc.sh /etc/profile.d/rustc.sh
-#cp /opt/admin/physix/build-scripts/04-utils/configs/rustc/rustc.sh /etc/profile.d/rustc.sh
 chroot_check $? "Set /etc/profile.d/rustc.sh"
 
 source /etc/profile.d/rustc.sh
+
+rm -rf /home/physix/.cargo
+
 
