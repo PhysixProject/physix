@@ -531,26 +531,6 @@
         },
         "57":{
                 "group": "04-utils",
-                "build_script": "4.670-llvm.sh",
-                "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
-                "patches": [],
-                "sources": {
-			"http://physixproject.org/source/llvm-8.0.1.src.tar.xz":"9a3b63df01c52556f7afb5617934e79e",
-			"http://physixproject.org/source/cfe-8.0.1.src.tar.xz":"28db72b57ca99307259773e4ac74a6d3",
-			"http://physixproject.org/source/compiler-rt-8.0.1.src.tar.xz":"c251e582862f9fcc880802f8f2920096"
-		}
-        },
-        "58":{
-                "group": "04-utils",
-                "build_script": "4.680-rust.sh",
-                "archives": ["rustc-1.35.0-src.tar.gz"],
-                "patches": [],
-                "sources": {
-			"http://physixproject.org/source/rustc-1.35.0-src.tar.gz":"f43af67a139ce21ff5f530bbd2f486aa"
-		}
-        },
-        "59":{
-                "group": "04-utils",
                 "build_script": "4.690-ICU.sh",
                 "archives": ["icu4c-64_2-src.tgz"],
                 "patches": [],
@@ -558,7 +538,7 @@
 			"http://physixproject.org/source/icu4c-64_2-src.tgz":"a3d18213beec454e3cdec9a3116d6b05"
 		}
         },
-        "60":{
+        "58":{
                 "group": "04-utils",
                 "build_script": "4.700-python.sh",
                 "archives": ["Python-2.7.16.tar.xz"],
@@ -567,7 +547,7 @@
 			"http://physixproject.org/source/Python-2.7.16.tar.xz":"30157d85a2c0479c09ea2cbe61f2aaf5"
 		}
         },
-        "61":{
+        "59":{
                 "group": "04-utils",
                 "build_script": "4.710-mutt.sh",
                 "archives": ["mutt-1.12.1.tar.gz"],
@@ -576,7 +556,7 @@
 			"http://physixproject.org/source/mutt-1.12.1.tar.gz":"f77586a895f12d19de9c5250a4dfd034"
 		}
         },
-        "62":{
+        "60":{
                 "group": "04-utils",
                 "build_script": "4.720-tmux.sh",
                 "archives": ["tmux-2.9a.tar.gz"],
@@ -585,7 +565,7 @@
 			"http://physixproject.org/source/tmux-2.9a.tar.gz":"f0564dbf4cf6b301c4845219d27ed3ad"
 		}
         },
-        "63":{
+        "61":{
                 "group": "04-utils",
                 "build_script": "4.730-screen.sh",
                 "archives": ["screen-4.6.2.tar.gz"],
@@ -594,7 +574,7 @@
 			"http://physixproject.org/source/screen-4.6.2.tar.gz":"a0f529d3333b128dfaa324d978ba73a8"
 		}
         },
-	"64":{
+	"62":{
 		"group": "04-utils",
 		"build_script": "4.740-htop.sh",
 		"archives": ["htop-2.2.0.tar.gz"],
@@ -602,6 +582,27 @@
 		"sources": {
 			"http://physixproject.org/source/htop-2.2.0.tar.gz":"7edaf501e9d117b2acad49bebde9be03"
 		}
-	}
+	},
+        "63":{
+                "group": "04-utils",
+                "build_script": "4.670-llvm.sh",
+                "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/llvm-8.0.1.src.tar.xz":"9a3b63df01c52556f7afb5617934e79e",
+                        "http://physixproject.org/source/cfe-8.0.1.src.tar.xz":"28db72b57ca99307259773e4ac74a6d3",
+                        "http://physixproject.org/source/compiler-rt-8.0.1.src.tar.xz":"c251e582862f9fcc880802f8f2920096"
+                }
+        },
+        "64":{
+                "group": "04-utils",
+                "build_script": "4.680-rust.sh",
+                "archives": ["rustc-1.35.0-src.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/rustc-1.35.0-src.tar.gz":"f43af67a139ce21ff5f530bbd2f486aa"
+                }
+        }
+
 }
 
