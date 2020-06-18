@@ -61,6 +61,9 @@ chroot_check $? "systemd : systemctl preset-all"
 systemctl disable systemd-time-wait-sync.service
 chroot_check $? "systemd : disable systemd-time-wait-sync.service"
 
+sed -i 's/#Storage=.*/Storage=persistent/' /etc/systemd/journald.conf
+chroot_check $? "journald set to persist logs"
+
 #rm -f /etc/sysctl.d/50-pid-max.conf
 #chroot_check $? "systemd : rm -f /etc/sysctl.d/50-pid-max.conf"
 #rm -fv /usr/lib/lib{blkid,uuid,mount}.so*
