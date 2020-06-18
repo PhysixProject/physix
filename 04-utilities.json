@@ -5,7 +5,7 @@
 			31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 
 			41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
-			61, 62, 63, 64],
+			61, 62, 63, 64, 65],
 
         "0":{   
                 "group": "04-utils",
@@ -585,6 +585,15 @@
 	},
         "63":{
                 "group": "04-utils",
+                "build_script": "4.745-mdadm.sh",
+                "archives": ["mdadm-4.1.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/mdadm-4.1.tar.xz":"51bf3651bd73a06c413a2f964f299598"
+                }
+        },
+        "64":{
+                "group": "04-utils",
                 "build_script": "4.750-llvm.sh",
                 "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
                 "patches": [],
@@ -594,7 +603,7 @@
                         "http://physixproject.org/source/compiler-rt-8.0.1.src.tar.xz":"c251e582862f9fcc880802f8f2920096"
                 }
         },
-        "64":{
+        "65":{
                 "group": "04-utils",
                 "build_script": "4.760-rust.sh",
                 "archives": ["rustc-1.35.0-src.tar.gz"],
