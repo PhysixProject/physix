@@ -585,7 +585,7 @@
 	},
         "63":{
                 "group": "04-utils",
-                "build_script": "4.670-llvm.sh",
+                "build_script": "4.750-llvm.sh",
                 "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
                 "patches": [],
                 "sources": {
@@ -596,7 +596,7 @@
         },
         "64":{
                 "group": "04-utils",
-                "build_script": "4.680-rust.sh",
+                "build_script": "4.760-rust.sh",
                 "archives": ["rustc-1.35.0-src.tar.gz"],
                 "patches": [],
                 "sources": {
