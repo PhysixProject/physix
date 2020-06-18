@@ -103,11 +103,6 @@ def create_volumes(config):
     if validate(ret_tpl, "Volume Create: admin"):
         return FAILURE
 
-    tmp_vol_size = str(config["CONF_LOGICAL_TMP_SIZE"].strip('\n')) + "G"
-    ret_tpl = run_cmd(["lvcreate", '--yes', "-L", tmp_vol_size, '-n', 'tmp', vol_group_name])
-    if validate(ret_tpl, "Volume Create: tmp"):
-        return FAILURE
-
     return SUCCESS
 
 
@@ -154,11 +149,6 @@ def format_volumes(config):
     physix_admin = "/dev/mapper/" + vol_group_name + "-admin"
     ret_tpl = run_cmd([mkfs_cmd, physix_admin])
     if validate(ret_tpl, mkfs_cmd+":"+ physix_admin):
-        return FAILURE
-
-    physix_tmp = "/dev/mapper/" + vol_group_name + "-tmp"
-    ret_tpl = run_cmd([mkfs_cmd, physix_tmp])
-    if validate(ret_tpl, mkfs_cmd+":"+physix_tmp):
         return FAILURE
 
     return SUCCESS
@@ -236,14 +226,6 @@ def mount_volumes(config):
     boot_part = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n') + "2"
     ret_tpl = run_cmd(['mount', boot_part, boot])
     if validate(ret_tpl, "Mount: " + boot_part):
-        return FAILURE
-
-    tmp = BUILDROOT + "/tmp"
-    os.mkdir(tmp, 0o755)
-    volume_tmp = "/dev/mapper/" + vol_group_name + "-tmp"
-    mnt_point = BUILDROOT + "/tmp"
-    ret_tpl = run_cmd(['mount', volume_tmp, mnt_point])
-    if validate(ret_tpl, "Mount: " + volume_tmp):
         return FAILURE
 
     return SUCCESS
