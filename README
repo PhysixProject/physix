@@ -242,7 +242,7 @@ Installation:
            catalyst -r <SNAPSHOT-NAME>
 
        S7. Build the utilities software group.
-           cd /opt/physix
+           cd /opt/admin/physix
            catalyst -b 04-utilities.json
 
        S8. Download xorg sources and Build xorg recipe:
