@@ -1,7 +1,7 @@
 NAME="Physix"
-VERSION="BETA"
+VERSION="Beta-v2.4"
 ID=physix
 PRETTY_NAME="Physix Project"
-VERSION_CODENAME="Oatmeal Pleco"
+VERSION_CODENAME="Coffee Bean Monsoon"
 HOME_URL="https://github.com/PhysixProject/physix.git"
 
