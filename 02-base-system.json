@@ -22,7 +22,7 @@
 		"archives": ["linux-5.4.41.tar.xz"],
 		"patches": [],
 		"sources":{
-			"http://physixproject.org/source/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
+			"http://physixproject.org/source/base/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
 		}
 	},
 	"2":{
@@ -31,7 +31,7 @@
                "archives": ["man-pages-5.02.tar.xz"],
                "patches": [],
                "sources": {
-                        "http://physixproject.org/source/man-pages-5.02.tar.xz":"136e5e3380963571a079693d8ae38f52"
+                        "http://physixproject.org/source/base/man-pages-5.02.tar.xz":"136e5e3380963571a079693d8ae38f52"
                 }
 	},
 	"3":{
@@ -40,8 +40,8 @@
                 "archives": ["glibc-2.30.tar.xz"],
                 "patches": ["glibc-2.30-fhs-1.patch"],
                 "sources": {
-			"http://physixproject.org/source/glibc-2.30.tar.xz":"2b1dbdf27b28620752956c061d62f60c",
-			"http://physixproject.org/source/glibc-2.30-fhs-1.patch":"9a5997c3452909b1769918c759eff8a2"
+			"http://physixproject.org/source/base/glibc-2.30.tar.xz":"2b1dbdf27b28620752956c061d62f60c",
+			"http://physixproject.org/source/base/glibc-2.30-fhs-1.patch":"9a5997c3452909b1769918c759eff8a2"
                 }
 
 	},
@@ -58,7 +58,7 @@
                 "archives": ["zlib-1.2.11.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/zlib-1.2.11.tar.xz":"85adef240c5f370b308da8c938951a68"
+                        "http://physixproject.org/source/base/zlib-1.2.11.tar.xz":"85adef240c5f370b308da8c938951a68"
                 }
 	},
         "6":{
@@ -67,7 +67,7 @@
                 "archives": ["file-5.37.tar.gz"],
                 "patches": [],
 	        "sources": {
-			"http://physixproject.org/source/file-5.37.tar.gz":"80c29aca745466c6c24d11f059329075"
+			"http://physixproject.org/source/base/file-5.37.tar.gz":"80c29aca745466c6c24d11f059329075"
 		}
                 
         },
@@ -77,7 +77,7 @@
                 "archives": ["readline-8.0.tar.gz"],
                 "patches": [],
 	        "sources": {
-                       	"http://physixproject.org/source/readline-8.0.tar.gz":"7e6c1f16aee3244a69aba6e438295ca3" 
+                       	"http://physixproject.org/source/base/readline-8.0.tar.gz":"7e6c1f16aee3244a69aba6e438295ca3" 
                 }
         },
         "8":{
@@ -86,7 +86,7 @@
                 "archives": ["m4-1.4.18.tar.xz"],
                 "patches": [],
                 "sources": {
-                	"http://physixproject.org/source/m4-1.4.18.tar.xz":"730bb15d96fffe47e148d1e09235af82"
+                	"http://physixproject.org/source/base/m4-1.4.18.tar.xz":"730bb15d96fffe47e148d1e09235af82"
                 }
         },
         "9":{
@@ -95,7 +95,7 @@
                 "archives": ["bc-2.1.3.tar.gz"],
                 "patches": "",
                 "sources": {
-                       	"http://physixproject.org/source/bc-2.1.3.tar.gz":"2a882dc39c0fb8e36c12f590d54cc039"
+                       	"http://physixproject.org/source/base/bc-2.1.3.tar.gz":"2a882dc39c0fb8e36c12f590d54cc039"
                 }
         },
         "10":{
@@ -104,7 +104,7 @@
                 "archives": ["binutils-2.34.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
+			"http://physixproject.org/source/base/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
                 }
         },
         "11":{
@@ -113,7 +113,7 @@
                 "archives": ["gmp-6.1.2.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gmp-6.1.2.tar.xz":"f58fa8001d60c4c77595fbbb62b63c1d"
+                        "http://physixproject.org/source/base/gmp-6.1.2.tar.xz":"f58fa8001d60c4c77595fbbb62b63c1d"
                 }
         },
         "12":{
@@ -122,7 +122,7 @@
                 "archives": ["mpfr-4.0.2.tar.xz"],
                 "patches": [],
                 "sources": {
-                       "http://physixproject.org/source/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8"
+                       "http://physixproject.org/source/base/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8"
                 }
         },
         "13":{
@@ -131,7 +131,7 @@
                 "archives": ["mpc-1.1.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
+                        "http://physixproject.org/source/base/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
                 }
         },
         "14":{
@@ -140,7 +140,7 @@
                 "archives": ["shadow-4.7.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/shadow-4.7.tar.xz":"f7ce18c8dfd05f1a009266cb604d58b7"
+			"http://physixproject.org/source/base/shadow-4.7.tar.xz":"f7ce18c8dfd05f1a009266cb604d58b7"
                 }
         },
         "15":{
@@ -149,7 +149,7 @@
                 "archives": ["gcc-9.2.0.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78"
+			"http://physixproject.org/source/base/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78"
                 }
         },
         "16":{
@@ -158,8 +158,8 @@
                 "archives": ["bzip2-1.0.8.tar.gz"],
                 "patches": ["bzip2-1.0.8-install_docs-1.patch"],
                 "sources": {
-			"http://physixproject.org/source/bzip2-1.0.8.tar.gz":"67e051268d0c475ea773822f7500d0e5",
-			"http://physixproject.org/source/bzip2-1.0.8-install_docs-1.patch":"6a5ac7e89b791aae556de0f745916f7f"
+			"http://physixproject.org/source/base/bzip2-1.0.8.tar.gz":"67e051268d0c475ea773822f7500d0e5",
+			"http://physixproject.org/source/base/bzip2-1.0.8-install_docs-1.patch":"6a5ac7e89b791aae556de0f745916f7f"
                 }
         },
         "17":{
@@ -168,7 +168,7 @@
                 "archives": ["pkg-config-0.29.2.tar.gz"],
                 "patches": [],
 		"sources": {
-                        "http://physixproject.org/source/pkg-config-0.29.2.tar.gz":"f6e931e319531b736fadc017f470e68a"
+                        "http://physixproject.org/source/base/pkg-config-0.29.2.tar.gz":"f6e931e319531b736fadc017f470e68a"
                 }
         },
         "18":{
@@ -177,7 +177,7 @@
                 "archives": ["ncurses-6.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/ncurses-6.1.tar.gz":"98c889aaf8d23910d2b92d65be2e737a"
+                        "http://physixproject.org/source/base/ncurses-6.1.tar.gz":"98c889aaf8d23910d2b92d65be2e737a"
                 }
         },
         "19":{
@@ -186,7 +186,7 @@
                 "archives": ["attr-2.4.48.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/attr-2.4.48.tar.gz":"bc1e5cb5c96d99b24886f1f527d3bb3d"
+                        "http://physixproject.org/source/base/attr-2.4.48.tar.gz":"bc1e5cb5c96d99b24886f1f527d3bb3d"
                 }
         },
         "20":{
@@ -195,7 +195,7 @@
                 "archives": ["acl-2.2.53.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/acl-2.2.53.tar.gz":"007aabf1dbb550bcddde52a244cd1070"
+                        "http://physixproject.org/source/base/acl-2.2.53.tar.gz":"007aabf1dbb550bcddde52a244cd1070"
                 }
         },
         "21":{
@@ -204,7 +204,7 @@
                 "archives": ["libcap-2.27.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/libcap-2.27.tar.xz":"2e8f9fab32eb5ccb37969fe317fd17aa"
+                        "http://physixproject.org/source/base/libcap-2.27.tar.xz":"2e8f9fab32eb5ccb37969fe317fd17aa"
 
                 }
         },
@@ -214,7 +214,7 @@
                 "archives": ["sed-4.7.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/sed-4.7.tar.xz":"777ddfd9d71dd06711fe91f0925e1573"
+                        "http://physixproject.org/source/base/sed-4.7.tar.xz":"777ddfd9d71dd06711fe91f0925e1573"
                 }
         },
         "23":{
@@ -223,7 +223,7 @@
                 "archives": ["psmisc-23.2.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/psmisc-23.2.tar.xz":"0524258861f00be1a02d27d39d8e5e62"
+                        "http://physixproject.org/source/base/psmisc-23.2.tar.xz":"0524258861f00be1a02d27d39d8e5e62"
                 }
         },
 	"24":{
@@ -232,7 +232,7 @@
                 "archives": ["iana-etc-2.30.tar.bz2"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/iana-etc-2.30.tar.bz2":"3ba3afb1d1b261383d247f46cb135ee8"
+                        "http://physixproject.org/source/base/iana-etc-2.30.tar.bz2":"3ba3afb1d1b261383d247f46cb135ee8"
                 }
         },
         "25":{
@@ -241,7 +241,7 @@
                 "archives": ["bison-3.4.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/bison-3.4.1.tar.xz":"201286a573b12da109df96282fe4ff4a"
+                        "http://physixproject.org/source/base/bison-3.4.1.tar.xz":"201286a573b12da109df96282fe4ff4a"
                 }
         },
         "26":{
@@ -250,7 +250,7 @@
                 "archives": ["flex-2.6.4.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/flex-2.6.4.tar.gz":"2882e3179748cc9f9c23ec593d6adc8d"
+                        "http://physixproject.org/source/base/flex-2.6.4.tar.gz":"2882e3179748cc9f9c23ec593d6adc8d"
                 }
         },
         "27":{
@@ -259,7 +259,7 @@
                 "archives": ["grep-3.3.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/grep-3.3.tar.xz":"05d0718a1b7cc706a4bdf8115363f1ed"
+                        "http://physixproject.org/source/base/grep-3.3.tar.xz":"05d0718a1b7cc706a4bdf8115363f1ed"
                 }
         },
         "28":{
@@ -268,7 +268,7 @@
                 "archives": ["bash-5.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/bash-5.0.tar.gz":"2b44b47b905be16f45709648f671820b"
+                        "http://physixproject.org/source/base/bash-5.0.tar.gz":"2b44b47b905be16f45709648f671820b"
                 }
         },
         "29":{
@@ -277,7 +277,7 @@
                 "archives": ["libtool-2.4.6.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/libtool-2.4.6.tar.xz":"1bfb9b923f2c1339b4d2ce1807064aa5"
+                        "http://physixproject.org/source/base/libtool-2.4.6.tar.xz":"1bfb9b923f2c1339b4d2ce1807064aa5"
 
                 }
         },
@@ -287,7 +287,7 @@
                 "archives": ["gdbm-1.18.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gdbm-1.18.1.tar.gz":"988dc82182121c7570e0cb8b4fcd5415"
+                        "http://physixproject.org/source/base/gdbm-1.18.1.tar.gz":"988dc82182121c7570e0cb8b4fcd5415"
                 }
         },
         "31":{
@@ -296,7 +296,7 @@
                 "archives": ["gperf-3.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gperf-3.1.tar.gz":"9e251c0a618ad0824b51117d5d9db87e"
+                        "http://physixproject.org/source/base/gperf-3.1.tar.gz":"9e251c0a618ad0824b51117d5d9db87e"
                 }
         },
         "32":{
@@ -305,7 +305,7 @@
                 "archives": ["expat-2.2.7.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/expat-2.2.7.tar.xz":"3659bc0938db78815b5f5a9c24d732aa"
+                        "http://physixproject.org/source/base/expat-2.2.7.tar.xz":"3659bc0938db78815b5f5a9c24d732aa"
                 }
         },
         "33":{
@@ -314,7 +314,7 @@
                 "archives": ["inetutils-1.9.4.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/inetutils-1.9.4.tar.xz":"87fef1fa3f603aef11c41dcc097af75e"
+                        "http://physixproject.org/source/base/inetutils-1.9.4.tar.xz":"87fef1fa3f603aef11c41dcc097af75e"
                 }
         },
         "34":{
@@ -323,7 +323,7 @@
                 "archives": ["perl-5.30.0.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/perl-5.30.0.tar.xz":"037c35000550bdcb47552ad0f6d3064d"
+                        "http://physixproject.org/source/base/perl-5.30.0.tar.xz":"037c35000550bdcb47552ad0f6d3064d"
                 }
         },
         "35":{
@@ -332,7 +332,7 @@
                 "archives": ["XML-Parser-2.44.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/XML-Parser-2.44.tar.gz":"af4813fe3952362451201ced6fbce379"
+                        "http://physixproject.org/source/base/XML-Parser-2.44.tar.gz":"af4813fe3952362451201ced6fbce379"
                 }
         },
         "36":{
@@ -341,7 +341,7 @@
                 "archives": ["intltool-0.51.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/intltool-0.51.0.tar.gz":"12e517cac2b57a0121cda351570f1e63"
+                        "http://physixproject.org/source/base/intltool-0.51.0.tar.gz":"12e517cac2b57a0121cda351570f1e63"
                 }
         },
         "37":{
@@ -350,7 +350,7 @@
                 "archives": ["autoconf-2.69.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/autoconf-2.69.tar.xz":"50f97f4159805e374639a73e2636f22e"
+                        "http://physixproject.org/source/base/autoconf-2.69.tar.xz":"50f97f4159805e374639a73e2636f22e"
                 }
         },
         "38":{
@@ -359,7 +359,7 @@
                 "archives": ["automake-1.16.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/automake-1.16.1.tar.xz":"53f38e7591fa57c3d2cee682be668e5b"
+                        "http://physixproject.org/source/base/automake-1.16.1.tar.xz":"53f38e7591fa57c3d2cee682be668e5b"
                 }
         },
         "39":{
@@ -368,7 +368,7 @@
                 "archives": ["xz-5.2.4.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/xz-5.2.4.tar.xz":"003e4d0b1b1899fc6e3000b24feddf7c"
+                        "http://physixproject.org/source/base/xz-5.2.4.tar.xz":"003e4d0b1b1899fc6e3000b24feddf7c"
                 }
         },
         "40":{
@@ -377,7 +377,7 @@
                 "archives": ["kmod-26.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/kmod-26.tar.xz":"1129c243199bdd7db01b55a61aa19601"
+                        "http://physixproject.org/source/base/kmod-26.tar.xz":"1129c243199bdd7db01b55a61aa19601"
                 }
         },
         "41":{
@@ -386,7 +386,7 @@
                 "archives": ["gettext-0.20.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gettext-0.20.1.tar.xz":"9ed9e26ab613b668e0026222a9c23639"
+                        "http://physixproject.org/source/base/gettext-0.20.1.tar.xz":"9ed9e26ab613b668e0026222a9c23639"
                 }
         },
         "42":{
@@ -395,7 +395,7 @@
                 "archives": ["elfutils-0.177.tar.bz2"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/elfutils-0.177.tar.bz2":"0b583722f911e1632544718d502aab87"
+                        "http://physixproject.org/source/base/elfutils-0.177.tar.bz2":"0b583722f911e1632544718d502aab87"
                 }
         },
         "43":{
@@ -404,7 +404,7 @@
                 "archives": ["libffi-3.2.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/libffi-3.2.1.tar.gz":"83b89587607e3eb65c70d361f13bab43"
+                        "http://physixproject.org/source/base/libffi-3.2.1.tar.gz":"83b89587607e3eb65c70d361f13bab43"
                 }
         },
         "44":{
@@ -413,7 +413,7 @@
                 "archives": ["openssl-1.1.1c.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/openssl-1.1.1c.tar.gz":"15e21da6efe8aa0e0768ffd8cd37a5f6"
+                        "http://physixproject.org/source/base/openssl-1.1.1c.tar.gz":"15e21da6efe8aa0e0768ffd8cd37a5f6"
                 }
         },
         "45":{
@@ -422,7 +422,7 @@
                 "archives": ["sqlite-autoconf-3310100.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/sqlite-autoconf-3310100.tar.gz":"2d0a553534c521504e3ac3ad3b90f125"
+                        "http://physixproject.org/source/base/sqlite-autoconf-3310100.tar.gz":"2d0a553534c521504e3ac3ad3b90f125"
                 }
         },
         "46":{
@@ -431,8 +431,8 @@
                 "archives": ["Python-3.7.4.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/Python-3.7.4.tar.xz":"d33e4aae66097051c2eca45ee3604803",
-                        "http://physixproject.org/source/python-3.7.4-docs-html.tar.bz2":"c410337e954dbba2d04fe169c355a6a2"
+			"http://physixproject.org/source/base/Python-3.7.4.tar.xz":"d33e4aae66097051c2eca45ee3604803",
+                        "http://physixproject.org/source/base/python-3.7.4-docs-html.tar.bz2":"c410337e954dbba2d04fe169c355a6a2"
                 }
         },
         "47":{
@@ -441,7 +441,7 @@
                 "archives": ["ninja-1.9.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/ninja-1.9.0.tar.gz":"f340be768a76724b83e6daab69009902"
+                        "http://physixproject.org/source/base/ninja-1.9.0.tar.gz":"f340be768a76724b83e6daab69009902"
                 }
         },
         "48":{
@@ -450,7 +450,7 @@
                 "archives": ["meson-0.51.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/meson-0.51.1.tar.gz":"48787e391ec5c052799a3dd491f73909"
+                        "http://physixproject.org/source/base/meson-0.51.1.tar.gz":"48787e391ec5c052799a3dd491f73909"
                 }
         },
         "49":{
@@ -459,8 +459,8 @@
                 "archives": ["coreutils-8.31.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/coreutils-8.31.tar.xz":"0009a224d8e288e8ec406ef0161f9293",
-			"http://physixproject.org/source/coreutils-8.31-i18n-1.patch":"a9404fb575dfd5514f3c8f4120f9ca7d"
+                        "http://physixproject.org/source/base/coreutils-8.31.tar.xz":"0009a224d8e288e8ec406ef0161f9293",
+			"http://physixproject.org/source/base/coreutils-8.31-i18n-1.patch":"a9404fb575dfd5514f3c8f4120f9ca7d"
                 }
         },
         "50":{
@@ -469,7 +469,7 @@
                 "archives": ["check-0.12.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/check-0.12.0.tar.gz":"31b17c6075820a434119592941186f70"
+                        "http://physixproject.org/source/base/check-0.12.0.tar.gz":"31b17c6075820a434119592941186f70"
                 }
         },
         "51":{
@@ -478,7 +478,7 @@
                 "archives": ["diffutils-3.7.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/diffutils-3.7.tar.xz":"4824adc0e95dbbf11dfbdfaad6a1e461"
+                        "http://physixproject.org/source/base/diffutils-3.7.tar.xz":"4824adc0e95dbbf11dfbdfaad6a1e461"
                 }
         },
 
@@ -488,7 +488,7 @@
                 "archives": ["gawk-5.0.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gawk-5.0.1.tar.xz":"f9db3f6715207c6f13719713abc9c707"
+                        "http://physixproject.org/source/base/gawk-5.0.1.tar.xz":"f9db3f6715207c6f13719713abc9c707"
                 }
         },
 
@@ -498,7 +498,7 @@
                 "archives": ["cpio-2.12.tar.bz2"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/cpio-2.12.tar.bz2":"93eea9f07c0058c097891c73e4955456"
+                        "http://physixproject.org/source/base/cpio-2.12.tar.bz2":"93eea9f07c0058c097891c73e4955456"
                 }
         },
         "54":{
@@ -507,7 +507,7 @@
                 "archives": ["dracut-050.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/dracut-050.tar.gz":"9df6a17bcbebb4296de9c68ea0a1c9c8"
+                        "http://physixproject.org/source/base/dracut-050.tar.gz":"9df6a17bcbebb4296de9c68ea0a1c9c8"
                 }
         },
         "55":{
@@ -516,7 +516,7 @@
                 "archives": ["findutils-4.6.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/findutils-4.6.0.tar.gz":"9936aa8009438ce185bea2694a997fc1"
+                        "http://physixproject.org/source/base/findutils-4.6.0.tar.gz":"9936aa8009438ce185bea2694a997fc1"
                 }
         },
         "56":{
@@ -525,7 +525,7 @@
                 "archives": ["groff-1.22.4.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/groff-1.22.4.tar.gz":"08fb04335e2f5e73f23ea4c3adbf0c5f"
+                        "http://physixproject.org/source/base/groff-1.22.4.tar.gz":"08fb04335e2f5e73f23ea4c3adbf0c5f"
                 }
         },
         "57":{
@@ -534,7 +534,7 @@
                 "archives": ["libaio_0.3.112.orig.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/libaio_0.3.112.orig.tar.xz":"66e3b7dd255581a73542ee851f8cd737"
+                        "http://physixproject.org/source/base/libaio_0.3.112.orig.tar.xz":"66e3b7dd255581a73542ee851f8cd737"
                 }
         },
         "58":{
@@ -543,7 +543,7 @@
                 "archives": ["popt-1.16.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/popt-1.16.tar.gz":"3743beefa3dd6247a73f8f7a32c14c33"
+                        "http://physixproject.org/source/base/popt-1.16.tar.gz":"3743beefa3dd6247a73f8f7a32c14c33"
                 }
         },
         "59":{
@@ -552,7 +552,7 @@
                 "archives": ["less-551.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/less-551.tar.gz":"4ad4408b06d7a6626a055cb453f36819"
+                        "http://physixproject.org/source/base/less-551.tar.gz":"4ad4408b06d7a6626a055cb453f36819"
                 }
         },
         "60":{
@@ -561,7 +561,7 @@
                 "archives": ["gzip-1.10.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gzip-1.10.tar.xz":"691b1221694c3394f1c537df4eee39d3"
+                        "http://physixproject.org/source/base/gzip-1.10.tar.xz":"691b1221694c3394f1c537df4eee39d3"
                 }
         },
         "61":{
@@ -570,7 +570,7 @@
                 "archives": ["iproute2-5.2.0.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/iproute2-5.2.0.tar.xz":"0cb2736e7bc2f56254a363d3d23703b7"
+                        "http://physixproject.org/source/base/iproute2-5.2.0.tar.xz":"0cb2736e7bc2f56254a363d3d23703b7"
                 }
         },
         "62":{
@@ -579,7 +579,7 @@
                 "archives": ["kbd-2.2.0.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/kbd-2.2.0.tar.xz":"d1d7ae0b5fb875dc082731e09cd0c8bc"
+                        "http://physixproject.org/source/base/kbd-2.2.0.tar.xz":"d1d7ae0b5fb875dc082731e09cd0c8bc"
                 }
         },
         "63":{
@@ -588,7 +588,7 @@
                 "archives": ["libpipeline-1.5.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/libpipeline-1.5.1.tar.gz":"4c8fe6cd85422baafd6e060f896c61bc"
+                        "http://physixproject.org/source/base/libpipeline-1.5.1.tar.gz":"4c8fe6cd85422baafd6e060f896c61bc"
                 }
         },
         "64":{
@@ -597,7 +597,7 @@
                 "archives": ["make-4.2.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/make-4.2.1.tar.gz":"7d0dcb6c474b258aab4d54098f2cf5a7"
+                        "http://physixproject.org/source/base/make-4.2.1.tar.gz":"7d0dcb6c474b258aab4d54098f2cf5a7"
                 }
         },
         "65":{
@@ -606,7 +606,7 @@
                 "archives": ["patch-2.7.6.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/patch-2.7.6.tar.xz":"78ad9937e4caadcba1526ef1853730d5"
+                        "http://physixproject.org/source/base/patch-2.7.6.tar.xz":"78ad9937e4caadcba1526ef1853730d5"
                 }
         },
         "66":{
@@ -615,7 +615,7 @@
                 "archives": ["man-db-2.8.6.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/man-db-2.8.6.1.tar.xz":"22e82fe1127f4ca95de7100168a927d1"
+                        "http://physixproject.org/source/base/man-db-2.8.6.1.tar.xz":"22e82fe1127f4ca95de7100168a927d1"
                 }
         },
         "67":{
@@ -624,7 +624,7 @@
                 "archives": ["tar-1.32.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/tar-1.32.tar.xz":"83e38700a80a26e30b2df054e69956e5"
+                        "http://physixproject.org/source/base/tar-1.32.tar.xz":"83e38700a80a26e30b2df054e69956e5"
                 }
         },
         "68":{
@@ -633,7 +633,7 @@
                 "archives": ["texinfo-6.6.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/texinfo-6.6.tar.xz":"5231da3e6aa106cd0532b8609e5b3702"
+                        "http://physixproject.org/source/base/texinfo-6.6.tar.xz":"5231da3e6aa106cd0532b8609e5b3702"
                 }
         },
         "69":{
@@ -642,7 +642,7 @@
                 "archives": ["vim-8.1.1846.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/vim-8.1.1846.tar.gz":"4f129a05254d93c739fcede843df87df"
+                        "http://physixproject.org/source/base/vim-8.1.1846.tar.gz":"4f129a05254d93c739fcede843df87df"
                 }
         },
         "70":{
@@ -651,8 +651,8 @@
                 "archives": ["systemd-243.tar.gz"],
                 "patches": ["systemd-243-consolidated_fixes-2.patch"],
                 "sources": {
-                        "http://physixproject.org/source/systemd-243.tar.gz":"ca2403fa7dff73afd2e896b4cb25021b",
-			"http://physixproject.org/source/systemd-243-consolidated_fixes-2.patch":"2bad2992f4373eb925885f2ea2fb8d14"
+                        "http://physixproject.org/source/base/systemd-243.tar.gz":"ca2403fa7dff73afd2e896b4cb25021b",
+			"http://physixproject.org/source/base/systemd-243-consolidated_fixes-2.patch":"2bad2992f4373eb925885f2ea2fb8d14"
                 }
         },
         "71":{
@@ -661,7 +661,7 @@
                 "archives": ["dbus-1.12.16.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/dbus-1.12.16.tar.gz":"2dbeae80dfc9e3632320c6a53d5e8890"
+                        "http://physixproject.org/source/base/dbus-1.12.16.tar.gz":"2dbeae80dfc9e3632320c6a53d5e8890"
                 }
         },
         "72":{
@@ -670,7 +670,7 @@
                 "archives": ["procps-ng-3.3.15.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/procps-ng-3.3.15.tar.xz":"2b0717a7cb474b3d6dfdeedfbad2eccc"
+                        "http://physixproject.org/source/base/procps-ng-3.3.15.tar.xz":"2b0717a7cb474b3d6dfdeedfbad2eccc"
                 }
         },
         "73":{
@@ -679,7 +679,7 @@
                 "archives": ["util-linux-2.34.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
+                        "http://physixproject.org/source/base/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
                 }
         },
         "74":{
@@ -688,7 +688,7 @@
                 "archives": ["e2fsprogs-1.45.3.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/e2fsprogs-1.45.3.tar.gz":"447a225c05f0a81121f6ddffbf55b06c"
+                        "http://physixproject.org/source/base/e2fsprogs-1.45.3.tar.gz":"447a225c05f0a81121f6ddffbf55b06c"
                 }
         },
         "75":{
@@ -697,7 +697,7 @@
                 "archives": ["LVM2.2.03.05.tgz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/LVM2.2.03.05.tgz":"22e4a9e66b94bbfcf81444472ed32a2d"
+                        "http://physixproject.org/source/base/LVM2.2.03.05.tgz":"22e4a9e66b94bbfcf81444472ed32a2d"
                 }
         },
         "76":{
@@ -706,7 +706,7 @@
                 "archives": ["grub-2.04.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/grub-2.04.tar.xz":"5aaca6713b47ca2456d8324a58755ac7"
+                        "http://physixproject.org/source/base/grub-2.04.tar.xz":"5aaca6713b47ca2456d8324a58755ac7"
                 }
         },
         "77":{
@@ -715,7 +715,7 @@
                 "archives": ["lzo-2.10.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/lzo-2.10.tar.gz":"39d3f3f9c55c87b1e5d6888e1420f4b5"
+                        "http://physixproject.org/source/base/lzo-2.10.tar.gz":"39d3f3f9c55c87b1e5d6888e1420f4b5"
                 }
         },
         "78":{
@@ -724,7 +724,7 @@
                 "archives": ["btrfs-progs-v5.2.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/btrfs-progs-v5.2.1.tar.xz":"9bacd0fec4efd449a6223f1c72ab91b3"
+                        "http://physixproject.org/source/base/btrfs-progs-v5.2.1.tar.xz":"9bacd0fec4efd449a6223f1c72ab91b3"
                 }
         },
         "79":{
@@ -747,7 +747,7 @@
         	"archives": ["git-2.23.0.tar.xz"],
         	"patches": [],
         	"sources": {
-                	"http://physixproject.org/source/git-2.23.0.tar.xz":"93ee0f867f81a39e0ef29eabfb1d2c5b"
+                	"http://physixproject.org/source/base/git-2.23.0.tar.xz":"93ee0f867f81a39e0ef29eabfb1d2c5b"
        		}
 	},
         "82":{
@@ -756,7 +756,7 @@
                 "archives": ["openssh-8.0p1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/openssh-8.0p1.tar.gz":"bf050f002fe510e1daecd39044e1122d"
+                        "http://physixproject.org/source/base/openssh-8.0p1.tar.gz":"bf050f002fe510e1daecd39044e1122d"
                 }
         },
         "83":{
@@ -765,8 +765,8 @@
                 "archives": ["tcl8.6.10-src.tar.gz", "tcl8.6.10-html.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/tcl8.6.10-src.tar.gz":"97c55573f8520bcab74e21bfd8d0aadc",
-			"http://physixproject.org/source/tcl8.6.10-html.tar.gz":"a012711241ba3a5bd4a04e833001d489"
+                        "http://physixproject.org/source/base/tcl8.6.10-src.tar.gz":"97c55573f8520bcab74e21bfd8d0aadc",
+			"http://physixproject.org/source/base/tcl8.6.10-html.tar.gz":"a012711241ba3a5bd4a04e833001d489"
                 }
         },
         "84":{
@@ -775,7 +775,7 @@
                 "archives": ["expect5.45.4.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/expect5.45.4.tar.gz":"00fce8de158422f5ccd2666512329bd2"
+                        "http://physixproject.org/source/base/expect5.45.4.tar.gz":"00fce8de158422f5ccd2666512329bd2"
                 }
         }
 }

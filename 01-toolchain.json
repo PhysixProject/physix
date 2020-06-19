@@ -11,7 +11,7 @@
 		"archives": ["binutils-2.34.tar.xz"],
 		"patches": "",
 		"sources": {
-			"http://physixproject.org/source/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
+			"http://physixproject.org/source/toolchain/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
 		},
 		"license":"GPLv2"
 	},
@@ -21,10 +21,10 @@
 		"archives": ["gcc-9.2.0.tar.xz", "mpfr-4.0.2.tar.xz", "gmp-6.2.0.tar.xz", "mpc-1.1.0.tar.gz"],
 		"patches": [],
 		"sources":{
-			"http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78",
-			"http://physixproject.org/source/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8",
-			"http://physixproject.org/source/gmp-6.2.0.tar.xz":"a325e3f09e6d91e62101e59f9bda3ec1",
-			"http://physixproject.org/source/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
+			"http://physixproject.org/source/toolchain/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78",
+			"http://physixproject.org/source/toolchain/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8",
+			"http://physixproject.org/source/toolchain/gmp-6.2.0.tar.xz":"a325e3f09e6d91e62101e59f9bda3ec1",
+			"http://physixproject.org/source/toolchain/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
 		},
 		"license":"GPLv2"
 	},
@@ -34,7 +34,7 @@
                "archives": ["linux-5.4.41.tar.xz"],
                "patches": [],
                "sources": {
-			"http://physixproject.org/source/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
+			"http://physixproject.org/source/toolchain/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
                 },
 		"license":"GPLv2"
 	},
@@ -44,7 +44,7 @@
                 "archives": ["glibc-2.30.tar.xz" ],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/glibc-2.30.tar.xz":"2b1dbdf27b28620752956c061d62f60c"
+                        "http://physixproject.org/source/toolchain/glibc-2.30.tar.xz":"2b1dbdf27b28620752956c061d62f60c"
                 },
 		"license":"GPLv2"
 	},
@@ -54,7 +54,7 @@
                 "archives": ["gcc-9.2.0.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78"
+                        "http://physixproject.org/source/toolchain/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78"
                 },
 		"license":"GPLv2"
 	},
@@ -64,7 +64,7 @@
                 "archives": ["binutils-2.34.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
+			"http://physixproject.org/source/toolchain/binutils-2.34.tar.xz":"664ec3a2df7805ed3464639aaae332d6"
                 },
 		"license":"GPLv2"
 	},
@@ -74,10 +74,10 @@
                 "archives": ["gcc-9.2.0.tar.xz", "mpfr-4.0.2.tar.xz","gmp-6.2.0.tar.xz","mpc-1.1.0.tar.gz"],
                 "patches": [],
 	        "sources": {
-                        "http://physixproject.org/source/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78",
-			"http://physixproject.org/source/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8",
-			"http://physixproject.org/source/gmp-6.2.0.tar.xz":"a325e3f09e6d91e62101e59f9bda3ec1",
-			"http://physixproject.org/source/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
+                        "http://physixproject.org/source/toolchain/gcc-9.2.0.tar.xz":"3818ad8600447f05349098232c2ddc78",
+			"http://physixproject.org/source/toolchain/mpfr-4.0.2.tar.xz":"320fbc4463d4c8cb1e566929d8adc4f8",
+			"http://physixproject.org/source/toolchain/gmp-6.2.0.tar.xz":"a325e3f09e6d91e62101e59f9bda3ec1",
+			"http://physixproject.org/source/toolchain/mpc-1.1.0.tar.gz":"4125404e41e482ec68282a2e687f6c73"
 		},
 		"license":"GPLv2"
         },
@@ -87,7 +87,7 @@
                 "archives": ["tcl8.6.9-src.tar.gz"],
                 "patches": [],
 	        "sources": {
-                       	"http://physixproject.org/source/tcl8.6.9-src.tar.gz":"aa0a121d95a0e7b73a036f26028538d4" 
+                       	"http://physixproject.org/source/toolchain/tcl8.6.9-src.tar.gz":"aa0a121d95a0e7b73a036f26028538d4" 
                 },
 		"license":"TCL"
         },
@@ -97,7 +97,7 @@
                 "archives": ["expect5.45.4.tar.gz"],
                 "patches": [],
                 "sources": {
-                	"http://physixproject.org/source/expect5.45.4.tar.gz":"00fce8de158422f5ccd2666512329bd2"
+                	"http://physixproject.org/source/toolchain/expect5.45.4.tar.gz":"00fce8de158422f5ccd2666512329bd2"
                 },
 		"license":"Public Domain"
         },
@@ -107,7 +107,7 @@
                 "archives": ["dejagnu-1.6.2.tar.gz"],
                 "patches": "",
                 "sources": {
-                       	"http://physixproject.org/source/dejagnu-1.6.2.tar.gz":"e1b07516533f351b3aba3423fafeffd6"
+                       	"http://physixproject.org/source/toolchain/dejagnu-1.6.2.tar.gz":"e1b07516533f351b3aba3423fafeffd6"
                 },
 		"license":"GPLv3+"
         },
@@ -117,7 +117,7 @@
                 "archives": ["m4-1.4.18.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/m4-1.4.18.tar.xz":"730bb15d96fffe47e148d1e09235af82"
+                        "http://physixproject.org/source/toolchain/m4-1.4.18.tar.xz":"730bb15d96fffe47e148d1e09235af82"
                 },
 		"license":"GPLv3+"
         },
@@ -127,7 +127,7 @@
                 "archives": ["ncurses-6.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/ncurses-6.1.tar.gz":"98c889aaf8d23910d2b92d65be2e737a"
+                        "http://physixproject.org/source/toolchain/ncurses-6.1.tar.gz":"98c889aaf8d23910d2b92d65be2e737a"
                 },
 		"license":"MIT"
         },
@@ -137,7 +137,7 @@
                 "archives": ["bash-5.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                       "http://physixproject.org/source/bash-5.0.tar.gz":"2b44b47b905be16f45709648f671820b"
+                       "http://physixproject.org/source/toolchain/bash-5.0.tar.gz":"2b44b47b905be16f45709648f671820b"
                 },
 		"license":"GPLv3+"
         },
@@ -147,7 +147,7 @@
                 "archives": ["bison-3.4.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/bison-3.4.1.tar.xz":"201286a573b12da109df96282fe4ff4a"
+                        "http://physixproject.org/source/toolchain/bison-3.4.1.tar.xz":"201286a573b12da109df96282fe4ff4a"
                 },
 		"license":"GPLv3+"
         },
@@ -157,7 +157,7 @@
                 "archives": ["bzip2-1.0.8.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/bzip2-1.0.8.tar.gz":"67e051268d0c475ea773822f7500d0e5"
+                        "http://physixproject.org/source/toolchain/bzip2-1.0.8.tar.gz":"67e051268d0c475ea773822f7500d0e5"
                 },
 		"license":"BSD"
         },
@@ -165,10 +165,9 @@
                 "group": "01-base-toolchain",
                 "build_script": "1.190-coreutils.sh",
                 "archives": ["coreutils-8.31.tar.xz"],
-                "patches": ["coreutils-8.31-i18n-1.patch"],
+                "patches": [],
                 "sources": {
-                       "http://physixproject.org/source/coreutils-8.31.tar.xz":"0009a224d8e288e8ec406ef0161f9293",
-		       "http://physixproject.org/source/coreutils-8.31-i18n-1.patch":"a9404fb575dfd5514f3c8f4120f9ca7d"
+                       "http://physixproject.org/source/toolchain/coreutils-8.31.tar.xz":"0009a224d8e288e8ec406ef0161f9293"
                 },
 		"license":"GPLv3+"
         },
@@ -178,7 +177,7 @@
                 "archives": ["diffutils-3.7.tar.xz"],
                 "patches": [],
                 "sources": {
-                       	"http://physixproject.org/source/diffutils-3.7.tar.xz":"4824adc0e95dbbf11dfbdfaad6a1e461"
+                       	"http://physixproject.org/source/toolchain/diffutils-3.7.tar.xz":"4824adc0e95dbbf11dfbdfaad6a1e461"
                 },
 		"license":"GPLv3+"
         },
@@ -188,7 +187,7 @@
                 "archives": ["file-5.37.tar.gz"],
                 "patches": [],
 		"sources": {
-                        "http://physixproject.org/source/file-5.37.tar.gz":"80c29aca745466c6c24d11f059329075"
+                        "http://physixproject.org/source/toolchain/file-5.37.tar.gz":"80c29aca745466c6c24d11f059329075"
                 },
 		"license":"BSD"
         },
@@ -198,7 +197,7 @@
                 "archives": ["findutils-4.6.0.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/findutils-4.6.0.tar.gz":"9936aa8009438ce185bea2694a997fc1"
+                        "http://physixproject.org/source/toolchain/findutils-4.6.0.tar.gz":"9936aa8009438ce185bea2694a997fc1"
                 },
 		"license":"GPLv3+"
         },
@@ -208,7 +207,7 @@
                 "archives": ["gawk-5.0.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gawk-5.0.1.tar.xz":"f9db3f6715207c6f13719713abc9c707"
+                        "http://physixproject.org/source/toolchain/gawk-5.0.1.tar.xz":"f9db3f6715207c6f13719713abc9c707"
                 },
 		"license":"GPLv3+ and GPLv2+ and LGPLv2+ and BSD"
         },
@@ -218,7 +217,7 @@
                 "archives": ["gettext-0.20.1.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gettext-0.20.1.tar.xz":"9ed9e26ab613b668e0026222a9c23639"
+                        "http://physixproject.org/source/toolchain/gettext-0.20.1.tar.xz":"9ed9e26ab613b668e0026222a9c23639"
                 },
 		"license":"GPLv3+ and LGPLv2+ and GFDL"
         },
@@ -228,7 +227,7 @@
                 "archives": ["grep-3.3.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/grep-3.3.tar.xz":"05d0718a1b7cc706a4bdf8115363f1ed"
+                        "http://physixproject.org/source/toolchain/grep-3.3.tar.xz":"05d0718a1b7cc706a4bdf8115363f1ed"
 
                 },
 		"license":"GPLv3+"
@@ -239,7 +238,7 @@
                 "archives": ["gzip-1.10.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/gzip-1.10.tar.xz":"691b1221694c3394f1c537df4eee39d3"
+                        "http://physixproject.org/source/toolchain/gzip-1.10.tar.xz":"691b1221694c3394f1c537df4eee39d3"
                 },
 		"license":"GPLv3+ and GFDL"
         },
@@ -249,7 +248,7 @@
                 "archives": ["make-4.2.1.tar.gz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/make-4.2.1.tar.gz":"7d0dcb6c474b258aab4d54098f2cf5a7"
+                        "http://physixproject.org/source/toolchain/make-4.2.1.tar.gz":"7d0dcb6c474b258aab4d54098f2cf5a7"
                 },
 		"license":"GPLv3+"
         },
@@ -259,7 +258,7 @@
                 "archives": ["patch-2.7.6.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/patch-2.7.6.tar.xz":"78ad9937e4caadcba1526ef1853730d5"
+                        "http://physixproject.org/source/toolchain/patch-2.7.6.tar.xz":"78ad9937e4caadcba1526ef1853730d5"
                 },
 		"license":"GPLv3+"
         },
@@ -269,7 +268,7 @@
                 "archives": ["perl-5.30.0.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/perl-5.30.0.tar.xz":"037c35000550bdcb47552ad0f6d3064d"
+                        "http://physixproject.org/source/toolchain/perl-5.30.0.tar.xz":"037c35000550bdcb47552ad0f6d3064d"
                 },
 		"license":"GPL+ or Artistic"
         },
@@ -279,8 +278,8 @@
                 "archives": ["Python-3.7.4.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/Python-3.7.4.tar.xz":"d33e4aae66097051c2eca45ee3604803",
-                        "http://physixproject.org/source/python-3.7.4-docs-html.tar.bz2":"c410337e954dbba2d04fe169c355a6a2"
+			"http://physixproject.org/source/toolchain/Python-3.7.4.tar.xz":"d33e4aae66097051c2eca45ee3604803",
+                        "http://physixproject.org/source/toolchain/python-3.7.4-docs-html.tar.bz2":"c410337e954dbba2d04fe169c355a6a2"
                 },
 		"license":"Python"
         },
@@ -290,7 +289,7 @@
                 "archives": ["sed-4.7.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/sed-4.7.tar.xz":"777ddfd9d71dd06711fe91f0925e1573"
+                        "http://physixproject.org/source/toolchain/sed-4.7.tar.xz":"777ddfd9d71dd06711fe91f0925e1573"
                 },
 		"license":"GPLv3+"
         },
@@ -300,7 +299,7 @@
                 "archives": ["tar-1.32.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/tar-1.32.tar.xz":"83e38700a80a26e30b2df054e69956e5"
+                        "http://physixproject.org/source/toolchain/tar-1.32.tar.xz":"83e38700a80a26e30b2df054e69956e5"
                 },
 		"license":"GPLv3+"
         },
@@ -310,7 +309,7 @@
                 "archives": ["texinfo-6.6.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/texinfo-6.6.tar.xz":"5231da3e6aa106cd0532b8609e5b3702"
+                        "http://physixproject.org/source/toolchain/texinfo-6.6.tar.xz":"5231da3e6aa106cd0532b8609e5b3702"
 
                 },
 		"license":"GPLv3+"
@@ -321,7 +320,7 @@
                 "archives": ["util-linux-2.34.tar.xz"],
                 "patches": [],
                 "sources": {
-                    "http://physixproject.org/source/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
+                    "http://physixproject.org/source/toolchain/util-linux-2.34.tar.xz":"a78cbeaed9c39094b96a48ba8f891d50"
                 },
 		"license":"GPLv2 and GPLv2+ and LGPLv2+ and BSD with advertising and Public Domain"
         },
@@ -331,7 +330,7 @@
                 "archives": ["xz-5.2.4.tar.xz"],
                 "patches": [],
                 "sources": {
-                        "http://physixproject.org/source/xz-5.2.4.tar.xz":"003e4d0b1b1899fc6e3000b24feddf7c"
+                        "http://physixproject.org/source/toolchain/xz-5.2.4.tar.xz":"003e4d0b1b1899fc6e3000b24feddf7c"
                 },
 		"license":"GPLv2+ and Public Domain"
         },
