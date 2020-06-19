@@ -75,3 +75,6 @@ chroot_check $? "systemd : rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf"
 unlink /lib/systemd/system/default.target
 ln -s  /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
+sed -i 's/#Storage=.*/Storage=persistent/' /etc/systemd/journald.conf
+chroot_check $? "journald set to persist logs"
+
