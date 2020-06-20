@@ -31,10 +31,10 @@
 	"2":{
                "group": "01-base-toolchain",
                "build_script": "1.060-linux-api-headers.sh",
-               "archives": ["linux-5.4.41.tar.xz"],
+               "archives": ["linux-5.4.47.tar.xz"],
                "patches": [],
                "sources": {
-			"http://physixproject.org/source/toolchain/linux-5.4.41.tar.xz":"e9d0e066f18a227c6bb0647429ca50a9"
+			"http://physixproject.org/source/toolchain/linux-5.4.47.tar.xz":"5efbf6aa31ae1dd5ebf2c6d9a609b804"
                 },
 		"license":"GPLv2"
 	},

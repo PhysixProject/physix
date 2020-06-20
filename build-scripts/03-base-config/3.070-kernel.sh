@@ -4,7 +4,7 @@
 source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-VERSION='5.4.41'
+VERSION='5.4.47'
 
 make mrproper
 chroot_check $? "system config: kernel : make mr_proper"
