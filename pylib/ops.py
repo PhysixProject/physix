@@ -886,10 +886,10 @@ def do_pull_sources(options):
     info("Downloading Sources to: "+dest)
     recipe_name = str(options.pull_sources)
     recipe = load_recipe(recipe_name)
-    if not pull_sources(recipe, dest):
+    if pull_sources(recipe, dest) == FAILURE:
         return FAILURE
 
-    if not verify_recipe_md5(recipe, context):
+    if verify_recipe_md5(recipe, context) == FAILURE:
         return FAILURE
 
     return SUCCESS
