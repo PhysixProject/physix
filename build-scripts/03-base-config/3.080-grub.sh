@@ -10,6 +10,8 @@ ROOT_DEV=`echo $CONF_ROOT_DEVICE | cut -d'=' -f2`
 ROOT_PART=`echo $CONF_ROOT_PARTITION | cut -d'=' -f2`
 ROOT_PART='\/dev\/'$ROOT_PART
 
+KERNEL=`ls /boot | grep vmlinuz-`
+INITRD=`ls /boot | grep initrd-`
 
 # This might fail due to Error:'will not proceed with blocklists'
 # Can be forced with --force
@@ -24,6 +26,14 @@ sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 SED_CMD='s/VOL_GROUP_MARKER/'$CONF_VOL_GROUP_NAME'/g'
+sed -i $SED_CMD /boot/grub/grub.cfg
+chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
+
+SED_CMD='s/KERNEL_MARKER/'$KERNEL'/g'
+sed -i $SED_CMD /boot/grub/grub.cfg
+chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
+
+SED_CMD='s/INITRD_MARKER/'$INITRD'/g'
 sed -i $SED_CMD /boot/grub/grub.cfg
 chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
