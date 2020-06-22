@@ -9,7 +9,7 @@ VERSION=$(echo $1 | cut -d- -f2)
 make mrproper
 chroot_check $? "system config: kernel : make mr_proper"
 
-install --verbose --mode 644 --owner root --group root /opt/admin/physix/build-scripts/03-base-config/configs/linux_config-$VERSION  /opt/admin/sources.physix/BUILDBOX/$1/.config
+install --verbose --mode 644 --owner root --group root /opt/admin/physix/build-scripts/03-base-config/configs/linux_kernel.config  /opt/admin/sources.physix/BUILDBOX/$1/.config
 chroot_check $? "Set Linux kernel config"
 
 make -j$NPROC
