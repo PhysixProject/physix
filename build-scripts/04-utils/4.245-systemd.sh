@@ -38,19 +38,19 @@ meson --prefix=/usr                \
 chroot_check $? "systemd : configure"
 
 LANG=en_US.UTF-8 ninja
-chroot_check $? "systemd : ninhja"
+chroot_check $? "systemd : ninja"
 
-systemctl start rescue.target
-chroot_check $? "Transition to rescue mode"
+systemctl daemon-reload
+chroot_check $? "Daemon Reload"
+
+sync
+sync
 
 LANG=en_US.UTF-8 ninja install
 chroot_check $? "systemd : ninja install"
 
 systemctl daemon-reload
 chroot_check $? "Daemon Reload"
-
-systemctl start multi-user.target
-chroot_check $? "Transition to multi-user"
 
 systemd-machine-id-setup
 chroot_check $? "systemd : systemd-machine-id-setup"
