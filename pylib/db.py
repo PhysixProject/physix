@@ -93,7 +93,7 @@ def init_db_tables():
         return FAILURE
 
     sql = ''' INSERT INTO STACK_0 (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) '''
-    init_values = ("INIT", 'INIT', 'INIT', 'INIT', 'INIT','INIT')
+    init_values = (date(), 'INIT', '', '', '','')
     try:
         cur = conn.cursor()
         cur.execute(sql, init_values)
