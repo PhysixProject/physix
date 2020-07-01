@@ -10,11 +10,15 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
+**Repository information**
+- Repository commit ID of where/when the issue occured.
+- Output from './catalyst -l'
+
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
+1. change directory to '...'
+2. run ./blah '...'
+3. wait for it '....'
 4. See error
 
 **Expected behavior**
@@ -23,16 +27,11 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**Build Log**
+If issue was a build failure, please include the associated log from /opt/admin/logs.physix/
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**Computer Hardware:**
+What hardware are you running?
 
 **Additional context**
 Add any other context about the problem here.
