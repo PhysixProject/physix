@@ -499,7 +499,7 @@ def build_recipe(recipe, context, start, stop):
         db = get_db_connection()
         if db:
             stack_name = get_name_current_stack()
-            entry = (date(), 'BUILD', commit_id, '', build_src, str(element["build_script"]))
+            entry = (date(), 'BUILD', commit_id, str(stack_name), build_src, str(element["build_script"]))
             sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
             if exec_sql(db, sql, entry):
                 error("DB: Failed to insert entry")
