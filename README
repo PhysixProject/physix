@@ -32,6 +32,28 @@ and Bash programming. It is recommended that you have at least a general
 understanding of the Linux From Scratch book.
 
 
+Physix as a Virtual Machine:
+============================
+1.  Download the Virtual Machine image from: http://physixproject.org/VM/Physix-Project-Beta-v2.6.x86_64.tar.bz2
+
+2.  Verify the md5sum:
+    `md5sum Physix-Project-Beta-v2.6.x86_64.tar.bz2`
+    61c77d74d1e5ffff46a1a28ddd6d0d55  Physix-Project-Beta-v2.6.x86_64.tar.bz2
+
+3.  Unpack the archive. This will take ~10 minutes to decompress 65G
+    `tar xvf Physix-Project-Beta-v2.6.x86_64.tar.bz2`
+
+4.  Create Virtual Machine using VirtualBox
+      * Start VirtualBox
+      * Click 'New', to Create a new Virtual Machine
+      * Select the memory usage/size.
+      * Radio button: Select an existing virtual hard disk file: 'Physix-Project-disk1.vdi'
+      * Under network settings,  set 'Attached to:' to 'Bridged Adapter' and select your network interface.
+
+    Start the VM and login as 'root' or as 'guest'.
+    password: 'physix'
+
+
 Conceptual Project Design:
 ==========================
 The system is devided into software groups. Software groups are collections
