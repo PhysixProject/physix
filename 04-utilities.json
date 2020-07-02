@@ -5,7 +5,7 @@
 			31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 
 			41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
-			61, 62, 63, 64, 65, 66],
+			61, 62, 63, 64, 65, 66, 67],
 
         "0":{   
                 "group": "04-utils",
@@ -603,6 +603,16 @@
         },
         "65":{
                 "group": "04-utils",
+                "build_script": "4.748-golang.sh",
+                "archives": ["go1.4-bootstrap-20171003.tar.gz", "go1.14.4.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/go1.4-bootstrap-20171003.tar.gz":"dbf727a4b0e365bf88d97cbfde590016",
+			"http://physixproject.org/source/utils/go1.14.4.tar.gz":"1478ff203997426495c4e0d88c10521b"
+                }
+        },
+        "66":{
+                "group": "04-utils",
                 "build_script": "4.750-llvm.sh",
                 "archives": ["llvm-8.0.1.src.tar.xz", "cfe-8.0.1.src.tar.xz", "compiler-rt-8.0.1.src.tar.xz"],
                 "patches": [],
@@ -612,7 +622,7 @@
                         "http://physixproject.org/source/utils/compiler-rt-8.0.1.src.tar.xz":"c251e582862f9fcc880802f8f2920096"
                 }
         },
-        "66":{
+        "67":{
                 "group": "04-utils",
                 "build_script": "4.760-rust.sh",
                 "archives": ["rustc-1.35.0-src.tar.gz"],
