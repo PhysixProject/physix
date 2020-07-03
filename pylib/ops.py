@@ -915,10 +915,11 @@ def do_list_snapshots():
     # Just in case it is already mounted.
     ret_tpl = run_cmd(['umount', mntpoint])
 
-    # Mount the root of the FS
-    #TODO: Dynamically determine volume group name so we don't have to
-    #      explicitly use '/dev/mapper/physix-root'
-    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', '/dev/mapper/physix-root', mntpoint])
+    physix_root = root_lvm_path()
+    if physix_root == None:
+        return FAILURE
+
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, mntpoint])
     if validate(ret_tpl, "Mount physix-root to tmp mount point"):
         return FAILURE
 
