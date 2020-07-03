@@ -91,6 +91,22 @@ def root_fs_type():
             return result[1]
 
 
+def root_lvm_path():
+    """return path of lvm volume currently mounted as root"""
+    ret_tpl = run_cmd(['lsblk', '-r', '-o', 'MOUNTPOINT,PATH'])
+    if validate(ret_tpl, "lsblk -r -o MOUNTPOINT,PATH"):
+        return None
+    std_out = ret_tpl[1]
+
+    parsed_lst = std_out.split('\n')
+    for line in parsed_lst:
+        slst = line.split(' ')
+        if len(slst) == 2 and slst[0] == '/':
+            dev_mapper_root = slst[1]
+            return str(dev_mapper_root)
+    return None
+
+
 def get_name_current_stack():
     """Return string name of the currently mounted FS snapshot"""
     if 'btrfs' != root_fs_type():
