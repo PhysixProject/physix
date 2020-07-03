@@ -225,7 +225,7 @@ Installation:
 
             CONF_IP_ADDRESS= IP Address of the system at first boot.
 
-            CONF_NAMESERVER= NOT IMPLEMENTED
+            CONF_NAMESERVER= IP Address of DNS server
 
             CONF_DEFAULT_ROUTE= IP Address of your local network's router
 
