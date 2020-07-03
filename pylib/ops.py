@@ -1088,8 +1088,6 @@ def do_delete_snapshot(options):
         validate(ret_tpl, "umount mntpoint")
         return FAILURE
 
-    #TODO: Remove snapshot from db
-
 
 def do_set_default_snapshot(options):
     """
