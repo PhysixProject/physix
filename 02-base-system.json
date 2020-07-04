@@ -7,7 +7,7 @@
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
 			61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 
 			71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-			81, 82, 83, 84],
+			81, 82, 83, 84, 85, 86, 87, 88],
 
 	"0":{
 		"group": "02-base",
@@ -776,6 +776,42 @@
                 "patches": [],
                 "sources": {
                         "http://physixproject.org/source/base/expect5.45.4.tar.gz":"00fce8de158422f5ccd2666512329bd2"
+                }
+        },
+        "85":{
+                "group": "02-base",
+                "build_script": "2.870-libtasn.sh",
+                "archives": ["libtasn1-4.14.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/libtasn1-4.14.tar.gz":"e9918200ed4a778e2b3cbe34c1be4205"
+               }
+        },
+        "86":{
+                "group": "02-base",
+                "build_script": "2.880-p11kit.sh",
+                "archives": ["p11-kit-0.23.16.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/p11-kit-0.23.16.1.tar.gz":"090a9cf689efd8d4899600c3093b3735"
+                }
+        },
+        "87":{
+                "group": "02-base",
+                "build_script": "2.890-make-ca.sh",
+                "archives": ["make-ca-1.4.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/make-ca-1.4.tar.xz":"995896ca8b4ee1f92a4a8fa46585d59d"
+                }
+        },
+        "88":{
+                "group": "02-base",
+                "build_script": "2.900-wget.sh",
+                "archives": ["wget-1.20.3.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/wget-1.20.3.tar.gz":"db4e6dc7977cbddcd543b240079a4899"
                 }
         }
 }

@@ -1,5 +1,7 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
+cd $SOURCE_DIR/$1 || exit 1
+
 
 sed '20,$ d' -i trust/trust-extract-compat.in &&
 cat >> trust/trust-extract-compat.in << "EOF"
@@ -11,12 +13,12 @@ cat >> trust/trust-extract-compat.in << "EOF"
 EOF
 chroot_check $? "p11kit : "
 
-su physix -c './configure --prefix=/usr  \
-              --sysconfdir=/etc          \
-              --with-trust-paths=/etc/pki/anchors'
+./configure --prefix=/usr  \
+ --sysconfdir=/etc          \
+ --with-trust-paths=/etc/pki/anchors
 chroot_check $? "p11kit : configure"
 
-su physix -c 'make'
+make
 chroot_check $? "p11kit : make"
 
 make install &&
