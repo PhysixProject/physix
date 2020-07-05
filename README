@@ -32,6 +32,13 @@ and Bash programming. It is recommended that you have at least a general
 understanding of the Linux From Scratch book.
 
 
+Branches:
+=========
+* The 'mainline' branch is the bleeding edge of development. Use Withi Caution.
+
+* The 'stable' branch should be considered as the latest and (least buggy) release branch.
+
+
 Physix as a Virtual Machine:
 ============================
 1.  Download the Virtual Machine image from: http://physixproject.org/VM/Physix-Project-Beta-v2.6.x86_64.tar.bz2
