@@ -252,30 +252,27 @@ Installation:
            catalyst -p 03-config-base.json
            catalyst -c 03-config-base.json
 
-       S4. Pull source code for utilities. This is done prior to reboot 
-           because the base system can not wget to the web, yet.
-           catalyst -p 04-utilities.json'
+       S4. Reboot into your new base system, login as root
 
-       S5. Reboot into your new base system, login as root
-
-       S6. [Recommended] If the system was built using btrfs, it is a good
+       S5. [Recommended] If the system was built using btrfs, it is a good
            idea to take a snapshot of your system's current state. This will
            enable you to revert the system back to this point later.
            catalyst -r <SNAPSHOT-NAME>
 
-       S7. Build the utilities software group.
+       S6. Build the utilities software group.
            cd /opt/admin/physix
+           catalyst -p 04-utilities.json
            catalyst -b 04-utilities.json
 
-       S8. Download xorg sources and Build xorg recipe:
+       S7. Download xorg sources and Build xorg recipe:
            catalyst -p 05-xorg.json
            catalyst -b 05-xorg.json
 
-       S9. Download Lightdm sources and build it:
+       S8. Download Lightdm sources and build it:
            catalyst -p 06.lightdm.json
            catalyst -b 06.lightdm.json
 
-       S10. Download LXDE sources and build it:
+       S9. Download LXDE sources and build it:
            catalyst -p 07-lxde.json
            catalyst -b 07-lxde.json
 
