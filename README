@@ -60,6 +60,15 @@ Physix as a Virtual Machine:
     Start the VM and login as 'root' or as 'guest'.
     password: 'physix'
 
+NOTE:
+    The Physix VM is delivered with the first 4 build recipes built and installed.
+     - 01-toolchain.json
+     - 02-base-system.json
+     - 03-config-base.json
+     - 04-utilities.json
+
+    This can be verified by running: `./catalyst -l`
+
 
 Conceptual Project Design:
 ==========================
