@@ -7,7 +7,7 @@
 			51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 
 			61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 
 			71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-			81, 82, 83, 84, 85, 86, 87, 88],
+			81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
 
 	"0":{
 		"group": "02-base",
@@ -812,6 +812,24 @@
                 "patches": [],
                 "sources": {
                         "http://physixproject.org/source/utils/wget-1.20.3.tar.gz":"db4e6dc7977cbddcd543b240079a4899"
+                }
+        },
+        "89":{
+                "group": "02-base",
+                "build_script": "2.910-curl.sh",
+                "archives": ["curl-7.65.3.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/curl-7.65.3.tar.xz":"7bd5b2ebfd3f591034eb8b55314d8c02"
+                }
+        },
+        "90":{
+                "group": "02-base",
+                "build_script": "2.920-git.sh",
+                "archives": ["git-2.23.0.tar.xz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/utils/git-2.23.0.tar.xz":"93ee0f867f81a39e0ef29eabfb1d2c5b"
                 }
         }
 }

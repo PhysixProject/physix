@@ -1,13 +1,14 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
+cd $SOURCE_DIR/$1 || exit 1
 
-su physix -c './configure --prefix=/usr     \
+./configure --prefix=/usr     \
               --disable-static                \
               --enable-threaded-resolver      \
-              --with-ca-path=/etc/ssl/certs'
+              --with-ca-path=/etc/ssl/certs
 chroot_check $? "curl : configure"
 
-su physix -c 'make'
+make
 chroot_check $? "curl : make"
 
 make install &&
