@@ -41,14 +41,14 @@ Branches:
 
 Physix as a Virtual Machine:
 ============================
-1.  Download the Virtual Machine image from: http://physixproject.org/VM/Physix-Project-Beta-v2.6.x86_64.tar.bz2
+1.  Download the Virtual Machine image from: http://physixproject.org/VM/Physix-Project-Beta-v2.7.x86_64.tar.bz2
 
 2.  Verify the md5sum:
-    `md5sum Physix-Project-Beta-v2.6.x86_64.tar.bz2`
-    61c77d74d1e5ffff46a1a28ddd6d0d55  Physix-Project-Beta-v2.6.x86_64.tar.bz2
+    `md5sum Physix-Project-Beta-v2.7.x86_64.tar.bz2`
+     5908dc46933cf9db74d722f077a42695  Physix-Project-Beta-v2.7.x86_64.tar.bz2
 
 3.  Unpack the archive. This will take ~10 minutes to decompress 65G
-    `tar xvf Physix-Project-Beta-v2.6.x86_64.tar.bz2`
+    `tar xvf Physix-Project-Beta-v2.7.x86_64.tar.bz2
 
 4.  Create Virtual Machine using VirtualBox
       * Start VirtualBox
