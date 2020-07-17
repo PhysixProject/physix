@@ -1,17 +1,32 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-groupadd -g 48 rsyncd &&
-useradd -c "rsyncd Daemon" -d /home/rsync -g rsyncd \
-    -s /bin/false -u 48 rsyncd
-chroot_check $? "rsync : groupadd/useradd " NOEXIT
+prep() {
+	return 0
+}
 
-./configure --prefix=/usr --without-included-zlib
-chroot_check $? "rsync : configure"
+config() {
+	./configure --prefix=/usr --without-included-zlib
+	chroot_check $? "rsync : configure"
+}
 
-make
-chroot_check $? "rsync: make"
+build() {
+	make
+	chroot_check $? "rsync: make"
+}
 
-make install
-chroot_check $? "rsync : make install"
+build_install() {
+	make install
+	chroot_check $? "rsync : make install"
+
+	groupadd -g 48 rsyncd &&
+	useradd -c "rsyncd Daemon" -d /home/rsync -g rsyncd \
+	    -s /bin/false -u 48 rsyncd
+	chroot_check $? "rsync : groupadd/useradd " NOEXIT
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

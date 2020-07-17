@@ -8,12 +8,28 @@ source /etc/profile.d/xorg.sh || exit 2
 #is a circular dependency. You must build libva first without EGL and GLX 
 #support, install this package, and rebuild libva.
 
-./configure $XORG_CONFIG
-chroot_check $? "/configure $XORG_CONFIG"
+prep() {
+	return 0
+}
 
-make
-chroot_check $? "make"
+config() {
+	./configure $XORG_CONFIG
+	chroot_check $? "/configure $XORG_CONFIG"
+}
 
-make install
-chroot_check $? "make install"
+build() {
+	make
+	chroot_check $? "make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

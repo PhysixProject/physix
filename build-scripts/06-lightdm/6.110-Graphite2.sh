@@ -1,19 +1,33 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
+prep() {
+	sed -i '/cmptest/d' tests/CMakeLists.txt
+	chroot_check $? "sed"
+	mkdir -v build
+}
 
-su physix -c 'sed -i '/cmptest/d' tests/CMakeLists.txt'
-chroot_check $? "sed"
+config() {
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr .. 
+	chroot_check $? "cmake"
+}
 
-su physix -c 'mkdir -v build'
-cd build 
+build() {
+	cd build
+	make
+	chroot_check $? "make"
+}
 
-su physix -c 'cmake -DCMAKE_INSTALL_PREFIX=/usr .. '
-chroot_check $? "cmake"
+build_install() {
+	cd build
+	make install
+	chroot_check $? "make install"
+}
 
-su physix -c 'make'
-chroot_check $? "make"
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 
-make install
-chroot_check $? "make install"
 

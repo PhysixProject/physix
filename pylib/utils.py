@@ -4,6 +4,7 @@ import db
 
 import os
 import sys
+import pwd
 import json
 import sqlite3
 import tarfile
@@ -382,6 +383,77 @@ def verify_recipe_md5(recipe, context):
                 return FAILURE
 
     return SUCCESS
+
+
+def demote(user_uid, user_gid):
+    def result():
+        #report_ids('starting demotion')
+        os.setgid(user_gid)
+        os.setuid(user_uid)
+        #report_ids('finished demotion')
+    return result
+
+
+def setup_user_env(user_name, cwd):
+    pw_record = pwd.getpwnam(user_name)
+    user_name      = pw_record.pw_name
+    user_home_dir  = pw_record.pw_dir
+    user_uid       = pw_record.pw_uid
+    user_gid       = pw_record.pw_gid
+    env = os.environ.copy()
+
+    env[ 'HOME'     ]  = user_home_dir
+    env[ 'LOGNAME'  ]  = user_name
+    env[ 'PWD'      ]  = cwd
+    env[ 'USER'     ]  = user_name
+    #report_ids('starting ' + str(args))
+    return (env, user_uid, user_gid)
+
+
+def run_cmd_as_physix_user(cmd, name, context, cwd):
+    env, user_uid, user_gid = setup_user_env('physix', cwd)
+
+    date_time = date()
+    date_time = date_time.replace(":", "-").replace(" ", "-").replace("/", "-")
+    log_name = date_time + "-" + name
+    rtn = FAILURE
+
+    if context == "CHRT":
+        log_path = "/opt/admin/logs.physix/" + log_name
+    else:
+        log_path = "/mnt/physix/opt/admin/logs.physix/" + log_name
+
+    with open(log_path, "w") as file_desc:
+        try:
+            p = subprocess.run(cmd, preexec_fn=demote(user_uid, user_gid), cwd=cwd, env=env, stdout=file_desc, stderr=file_desc)
+            rtn = int(p.returncode)
+        except Exception as exc:
+            error("[ERROR] Opperation Failed:"+str(exc)),
+
+    return (rtn, "", "")
+
+
+def run_cmd_as_root_user(cmd, name, context, cwd):
+    # CHECK USER UID
+
+    date_time = date()
+    date_time = date_time.replace(":", "-").replace(" ", "-").replace("/", "-")
+    log_name = date_time + "-" + name
+    rtn = FAILURE
+
+    if context == "CHRT":
+        log_path = "/opt/admin/logs.physix/" + log_name
+    else:
+        log_path = "/mnt/physix/opt/admin/logs.physix/" + log_name
+
+    with open(log_path, "w") as file_desc:
+        try:
+            p = subprocess.run(cmd, cwd=cwd, stdout=file_desc, stderr=file_desc)
+            rtn = int(p.returncode)
+        except Exception as exc:
+            error("[ERROR] Opperation Failed:"+str(exc)),
+
+    return (rtn, "", "")
 
 
 def run_cmd_log(cmd, name, context):

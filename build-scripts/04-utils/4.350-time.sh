@@ -1,12 +1,29 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/usr'
-chroot_check $? "time : configure"
 
-su physix -c 'make'
-chroot_check $? "time : make"
+prep() {
+	return 0
+}
 
-make install
-chroot_check $? "time : make install"
+config() {
+	./configure --prefix=/usr
+	chroot_check $? "time : configure"
+}
+
+build() {
+	make
+	chroot_check $? "time : make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "time : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

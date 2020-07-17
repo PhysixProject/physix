@@ -2,15 +2,27 @@
 source /opt/admin/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
 
+prep(){
+	return 0
+}
 
-su physix -c "./configure $XORG_CONFIG --with-xkb-rules-symlink=xorg"
-chroot_check $? 'configure'
+config() {
+	./configure $XORG_CONFIG --with-xkb-rules-symlink=xorg
+	chroot_check $? 'configure'
+}
 
-su physix -c 'make'
-chroot_check $? 'make'
+build() {
+	make
+	chroot_check $? 'make'
+}
 
-su physix -c 'make install'
-chroot_check $? 'make install' NOEXIT
+build_install() {
+	make install
+	chroot_check $? 'make install' NOEXIT
+}
 
-
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

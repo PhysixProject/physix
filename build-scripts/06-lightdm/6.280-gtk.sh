@@ -1,22 +1,30 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
+prep() {
+	#	ldconfig
+	return 0
+}
 
-ldconfig
-su physix -c 'source ~/.profile && env && ./configure --prefix=/usr              \
+config() {
+	source ~/.profile && env && ./configure --prefix=/usr              \
             --sysconfdir=/etc          \
             --enable-broadway-backend  \
             --enable-x11-backend       \
-            --enable-wayland-backend  --libdir=/usr/lib64'
-chroot_check $? "configure"
+            --enable-wayland-backend  --libdir=/usr/lib64
+	chroot_check $? "configure"
+}
 
-su physix -c 'make'
-chroot_check $? "make"
+build() {
+	make
+	chroot_check $? "make"
+}
 
-make install
-chroot_check $? "make install"
+build_install() {
+	make install
+	chroot_check $? "make install"
 
-mkdir -vp ~/.config/gtk-3.0
+	mkdir -vp ~/.config/gtk-3.0
 cat > ~/.config/gtk-3.0/settings.ini << "EOF"
 [Settings]
 gtk-theme-name = Adwaita
@@ -38,12 +46,17 @@ cat > ~/.config/gtk-3.0/gtk.css << "EOF"
 }
 EOF
 
-ldconfig
-chroot_check $? "ldconfig"
+	ldconfig
+	chroot_check $? "ldconfig"
 
-gtk-query-immodules-3.0 --update-cache
-chroot_check $? "gtk-query-immodules-3.0"
+	gtk-query-immodules-3.0 --update-cache
+	chroot_check $? "gtk-query-immodules-3.0"
 
-glib-compile-schemas /usr/share/glib-2.0/schemas
-chroot_check $? "glib-compile-schemas"
+	glib-compile-schemas /usr/share/glib-2.0/schemas
+	chroot_check $? "glib-compile-schemas"
+}
 
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?

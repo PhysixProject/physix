@@ -1,7 +1,6 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-
 # Disabling the install of the documentation because  
 # nasm-xdoc was not archvied correctly. If the tarball is called 
 # nasm-2.14.02-xdoc, then so should the directory within in it. 
@@ -12,17 +11,33 @@ source /opt/admin/physix/include.sh || exit 1
 #su physix -c 'cp -r ../nasm-2.14.02/doc .'
 #chroot_check $? "tar nasm docs"
 
-su physix -c './configure --prefix=/usr'
-chroot_check $? "configure"
+prep() {
+	return 0
+}
 
-su physix -c "make -j$NPROC"
-chroot_check $? "make"
+config() {
+	./configure --prefix=/usr
+	chroot_check $? "configure"
+}
 
-make install
-chroot_check $? "make install"
+build() {
+	make -j$NPROC
+	chroot_check $? "make"
+}
 
-#install -m755 -d         /usr/share/doc/nasm-2.14.02/html  &&
-#cp -v doc/html/*.html    /usr/share/doc/nasm-2.14.02/html  &&
-#cp -v doc/*.{txt,ps,pdf} /usr/share/doc/nasm-2.14.02
-#chroot_check $? "make install"
+build_install() {
+	make install
+	chroot_check $? "make install"
+
+	#install -m755 -d         /usr/share/doc/nasm-2.14.02/html  &&
+	#cp -v doc/html/*.html    /usr/share/doc/nasm-2.14.02/html  &&
+	#cp -v doc/*.{txt,ps,pdf} /usr/share/doc/nasm-2.14.02
+	#chroot_check $? "make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

@@ -2,15 +2,31 @@
 source /opt/admin/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
 
+prep() {
+	if [ -e ./build ] ; then rm -rf ./build; fi
+	mkdir build
+}
 
-if [ -e ./build ] ; then rm -rf ./build; fi
-su physix -c "mkdir build"
-cd    build 
+config() {
+	cd build
+	meson --prefix=$XORG_PREFIX -Dudev=true 
+}
 
-meson --prefix=$XORG_PREFIX -Dudev=true &&
-ninja
-chroot_check $? "libdrm : ninja "
+build() {
+	cd build
+	ninja
+	chroot_check $? "libdrm : ninja "
+}
 
-ninja install
-chroot_check $? "libdrm : ninja install"
+build_install() {
+	cd build
+	ninja install
+	chroot_check $? "libdrm : ninja install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

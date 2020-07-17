@@ -15,6 +15,20 @@ source /opt/admin/physix/include.sh || exit 1
 #chroot_check $? "unzip"
 
 
+prep() {
+	return 0
+}
+
+config(){
+	return 0
+}
+
+build(){
+	return 0
+}
+
+build_install() {
+
 install -v -d -m755 /usr/share/xml/docbook/xml-dtd-4.5 &&
 install -v -d -m755 /etc/xml &&
 chown -R root:root . &&
@@ -92,4 +106,9 @@ xmlcatalog --noout --add "delegateURI" \
     "file:///etc/xml/docbook" \
     /etc/xml/catalog
 chroot_check $? "3"
+}
 
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?

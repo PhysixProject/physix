@@ -1,13 +1,29 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-sed -i 's/namespace/pkg_&/' src/Makefile.{am,in} src/mkstrtable.awk
+prep() {
+	sed -i 's/namespace/pkg_&/' src/Makefile.{am,in} src/mkstrtable.awk
+	chroot_check $? "prep"
+}
 
-./configure --prefix=/usr &&
-make
-chroot_check $? "libgpg-error : make"
+config() {
+	./configure --prefix=/usr 
+	chroot_check $? "configure"
+}
 
-make install &&
-install -v -m644 -D README /usr/share/doc/libgpg-error-1.36/README
-chroot_check $? "libgpg-error : make install"
+build() {
+	make
+	chroot_check $? "make"
+}
+
+build_install() {
+	make install &&
+	install -v -m644 -D README /usr/share/doc/libgpg-error-1.36/README
+	chroot_check $? "libgpg-error : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

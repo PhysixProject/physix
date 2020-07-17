@@ -2,16 +2,32 @@
 source /opt/admin/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
 
+prep() {
+	mkdir build 
+	chroot_check $? "mkdir build"
+}
 
-[ ! -e ./build ] || rm -rf ./build
+config() {
+	cd build
+	meson --prefix=/usr 
+	chroot_check $? "configure"
+}
 
-mkdir build &&
-cd build 
+build() {
+	cd build && ninja
+	chroot_check $? "ninja build"
+}
 
-meson --prefix=/usr &&
-ninja
-chroot_check $? "meson / ninja"
+build_install() {
+	cd build
+	ninja install
+	chroot_check $? "ninja install"
+}
 
-ninja install
-chroot_check $? "ninja install"
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
+
 

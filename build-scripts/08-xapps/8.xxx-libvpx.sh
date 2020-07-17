@@ -1,23 +1,38 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
-su physix -c "sed -i 's/cp -p/cp/' build/make/Makefile"
-chroot_check $? "sed fix"
+prep() {
+	sed -i 's/cp -p/cp/' build/make/Makefile
+	chroot_check $? "sed fix"
 
-[ ! -e build ] || rm -r build
-su physix -c 'mkdir build'
-cd build
+	mkdir build
+	chroot_check $? "mkdir build"
+}
 
-su physix -c '../configure --prefix=/usr \
+config() {
+	cd build
+	../configure --prefix=/usr \
               --enable-shared \
-              --disable-static'
-chroot_check $? "configure"
+              --disable-static
+	chroot_check $? "configure"
+}
 
-su physix -c 'make'
-chroot_check $? "make"
 
-make install &&
-install -v -m644 doc/Vorbis* /usr/share/doc/libvorbis-1.3.6
-chroot_check $? "make install"
+build() {
+	cd build
+	make
+	chroot_check $? "make"
+}
 
+build_install() {
+	cd build
+	make install &&
+	install -v -m644 doc/Vorbis* /usr/share/doc/libvorbis-1.3.6
+	chroot_check $? "make install"
+}
+
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?

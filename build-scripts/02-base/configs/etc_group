@@ -31,4 +31,3 @@ systemd-coredump:x:79:
 wheel:x:97:
 nogroup:x:99:
 users:x:999:
-physix:x:1000:

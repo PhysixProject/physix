@@ -2,15 +2,32 @@
 source /opt/admin/physix/include.sh || exit 1
 
 
-su physix -c './configure --prefix=/usr     \
+prep() {
+	return 0
+}
+
+config() {
+	./configure --prefix=/usr     \
             --sysconfdir=/etc \
-            --enable-dbus '
-chroot_check $? "configure"
+            --enable-dbus
+	chroot_check $? "configure"
+}
 
-su physix -c "make -j$NPROC"
-chroot_check $? "make"
+build() {
+	make -j$NPROC
+	chroot_check $? "make"
+}
 
-make install
-chroot_check $? "make install"
 
+build_install() {
+	make install
+	chroot_check $? "make install"
+}
+
+
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

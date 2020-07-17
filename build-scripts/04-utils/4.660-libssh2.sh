@@ -2,12 +2,27 @@
 source /opt/admin/physix/include.sh || exit 1
 source /etc/physix.conf || exit 1
 
-su physix -c './configure --prefix=/usr --disable-static'
-chroot_check $? "libSSH2 : configure"
+prep() {
+	return 0
+}
 
-su physix -c 'make'
-chroot_check $? "libSSH2 : make "
+config() {
+	./configure --prefix=/usr --disable-static
+	chroot_check $? "libSSH2 : configure"
+}
 
-make install
-chroot_check $? "libSSH2 : make install"
+build() {
+	make
+	chroot_check $? "libSSH2 : make "
+}
+
+build_install() {
+	make install
+	chroot_check $? "libSSH2 : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

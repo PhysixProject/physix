@@ -2,16 +2,29 @@
 source /opt/admin/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
 
+prep() {
+	return 0
+}
 
-
-./configure $XORG_CONFIG \
+config() {
+	./configure $XORG_CONFIG \
             --with-udev-rules-dir=/lib/udev/rules.d \
             --with-systemd-unit-dir=/lib/systemd/system
-chroot_check $? "configure"
+	chroot_check $? "configure"
+}
 
-make
-chroot_check $? "make"
+build() {
+	make
+	chroot_check $? "make"
+}
 
-make install
-chroot_check $? "make install"
+build_install() {
+	make install
+	chroot_check $? "make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

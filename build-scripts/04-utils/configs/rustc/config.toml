@@ -16,7 +16,7 @@ docs = false
 extended = true
 
 [install]
-prefix = "/usr/bin/rustc-1.35.0"
+prefix = "/opt/admin/sources.physix/BUILDBOX/transroot/"
 docdir = "share/doc/rustc-1.35.0"
 
 [rust]

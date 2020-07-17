@@ -1,17 +1,33 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
-cd $SOURCE_DIR/$1 || exit 1
 
-su physix -c 'mkdir build'
-cd build
-chroot_check $? "mkdir build"
+prep() {
+	mkdir build
+}
 
-su physix -c 'meson --prefix=/usr ..'
-chroot_check $? "configure"
+config() {
+	cd build
+	chroot_check $? "mkdir build"
 
-su physix -c 'ninja'
-chroot_check $? "ninja"
+	meson --prefix=/usr ..
+	chroot_check $? "configure"
+}
 
-ninja install
-chroot_check $? "ninja install"
+build() {
+	cd build
+	ninja
+	chroot_check $? "ninja"
+}
 
+build_install() {
+	cd build
+	ninja install
+	chroot_check $? "ninja install"
+}
+
+
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?

@@ -1,12 +1,27 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c 'sed 's@-Werror@@' -i Makefile'
-chroot_check $? "Sed Makefile"
+prep() {
+	sed 's@-Werror@@' -i Makefile
+	chroot_check $? "Sed Makefile"
+}
 
-su physix -c "make -j$NPROC"
-chroot_check $? "make"
+config() {
+	return 0
+}
 
-make install
-chroot_check $? "make install"
+build() {
+	make -j$NPROC
+	chroot_check $? "make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

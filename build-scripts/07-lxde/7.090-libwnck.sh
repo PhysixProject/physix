@@ -1,16 +1,30 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
+prep() {
+	return 0
+}
 
-su physix -c './configure --prefix=/usr \
+config() {
+	./configure --prefix=/usr \
             --disable-static \
-            --program-suffix=-1'
-chroot_check $? "configure"
+            --program-suffix=-1
+	chroot_check $? "configure"
+}
 
-su physix -c 'make GETTEXT_PACKAGE=libwnck-1'
-chroot_check $? "make"
+build() {
+	make GETTEXT_PACKAGE=libwnck-1
+	chroot_check $? "make"
+}
 
-make GETTEXT_PACKAGE=libwnck-1 install
-chroot_check $? "make install"
+build_install() {
+	make GETTEXT_PACKAGE=libwnck-1 install
+	chroot_check $? "make install"
+}
 
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

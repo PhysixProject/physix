@@ -1,20 +1,34 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/usr       \
+prep() {
+	return 0
+}
+
+config() {
+	./configure --prefix=/usr             \
             --infodir=/usr/share/info         \
             --mandir=/usr/share/man           \
             --with-socket-dir=/run/screen     \
             --with-pty-group=5                \
-            --with-sys-screenrc=/etc/screenrc'
-chroot_check $? "screen : configure"
+            --with-sys-screenrc=/etc/screenrc
+	chroot_check $? "screen : configure"
+}
 
-su physix -c 'sed -i -e "s%/usr/local/etc/screenrc%/etc/screenrc%" {etc,doc}/*'
+build() {
+	sed -i -e "s%/usr/local/etc/screenrc%/etc/screenrc%" {etc,doc}/*
+	make -j$NPROC
+	chroot_check $? "screen : make"
+}
 
-su physix -c "make -j$NPROC"
-chroot_check $? "screen : make"
+build_install() {
+	make install &&
+	install -m 644 etc/etcscreenrc /etc/screenrc
+	chroot_check $? "screen : make install"
+}
 
-make install &&
-install -m 644 etc/etcscreenrc /etc/screenrc
-chroot_check $? "screen : make install"
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

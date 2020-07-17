@@ -10,3 +10,9 @@ chroot_check $? "configure / make"
 make install
 chroot_check $? "ninja install"
 
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
+

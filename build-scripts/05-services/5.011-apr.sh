@@ -1,15 +1,31 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/usr    \
-            --disable-static \
-            --with-installbuilddir=/usr/share/apr-1/build' 
-chroot_check $? "configure"
+prep() {
+	return 0
+}
 
-touch libtoolT
-su physix -c "make -j$NPROC"
-chroot_check $? "make"
+config() {
+	./configure --prefix=/usr    \
+            --disable-static         \
+            --with-installbuilddir=/usr/share/apr-1/build
+	chroot_check $? "configure"
+}
 
-make install
-chroot_check $? "make install"
+build() {
+	touch libtoolT
+	make -j$NPROC
+	chroot_check $? "make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

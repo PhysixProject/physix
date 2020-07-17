@@ -1,17 +1,32 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/usr'
-chroot_check $? "haveged : configure"
+prep() {
+	return 0
+}
 
-su physix -c 'make'
-chroot_check $? "haveged : make"
+config() {
+	./configure --prefix=/usr
+	chroot_check $? "haveged : configure"
+}
 
-make install &&
-mkdir -pv    /usr/share/doc/haveged-1.9.2 &&
-cp -v README /usr/share/doc/haveged-1.9.2
-chroot_check $? "haveged : make install"
+build(){
+	make
+	chroot_check $? "haveged : make"
+}
+
+build_install() {
+	make install &&
+	mkdir -pv    /usr/share/doc/haveged-1.9.2 &&
+	cp -v README /usr/share/doc/haveged-1.9.2
+	chroot_check $? "haveged : make install"
+}
 
 #init script for boot
 #make install-haveged
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

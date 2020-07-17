@@ -1,15 +1,30 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/               \
-            --enable-compat-symlinks \
-            --mandir=/usr/share/man  \
-            --docdir=/usr/share/doc/dosfstools-4.1'
-chroot_check $? "dosfstools : configure"
+prep() {
+	return 0
+}
 
-su physix -c 'make'
-chroot_check $? "dosfstools : make"
+config() {
+	./configure --prefix=/               \
+	            --enable-compat-symlinks \
+	            --mandir=/usr/share/man  \
+	            --docdir=/usr/share/doc/dosfstools-4.1
+	chroot_check $? "dosfstools : configure"
+}
 
-make install
-chroot_check $? "parted : make install"
+build() {
+	make
+	chroot_check $? "dosfstools : make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "parted : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

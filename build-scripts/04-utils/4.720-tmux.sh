@@ -1,12 +1,28 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure'
-chroot_check $? "tmux : configure"
+prep() {
+	return 0
+}
 
-su physix -c "make -j$NPROC"
-chroot_check $? "tmux : make"
+config() {
+	./configure
+	chroot_check $? "tmux : configure"
+}
 
-make install
-chroot_check $? "tmux : make install"
+build() {
+	make -j$NPROC
+	chroot_check $? "tmux : make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "tmux : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

@@ -1,17 +1,32 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/usr --without-python'
-chroot_check $? "bind-utils : configure"
+prep() {
+	return 0
+}
 
-su physix -c 'make -C lib/dns    &&
-              make -C lib/isc    &&
-              make -C lib/bind9  &&
-              make -C lib/isccfg &&
-              make -C lib/irs    &&
-              make -C bin/dig'
-chroot_check $? "bind-utils : make"
+config() {
+	./configure --prefix=/usr --without-python
+	chroot_check $? "bind-utils : configure"
+}
 
-make -C bin/dig install
-chroot_check $? "bind-utils : make install"
+build() {
+	make -C lib/dns    &&
+        make -C lib/isc    &&
+        make -C lib/bind9  &&
+        make -C lib/isccfg &&
+        make -C lib/irs    &&
+        make -C bin/dig
+	chroot_check $? "bind-utils : make"
+}
+
+build_install() {
+	make -C bin/dig install
+	chroot_check $? "bind-utils : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

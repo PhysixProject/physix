@@ -1,68 +1,80 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
+# Copyright (C) 2019 Tree Davies
 source /opt/admin/physix/include.sh || exit 1
 
-patch -Np1 -i ../systemd-243-consolidated_fixes-2.patch
-chroot_check $? "systemd : patch systemd-243-consolidated_fixes-2.patch"
+prep() {
+	patch -Np1 -i ../systemd-243-consolidated_fixes-2.patch
+	chroot_check $? "systemd : patch systemd-243-consolidated_fixes-2.patch"
 
-sed '177,$ d' -i src/resolve/meson.build &&
-sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
-chroot_check $? "systemd :"
+	sed '177,$ d' -i src/resolve/meson.build &&
+	sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
+	chroot_check $? "systemd :"
+	mkdir -p build
+}
 
-mkdir -p build
-cd       build
+config() {
 
-PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
-LANG=en_US.UTF-8                   \
-meson --prefix=/usr                \
-      --sysconfdir=/etc            \
-      --localstatedir=/var         \
-      -Dblkid=true                 \
-      -Dbuildtype=release          \
-      -Ddefault-dnssec=no          \
-      -Dfirstboot=false            \
-      -Dinstall-tests=false        \
-      -Dkmod-path=/bin/kmod        \
-      -Dldconfig=false             \
-      -Dmount-path=/bin/mount      \
-      -Drootprefix=                \
-      -Drootlibdir=/lib            \
-      -Dsplit-usr=true             \
-      -Dsulogin-path=/sbin/sulogin \
-      -Dsysusers=false             \
-      -Dumount-path=/bin/umount    \
-      -Db_lto=false                \
-      -Drpmmacrosdir=no            \
-      ..
-chroot_check $? "systemd : configure"
+	cd build
 
-LANG=en_US.UTF-8 ninja
-chroot_check $? "systemd : ninja"
+	PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
+	LANG=en_US.UTF-8                   \
+	meson --prefix=/usr                \
+	      --sysconfdir=/etc            \
+	      --localstatedir=/var         \
+	      -Dblkid=true                 \
+	      -Dbuildtype=release          \
+	      -Ddefault-dnssec=no          \
+	      -Dfirstboot=false            \
+	      -Dinstall-tests=false        \
+	      -Dkmod-path=/bin/kmod        \
+	      -Dldconfig=false             \
+	      -Dmount-path=/bin/mount      \
+	      -Drootprefix=                \
+	      -Drootlibdir=/lib            \
+	      -Dsplit-usr=true             \
+	      -Dsulogin-path=/sbin/sulogin \
+	      -Dsysusers=false             \
+	      -Dumount-path=/bin/umount    \
+	      -Db_lto=false                \
+	      -Drpmmacrosdir=no            \
+	      ..
+	chroot_check $? "systemd : configure"
+}
 
-systemctl daemon-reload
-chroot_check $? "Daemon Reload"
+build() {
+	cd ./build  &&  LANG=en_US.UTF-8 ninja
+	chroot_check $? "systemd : ninja"
+}
 
-sync
-sync
+build_install() {
 
-LANG=en_US.UTF-8 ninja install
-chroot_check $? "systemd : ninja install"
+	cd build
 
-systemctl daemon-reload
-chroot_check $? "Daemon Reload"
+        systemctl daemon-reload
+        chroot_check $? "Daemon Reload"
 
-systemd-machine-id-setup
-chroot_check $? "systemd : systemd-machine-id-setup"
+        sync
+        sync
 
-systemctl preset-all
-chroot_check $? "systemd : systemctl preset-all"
+	LANG=en_US.UTF-8 ninja install
+	chroot_check $? "systemd : ninja install"
 
-systemctl disable systemd-time-wait-sync.service
-chroot_check $? "systemd : disable systemd-time-wait-sync.service"
+	systemctl daemon-reload
+	chroot_check $? "Daemon Reload"
 
-sed -i 's/#Storage=.*/Storage=persistent/' /etc/systemd/journald.conf
-chroot_check $? "journald set to persist logs"
+	systemd-machine-id-setup
+	chroot_check $? "systemd : systemd-machine-id-setup"
+
+	systemctl preset-all
+	chroot_check $? "systemd : systemctl preset-all"
+
+	systemctl disable systemd-time-wait-sync.service
+	chroot_check $? "systemd : disable systemd-time-wait-sync.service"
+
+	sed -i 's/#Storage=.*/Storage=persistent/' /etc/systemd/journald.conf
+	chroot_check $? "journald set to persist logs"
+}
 
 #rm -f /etc/sysctl.d/50-pid-max.conf
 #chroot_check $? "systemd : rm -f /etc/sysctl.d/50-pid-max.conf"
@@ -71,4 +83,9 @@ chroot_check $? "journald set to persist logs"
 #rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf
 #chroot_check $? "systemd : rm -f /usr/lib/tmpfiles.d/systemd-nologin.conf"
 
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

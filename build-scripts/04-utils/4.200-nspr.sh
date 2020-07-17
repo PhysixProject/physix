@@ -1,19 +1,33 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-cd nspr                                                     &&
-sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&
-sed -i 's#$(LIBRARY) ##'            config/rules.mk         &&
+prep() {
+	cd nspr                                                     &&
+	sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in &&
+	sed -i 's#$(LIBRARY) ##'            config/rules.mk 
+	chroot_check $? "prep"
+}
 
-su physix -c './configure --prefix=/usr \
+config() {
+	./configure --prefix=/usr \
             --with-mozilla \
             --with-pthreads \
-            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)'
-chroot_check $? "nspr : configure"
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)
+	chroot_check $? "nspr : configure"
+}
 
-su physix -c 'make'
-chroot_check $? "nspr : make"
+build() {
+	make
+	chroot_check $? "nspr : make"
+}
 
-make install
-chroot_check $? "nspr : make install"
+build_install() {
+	make install
+	chroot_check $? "nspr : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

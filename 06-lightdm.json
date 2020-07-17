@@ -2,7 +2,7 @@
 	"build_queue": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
 			11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
 			21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 
-			31, 32, 33, 34, 35, 36, 37, 38, 39],
+			31, 32, 33, 34, 35, 36, 37, 38, 39, 40,	41],
 	"0":{
 		"group": "06-lightdm",
 		"build_script": "6.000-gobject-interspection.sh",
@@ -223,15 +223,24 @@
         },
         "24":{   
                 "group": "06-lightdm",
-                "build_script": "6.190-sassc.sh",
-                "archives": ["libsass-3.6.1.tar.gz", "sassc-3.6.1.tar.gz"],
+                "build_script": "6.190-libsass.sh",
+                "archives": ["libsass-3.6.1.tar.gz" ],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/lightdm/libsass-3.6.1.tar.gz":"8b0aee63fd535cf6f40b254a6f453d24",
-			"http://physixproject.org/source/lightdm/sassc-3.6.1.tar.gz":"dd675920c7151e50e2d2ac14f0fb222a"
+			"http://physixproject.org/source/lightdm/libsass-3.6.1.tar.gz":"8b0aee63fd535cf6f40b254a6f453d24"
 		}
         },
-        "25":{   
+        "25":{
+                "group": "06-lightdm",
+                "build_script": "6.195-sassc.sh",
+                "archives": ["sassc-3.6.1.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/lightdm/sassc-3.6.1.tar.gz":"dd675920c7151e50e2d2ac14f0fb222a"
+                }
+        },
+
+        "26":{   
                 "group": "06-lightdm",
                 "build_script": "6.200-libcroco.sh",
                 "archives": ["libcroco-0.6.13.tar.xz"],
@@ -240,7 +249,7 @@
 			"http://physixproject.org/source/lightdm/libcroco-0.6.13.tar.xz":"c80c5a8385011a0260dce6bd0da93dce"
 		}
         },
-        "26":{   
+        "27":{   
                 "group": "06-lightdm",
                 "build_script": "6.210-LibTIFF.sh",
                 "archives": ["tiff-4.0.10.tar.gz"],
@@ -249,7 +258,7 @@
 			"http://physixproject.org/source/lightdm/tiff-4.0.10.tar.gz":"114192d7ebe537912a2b97408832e7fd"
 		}
         },
-        "27":{   
+        "28":{   
                 "group": "06-lightdm",
                 "build_script": "6.220-itstool.sh",
                 "archives": ["itstool-2.0.6.tar.bz2"],
@@ -258,7 +267,7 @@
 			"http://physixproject.org/source/lightdm/itstool-2.0.6.tar.bz2":"4306eeba4f4aee6b393d14f9c3c57ca1"
 		}
         },
-        "28":{   
+        "29":{   
                 "group": "06-lightdm",
                 "build_script": "6.230-libxslt.sh",
                 "archives": ["libxslt-1.1.33.tar.gz"],
@@ -268,7 +277,7 @@
 			"http://physixproject.org/source/lightdm/libxslt-1.1.33-security_fix-1.patch":"b0decc961810f02ad5a279691319f9e7"
 		}
         },
-        "29":{   
+        "30":{   
                 "group": "06-lightdm",
                 "build_script": "6.240-gdkpix-buf.sh",
                 "archives": ["gdk-pixbuf-2.38.1.tar.xz"],
@@ -277,7 +286,7 @@
 			"http://physixproject.org/source/lightdm/gdk-pixbuf-2.38.1.tar.xz":"f6ba2195acd18c5c9555421f30c31cc1"
 		}
         },
-        "30":{   
+        "31":{   
                 "group": "06-lightdm",
                 "build_script": "6.260-libxklavier.sh",
                 "archives": ["libxklavier-5.4.tar.bz2"],
@@ -286,7 +295,7 @@
 			"http://physixproject.org/source/lightdm/libxklavier-5.4.tar.bz2":"13af74dcb6011ecedf1e3ed122bd31fa"
 		}
         },
-        "31":{   
+        "32":{   
                 "group": "06-lightdm",
                 "build_script": "6.265-librsvg.sh",
                 "archives": ["librsvg-2.44.14.tar.xz"],
@@ -295,7 +304,7 @@
 			"http://physixproject.org/source/lightdm/librsvg-2.44.14.tar.xz":"7570d139148f3554fa60fb2a0ecfc4f8"
 		}
         },
-        "32":{   
+        "33":{   
                 "group": "06-lightdm",
                 "build_script": "6.270-perl-uri.sh",
                 "archives": ["URI-1.76.tar.gz"],
@@ -304,7 +313,7 @@
 			"http://physixproject.org/source/lightdm/URI-1.76.tar.gz":"c236e0142adecc1b1104da664bc43a79"
 		}
         },
-        "33":{   
+        "34":{   
                 "group": "06-lightdm",
                 "build_script": "6.271-docbook-xml-dtd.sh",
                 "archives": ["docbook-xml-4.5.tar.gz"],
@@ -313,7 +322,7 @@
 			"http://physixproject.org/source/lightdm/docbook-xml-4.5.tar.gz":"79b81e7280b41787cb27326391d1af02"
 		}
         },
-        "34":{
+        "35":{
                 "group": "06-lightdm",
                 "build_script": "6.280-gtk.sh",
                 "archives": ["gtk+-3.24.20.tar.xz"],
@@ -322,7 +331,7 @@
                         "http://physixproject.org/source/lightdm/gtk+-3.24.20.tar.xz":"b302acc0a4b42e2980ef18628f9ce951"
                 }
         },	
-        "35":{   
+        "36":{   
                 "group": "06-lightdm",
                 "build_script": "6.290-libxfce4util.sh",
                 "archives": ["libxfce4util-4.14.0.tar.bz2"],
@@ -331,7 +340,7 @@
 			"http://physixproject.org/source/lightdm/libxfce4util-4.14.0.tar.bz2":"46f44e36acc3abf1a5ba814c22a773cb"
 		}
         },
-        "36":{
+        "37":{
                 "group": "06-lightdm",
                 "build_script": "6.292-libxfconf.sh",
                 "archives": ["xfconf-4.14.1.tar.bz2"],
@@ -340,7 +349,7 @@
                         "http://physixproject.org/source/lightdm/xfconf-4.14.1.tar.bz2":"cb51a59e2a89d05232f825ad8c74a7c0"
                 }
         },
-        "37":{   
+        "38":{   
                 "group": "06-lightdm",
                 "build_script": "6.291-libxfce4ui.sh",
                 "archives": ["libxfce4ui-4.14.1.tar.bz2"],
@@ -349,7 +358,7 @@
 			"http://physixproject.org/source/lightdm/libxfce4ui-4.14.1.tar.bz2":"50eae4bab5eeced186bce16fb5f802ac"
 		}
         },
-        "38":{   
+        "39":{   
                 "group": "06-lightdm",
                 "build_script": "6.300-exo.sh",
                 "archives": ["exo-0.12.8.tar.bz2"],
@@ -358,16 +367,25 @@
 			"http://physixproject.org/source/lightdm/exo-0.12.8.tar.bz2":"e618ce760a12ac7427a48a44c69f3d31"
 		}
         },
-        "39":{   
+        "40":{
                 "group": "06-lightdm",
                 "build_script": "6.310-lightdm.sh",
-                "archives": ["lightdm-1.30.0.tar.xz", "lightdm-gtk-greeter-2.0.6.tar.gz"],
+                "archives": ["lightdm-1.30.0.tar.xz"],
                 "patches": [],
                 "sources": {
-			"http://physixproject.org/source/lightdm/lightdm-1.30.0.tar.xz":"c566ea595f2b81e68684be9f8dbcbb42",
-			"http://physixproject.org/source/lightdm/lightdm-gtk-greeter-2.0.6.tar.gz":"36dc961f14cc3b0baef3ddb1c494eb16"
-		}
+                        "http://physixproject.org/source/lightdm/lightdm-1.30.0.tar.xz":"c566ea595f2b81e68684be9f8dbcbb42"
+                }
+        },
+        "41":{
+                "group": "06-lightdm",
+                "build_script": "6.320-lightdm-greeter.sh",
+                "archives": ["lightdm-gtk-greeter-2.0.6.tar.gz"],
+                "patches": [],
+                "sources": {
+                        "http://physixproject.org/source/lightdm/lightdm-gtk-greeter-2.0.6.tar.gz":"36dc961f14cc3b0baef3ddb1c494eb16"
+                }
         }
+
 
 }
 

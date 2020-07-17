@@ -1,12 +1,27 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
 
-su physix -c './configure --prefix=/usr --disable-gpg-test'
-chroot_check $? "gpgme : configure"
+prep() {
+	return 0
+}
 
-su physix -c 'make'
-chroot_check $? "gpgme : make"
+config() {
+	./configure --prefix=/usr --disable-gpg-test
+	chroot_check $? "gpgme : configure"
+}
 
-make install
-chroot_check $? "gpgme : make install"
+build() {
+	make
+	chroot_check $? "gpgme : make"
+}
+
+build_install() {
+	make install
+	chroot_check $? "gpgme : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

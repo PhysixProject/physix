@@ -2,11 +2,28 @@
 source /opt/admin/physix/include.sh || exit 1
 source /etc/profile.d/xorg.sh || exit 2
 
+prep() {
+	return 0
+}
 
-./configure $XORG_CONFIG
-chroot_check $? "xcb-util-wm : config"
-make
-chroot_check $? "xcb-util-wm : make "
-make install
-chroot_check $? "xcb-util-wm : make install"
+config() {
+	./configure $XORG_CONFIG
+	chroot_check $? "xcb-util-wm : config"
+}
+
+build() {
+	make
+	chroot_check $? "xcb-util-wm : make "
+}
+
+build_install() {
+	make install
+	chroot_check $? "xcb-util-wm : make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

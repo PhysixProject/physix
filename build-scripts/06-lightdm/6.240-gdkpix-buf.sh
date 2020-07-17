@@ -2,19 +2,35 @@
 source /opt/admin/physix/include.sh || exit 1
 
 
-su physix -c 'mkdir build' 
-chroot_check $? "mkdir build"
-cd build 
+prep() {
+	mkdir build
+	chroot_check $? "mkdir build"
+}
 
-su physix -c 'meson --prefix=/usr .. '
-chroot_check $? "meson"
+config() {
+	cd build 
+	meson --prefix=/usr .. 
+	chroot_check $? "meson"
+}
 
-su physix -c "sed -i 's/'--nonet'//' build.ninja"
-chroot_check $? "Remove --nonet"
+build() {
+	cd build
+	sed -i 's/'--nonet'//' build.ninja
+	chroot_check $? "Remove --nonet"
 
-su physix -c 'ninja'
-chroot_check $? "ninja"
+	ninja
+	chroot_check $? "ninja"
+}
 
-ninja install
-chroot_check $? "ninja install"
+build_install() {
+	cd build
+	ninja install
+	chroot_check $? "ninja install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 
