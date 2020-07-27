@@ -1,7 +1,7 @@
 NAME="Physix"
-VERSION="Beta-v2.7"
+VERSION="Beta-v2.8"
 ID=physix
 PRETTY_NAME="Physix Project"
-VERSION_CODENAME="Penguin Sun"
+VERSION_CODENAME="Safety Dance"
 HOME_URL="https://github.com/PhysixProject/physix.git"
 
