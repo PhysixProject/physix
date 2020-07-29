@@ -432,7 +432,7 @@ def build_toolchain(recipe, context, start, stop):
         stack_script = "STACK_0-" + str(element["build_script"])
 
         info("Building " + str(cmd))
-        ret_tpl = run_cmd_log(cmd, stack_script, "")
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
         if validate(ret_tpl, "Build: " + str(cmd), True):
             return FAILURE
 
@@ -513,7 +513,7 @@ def build_recipe(recipe, context, start, stop):
 
         cmd = [build_file, 'build_install']
         info("Executing build() as root user: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_log_io_as_root_user(cmd, log_name, context, cwd)
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, log_name, context)
         if validate(ret_tpl, "Build_install(): "+str(cmd), True):
             unset_build_lock()
             return FAILURE
@@ -553,7 +553,7 @@ def build_base(recipe, context, start, stop):
 
     if start == 0:
         cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/2.000-base-build-prep.sh']
-        ret_tpl = run_cmd_log(cmd, "2.000-base-build-prep.sh", "")
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, "2.000-base-build-prep.sh", "")
         if validate(ret_tpl, "Build: " + str(cmd)):
             return FAILURE
 
@@ -587,7 +587,7 @@ def build_base(recipe, context, start, stop):
                str(element["build_script"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_log(cmd, stack_script, "")
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
         if validate(ret_tpl, "Build: " + str(cmd), True):
             return FAILURE
 
@@ -636,7 +636,7 @@ def config_base_system(recipe, context, start, stop):
                str(element["build_script"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_log(cmd, stack_script, "")
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
         if validate(ret_tpl, "Build: "+str(cmd), True):
             return FAILURE
 

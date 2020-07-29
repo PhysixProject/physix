@@ -411,6 +411,17 @@ def setup_user_env(user_name, cwd):
 
 
 def run_cmd_log_io_as_physix_user(cmd, name, context, cwd):
+    """
+        Run command and log I/O to log file
+        Returns tuple: (int, str, str)
+
+        Keyword arguments:
+        cmd -- list:
+        name -- string: log name
+        context -- string: 'CHRT' or 'NON-CHRT'
+        cwd -- 
+    """
+
     env, user_uid, user_gid = setup_user_env('physix', cwd)
 
     date_time = date()
@@ -433,30 +444,7 @@ def run_cmd_log_io_as_physix_user(cmd, name, context, cwd):
     return (rtn, "", "")
 
 
-def run_cmd_log_io_as_root_user(cmd, name, context, cwd):
-    # CHECK USER UID
-
-    date_time = date()
-    date_time = date_time.replace(":", "-").replace(" ", "-").replace("/", "-")
-    log_name = date_time + "-" + name
-    rtn = FAILURE
-
-    if context == "CHRT":
-        log_path = "/opt/admin/logs.physix/" + log_name
-    else:
-        log_path = "/mnt/physix/opt/admin/logs.physix/" + log_name
-
-    with open(log_path, "w") as file_desc:
-        try:
-            p = subprocess.run(cmd, cwd=cwd, stdout=file_desc, stderr=file_desc)
-            rtn = int(p.returncode)
-        except Exception as exc:
-            error("[ERROR] Opperation Failed:"+str(exc)),
-
-    return (rtn, "", "")
-
-
-def run_cmd_log(cmd, name, context):
+def run_cmd_log_io_as_root_user(cmd, name, context):
     """
         Run command and log I/O to log file
         Returns tuple: (int, str, str)
@@ -466,6 +454,9 @@ def run_cmd_log(cmd, name, context):
         name -- string: log name
         context -- string: 'CHRT' or 'NON-CHRT'
     """
+
+    # CHECK USER UID
+
     date_time = date()
     date_time = date_time.replace(":", "-").replace(" ", "-").replace("/", "-")
     log_name = date_time + "-" + name
