@@ -492,28 +492,28 @@ def build_recipe(recipe, context, start, stop):
 
         cmd = [build_file, 'prep']
         info("Executing prep() as physix user: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_as_physix_user(cmd, log_name, context, cwd)
+        ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
         if validate(ret_tpl, "prep(): "+str(cmd), True):
             unset_build_lock()
             return FAILURE
 
         cmd = [build_file, 'config']
         info("Executing config() as physix user: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_as_physix_user(cmd, log_name, context, cwd)
+        ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
         if validate(ret_tpl, "config(): "+str(cmd), True):
             unset_build_lock()
             return FAILURE
 
         cmd = [build_file, 'build']
         info("Executing build() as physix user: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_as_physix_user(cmd, log_name, context, cwd)
+        ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
         if validate(ret_tpl, "Build(): "+str(cmd), True):
             unset_build_lock()
             return FAILURE
 
         cmd = [build_file, 'build_install']
         info("Executing build() as root user: " + "[" + str(i) + "] " + str(cmd))
-        ret_tpl = run_cmd_as_root_user(cmd, log_name, context, cwd)
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, log_name, context, cwd)
         if validate(ret_tpl, "Build_install(): "+str(cmd), True):
             unset_build_lock()
             return FAILURE

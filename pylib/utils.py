@@ -410,7 +410,7 @@ def setup_user_env(user_name, cwd):
     return (env, user_uid, user_gid)
 
 
-def run_cmd_as_physix_user(cmd, name, context, cwd):
+def run_cmd_log_io_as_physix_user(cmd, name, context, cwd):
     env, user_uid, user_gid = setup_user_env('physix', cwd)
 
     date_time = date()
@@ -433,7 +433,7 @@ def run_cmd_as_physix_user(cmd, name, context, cwd):
     return (rtn, "", "")
 
 
-def run_cmd_as_root_user(cmd, name, context, cwd):
+def run_cmd_log_io_as_root_user(cmd, name, context, cwd):
     # CHECK USER UID
 
     date_time = date()
