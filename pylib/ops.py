@@ -481,24 +481,6 @@ def build_recipe(recipe, context, start, stop):
         else:
             build_src = ''
 
-        ###### ORIG ##########################################################
-        #subcmd = os.path.join('/opt/admin/physix/build-scripts/',
-        #                      str(element["group"]),
-        #                      str(element["build_script"]))
-        #cmd = [subcmd, build_src]
-
-        #stack_script = get_name_current_stack() + "-" + str(element["build_script"])
-
-        #info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
-        #os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
-        #ret_tpl = run_cmd_log(cmd, stack_script, context)
-        #os.chdir('/opt/admin/physix')
-        #if validate(ret_tpl, "Build: "+str(cmd), True):
-        #    unset_build_lock()
-        #    return FAILURE
-        #######
-        ####### NEW ###########################################################3
-
         build_file = os.path.join('/opt/admin/physix/build-scripts/',
                               str(element["group"]),
                               str(element["build_script"]))
@@ -539,11 +521,8 @@ def build_recipe(recipe, context, start, stop):
         # CHDIR
         os.chdir('/opt/admin/physix')
 
-        #if validate(ret_tpl, "Build: "+str(cmd), True):
-        #        unset_build_lock()
-        #        return FAILURE
 
-        #############################################################################3
+
 
         db = get_db_connection()
         if db:
