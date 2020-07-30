@@ -45,7 +45,7 @@ build_install() {
         install -v -dm 755 /var/lib/dhclient
         chroot_check $? "install -v -dm 755 /var/lib/dhclient"
 
-	IFACE=`ip link | grep 'state UP' | awk -F: '{print $2}' | tr -d '[:space:]'`
+        IFACE=`ip link | grep 'state UP' | awk -F: '{print $2}' | tr -d '[:space:]'`
         dhclient $IFACE
         chroot_check $? "dhclient test"
 
@@ -54,8 +54,8 @@ build_install() {
         install -d -m 755 /lib/systemd/system
         chroot_check $? "install dirs"
 
-	install -v -m644 /opt/admin/physix/build-scripts/04-utils/configs/dhclient/dhclient.conf  /etc/dhcp
-	chroot_check $? "Install /etc/dhcp/dhclient.conf"
+        install -v -m644 /opt/admin/physix/build-scripts/04-utils/configs/dhclient/dhclient.conf  /etc/dhcp
+        chroot_check $? "Install /etc/dhcp/dhclient.conf"
 
         install -v -m644 /opt/admin/physix/build-scripts/04-utils/configs/dhclient/dhclient@.service  /lib/systemd/system/
         chroot_check $? "Install  /lib/systemd/system/dhclient@.service"
@@ -63,7 +63,7 @@ build_install() {
         systemctl disable systemd-networkd
         chroot_check $? "disable systemd-networkd"
 
-        systemctl enable dhclient@enp0s3
+        systemctl enable dhclient@$IFACE
 }
 
 [ $1 == 'prep' ]   && prep   && exit $?
