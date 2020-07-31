@@ -6,7 +6,9 @@ source /opt/admin/physix/physix.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 echo $CONF_UEFI_ENABLE
-exit 0
+if [ $CONF_UEFI_ENABLE == "n" ] ; then
+	exit 0
+fi
 
 patch -Np1 -i ../../efivar-37-gcc_9-1.patch
 

@@ -9,7 +9,7 @@ NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
 export NPROC
 
 function ok() {
-        local MSG=$1
+	local MSG=$1
 	local BR=''
 	local TIME=`date "+%D %T"`
 
@@ -17,22 +17,22 @@ function ok() {
 		BR=$BUILDROOT
 	fi
 
-        echo -e "\e[92m[OK]\e[0m   $TIME : $MSG"
-        #echo -e "[OK] $TIME : $MSG" >> $BR/opt/physix/logs.physix/physix-build.log
+	echo -e "\e[92m[OK]\e[0m   $TIME : $MSG"
+	#echo -e "[OK] $TIME : $MSG" >> $BR/opt/physix/logs.physix/physix-build.log
 }
 
 
 function error() {
-        local MSG=$1
+	local MSG=$1
 	local BR=''
 
 	if [ -r '/mnt/physix/opt/logs.physix/' ] && [ -r '/mnt/opt/physix/' ] ; then
 		BR=$BUILDROOT
 	fi
 
-        echo -e "\e[31m[ERROR]\e[0m $TIME :$MSG"
+	echo -e "\e[31m[ERROR]\e[0m $TIME :$MSG"
 	#echo -e "[ERROR] $TIME : $MSG" >> $BR/opt/physix/logs.physix/physix-build.log
-        #echo -e "[ERROR] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
+    #echo -e "[ERROR] $TIME : $MSG" >> $BR/var/physix/system-build-logs/build.log
 }
 
 # Check, handle and log return code
