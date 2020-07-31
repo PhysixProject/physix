@@ -191,6 +191,8 @@ def mount_volumes(config):
         if validate(ret_tpl, "unmount /mnt/physix"):
             return FAILURE
 
+
+        # This should be moved out of this if-branch?
         volume_root = "/dev/mapper/" + vol_group_name + "-root"
         ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=STACK_0', volume_root, '/mnt/physix'])
         if validate(ret_tpl, "Mount physix-root subvolume: STACK_0"):
