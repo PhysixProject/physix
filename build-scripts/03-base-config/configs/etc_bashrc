@@ -16,7 +16,7 @@
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias bb='cd ..'
-alias lsg='ls | grep '
+alias lsg='ls -all | grep '
 
 # Provides prompt for non-login shells, specifically shells started
 # in the X environment. [Review the LFS archive thread titled
