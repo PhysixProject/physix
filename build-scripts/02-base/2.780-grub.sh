@@ -8,7 +8,7 @@ cd $SOURCE_DIR/$1 || exit 1
 
 
 if [ $CONF_UEFI_ENABLE == "n" ] ; then
-	./configure --prefix=/usr          \
+	./configure --prefix=/usr      \
             --sbindir=/sbin        \
             --sysconfdir=/etc      \
             --disable-efiemu       \
@@ -17,6 +17,14 @@ if [ $CONF_UEFI_ENABLE == "n" ] ; then
 	chroot_check $? "UEFI=n, grub configure"
 else
 	exit 1
+    ./configure --prefix=/usr  \
+        --sbindir=/sbin        \
+        --sysconfdir=/etc      \
+        --disable-efiemu       \
+        --enable-grub-mkfont   \
+        --with-platform=efi    \
+        --disable-werror
+	chroot_check $? "UEFI=n, grub configure"
 fi
 
 
