@@ -15,7 +15,8 @@ if [ $CONF_UEFI_ENABLE == "n" ] ; then
             --disable-werror       \
             --enable-device-mapper
 	chroot_check $? "UEFI=n, grub configure"
-else
+
+elif [ $CONF_UEFI_ENABLE == "y" ] ; then
 	exit 1
     ./configure --prefix=/usr  \
         --sbindir=/sbin        \
@@ -24,7 +25,10 @@ else
         --enable-grub-mkfont   \
         --with-platform=efi    \
         --disable-werror
-	chroot_check $? "UEFI=n, grub configure"
+	chroot_check $? "UEFI=y, grub configure"
+
+else
+	exit 1
 fi
 
 
