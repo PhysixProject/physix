@@ -170,10 +170,10 @@ Installation:
 
 
 	  D1:
-              ******** USE EXTREME CAUTION ********
+          ******** !USE EXTREME CAUTION! *************************************************
 	      The following operations will destroy all existing data on your target 
-              installation device.
-	      *************************************
+          installation device.
+          ********************************************************************************
 
 	     Use the 'lvremove' tool to remove all volumes from your target installation device.
               For example, to remove all volumes from device sdb: 
