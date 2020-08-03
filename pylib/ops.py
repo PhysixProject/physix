@@ -833,9 +833,9 @@ def do_config_base(options):
     info("------------------------------------")
     info("- Base System Configured!")
     info("- Next Steps:")
-    info("- 1. Pull Utility sources:")
-    info("      ./catalyst -p 04-utilities.json")
-    info("- 2. reboot ")
+    info("- 1. reboot ")
+    info("- 2. login as root")
+    info("- 3. make-ca -g")
     info("------------------------------------")
     return SUCCESS
 
