@@ -32,6 +32,18 @@ and Bash programming. It is recommended that you have at least a general
 understanding of the Linux From Scratch book.
 
 
+Quickstart:
+===========
+1. Edit physix.conf: Identify the disk you will install to, by setting
+   the CONF_ROOT_DEVICE variable.
+
+2. Setup your disk partitions:
+	./catalyst -i physix.conf
+
+3. Run build script.
+	cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
+
+
 Branches:
 =========
 * The 'mainline' branch is the bleeding edge of development. Use Withi Caution.
