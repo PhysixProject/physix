@@ -35,7 +35,7 @@ understanding of the Linux From Scratch book.
 Quickstart:
 ===========
 0. Install required tools on the host system:
-    * Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git
+	* Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git
 	* Fedora : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git
 
 1. Edit physix.conf: Identify the disk you will install to, by setting
