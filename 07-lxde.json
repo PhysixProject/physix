@@ -1,260 +1,428 @@
+
+
 {
-
-	"build_queue": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
-			11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
-			21, 22, 23, 24, 25, 26, 27],
-
-	"0":{
+	"build_queue": [
+		0,
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+		9,
+		10,
+		11,
+		12,
+		13,
+		14,
+		15,
+		16,
+		17,
+		18,
+		19,
+		20,
+		21,
+		22,
+		23,
+		24,
+		25,
+		26,
+		27
+	],
+	"0": {
 		"group": "07-lxde",
 		"build_script": "7.000-lxmenu-data.sh",
-		"archives": ["lxmenu-data-0.1.5.tar.xz"],
+		"archives": [
+			"lxmenu-data-0.1.5.tar.xz"
+		],
 		"patches": [],
-		"sources": {
-			"http://physixproject.org/source/lxde/lxmenu-data-0.1.5.tar.xz":"cc1989444284a65dbc7047348a68d6d4"
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxmenu-data-0.1.5.tar.xz": "cc1989444284a65dbc7047348a68d6d4"
+		},
+		"alt_sources": {
+			"": ""
 		}
 	},
-        "1":{
-                "group": "07-lxde",
-                "build_script": "7.010-libfm-extra.sh",
-                "archives": ["libfm-1.3.1.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/libfm-1.3.1.tar.xz":"c15ecd2c9317e2c385cd3f046d0b61ba"
-                }
-        },
-        "2":{
-                "group": "07-lxde",
-                "build_script": "7.020-menu-cache.sh",
-                "archives": ["menu-cache-1.1.0.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/menu-cache-1.1.0.tar.xz":"99999a0bca48b980105208760c8fd893"
-                }
-        },
-	"3":{
-                "group": "07-lxde",
-                "build_script": "7.025-gdkpix-buf.sh",
-                "archives": ["gdk-pixbuf-2.38.1.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lightdm/gdk-pixbuf-2.38.1.tar.xz":"f6ba2195acd18c5c9555421f30c31cc1"
-                }
-        },
-        "4":{
-                "group": "07-lxde",
-                "build_script": "7.030-gtk2.sh",
-                "archives": ["gtk+-2.24.32.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/gtk+-2.24.32.tar.xz":"d5742aa42275203a499b59b4c382a784"
-                }
-        },
-        "5":{
-                "group": "07-lxde",
-                "build_script": "7.040-libfm.sh",
-                "archives": ["libfm-1.3.1.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/libfm-1.3.1.tar.xz":"c15ecd2c9317e2c385cd3f046d0b61ba"
-                }
-        },
-        "6":{
-                "group": "07-lxde",
-                "build_script": "7.050-PCManFM.sh",
-                "archives": ["pcmanfm-1.3.1.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/pcmanfm-1.3.1.tar.xz":"d32ad2c9c7c52bff2004bbc120b53420"
-                }
-        },
-        "7":{
-                "group": "07-lxde",
-                "build_script": "7.060-pyCairo.sh",
-                "archives": ["pycairo-1.18.1.tar.gz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/pycairo-1.18.1.tar.gz":"7610da8a40a7bed548991aa3416431d1"
-                }
-        },
-        "8":{
-                "group": "07-lxde",
-                "build_script": "7.070-pygobject.sh",
-                "archives": ["pygobject-2.28.7.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/pygobject-2.28.7.tar.xz":"ae48b60c690c4aa894e69e0c97802745"
-                }
-        },
-        "9":{
-                "group": "07-lxde",
-                "build_script": "7.080-pygtk.sh",
-                "archives": ["pygtk-2.24.0.tar.bz2"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/pygtk-2.24.0.tar.bz2":"a1051d5794fd7696d3c1af6422d17a49"
-                }
-        },
-        "10":{
-                "group": "07-lxde",
-                "build_script": "7.090-libwnck.sh",
-                "archives": ["libwnck-2.30.7.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/libwnck-2.30.7.tar.xz":"3d20f26105a2fd878899d6ecdbe9a082"
-                }
-        },
-        "11":{
-                "group": "07-lxde",
-                "build_script": "7.100-keybinder.sh",
-                "archives": ["keybinder-0.3.1.tar.gz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/keybinder-0.3.1.tar.gz":"a6d7caae0dcb040b08692b008a68a507"
-                }
-        },
-        "12":{
-                "group": "07-lxde",
-                "build_script": "7.110-wireless-tools.sh",
-                "archives": ["wireless_tools.29.tar.gz"],
-                "patches": ["wireless_tools-29-fix_iwlist_scanning-1.patch"],
-                "sources": {
-                        "http://physixproject.org/source/lxde/wireless_tools.29.tar.gz":"e06c222e186f7cc013fd272d023710cb",
-			"http://physixproject.org/source/lxde/wireless_tools-29-fix_iwlist_scanning-1.patch":"9db3a9451d8cb969e388e089be401408"
-                }
-        },
-        "13":{
-                "group": "07-lxde",
-                "build_script": "7.120-LXPanel.sh",
-                "archives": ["lxpanel-0.10.0.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxpanel-0.10.0.tar.xz":"e6a1f9bd5cf39812e1c5d2453a34a7c5"
-                }
-        },
-        "14":{
-                "group": "07-lxde",
-                "build_script": "7.130-dbus-glib.sh",
-                "archives": ["dbus-glib-0.110.tar.gz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/dbus-glib-0.110.tar.gz":"d7cebf1d69445cbd28b4983392145192"
-                }
-        },
-        "15":{
-                "group": "07-lxde",
-                "build_script": "7.140-lxappearance.sh",
-                "archives": ["lxappearance-0.6.3.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxappearance-0.6.3.tar.xz":"f10345313e2c12bad51c1b58bd46b454"
-                }
-        },
-        "16":{
-                "group": "07-lxde",
-                "build_script": "7.150-libunique.sh",
-                "archives": ["libunique-1.1.6.tar.bz2"],
-                "patches": ["libunique-1.1.6-upstream_fixes-1.patch"],
-                "sources": {
-                        "http://physixproject.org/source/lxde/libunique-1.1.6.tar.bz2":"7955769ef31f1bc4f83446dbb3625e6d",
-			"http://physixproject.org/source/lxde/libunique-1.1.6-upstream_fixes-1.patch":"4ce1bf51879a679b55be831f31bf3a2f"
-                }
-        },
-        "17":{
-                "group": "07-lxde",
-                "build_script": "7.160-lxsession.sh",
-                "archives": ["lxsession-0.5.4.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxsession-0.5.4.tar.xz":"e255aaf3c2a8e49812e3477fb3f099b0"
-                }
-        },
-        "18":{
-                "group": "07-lxde",
-                "build_script": "7.170-lxde-common.sh",
-                "archives": ["lxde-common-0.99.2.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxde-common-0.99.2.tar.xz":"14a9d19c4576dc15d985453ccb8ca9f6"
-                }
-        },
-        "19":{
-                "group": "07-lxde",
-                "build_script": "7.180-GPicView.sh",
-                "archives": ["gpicview-0.2.5.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/gpicview-0.2.5.tar.xz":"26be9b0c5a234f1afe7d83d02a4a33f4"
-                }
-        },
-        "20":{
-                "group": "07-lxde",
-                "build_script": "7.190-openbox.sh",
-                "archives": ["openbox-3.6.1.tar.gz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/openbox-3.6.1.tar.gz":"b72794996c6a3ad94634727b95f9d204"
-                }
-        },
-        "21":{
-                "group": "07-lxde",
-                "build_script": "7.200-lxappearance-obconf.sh",
-                "archives": ["lxappearance-obconf-0.2.3.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxappearance-obconf-0.2.3.tar.xz":"ae0076d489aa786f5d573f7ff592a4ab"
-                }
-        },
-        "22":{
-                "group": "07-lxde",
-                "build_script": "7.210-LXInput.sh",
-                "archives": ["lxinput-0.3.5.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxinput-0.3.5.tar.xz":"69680debaef053d540ae3a5f4b237150"
-                }
-        },
-        "23":{
-                "group": "07-lxde",
-                "build_script": "7.220-LXRandR.sh",
-                "archives": ["lxrandr-0.3.2.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxrandr-0.3.2.tar.xz":"5101ab29d87fb2b56a5ec5bc8bc3f258"
-                }
-        },
-        "24":{
-                "group": "07-lxde",
-                "build_script": "7.230-LXTask.sh",
-                "archives": ["lxtask-0.1.9.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxtask-0.1.9.tar.xz":"f19a9e4d22a075f984681a480f0aa886"
-                }
-        },
-        "25":{
-                "group": "07-lxde",
-                "build_script": "7.240-Vte.sh",
-                "archives": ["vte-0.28.2.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/vte-0.28.2.tar.xz":"497f26e457308649e6ece32b3bb142ff"
-                }
-        },
-        "26":{
-                "group": "07-lxde",
-                "build_script": "7.250-LXTerminal.sh",
-                "archives": ["lxterminal-0.3.2.tar.xz"],
-                "patches": [],
-                "sources": {
-                        "http://physixproject.org/source/lxde/lxterminal-0.3.2.tar.xz":"62e57c3aafb831505cc1638b2b737cc9"
-                }
-        },
-        "27":{
-                "group": "07-lxde",
-                "build_script": "7.260-set-graphical-target.sh",
-                "archives": [],
-                "patches": [],
-                "sources": {}
-        }
+	"1": {
+		"group": "07-lxde",
+		"build_script": "7.010-libfm-extra.sh",
+		"archives": [
+			"libfm-1.3.1.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/libfm-1.3.1.tar.xz": "c15ecd2c9317e2c385cd3f046d0b61ba"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"2": {
+		"group": "07-lxde",
+		"build_script": "7.020-menu-cache.sh",
+		"archives": [
+			"menu-cache-1.1.0.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/menu-cache-1.1.0.tar.xz": "99999a0bca48b980105208760c8fd893"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"3": {
+		"group": "07-lxde",
+		"build_script": "7.025-gdkpix-buf.sh",
+		"archives": [
+			"gdk-pixbuf-2.38.1.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lightdm/gdk-pixbuf-2.38.1.tar.xz": "f6ba2195acd18c5c9555421f30c31cc1"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"4": {
+		"group": "07-lxde",
+		"build_script": "7.030-gtk2.sh",
+		"archives": [
+			"gtk+-2.24.32.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/gtk+-2.24.32.tar.xz": "d5742aa42275203a499b59b4c382a784"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"5": {
+		"group": "07-lxde",
+		"build_script": "7.040-libfm.sh",
+		"archives": [
+			"libfm-1.3.1.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/libfm-1.3.1.tar.xz": "c15ecd2c9317e2c385cd3f046d0b61ba"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"6": {
+		"group": "07-lxde",
+		"build_script": "7.050-PCManFM.sh",
+		"archives": [
+			"pcmanfm-1.3.1.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/pcmanfm-1.3.1.tar.xz": "d32ad2c9c7c52bff2004bbc120b53420"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"7": {
+		"group": "07-lxde",
+		"build_script": "7.060-pyCairo.sh",
+		"archives": [
+			"pycairo-1.18.1.tar.gz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/pycairo-1.18.1.tar.gz": "7610da8a40a7bed548991aa3416431d1"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"8": {
+		"group": "07-lxde",
+		"build_script": "7.070-pygobject.sh",
+		"archives": [
+			"pygobject-2.28.7.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/pygobject-2.28.7.tar.xz": "ae48b60c690c4aa894e69e0c97802745"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"9": {
+		"group": "07-lxde",
+		"build_script": "7.080-pygtk.sh",
+		"archives": [
+			"pygtk-2.24.0.tar.bz2"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/pygtk-2.24.0.tar.bz2": "a1051d5794fd7696d3c1af6422d17a49"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"10": {
+		"group": "07-lxde",
+		"build_script": "7.090-libwnck.sh",
+		"archives": [
+			"libwnck-2.30.7.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/libwnck-2.30.7.tar.xz": "3d20f26105a2fd878899d6ecdbe9a082"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"11": {
+		"group": "07-lxde",
+		"build_script": "7.100-keybinder.sh",
+		"archives": [
+			"keybinder-0.3.1.tar.gz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/keybinder-0.3.1.tar.gz": "a6d7caae0dcb040b08692b008a68a507"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"12": {
+		"group": "07-lxde",
+		"build_script": "7.110-wireless-tools.sh",
+		"archives": [
+			"wireless_tools.29.tar.gz"
+		],
+		"patches": [
+			"wireless_tools-29-fix_iwlist_scanning-1.patch"
+		],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/wireless_tools.29.tar.gz": "e06c222e186f7cc013fd272d023710cb",
+			"https://physixproject.org/source/lxde/wireless_tools-29-fix_iwlist_scanning-1.patch": "9db3a9451d8cb969e388e089be401408"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"13": {
+		"group": "07-lxde",
+		"build_script": "7.120-LXPanel.sh",
+		"archives": [
+			"lxpanel-0.10.0.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxpanel-0.10.0.tar.xz": "e6a1f9bd5cf39812e1c5d2453a34a7c5"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"14": {
+		"group": "07-lxde",
+		"build_script": "7.130-dbus-glib.sh",
+		"archives": [
+			"dbus-glib-0.110.tar.gz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/dbus-glib-0.110.tar.gz": "d7cebf1d69445cbd28b4983392145192"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"15": {
+		"group": "07-lxde",
+		"build_script": "7.140-lxappearance.sh",
+		"archives": [
+			"lxappearance-0.6.3.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxappearance-0.6.3.tar.xz": "f10345313e2c12bad51c1b58bd46b454"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"16": {
+		"group": "07-lxde",
+		"build_script": "7.150-libunique.sh",
+		"archives": [
+			"libunique-1.1.6.tar.bz2"
+		],
+		"patches": [
+			"libunique-1.1.6-upstream_fixes-1.patch"
+		],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/libunique-1.1.6.tar.bz2": "7955769ef31f1bc4f83446dbb3625e6d",
+			"https://physixproject.org/source/lxde/libunique-1.1.6-upstream_fixes-1.patch": "4ce1bf51879a679b55be831f31bf3a2f"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"17": {
+		"group": "07-lxde",
+		"build_script": "7.160-lxsession.sh",
+		"archives": [
+			"lxsession-0.5.4.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxsession-0.5.4.tar.xz": "e255aaf3c2a8e49812e3477fb3f099b0"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"18": {
+		"group": "07-lxde",
+		"build_script": "7.170-lxde-common.sh",
+		"archives": [
+			"lxde-common-0.99.2.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxde-common-0.99.2.tar.xz": "14a9d19c4576dc15d985453ccb8ca9f6"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"19": {
+		"group": "07-lxde",
+		"build_script": "7.180-GPicView.sh",
+		"archives": [
+			"gpicview-0.2.5.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/gpicview-0.2.5.tar.xz": "26be9b0c5a234f1afe7d83d02a4a33f4"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"20": {
+		"group": "07-lxde",
+		"build_script": "7.190-openbox.sh",
+		"archives": [
+			"openbox-3.6.1.tar.gz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/openbox-3.6.1.tar.gz": "b72794996c6a3ad94634727b95f9d204"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"21": {
+		"group": "07-lxde",
+		"build_script": "7.200-lxappearance-obconf.sh",
+		"archives": [
+			"lxappearance-obconf-0.2.3.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxappearance-obconf-0.2.3.tar.xz": "ae0076d489aa786f5d573f7ff592a4ab"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"22": {
+		"group": "07-lxde",
+		"build_script": "7.210-LXInput.sh",
+		"archives": [
+			"lxinput-0.3.5.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxinput-0.3.5.tar.xz": "69680debaef053d540ae3a5f4b237150"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"23": {
+		"group": "07-lxde",
+		"build_script": "7.220-LXRandR.sh",
+		"archives": [
+			"lxrandr-0.3.2.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxrandr-0.3.2.tar.xz": "5101ab29d87fb2b56a5ec5bc8bc3f258"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"24": {
+		"group": "07-lxde",
+		"build_script": "7.230-LXTask.sh",
+		"archives": [
+			"lxtask-0.1.9.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxtask-0.1.9.tar.xz": "f19a9e4d22a075f984681a480f0aa886"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"25": {
+		"group": "07-lxde",
+		"build_script": "7.240-Vte.sh",
+		"archives": [
+			"vte-0.28.2.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/vte-0.28.2.tar.xz": "497f26e457308649e6ece32b3bb142ff"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"26": {
+		"group": "07-lxde",
+		"build_script": "7.250-LXTerminal.sh",
+		"archives": [
+			"lxterminal-0.3.2.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/lxterminal-0.3.2.tar.xz": "62e57c3aafb831505cc1638b2b737cc9"
+		},
+		"alt_sources": {
+			"": ""
+		}
+	},
+	"27": {
+		"group": "07-lxde",
+		"build_script": "7.260-set-graphical-target.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
+	}
 }
+
 

@@ -7,75 +7,93 @@
 		"build_script": "3.020-set-hostname.sh",
 		"archives": [],
 		"patches": "",
-		"sources": {}
+		"physix_sources": {},
+		"alt_sources": {}
 	},
+
 	"1":{
 		"group": "03-base-config",
 		"build_script": "3.030-network-conf.sh",
 		"archives": [],
 		"patches": [],
-		"sources":{
-		}
+		"physix_sources":{},
+		"alt_sources": {}
 	},
+
 	"2":{
-               "group": "03-base-config",
-               "build_script": "3.040-shells.sh",
-               "archives": [],
-               "patches": [],
-               "sources": {
-                }
+		"group": "03-base-config",
+		"build_script": "3.040-shells.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
 	},
+
 	"3":{
-                "group": "03-base-config",
-                "build_script": "3.050-disable-clrscrn.sh",
-                "archives": [],
-                "patches": [],
-                "sources": {}
+		"group": "03-base-config",
+		"build_script": "3.050-disable-clrscrn.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
 	},
+
 	"4":{
-                "group": "03-base-config",
-                "build_script": "3.060-fstab.sh",
-                "archives": [],
-                "patches": [],
-                "sources": {}
+		"group": "03-base-config",
+		"build_script": "3.060-fstab.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
 	},
+
 	"5":{
-                "group": "03-base-config",
-                "build_script": "3.070-kernel.sh",
-                "archives": ["linux-5.4.47.tar.xz"],
-                "patches": [],
-                "sources": {
-			"http://physixproject.org/source/base/linux-5.4.47.tar.xz":"5efbf6aa31ae1dd5ebf2c6d9a609b804"
+		"group": "03-base-config",
+		"build_script": "3.070-kernel.sh",
+		"archives": ["linux-5.4.47.tar.xz"],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/base/linux-5.4.47.tar.xz":"5efbf6aa31ae1dd5ebf2c6d9a609b804"
+		},
+		"alt_sources": {
+			"https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.4.47.tar.xz":"5efbf6aa31ae1dd5ebf2c6d9a609b804"
 		}
 	},
-        "6":{
-                "group": "03-base-config",
-                "build_script": "3.080-grub.sh",
-                "archives": [],
-                "patches": [],
-	        "sources": {}
-                
-        },
-        "7":{
-                "group": "03-base-config",
-                "build_script": "3.100-os-release.sh",
-                "archives": [],
-                "patches": [],
-                "sources": {}
-        },
-        "8":{
-                "group": "03-base-config",
-                "build_script": "3.105-set-resolv-conf.sh",
-                "archives": [],
-                "patches": [],
-                "sources": {}
-        },
-        "9":{
-                "group": "03-base-config",
-                "build_script": "3.110-setup-users.sh",
-                "archives": [],
-                "patches": [],
-                "sources": {}
-        }
+
+	"6":{
+		"group": "03-base-config",
+		"build_script": "3.080-grub.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
+	},
+
+	"7":{
+		"group": "03-base-config",
+		"build_script": "3.100-os-release.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
+	},
+
+	"8":{
+		"group": "03-base-config",
+		"build_script": "3.105-set-resolv-conf.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
+	},
+
+	"9":{
+		"group": "03-base-config",
+		"build_script": "3.110-setup-users.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
+	}
 }
 

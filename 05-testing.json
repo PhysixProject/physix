@@ -1,15 +1,23 @@
+
+
 {
-
-	"build_queue":[0],
-
-	"0":{
+	"build_queue": [
+		0
+	],
+	"0": {
 		"group": "05-testing",
 		"build_script": "5.000-ltp.sh",
-		"archives": ["ltp-20200515.tar.gz"],
+		"archives": [
+			"ltp-full-20200515.tar.xz"
+		],
 		"patches": [],
-		"sources": {
-			"http://physixproject.org/source/testing/ltp-20200515.tar.gz":"a58b045cb595a15092e624676ef6b399"
+		"physix_sources": {
+			"https://physixproject.org/source/testing/ltp-full-20200515.tar.xz": "1bbbda555a0e68f95d90f03b545d85f1"
+		},
+		"alt_sources": {
+			"https://github.com/linux-test-project/ltp/releases/download/20200515/ltp-full-20200515.tar.xz": "1bbbda555a0e68f95d90f03b545d85f1"
 		}
 	}
 }
+
 
