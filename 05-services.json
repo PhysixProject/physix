@@ -1,16 +1,7 @@
 
 
 {
-	"build_queue": [
-		0,
-		1,
-		2,
-		3,
-		4,
-		5,
-		6,
-		7
-	],
+	"build_queue": [0, 1, 2, 3,	4, 5, 6, 7],
 	"0": {
 		"group": "05-services",
 		"build_script": "5.000-libnfsidmap.sh",
