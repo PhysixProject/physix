@@ -253,7 +253,7 @@ def pull_sources(recipe, dest):
 
     pull_lst = []
     for i in range(rsize):
-        sources = recipe[str(i)]["sources"]
+        sources = recipe[str(i)]["physix_sources"]
         for key in sources.keys():
             pull_lst.append(key)
 

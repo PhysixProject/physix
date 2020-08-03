@@ -373,7 +373,7 @@ def verify_recipe_md5(recipe, context):
 
     for i in range(len(recipe['build_queue'])):
         element = recipe[str(i)]
-        sources = element['sources']
+        sources = element['physix_sources']
 
         for url in sources.keys():
             rmd5 = sources[url]
