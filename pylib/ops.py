@@ -12,7 +12,7 @@ from optparse import OptionParser
 
 from db import *
 from utils import *
-
+from definitions import *
 
 BUILDROOT = "/mnt/physix"
 

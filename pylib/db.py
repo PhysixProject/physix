@@ -14,7 +14,7 @@ FAILURE = 1
 SUCCESS = 0
 
 from utils import *
-
+from definitions import *
 
 def get_db_connection():
     """Return db connection object. Return None on error."""

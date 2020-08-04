@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import db
+from definitions import *
 
 import os
 import sys
