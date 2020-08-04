@@ -11,7 +11,7 @@ cd       build
 ../configure --prefix=/tools --with-sysroot=$BUILDROOT --with-lib-path=/tools/lib --target=$BUILDROOT_TGT --disable-nls --disable-werror
 check $? "Binutils Configure"
 
-make -j8
+make -j$NPROC
 check $? "Binutils make"
 
 

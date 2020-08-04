@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
+# Copyright (C) 2019 Tree Davies
 
 export BUILDROOT='/mnt/physix'
 export BR_SOURCE_DIR=$BUILDROOT/opt/admin/sources.physix/BUILDBOX

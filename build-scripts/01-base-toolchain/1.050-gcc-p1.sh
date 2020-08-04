@@ -64,7 +64,7 @@ cd       build
 
 check $? "GCC Pass 1 Configure"
 
-make -j8
+make -j$NPROC
 check $? "GCC Pass 1 make"
 
 make install
