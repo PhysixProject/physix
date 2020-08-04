@@ -115,7 +115,7 @@
 			"https://physixproject.org/source/lxde/pycairo-1.18.1.tar.gz": "7610da8a40a7bed548991aa3416431d1"
 		},
 		"alt_sources": {
-			"": ""
+			"https://github.com/pygobject/pycairo/releases/download/v1.18.1/pycairo-1.18.1.tar.gz": "7610da8a40a7bed548991aa3416431d1"
 		}
 	},
 	"8": {
