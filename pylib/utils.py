@@ -388,10 +388,8 @@ def verify_recipe_md5(recipe, context):
 
 def demote(user_uid, user_gid):
     def result():
-        #report_ids('starting demotion')
         os.setgid(user_gid)
         os.setuid(user_uid)
-        #report_ids('finished demotion')
     return result
 
 
