@@ -984,7 +984,7 @@ def do_snapshot(options):
     options -- dict: config options.
     """
 
-    mntpoint = '/opt/admin/.tmp/mnt/'
+    mntpoint = TMP_MNTPOINT_DIR
     snap_name = options.snapshot
 
     if 'btrfs' != root_fs_type():
