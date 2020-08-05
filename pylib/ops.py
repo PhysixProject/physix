@@ -1079,7 +1079,8 @@ def do_delete_snapshot(options):
     options -- dict: config options.
     """
 
-    mntpoint = '/opt/.tmp/mnt/'
+    #mntpoint = '/opt/.tmp/mnt/'
+    mntpoint = TMP_MNTPOINT_DIR
     snap_name = options.delete_snap
 
     # Check snap_name is not current running stack
