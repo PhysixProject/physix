@@ -424,7 +424,6 @@ def build_toolchain(recipe, context, start, stop):
             bsp = os.path.join(get_sources_prefix(context), str(element["archives"][0]))
             build_src = top_most_dir(bsp)
 
-        #subcmd = os.path.join('/mnt/physix/opt/admin/physix/build-scripts/',
         subcmd = os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
                               str(element["build_script"]))
