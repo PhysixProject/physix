@@ -309,11 +309,11 @@ def get_sources_prefix(context):
     """
 
     if context == "CHRT":
-        return '/opt/admin/sources.physix/'
+        return SOURCES_DIR_PATH
     elif context == "NON-CHRT":
-        return '/mnt/physix/opt/admin/sources.physix/'
+        return BUILDROOT_SOURCES_DIR_PATH
     else:
-        error("get_sources_prefix: Unknown context")
+        error("get_sources_prefix(): Unknown context")
         return False
 
 
