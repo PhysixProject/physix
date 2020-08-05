@@ -638,7 +638,7 @@ def config_base_system(recipe, context, start, stop):
         """ Dir name of First tarball in list, is passed as arg to the 
             build script """
         if element["archives"] != []:
-            bsp = "/mnt/physix/opt/admin/sources.physix/"+ str(element["archives"][0])
+            bsp = BUILDROOT_SOURCES_DIR_PATH + str(element["archives"][0])
             build_src = top_most_dir(bsp)
         else:
             build_src = ''
