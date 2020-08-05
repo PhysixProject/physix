@@ -942,7 +942,8 @@ def do_list_snapshots():
     Return SUCCESS/FAILURE
     """
 
-    mntpoint = '/opt/admin/.tmp/mnt/'
+    #mntpoint = '/opt/admin/.tmp/mnt/'
+    mntpoint = TMP_MNTPOINT_DIR
 
     if 'btrfs' != root_fs_type():
         error("File system snapshots are not available for " + str(root_fs_type()))
