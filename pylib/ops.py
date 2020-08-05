@@ -735,10 +735,10 @@ def do_toolchain_build(options):
         start = int(options.start_number)
 
     if os.path.exists("/tmp/physix-build.log"):
-        CMD = ['mv', '/tmp/physix-build.log', '/mnt/physix/opt/admin/logs.physix/']
+        CMD = ['mv', '/tmp/physix-build.log', BUILDROOT_PHYSIX_LOGS_DIR]
         if (run_cmd(CMD))[1] != 0:
-            ok("Relocated physix-build.log to /mnt/physix/opt/admin/logs.physix/")
-    logging.basicConfig(filename='/mnt/physix/opt/admin/logs.physix/physix-build.log',
+            ok("Relocated physix-build.log to "+BUILDROOT_PHYSIX_LOGS_DIR)
+    logging.basicConfig(filename=BUILDROOT_PHYSIX_LOGFILE,
                             level=logging.DEBUG)
     info("build toolchain...")
     RECIPE_NAME = str(options.toolchain_conf)
