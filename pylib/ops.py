@@ -795,7 +795,7 @@ def do_base_build(options):
 
     info("------------------------------------")
     info("- Base System Build Completete!")
-    info("- Next Step: Build the toolchain.")
+    info("- Next Step: Configure Base System")
     info("- 1. ./catalyst -c 03-config-base.json")
     info("------------------------------------")
     return SUCCESS
