@@ -171,9 +171,9 @@ def set_build_lock():
         likely using it.
         Return SUCCESS/FAILURE
     """
-    if not os.path.exists('/run/lock/buildbox.lock'):
-        rtn_tpl = run_cmd(['touch', '/run/lock/buildbox.lock'])
-        return validate(rtn_tpl, "Set /run/lock/buildbox.lock")
+    if not os.path.exists(BUILDLOCK_FILE):
+        rtn_tpl = run_cmd(['touch', BUILDLOCK_FILE])
+        return validate(rtn_tpl, "Set "+BUILDLOCK_FILE)
     else:
         error("buildbox.lock Already set.")
         return FAILURE
