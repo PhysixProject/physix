@@ -184,8 +184,8 @@ def unset_build_lock():
     Remove lockfile from File system
     Return SUCCESS/FAILURE
     """
-    if os.path.exists('/run/lock/buildbox.lock'):
-        rtn_tpl = run_cmd(['rm', '/run/lock/buildbox.lock'])
+    if os.path.exists(BUILDLOCK_FILE):
+        rtn_tpl = run_cmd(['rm', BUILDLOCK_FILE])
         return validate(rtn_tpl, "buildbox.lock removed")
     else:
         error("buildbox.lock not Set.")
