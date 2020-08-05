@@ -328,9 +328,9 @@ def get_physix_prefix(context):
 
     rtn = False
     if context == "CHRT":
-        rtn = '/opt/admin/physix/'
+        rtn = PHYSIX_DIR
     elif context == "NON-CHRT":
-        rtn = '/mnt/physix/opt/admin/physix/'
+        rtn = BUILDROOT_PHYSIX_DIR
     else:
         error("get_physix_prefix: Unknown context")
     return rtn
