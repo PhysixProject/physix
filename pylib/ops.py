@@ -774,7 +774,7 @@ def do_base_build(options):
     if options.start_number:
         start = int(options.start_number)
 
-    logging.basicConfig(filename='/mnt/physix/opt/admin/logs.physix/physix-build.log',
+    logging.basicConfig(filename=BUILDROOT_PHYSIX_LOGFILE,
                             level=logging.DEBUG)
     info("Building Base System...")
     RECIPE_NAME = str(options.base_conf)
