@@ -325,12 +325,15 @@ def setup(config):
 
     if not os.path.exists(BUILDROOT+"/opt"):
         os.mkdir(BUILDROOT+"/opt", 755)
-    if not os.path.exists(BUILDROOT+"/opt/admin"):
-        os.mkdir(BUILDROOT+"/opt/admin", 755)
-    if not os.path.exists(BUILDROOT+"/opt/admin/logs.physix"):
-        os.mkdir(BUILDROOT+"/opt/admin/logs.physix", 777)
-    if not os.path.exists(BUILDROOT+"/opt/admin/sources.physix"):
-        os.mkdir(BUILDROOT+"/opt/admin/sources.physix", 770)
+    #if not os.path.exists(BUILDROOT+"/opt/admin"):
+    if not os.path.exists(BUILDROOT_ADMIN_DIR_PATH):
+        os.mkdir(BUILDROOT_ADMIN_DIR_PATH, 755)
+    #if not os.path.exists(BUILDROOT+"/opt/admin/logs.physix"):
+    if not os.path.exists(BUILDROOT_PHYSIX_LOGS_DIR):
+        os.mkdir(BUILDROOT_PHYSIX_LOGS_DIR, 777)
+    #if not os.path.exists(BUILDROOT+"/opt/admin/sources.physix"):
+    if not os.path.exists(BUILDROOT_SOURCES_DIR_PATH):
+        os.mkdir(BUILDROOT_SOURCES_DIR_PATH, 770)
 
     # First find bash
     ret_tpl = run_cmd(['ln', '-sfv', '/usr/bin/bash', '/usr/bin/sh'])
@@ -374,8 +377,8 @@ def setup(config):
     if validate(ret_tpl, "chmod 770 "+tools_dir):
         return FAILURE
 
-    sources_dir = BUILDROOT + "/opt/admin/sources.physix"
-    ret_tpl = run_cmd(['chown', '-v', 'physix', sources_dir])
+    #sources_dir = BUILDROOT + "/opt/admin/sources.physix"
+    ret_tpl = run_cmd(['chown', '-v', 'physix', BUILDROOT_SOURCES_DIR_PATH])
     if validate(ret_tpl, "chown "+sources_dir):
         return FAILURE
 
@@ -383,8 +386,9 @@ def setup(config):
     if validate(ret_tpl, "chmod 750 "+sources_dir):
         return FAILURE
 
-    ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/admin'])
-    if validate(ret_tpl, "Move physix repo to /mnt/physix/opt/admin"):
+    #ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/admin'])
+    ret_tpl = run_cmd(['mv', os.getcwd(), BUILDROOT_ADMIN_DIR_PATH])
+    if validate(ret_tpl, "Move physix repo to "+BUILDROOT_ADMIN_DIR_PATH):
         return FAILURE
 
     return SUCCESS 

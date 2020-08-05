@@ -26,6 +26,9 @@ BUILDROOT_BUILDBOX_DIR_PATH= '/mnt/physix/opt/admin/sources.physix/BUILDBOX'
 PHYSIX_LOGFILE = '/opt/admin/logs.physix/physix-build.log'
 BUILDROOT_PHYSIX_LOGFILE = '/mnt/physix/opt/admin/logs.physix/physix-build.log'
 
+PHYSIX_LOGS_DIR = '/opt/admin/logs.physix'
+BUILDROOT_PHYSIX_LOGS_DIR = '/mnt/physix/opt/admin/logs.physix'
+
 TMP_MNTPOINT_DIR = '/opt/admin/.tmp/mnt/'
 BUILDROOT_TMP_MNTPOINT_DIR = '/mnt/physix/opt/admin/.tmp/mnt/'
 
