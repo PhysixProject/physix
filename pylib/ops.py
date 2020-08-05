@@ -483,21 +483,26 @@ def build_recipe(recipe, context, start, stop):
         """ Dir name of First tarball in list, is taken/used/assumed to be
             the build directory we want to chdir into """
         if element["archives"] != []:
-            bsp = "/opt/admin/sources.physix/"+ str(element["archives"][0])
+            #bsp = "/opt/admin/sources.physix/"+ str(element["archives"][0])
+            bsp = SOURCES_DIR_PATH + str(element["archives"][0])
             build_src = top_most_dir(bsp)
         else:
             build_src = ''
 
-        build_file = os.path.join('/opt/admin/physix/build-scripts/',
+        #build_file = os.path.join('/opt/admin/physix/build-scripts/',
+        build_file = os.path.join(BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
                               str(element["build_script"]))
         log_name = get_name_current_stack() + "-" + str(element["build_script"])
 
         # CHDIR
-        os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
-        cwd = '/opt/admin/sources.physix/BUILDBOX/'+build_src
+        #os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
+        os.chdir(BUILDBOX_DIR_PATH + build_src)
 
+        #cwd = '/opt/admin/sources.physix/BUILDBOX/'+build_src
+        cwd = BUILDBOX_DIR_PATH + build_src
         cmd = [build_file, 'prep']
+
         info("Executing prep() as physix user: " + "[" + str(i) + "] " + str(cmd))
         ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
         if validate(ret_tpl, "prep(): "+str(cmd), True):
@@ -526,7 +531,8 @@ def build_recipe(recipe, context, start, stop):
             return FAILURE
 
         # CHDIR
-        os.chdir('/opt/admin/physix')
+        #os.chdir('/opt/admin/physix')
+        os.chdir(PHYSIX_DIR)
 
 
 
