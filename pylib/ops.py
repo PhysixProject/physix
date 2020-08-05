@@ -915,10 +915,10 @@ def do_pull_sources(options):
     """
 
     context = 'NON-CHRT'
-    dest = "/mnt/physix/opt/admin/sources.physix"
+    dest = BUILDROOT_SOURCES_DIR_PATH
 
     if not os.path.exists(dest):
-        dest = "/opt/admin/sources.physix"
+        dest = SOURCES_DIR_PATH
         context = "CHRT"
         if not os.path.exists(dest):
             error("Pull Sources: Invalid Destination")
