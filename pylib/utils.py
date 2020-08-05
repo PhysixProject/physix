@@ -405,7 +405,7 @@ def setup_user_env(user_name, cwd):
     env[ 'LOGNAME'  ]  = user_name
     env[ 'PWD'      ]  = cwd
     env[ 'USER'     ]  = user_name
-    #report_ids('starting ' + str(args))
+
     return (env, user_uid, user_gid)
 
 
