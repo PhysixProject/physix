@@ -429,9 +429,9 @@ def run_cmd_log_io_as_physix_user(cmd, name, context, cwd):
     rtn = FAILURE
 
     if context == "CHRT":
-        log_path = "/opt/admin/logs.physix/" + log_name
+        log_path = PHYSIX_LOGS_DIR + log_name
     else:
-        log_path = "/mnt/physix/opt/admin/logs.physix/" + log_name
+        log_path = BUILDROOT_PHYSIX_LOGS_DIR + log_name
 
     with open(log_path, "w") as file_desc:
         try:
