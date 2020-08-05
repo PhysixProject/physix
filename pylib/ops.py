@@ -379,11 +379,11 @@ def setup(config):
 
     #sources_dir = BUILDROOT + "/opt/admin/sources.physix"
     ret_tpl = run_cmd(['chown', '-v', 'physix', BUILDROOT_SOURCES_DIR_PATH])
-    if validate(ret_tpl, "chown "+sources_dir):
+    if validate(ret_tpl, "chown "+BUILDROOT_SOURCES_DIR_PATH):
         return FAILURE
 
-    ret_tpl = run_cmd(['chmod', '750', sources_dir])
-    if validate(ret_tpl, "chmod 750 "+sources_dir):
+    ret_tpl = run_cmd(['chmod', '750', BUILDROOT_SOURCES_DIR_PATH])
+    if validate(ret_tpl, "chmod 750 "+BUILDROOT_SOURCES_DIR_PATH):
         return FAILURE
 
     #ret_tpl = run_cmd(['mv', os.getcwd(), '/mnt/physix/opt/admin'])
