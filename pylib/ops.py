@@ -1074,21 +1074,20 @@ def do_delete_snapshot(options):
     options -- dict: config options.
     """
 
-    #mntpoint = '/opt/.tmp/mnt/'
-    mntpoint = TMP_MNTPOINT_DIR
     snap_name = options.delete_snap
 
-    # Check snap_name is not current running stack
     curr_stack = get_name_current_stack()
     if curr_stack == snap_name:
         error("Can not delete currently running snapshot")
         return FAILURE
 
-    # Check snap_name is not a next default stack
+    #TODO Check snap_name is not a next default stack
 
-    if not os.path.exists(mntpoint):
-        ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
-        if validate(ret_tpl, "mkdir "+mntpoint):
+    if not os.path.exists(TMP_MNTPOINT_DIR):
+        try:
+            os.makedirs(TMP_MNTPOINT_DIR, 0o755)
+        except Exception as e:
+            info(str(e))
             return FAILURE
 
     db  = get_db_connection()
@@ -1099,13 +1098,13 @@ def do_delete_snapshot(options):
         return FAILURE
 
     # Just in case it is already mounted.
-    ret_tpl = run_cmd(['umount', mntpoint])
+    ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
 
     physix_root = root_lvm_path()
     if physix_root == None:
         return FAILURE
 
-    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, mntpoint])
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, TMP_MNTPOINT_DIR])
     if validate(ret_tpl, "Mount physix-root to tmp mount point"):
         return FAILURE
 
@@ -1119,11 +1118,11 @@ def do_delete_snapshot(options):
         error("DB: Failed to drop table" + snap_name)
         return FAILURE
 
-    snap_stack_path = mntpoint + snap_name
+    snap_stack_path = TMP_MNTPOINT_DIR + snap_name
     ret_tpl = run_cmd(['rm', '-r', snap_stack_path])
     if validate(ret_tpl, "Remove Snapshot:"+snap_name):
-        ret_tpl = run_cmd(['umount', mntpoint])
-        validate(ret_tpl, "umount mntpoint")
+        ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
+        validate(ret_tpl, "Failed umount mntpoint, after snapshot deleted and DB updated.")
         return FAILURE
 
 
