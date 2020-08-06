@@ -978,7 +978,6 @@ def do_snapshot(options):
     options -- dict: config options.
     """
 
-    mntpoint = TMP_MNTPOINT_DIR
     snap_name = options.snapshot
 
     if 'btrfs' != root_fs_type():
@@ -988,9 +987,11 @@ def do_snapshot(options):
     if not name_is_valid(snap_name):
         return FAILURE
 
-    if not os.path.exists(mntpoint):
-        ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
-        if validate(ret_tpl, "mkdir "+mntpoint):
+    if not os.path.exists(TMP_MNTPOINT_DIR):
+        try:
+            os.makedirs(TMP_MNTPOINT_DIR, 0o755)
+        except Exception as e:
+            info(str(e))
             return FAILURE
 
     commit_id = get_curr_commit_id()
@@ -1010,26 +1011,26 @@ def do_snapshot(options):
         return FAILURE
 
     # Just in case it is already mounted.
-    ret_tpl = run_cmd(['umount', mntpoint])
+    ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
 
     physix_root = root_lvm_path()
     if physix_root == None:
         return FAILURE
 
-    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, mntpoint])
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, TMP_MNTPOINT_DIR])
     if validate(ret_tpl, "Mount root to tmp mount point"):
         return FAILURE
 
-    curr_stack_path = mntpoint + curr_stack
-    snap_stack_path = mntpoint + snap_name
+    curr_stack_path = TMP_MNTPOINT_DIR + curr_stack
+    snap_stack_path = TMP_MNTPOINT_DIR + snap_name
 
     run_cmd(['sync'])
     run_cmd(['sync'])
 
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'snapshot', curr_stack_path, snap_stack_path])
     if validate(ret_tpl, "Record Snapshot:"+snap_name):
-        ret_tpl = run_cmd(['umount', mntpoint])
-        validate(ret_tpl, "umount mntpoint")
+        ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
+        validate(ret_tpl, "umount mntpoint:")
         return FAILURE
 
     entry = (date(), 'SNAPSHOT', commit_id, snap_name, '', '')
@@ -1055,8 +1056,8 @@ def do_snapshot(options):
         error("DB: Failed to copy data from curr_tack to new snapshot")
         return FAILURE
 
-    ret_tpl = run_cmd(['umount', mntpoint])
-    if validate(ret_tpl, "umount mntpoint after taking snapshot"):
+    ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
+    if validate(ret_tpl, "Failed to umount mntpoint after taking snapshot and recording to DB"):
         return FAILURE
 
     ok("System Snapshot Successful: "+snap_name)
