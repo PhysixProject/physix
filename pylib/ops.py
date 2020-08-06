@@ -936,36 +936,36 @@ def do_list_snapshots():
     Return SUCCESS/FAILURE
     """
 
-    #mntpoint = '/opt/admin/.tmp/mnt/'
     mntpoint = TMP_MNTPOINT_DIR
 
     if 'btrfs' != root_fs_type():
         error("File system snapshots are not available for " + str(root_fs_type()))
         return FAILURE
 
-    if not os.path.exists(mntpoint):
-        ret_tpl = run_cmd(['mkdir', '-p', mntpoint])
-        if validate(ret_tpl, "mkdir "+mntpoint):
-            return FAILURE
+    if not os.path.exists(TMP_MNTPOINT_DIR):
+        try:
+            os.makedirs(TMP_MNTPOINT_DIR, 0o755)
+        except Exception as e:
+            info(str(e))
 
     # Just in case it is already mounted.
-    ret_tpl = run_cmd(['umount', mntpoint])
+    ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
 
     physix_root = root_lvm_path()
     if physix_root == None:
         return FAILURE
 
-    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, mntpoint])
+    ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, TMP_MNTPOINT_DIR])
     if validate(ret_tpl, "Mount physix-root to tmp mount point"):
         return FAILURE
 
-    dir_listing = os.listdir(mntpoint)
+    dir_listing = os.listdir(TMP_MNTPOINT_DIR)
     print("Available Snapshots:")
     for snap_name in dir_listing:
         print ("  "+snap_name)
 
-    ret_tpl = run_cmd(['umount', mntpoint])
-    if validate(ret_tpl, "Mount physix-root to tmp mount point"):
+    ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
+    if validate(ret_tpl, "umount mount point"):
         return FAILURE
 
 
