@@ -43,11 +43,12 @@ Quickstart:
 2. Edit physix.conf: Identify the disk you will install to, by setting
    the CONF_ROOT_DEVICE variable.
 
-3. Setup your disk partitions:
-	./catalyst -i physix.conf
+3. Setup the disk partitions by running:
+	 ./catalyst -i physix.conf
+   NOTE: This will move this git repository to /mnt/physix/opt/admin/physix
 
 4. Run build script.
-	cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
+	 cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
 
 
 Branches:
