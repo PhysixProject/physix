@@ -44,9 +44,10 @@ Base Build Complete.
 Next Steps:
 1. reboot
 2. login as root.
-3. Take snapshot of the base system before continuing build:
+3. Download root certs: 'make-ca -g'
+4. Take snapshot of the base system before continuing build:
       cd /opt/admin/physix ; ./catalyst -r SNAPSHOT_NAME
-4. Build Utilities:
+5. Build Utilities:
       ./catalyst -p 04-utilities.json
       ./catalyst -b 04-utilities.json
 EOF
