@@ -542,18 +542,16 @@ def refresh_build_box(context):
 
     if os.path.exists(bb_path):
         ret_tpl = run_cmd(['rm', '-r', bb_path])
-        validate(ret_tpl, '')
+        validate(ret_tpl, 'Failed to rm BUILDBOX')
 
-        os.mkdir(bb_path, 0o700)
-        ret_tpl = run_cmd(['mkdir', '-p', bb_path])
-        validate(ret_tpl, "mkdir bb_path: " + bb_path)
+    try:
+        os.makedirs(bb_path, 0o700)
+    except Exception as e:
+        info(str(e))
+        return FAILURE
 
-        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
-        validate(ret_tpl, "chown physix " + bb_path)
-    else:
-        os.mkdir(bb_path, 0o700)
-        ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
-        validate(ret_tpl, "chown physix " + bb_path)
+    ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
+    validate(ret_tpl, "chown physix " + bb_path)
 
     return True
 
