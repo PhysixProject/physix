@@ -547,7 +547,7 @@ def refresh_build_box(context):
     try:
         os.makedirs(bb_path, 0o700)
     except Exception as e:
-        info(str(e))
+        error(str(e))
         return FAILURE
 
     ret_tpl = run_cmd(['chown', 'physix:root', bb_path])
