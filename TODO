@@ -1,20 +1,28 @@
 
 0. Implement boot via UEFI. 
-   Current tracking branch: efi   
+   Packages are in tree and build. It is believed that what is left
+   is to make the changes to grub build script to install as UEFI.
 
-1. Create Documentation for creating a bootable ISO Image.
+1. Create process/Documentation for creating a bootable ISO Image.
 
-2. For the moment, docbook zip pkgs have been repackaqged as a tar.gz
+2. Break up toolchain scripts into prep(), config(), build(), and build_install().
+   Just like 04-09 recipes
+
+3. Break up Base scripts into prep(), config(), build(), and build_install().
+   Just like 04-09 recipes
+
+4. For the moment, docbook zip pkgs have been repackaqged as a tar.gz
    to fit the process, but this case could be handled.
 
-3. Needed software:
+5. Needed software:
    - irc clients (hexchat)
    - java
    - BCC
+   - lua
 
-4. Implement Advanced Linux Sound Architecture (ALSA)
+6. Implement Advanced Linux Sound Architecture (ALSA)
 
-5. Implement Gnome. 
-   Current Tracking branch: gnome
+7. Implement Gnome. 
+   Current Tracking branch: gnome, and the tree needs to brought up to date.
 
 
