@@ -32,6 +32,11 @@ and Bash programming. It is recommended that you have at least a general
 understanding of the Linux From Scratch book.
 
 
+Media:
+======
+* The Build Process Demo: https://youtu.be/57FnNBbi728
+
+
 Quickstart:
 ===========
 0. Install required tools on the host system:
