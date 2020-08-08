@@ -2,22 +2,35 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
 source /mnt/physix/opt/admin/physix/include.sh || exit 1
-cd $BR_SOURCE_DIR/$1 || exit 1
 source ~/.bashrc
-whoami
 
-./configure --prefix=/tools --without-bash-malloc
-check $? "bash Configre"
+prep() {
+	exit 0
+}
 
-make -j8
-check $? "bash make"
+config() {
+	./configure --prefix=/tools --without-bash-malloc
+	check $? "bash Configre"
+}
 
-#make tests
-#check $? "bash make tests" NOEXIT
+build() {
+	make -j8
+	check $? "bash make"
 
-make install
-check $? "bash  make install"
+	#make tests
+	#check $? "bash make tests" NOEXIT
+}
 
-ln -sfv bash /tools/bin/sh
-check $? "bash: ln -sv bash /tools/bin/sh"
+build_install() {
+	make install
+	check $? "bash  make install"
+
+	ln -sfv bash /tools/bin/sh
+	check $? "bash: ln -sv bash /tools/bin/sh"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
 

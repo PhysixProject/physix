@@ -424,19 +424,38 @@ def build_toolchain(recipe, context, start, stop):
             bsp = os.path.join(get_sources_prefix(context), str(element["archives"][0]))
             build_src = top_most_dir(bsp)
 
-        subcmd = os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
+        build_file= os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
                               str(element["build_script"]))
-        subcmd = " ".join([subcmd, build_src])
-        cmd = ['su', 'physix', '-c', subcmd]
 
-        stack_script = "STACK_0-" + str(element["build_script"])
+        cwd = BUILDROOT_BUILDBOX_DIR_PATH + build_src
+        log_name = 'toolchain' + "-" + str(element["build_script"])
+        os.chdir(cwd)
 
-        info("Building " + str(cmd))
-        ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
-        if validate(ret_tpl, "Build: " + str(cmd), True):
+        cmd = [build_file, 'prep']
+        ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
+        if validate(ret_tpl, "prep(): "+str(cmd), True):
+            unset_build_lock()
             return FAILURE
 
+        cmd = [build_file, 'config'] 
+        ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
+        if validate(ret_tpl, "config(): "+str(cmd), True):
+            unset_build_lock()
+            return FAILURE
+
+        cmd = [build_file, 'build']
+        ret_tpl = run_cmd_log_io_as_physix_user(cmd, log_name, context, cwd)
+        if validate(ret_tpl, "build(): "+str(cmd), True):
+            unset_build_lock()
+            return FAILURE
+ 
+        cmd = [build_file, 'build_install']
+        ret_tpl = run_cmd_log_io_as_root_user(cmd, log_name, "")
+        if validate(ret_tpl, "Build_install(): " + str(cmd), True):
+            return FAILURE
+
+        os.chdir(BUILDROOT_PHYSIX_DIR)
     return SUCCESS
 
 

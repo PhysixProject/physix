@@ -5,7 +5,7 @@
 
 1. Create process/Documentation for creating a bootable ISO Image.
 
-2. Break up toolchain scripts into prep(), config(), build(), and build_install().
+2. [DONE] Break up toolchain scripts into prep(), config(), build(), and build_install().
    Just like 04-09 recipes
 
 3. Break up Base scripts into prep(), config(), build(), and build_install().

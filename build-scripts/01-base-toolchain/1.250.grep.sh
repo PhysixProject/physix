@@ -2,18 +2,38 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
 source /mnt/physix/opt/admin/physix/include.sh || exit 1
-cd $BR_SOURCE_DIR/$1 || exit 1
 source ~/.bashrc
 
-./configure --prefix=/tools
-check $? "Grep: Configure"
+prep() {
+	exit 0
+}
 
-make -j8
-check $? "Grep make"
+config() {
+	./configure --prefix=/tools
+	check $? "Grep: Configure"
+}
 
-make check
-check $? "Grep make check" NOEXIT
+build() {
+	make -j8
+	check $? "Grep make"
+	make check
+	check $? "Grep make check" NOEXIT
+}
 
-make install
-check $? "grep make install"
+build_install() {
+	make install
+	check $? "grep make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
+
 

@@ -2,14 +2,30 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
 source /mnt/physix/opt/admin/physix/include.sh || exit 1
-cd $BR_SOURCE_DIR/$1 || exit 1
 source ~/.bashrc
 
-./configure --disable-shared
-check $? "gettext: Configure"
+prep() {
+	exit 0
+}
 
-make
-check $? "gettext make"
+config() {
+	./configure --disable-shared
+	check $? "gettext: Configure"
+}
 
-cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /tools/bin
+build() {
+	make
+	check $? "gettext make"
+}
+
+build_install() {
+	cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /tools/bin
+	check $? "make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

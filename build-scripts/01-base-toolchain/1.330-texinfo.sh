@@ -2,19 +2,34 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
 source /mnt/physix/opt/admin/physix/include.sh || exit 1
-cd $BR_SOURCE_DIR/$1 || exit 1
 source ~/.bashrc
 
-./configure --prefix=/tools
-check $? "Texinfo: Configure"
+prep() {
+	exit 0
+}
 
-make -j8
-check $? "texingo: make"
+config() {
+	./configure --prefix=/tools
+	check $? "Texinfo: Configure"
+}
 
-make check
-# Not necessary
-check $? "texinfo: make check" NOEXIT
+build() {
+	make -j8
+	check $? "texingo: make"
 
-make install
-check $? "Texinfo: make install"
+	make check
+	# Not necessary
+	check $? "texinfo: make check" NOEXIT
+}
+
+build_install() {
+	make install
+	check $? "Texinfo: make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 

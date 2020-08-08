@@ -2,27 +2,40 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
 source /mnt/physix/opt/admin/physix/include.sh || exit 1
-cd $BR_SOURCE_DIR/$1 || exit 1
 source ~/.bashrc
 
-sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c
-check $? "Findutiles: sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c"
+prep() {
+	sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c
+	check $? "Findutiles: sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c"
 
-sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c
-check $? "Findutiles: sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c"
+	sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c
+	check $? "Findutiles: sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c"
 
-echo "#define _IO_IN_BACKUP 0x100" >> gl/lib/stdio-impl.h
-check $? "Findutils: echo #define _IO_IN_BACKUP 0x100 >> gl/lib/stdio-impl.h "
+	echo "#define _IO_IN_BACKUP 0x100" >> gl/lib/stdio-impl.h
+	check $? "Findutils: echo #define _IO_IN_BACKUP 0x100 >> gl/lib/stdio-impl.h "
+}
 
-./configure --prefix=/tools
-check $? "Findutils configure"
+config() {
+	./configure --prefix=/tools
+	check $? "Findutils configure"
+}
 
-make
-check $? "Findutils make"
+build() {
+	make
+	check $? "Findutils make"
 
-make check
-check $? "Findutils make check" NOEXIT
+	make check
+	check $? "Findutils make check" NOEXIT
+}
 
-make install
-check $? "Findutils make install"
+build_install() {
+	make install
+	check $? "Findutils make install"
+}
+
+[ $1 == 'prep' ]   && prep   && exit $?
+[ $1 == 'config' ] && config && exit $?
+[ $1 == 'build' ]  && build  && exit $?
+[ $1 == 'build_install' ] && build_install && exit $?
+
 
