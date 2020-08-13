@@ -11,6 +11,7 @@ if [ $CONF_UEFI_ENABLE == "n" ] ; then
 fi
 
 patch -Np1 -i ../../efivar-37-gcc_9-1.patch
+chroot_check $? "patch"
 
 make libdir=/usr/lib
 chroot_check $? "make"

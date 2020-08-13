@@ -13,10 +13,15 @@ ROOT_PART='\/dev\/'$ROOT_PART
 KERNEL=`ls /boot | grep vmlinuz-`
 INITRD=`ls /boot | grep initrd-`
 
-# This might fail due to Error:'will not proceed with blocklists'
-# Can be forced with --force
-grub-install --target=i386-pc --force /dev/$ROOT_DEV
-chroot_check $? "grub-install /dev/$ROOT_DEV"
+if [ $CONF_UEFI_ENABLE == "n" ] ; then
+	# This might fail due to Error:'will not proceed with blocklists'
+	# Can be forced with --force
+	grub-install --target=i386-pc --force /dev/$ROOT_DEV
+	chroot_check $? "grub-install /dev/$ROOT_DEV"
+else
+	grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=PHYSIX --force /dev/$ROOT_DEV
+	chroot_check $? "grub-install EFI"
+fi
 
 install --verbose --mode 644 --owner root --group root /opt/admin/physix/build-scripts/03-base-config/configs/lvm-grub.cfg  /boot/grub/grub.cfg
 chroot_check $? "Install grub.cfg"
@@ -42,6 +47,6 @@ if [ -e /boot/grub ] ; then
 	chroot_check $? "install /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts"
 
 	install --verbose --mode 444 --owner root --group root /opt/admin/physix/build-scripts/03-base-config/configs/physix-splash.png  /boot/grub/
-        chroot_check $? "install physix-splash.png /boot/grub/"
+    chroot_check $? "install physix-splash.png /boot/grub/"
 fi
 

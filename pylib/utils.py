@@ -254,6 +254,11 @@ def verify_checker(config):
         error(msg)
         return FAILURE
 
+    if config['CONF_UEFI_ENABLE'].lower() == "y":
+        if not os.path.exists("/sys/firmware/efi"):
+            info("Host system not booted via UEFI")
+            return FAILURE
+
     return SUCCESS
 
 

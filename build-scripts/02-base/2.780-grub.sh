@@ -17,16 +17,14 @@ if [ $CONF_UEFI_ENABLE == "n" ] ; then
 	chroot_check $? "UEFI=n, grub configure"
 
 elif [ $CONF_UEFI_ENABLE == "y" ] ; then
-	exit 1
+	# --enable-grub-mkfont   \
     ./configure --prefix=/usr  \
         --sbindir=/sbin        \
         --sysconfdir=/etc      \
         --disable-efiemu       \
-        --enable-grub-mkfont   \
         --with-platform=efi    \
         --disable-werror
 	chroot_check $? "UEFI=y, grub configure"
-
 else
 	exit 1
 fi

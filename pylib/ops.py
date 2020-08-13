@@ -191,12 +191,12 @@ def mount_volumes(config):
         if validate(ret_tpl, "unmount /mnt/physix"):
             return FAILURE
 
-
-        # This should be moved out of this if-branch?
-        volume_root = "/dev/mapper/" + vol_group_name + "-root"
         ret_tpl = run_cmd(['mount', '-t', 'btrfs', '-o', 'subvol=STACK_0', volume_root, '/mnt/physix'])
         if validate(ret_tpl, "Mount physix-root subvolume: STACK_0"):
             return FAILURE
+
+
+    # TODO: create root as alternative FS
 
     mnt_point = BUILDROOT + "/home"
     os.mkdir(mnt_point, 0o755)
@@ -229,6 +229,14 @@ def mount_volumes(config):
     ret_tpl = run_cmd(['mount', boot_part, boot])
     if validate(ret_tpl, "Mount: " + boot_part):
         return FAILURE
+
+    if config['CONF_UEFI_ENABLE'].lower() == 'y':
+        efi_dir = BUILDROOT + "/boot/efi"
+        os.mkdir(efi_dir, 0o755)
+        efi_boot_part = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n') + "1"
+        ret_tpl = run_cmd(['mount', efi_boot_part, efi_dir])
+        if validate(ret_tpl, "Mount: " + efi_boot_part):
+            return FAILURE
 
     return SUCCESS
 
