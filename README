@@ -243,8 +243,12 @@ Installation:
 
    System Build:
 
-       S0. Disk Partitioning:
+       S0. Partition Disk:
            catalyst -i physix.conf
+           cd /mnt/physix/opt/admin/physix
+
+           To reduce the need to babysit the build, You can skip steps
+           S1. S2, and S3 by running: BUILD_BASE_SYSTEM.sh
 
        S1. Build the temporary toolchain:
            - Pull/Download sources:
