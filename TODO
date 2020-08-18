@@ -8,21 +8,27 @@
 2. [DONE] Break up toolchain scripts into prep(), config(), build(), and build_install().
    Just like 04-09 recipes
 
-3. Break up Base scripts into prep(), config(), build(), and build_install().
+2.5. Move actions in 2.000-base-build-prep.sh and 2.010-directories.sh out of the 
+     software group because 1. it doesn't install software, and 2. it can't not
+     be accomplished by a non-priv'd user.
+
+3. Break up 02-Base scripts into prep(), config(), build(), and build_install().
    Just like 04-09 recipes
 
 4. For the moment, docbook zip pkgs have been repackaqged as a tar.gz
    to fit the process, but this case could be handled.
 
 5. Needed software:
-   - irc clients (hexchat)
+   - irc clients (hexchat, or irssi)
    - java
    - BCC
    - lua
 
-6. Implement Advanced Linux Sound Architecture (ALSA)
+6. Implement catalyst -P to pull down sources from the recipe's alternative url.
 
-7. Implement Gnome. 
+7. Implement Advanced Linux Sound Architecture (ALSA)
+
+8. Implement Gnome. 
    Current Tracking branch: gnome, and the tree needs to brought up to date.
 
 
