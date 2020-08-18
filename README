@@ -40,8 +40,8 @@ Media:
 Quickstart:
 ===========
 0. Install required tools on the host system:
-	* Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git
-	* Fedora : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git
+	* Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
+	* Fedora : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
 
 1. git clone https://github.com/PhysixProject/physix.git
    cd physix
