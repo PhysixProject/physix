@@ -492,6 +492,7 @@ def run_cmd(cmd):
 
     out = ''
     err = ''
+    rtn = 1
     try:
         p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         rtn = int(p.returncode)
@@ -500,9 +501,7 @@ def run_cmd(cmd):
     except Exception as exc:
         error("[Exceotion] Opperation Failed:\n "+str(exc))
 
-    rtn = (int(rtn), str(out), str(err))
-    #info("Returning:" + str(rtn))
-    return rtn
+    return (int(rtn), str(out), str(err))
 
 
 def run_cmd_live(cmd):
