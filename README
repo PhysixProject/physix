@@ -49,6 +49,9 @@ Quickstart:
 2. Edit physix.conf: Identify the disk you will install to, by setting
    the CONF_ROOT_DEVICE variable.
 
+   NOTE: verify '/sbin' is in your environment PATH.
+         echo $PATH | grep '\/sbin'
+
 3. Setup the disk partitions by running:
 	 ./catalyst -i physix.conf
    NOTE: This will move this git repository to /mnt/physix/opt/admin/physix
@@ -158,6 +161,9 @@ Installation:
 
 	P3: No existing partitions/volumes should be present on the storage device. 
 
+    P4. verify '/sbin' is in your environment PATH.
+        echo $PATH | grep '\/sbin'
+        If not, set it in root user's .bashrc
 
    Device Setup: 
 	If your target installation device is NOT blank, use the following steps to remove existing 
@@ -225,12 +231,12 @@ Installation:
                                above example, this would be set to 'sdb'
 
             CONF_GRUB_SET_ROOT=  This option specifies the name and partition used to configure
-                the GRUB bootloader. It is IMPORTANT to set this correctly.
-                It usually takes the form of '(hd0,2)', which indicates
-                Storage Disk 1, Partition 2. This config/value is defined
-                by you systemd BIOS, so if unsure, consult the BIOS config.
+                                 the GRUB bootloader. It is IMPORTANT to set this correctly.
+                                 It usually takes the form of '(hd0,2)', which indicates
+                                 Storage Disk 1, Partition 2. This config/value is defined
+                                 by you systemd BIOS, so if unsure, consult the BIOS config.
 
-	    CONF_GEN_USER=  login name of the a general user other than root, to be
+            CONF_GEN_USER=  login name of the a general user other than root, to be
                             created during installation
 
             CONF_IP_ADDRESS= IP Address of the system at first boot.
