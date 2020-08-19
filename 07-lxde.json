@@ -4,7 +4,7 @@
 	"build_queue": [
 	0, 1, 2, 3, 4, 5, 6, 7,	8, 9,
 	10,	11,	12,	13,	14,	15,	16,	17,	18,	19,
-	20,	21,	22,	23,	24,	25,	26,	27
+	20,	21,	22,	23,	24,	25,	26,	27, 28
 	],
 	"0": {
 		"group": "07-lxde",
@@ -397,7 +397,18 @@
 		"patches": [],
 		"physix_sources": {},
 		"alt_sources": {}
+	},
+	"28": {
+		"group": "07-lxde",
+		"build_script": "7.270-install-wallpaper.sh",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/lxde/sharon-mccutcheon.jpg": "5d67abe7d54c5c284de99ea18d4e0ec1"
+		},
+		"alt_sources": {}
 	}
+
 }
 
 

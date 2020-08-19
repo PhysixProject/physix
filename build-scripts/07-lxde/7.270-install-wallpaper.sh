@@ -1,5 +1,6 @@
 #!/bin/bash
 source /opt/admin/physix/include.sh || exit 1
+source /etc/physix.conf || exit 1
 
 prep() {
 	return 0
@@ -15,13 +16,8 @@ build() {
 
 
 build_install() {
-	if [ -L /etc/systemd/system/default.target ] ; then
-		rm /etc/systemd/system/default.target
-		chroot_check $? "rm link to default.target"
-	fi
-
-	ln -s  /lib/systemd/system/graphical.target /etc/systemd/system/default.target
-	chroot_check $? "link default.target"
+	install -m444 /opt/admin/sources.physix/sharon-mccutcheon.jpg /usr/share/lxde/wallpapers/
+	chroot_check $? "install wallpaper direcory"
 }
 
 [ $1 == 'prep' ]   && prep   && exit $?
