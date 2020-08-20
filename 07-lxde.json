@@ -404,7 +404,8 @@
 		"archives": [],
 		"patches": [],
 		"physix_sources": {
-			"https://physixproject.org/source/lxde/sharon-mccutcheon.jpg": "5d67abe7d54c5c284de99ea18d4e0ec1"
+			"https://physixproject.org/source/lxde/sharon-mccutcheon.jpg":"5d67abe7d54c5c284de99ea18d4e0ec1",
+			"https://physixproject.org/source/lxde/jr-korpa.jpg":"d3b87c716c7abd982621eb42b60e2a53"
 		},
 		"alt_sources": {}
 	}
