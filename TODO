@@ -21,7 +21,6 @@
 5. Needed software:
    - irc clients (hexchat, or irssi)
    - java
-   - BCC
    - lua
 
 6. Implement catalyst -P to pull down sources from the recipe's alternative url.
