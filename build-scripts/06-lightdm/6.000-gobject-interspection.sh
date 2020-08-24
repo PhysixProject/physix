@@ -22,6 +22,9 @@ build_install() {
 	cd ./build
 	ninja install
 	chroot_check $? "ninja install"
+
+	ldconfig
+	chroot_check $? "ldconfig"
 }
 
 [ $1 == 'prep' ]   && prep   && exit $?
