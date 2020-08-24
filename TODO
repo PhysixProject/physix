@@ -1,5 +1,5 @@
 
-0. Implement boot via UEFI. 
+0. [Implemented but still experimental] Implement boot via UEFI. 
    Packages are in tree and build. It is believed that what is left
    is to make the changes to grub build script to install as UEFI.
 
