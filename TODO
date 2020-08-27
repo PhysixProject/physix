@@ -1,7 +1,5 @@
 
 0. [Implemented but still experimental] Implement boot via UEFI. 
-   Packages are in tree and build. It is believed that what is left
-   is to make the changes to grub build script to install as UEFI.
 
 1. Create process/Documentation for creating a bootable ISO Image.
 
@@ -22,12 +20,24 @@
    - irc clients (hexchat, or irssi)
    - java
    - lua
+   - gnupg
 
 6. Implement catalyst -P to pull down sources from the recipe's alternative url.
 
-7. Implement Advanced Linux Sound Architecture (ALSA)
+7. Implement Advanced Linux Sound Architecture (ALSA) because I WANT TO WATCH STAR TREK!
 
 8. Implement Gnome. 
    Current Tracking branch: gnome, and the tree needs to brought up to date.
+
+9. JSON Objects are not ordered, and for readability and understanding of the build
+   process, the order of these elements is important. So, we should implement the
+   recipes such that the recipe is encapsulated within a JSON list (which is ordered).
+   This will require changes to all recipes and catalyst functions which parse it.
+
+10. Maybe think about converting the build-scrips into build_directores (packages) that
+    contain the build-script (similiar to a spec file - BUT NOT) and any associated configs.
+    This will eliminate the need for the general config directory in each software group.
+
+11. Implement LUKS disk encryption
 
 
