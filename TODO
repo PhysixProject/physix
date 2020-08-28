@@ -21,6 +21,7 @@
    - java
    - lua
    - gnupg
+   - fio
 
 6. Implement catalyst -P to pull down sources from the recipe's alternative url.
 
