@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 
 prep() {
 	patch -Np1 -i ../wireless_tools-29-fix_iwlist_scanning-1.patch

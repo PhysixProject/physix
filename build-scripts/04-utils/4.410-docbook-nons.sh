@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 
 prep() {
 	patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source include.sh || exit 1
 source /etc/physix.conf || exit 1
 
 prep() {
@@ -13,7 +13,6 @@ config() {
 build() {
 	return 0
 }
-
 
 build_install() {
 	install -m444 /opt/admin/sources.physix/sharon-mccutcheon.jpg /usr/share/lxde/wallpapers/

@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 
 prep() {
 	patch -Np1 -i ../systemd-243-consolidated_fixes-2.patch

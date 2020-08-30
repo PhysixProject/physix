@@ -1,12 +1,12 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 source /etc/physix.conf || exit 1
 
 prep() {
         CONFIGURE=`pwd`/dhc_configure.sh
 cat <<EOT >> $CONFIGURE
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 source /etc/physix.conf || exit 1
 
 export CFLAGS="$CFLAGS -Wall -fno-strict-aliasing                   \

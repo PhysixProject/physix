@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 
 prep(){ 
 	return 0	

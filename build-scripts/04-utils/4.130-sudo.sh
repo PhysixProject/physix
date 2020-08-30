@@ -1,8 +1,6 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
-
-#TODO Change this to source from /etc/physix.conf
-source /opt/admin/physix/physix.conf || exit 1
+source ../include.sh || exit 1
+source /etc/physix.conf || exit 1
 
 prep(){
 	sed -e '/^pre-install:/{N;s@;@ -a -r $(sudoersdir)/sudoers;@}' \

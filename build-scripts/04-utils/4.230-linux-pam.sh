@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 
 prep() {
 	tar -xf ../../Linux-PAM-1.3.1-docs.tar.xz --strip-components=1
