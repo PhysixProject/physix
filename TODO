@@ -23,6 +23,8 @@
    - gnupg
    - fio
    - xreader
+   - libmnl
+   - ethtool
 
 6. Implement catalyst -P to pull down sources from the recipe's alternative url.
 
