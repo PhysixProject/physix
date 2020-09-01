@@ -378,8 +378,8 @@ def setup(config):
     if validate(ret_tpl, "chown "+tools_dir):
         return FAILURE
 
-    ret_tpl = run_cmd(['chmod', '750', tools_dir])
-    if validate(ret_tpl, "chmod 770 "+tools_dir):
+    ret_tpl = run_cmd(['chmod', '755', tools_dir])
+    if validate(ret_tpl, "chmod 775 "+tools_dir):
         return FAILURE
 
     ret_tpl = run_cmd(['chown', '-v', 'physix', BUILDROOT_SOURCES_DIR_PATH])
