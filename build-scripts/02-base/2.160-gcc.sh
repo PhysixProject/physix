@@ -30,11 +30,12 @@ chroot_check $? "system-build : gcc : configure"
 make -j8
 chroot_check $? "system-build : gcc : make "
 
-ulimit -s 32768
-rm ../gcc/testsuite/g++.dg/pr83239.C
-chown -Rv nobody .
 
 if [ "$CONF_RUN_ALL_TEST_SUITE"=="y" ] ; then
+	ulimit -s 32768
+	rm ../gcc/testsuite/g++.dg/pr83239.C
+	chown -Rv nobody .
+
     su nobody -s /bin/bash -c "PATH=$PATH make -k check"
     ../contrib/test_summary
 fi
