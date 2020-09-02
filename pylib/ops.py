@@ -386,8 +386,8 @@ def setup(config):
     if validate(ret_tpl, "chown "+BUILDROOT_SOURCES_DIR_PATH):
         return FAILURE
 
-    ret_tpl = run_cmd(['chmod', '750', BUILDROOT_SOURCES_DIR_PATH])
-    if validate(ret_tpl, "chmod 750 "+BUILDROOT_SOURCES_DIR_PATH):
+    ret_tpl = run_cmd(['chmod', '755', BUILDROOT_SOURCES_DIR_PATH])
+    if validate(ret_tpl, "chmod 755 "+BUILDROOT_SOURCES_DIR_PATH):
         return FAILURE
 
     ret_tpl = run_cmd(['mv', os.getcwd(), BUILDROOT_ADMIN_DIR_PATH])
