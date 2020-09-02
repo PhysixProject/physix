@@ -549,7 +549,7 @@ def refresh_build_box(context):
         validate(ret_tpl, 'Failed to rm BUILDBOX')
 
     try:
-        os.makedirs(bb_path, 0o700)
+        os.makedirs(bb_path, 0o755)
     except Exception as e:
         error(str(e))
         return FAILURE
