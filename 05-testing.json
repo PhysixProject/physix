@@ -1,7 +1,7 @@
 
 
 {
-	"build_queue": [0, 1, 2, 3, 4],
+	"build_queue": [0, 1, 2, 3, 4, 5],
 	"0": {
 		"group": "05-testing",
 		"build_script": "5.000-ltp.sh",
@@ -71,7 +71,22 @@
 		"alt_sources": {
 			"https://www.tcpdump.org/release/tcpdump-4.9.3.tar.gz":"a4ead41d371f91aa0a2287f589958bae"
 		}
+	},
+	"5": {
+		"group": "05-testing",
+		"build_script": "5.040-sysstat.sh",
+		"archives": [
+			"sysstat-12.4.0.tar.gz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/testing/sysstat-12.4.0.tar.gz":"cfc48837b0e2fc08a98aa6dea3002894"
+		},
+		"alt_sources": {
+			"https://github.com/sysstat/sysstat/archive/v12.4.0.tar.gz":"cfc48837b0e2fc08a98aa6dea3002894"
+		}
 	}
+
 }
 
 
