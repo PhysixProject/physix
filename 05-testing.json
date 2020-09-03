@@ -1,7 +1,7 @@
 
 
 {
-	"build_queue": [0, 1, 2],
+	"build_queue": [0, 1, 2, 3],
 	"0": {
 		"group": "05-testing",
 		"build_script": "5.000-ltp.sh",
@@ -43,9 +43,21 @@
 		"alt_sources": {
 			"https://github.com/iovisor/bcc/releases/download/v0.16.0/bcc-src-with-submodule.tar.gz":"5753ca10617dea73c511c40f69a68b1e"
 		}
+	},
+	"3": {
+		"group": "05-testing",
+		"build_script": "5.020-libpcap.sh",
+		"archives": [
+			"libpcap-1.9.1.tar.gz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/testing/libpcap-1.9.1.tar.gz": "21af603d9a591c7d96a6457021d84e6c"
+		},
+		"alt_sources": {
+			"https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz":"21af603d9a591c7d96a6457021d84e6c"
+		}
 	}
-
-
 }
 
 
