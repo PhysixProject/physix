@@ -4,7 +4,7 @@
 
 	"0":{
 		"group": "03-base-config",
-		"build_script": "3.020-set-hostname.sh",
+		"build_script": "3.020-set-hostname",
 		"archives": [],
 		"patches": "",
 		"physix_sources": {},
@@ -13,7 +13,7 @@
 
 	"1":{
 		"group": "03-base-config",
-		"build_script": "3.030-network-conf.sh",
+		"build_script": "3.030-network-conf",
 		"archives": [],
 		"patches": [],
 		"physix_sources":{},
@@ -22,7 +22,7 @@
 
 	"2":{
 		"group": "03-base-config",
-		"build_script": "3.040-shells.sh",
+		"build_script": "3.040-shells",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},
@@ -31,7 +31,7 @@
 
 	"3":{
 		"group": "03-base-config",
-		"build_script": "3.050-disable-clrscrn.sh",
+		"build_script": "3.050-disable-clrscrn",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},
@@ -40,7 +40,7 @@
 
 	"4":{
 		"group": "03-base-config",
-		"build_script": "3.060-fstab.sh",
+		"build_script": "3.060-fstab",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},
@@ -49,7 +49,7 @@
 
 	"5":{
 		"group": "03-base-config",
-		"build_script": "3.070-kernel.sh",
+		"build_script": "3.070-kernel",
 		"archives": ["linux-5.4.47.tar.xz"],
 		"patches": [],
 		"physix_sources": {
@@ -62,7 +62,7 @@
 
 	"6":{
 		"group": "03-base-config",
-		"build_script": "3.080-grub.sh",
+		"build_script": "3.080-grub",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},
@@ -71,7 +71,7 @@
 
 	"7":{
 		"group": "03-base-config",
-		"build_script": "3.100-os-release.sh",
+		"build_script": "3.100-os-release",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},
@@ -80,7 +80,7 @@
 
 	"8":{
 		"group": "03-base-config",
-		"build_script": "3.105-set-resolv-conf.sh",
+		"build_script": "3.105-set-resolv-conf",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},
@@ -89,7 +89,7 @@
 
 	"9":{
 		"group": "03-base-config",
-		"build_script": "3.110-setup-users.sh",
+		"build_script": "3.110-setup-users",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},

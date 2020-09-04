@@ -1,8 +1,0 @@
-[Unit]
-Description=Kerberos 5 Administration Server
-
-[Service]
-ExecStart=/usr/sbin/kadmind -nofork
-
-[Install]
-WantedBy=multi-user.target

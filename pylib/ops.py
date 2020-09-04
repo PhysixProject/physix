@@ -432,9 +432,10 @@ def build_toolchain(recipe, context, start, stop):
             bsp = os.path.join(get_sources_prefix(context), str(element["archives"][0]))
             build_src = top_most_dir(bsp)
 
-        build_file= os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
+        build_file = os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
-                              str(element["build_script"]))
+                              str(element["build_script"]),
+                              "build.sh")
 
         cwd = BUILDROOT_BUILDBOX_DIR_PATH + build_src
         log_name = 'toolchain' + "-" + str(element["build_script"])
@@ -513,7 +514,8 @@ def build_recipe(recipe, context, start, stop):
         #build_file = os.path.join('/opt/admin/physix/build-scripts/',
         build_file = os.path.join(BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
-                              str(element["build_script"]))
+                              str(element["build_script"]),
+                              "build.sh")
         log_name = get_name_current_stack() + "-" + str(element["build_script"])
 
         # CHDIR
@@ -545,7 +547,7 @@ def build_recipe(recipe, context, start, stop):
             return FAILURE
 
         cmd = [build_file, 'build_install']
-        info("Executing build() as root user: " + "[" + str(i) + "] " + str(cmd))
+        info("Executing build_install() as root user: " + "[" + str(i) + "] " + str(cmd))
         ret_tpl = run_cmd_log_io_as_root_user(cmd, log_name, context)
         if validate(ret_tpl, "Build_install(): "+str(cmd), True):
             unset_build_lock()
@@ -586,7 +588,7 @@ def build_base(recipe, context, start, stop):
     """
 
     if start == 0:
-        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/2.000-base-build-prep.sh']
+        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/2.000-base-build-prep/build.sh']
         ret_tpl = run_cmd_log_io_as_root_user(cmd, "2.000-base-build-prep.sh", "")
         if validate(ret_tpl, "Build: " + str(cmd)):
             return FAILURE
@@ -676,7 +678,7 @@ def config_base_system(recipe, context, start, stop):
 
     """ Special case for user to set password without logging"""
     cmd = ['/mnt/physix/opt/admin/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
-           '3.111-set-passwd.sh']
+           '3.111-set-passwd']
     run_cmd_live(cmd)
 
 

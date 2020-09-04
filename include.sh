@@ -4,9 +4,8 @@
 export BUILDROOT='/mnt/physix'
 export BR_SOURCE_DIR=$BUILDROOT/opt/admin/sources.physix/BUILDBOX
 export SOURCE_DIR=/opt/admin/sources.physix/BUILDBOX
-
-NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
-export NPROC
+export NPROC=`grep -e ^processor /proc/cpuinfo | wc -l`
+export PKG_DIR_PATH=$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 
 function ok() {
 	local MSG=$1

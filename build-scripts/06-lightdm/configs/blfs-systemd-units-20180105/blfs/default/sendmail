@@ -1,6 +1,0 @@
-# Begin /etc/default/sendmail
-
-# Options to pass to sendmail.
-SENDMAIL_OPTS="-q5m"
-
-# End /etc/default/sendmail

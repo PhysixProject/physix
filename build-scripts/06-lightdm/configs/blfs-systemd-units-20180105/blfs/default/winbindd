@@ -1,6 +1,0 @@
-# Begin /etc/default/winbindd
-
-# Options to pass to winbindd.
-WINBINDD_OPTS=
-
-# End /etc/default/winbindd
