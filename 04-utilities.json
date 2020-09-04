@@ -7,7 +7,7 @@
 					30,	31,	32,	33,	34,	35,	36,	37,	38,	39,
 					40,	41,	42,	43, 44,	45,	46,	47,	48,	49,
 					50,	51,	52,	53,	54,	55,	56,	57,	58,	59,
-					60,	61,	62,	63],
+					60,	61,	62],
 	"0": 
 	{
 		"group": "04-utils",
@@ -1187,24 +1187,6 @@
 		"alt_sources": 
 		{
 			"https://static.rust-lang.org/dist/rustc-1.35.0-src.tar.gz": "f43af67a139ce21ff5f530bbd2f486aa"
-		}
-	},
-	"63": 
-	{
-		"group": "04-utils",
-		"build_script": "4.770-dhclient.sh",
-		"archives": 
-		[
-			"dhcp-4.4.2.tar.gz"
-		],
-		"patches": [],
-		"physix_sources": 
-		{
-			"https://physixproject.org/source/utils/dhcp-4.4.2.tar.gz": "2afdaf8498dc1edaf3012efdd589b3e1"
-		},
-		"alt_sources": 
-		{
-			"ftp://ftp.isc.org/isc/dhcp/4.4.2/dhcp-4.4.2.tar.gz": "2afdaf8498dc1edaf3012efdd589b3e1"
 		}
 	}
 }
