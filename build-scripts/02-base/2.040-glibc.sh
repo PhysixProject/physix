@@ -38,8 +38,10 @@ case $(uname -m) in
   x86_64) ln -sfnv $PWD/elf/ld-linux-x86-64.so.2 /lib ;;
 esac
 
-make check
-chroot_check $? "system-build : glibc : make check" NOEXIT
+if [ "$CONF_RUN_ALL_TEST_SUITE"=="y" ] ; then
+	make check
+	chroot_check $? "system-build : glibc : make check" NOEXIT
+fi
 
 touch /etc/ld.so.conf
 
