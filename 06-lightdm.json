@@ -10,7 +10,7 @@
 	],
 	"0": {
 		"group": "06-lightdm",
-		"build_script": "6.000-gobject-interspection",
+		"package": "6.000-gobject-interspection",
 		"archives": [
 			"gobject-introspection-1.60.2.tar.xz"
 		],
@@ -24,7 +24,7 @@
 	},
 	"1": {
 		"group": "06-lightdm",
-		"build_script": "6.001-accountservice",
+		"package": "6.001-accountservice",
 		"archives": [
 			"accountsservice-0.6.55.tar.xz"
 		],
@@ -38,7 +38,7 @@
 	},
 	"2": {
 		"group": "06-lightdm",
-		"build_script": "6.999-general",
+		"package": "6.999-general",
 		"archives": [
 			"atk-2.32.0.tar.xz"
 		],
@@ -52,7 +52,7 @@
 	},
 	"3": {
 		"group": "06-lightdm",
-		"build_script": "6.010-at-spi2-core",
+		"package": "6.010-at-spi2-core",
 		"archives": [
 			"at-spi2-core-2.32.1.tar.xz"
 		],
@@ -66,7 +66,7 @@
 	},
 	"4": {
 		"group": "06-lightdm",
-		"build_script": "6.020-at-spi2-atk",
+		"package": "6.020-at-spi2-atk",
 		"archives": [
 			"at-spi2-atk-2.32.0.tar.xz"
 		],
@@ -80,7 +80,7 @@
 	},
 	"5": {
 		"group": "06-lightdm",
-		"build_script": "6.999-general",
+		"package": "6.999-general",
 		"archives": [
 			"fribidi-1.0.5.tar.bz2"
 		],
@@ -94,7 +94,7 @@
 	},
 	"6": {
 		"group": "06-lightdm",
-		"build_script": "6.050-nasm",
+		"package": "6.050-nasm",
 		"archives": [
 			"nasm-2.14.02.tar.xz"
 		],
@@ -108,7 +108,7 @@
 	},
 	"7": {
 		"group": "06-lightdm",
-		"build_script": "6.060-libpng",
+		"package": "6.060-libpng",
 		"archives": [
 			"libpng-1.6.37.tar.xz",
 			"libpng-1.6.37-apng.patch.gz"
@@ -125,7 +125,7 @@
 	},
 	"8": {
 		"group": "06-lightdm",
-		"build_script": "6.070-libjpeg-turbo",
+		"package": "6.070-libjpeg-turbo",
 		"archives": [
 			"libjpeg-turbo-2.0.2.tar.gz"
 		],
@@ -139,7 +139,7 @@
 	},
 	"9": {
 		"group": "06-lightdm",
-		"build_script": "6.073-libxml2",
+		"package": "6.073-libxml2",
 		"archives": [
 			"libxml2-2.9.9.tar.gz"
 		],
@@ -153,7 +153,7 @@
 	},
 	"10": {
 		"group": "06-lightdm",
-		"build_script": "6.075-shared-mime",
+		"package": "6.075-shared-mime",
 		"archives": [
 			"shared-mime-info-1.12.tar.xz"
 		],
@@ -167,7 +167,7 @@
 	},
 	"11": {
 		"group": "06-lightdm",
-		"build_script": "6.080-sgml-common",
+		"package": "6.080-sgml-common",
 		"archives": [
 			"sgml-common-0.6.3.tgz"
 		],
@@ -185,7 +185,7 @@
 	},
 	"12": {
 		"group": "06-lightdm",
-		"build_script": "6.110-Graphite2",
+		"package": "6.110-Graphite2",
 		"archives": [
 			"graphite2-1.3.13.tgz"
 		],
@@ -199,7 +199,7 @@
 	},
 	"13": {
 		"group": "06-lightdm",
-		"build_script": "6.120-harfbuzz",
+		"package": "6.120-harfbuzz",
 		"archives": [
 			"harfbuzz-2.6.0.tar.xz"
 		],
@@ -213,7 +213,7 @@
 	},
 	"14": {
 		"group": "06-lightdm",
-		"build_script": "6.130-freetype",
+		"package": "6.130-freetype",
 		"archives": [
 			"freetype-2.10.1.tar.xz"
 		],
@@ -227,7 +227,7 @@
 	},
 	"15": {
 		"group": "06-lightdm",
-		"build_script": "6.140-cairo",
+		"package": "6.140-cairo",
 		"archives": [
 			"cairo-1.16.0.tar.xz"
 		],
@@ -241,7 +241,7 @@
 	},
 	"16": {
 		"group": "06-lightdm",
-		"build_script": "6.141-graphviz",
+		"package": "6.141-graphviz",
 		"archives": [
 			"graphviz.tar.gz"
 		],
@@ -255,7 +255,7 @@
 	},
 	"17": {
 		"group": "06-lightdm",
-		"build_script": "6.142-vala",
+		"package": "6.142-vala",
 		"archives": [
 			"vala-0.44.7.tar.xz"
 		],
@@ -269,7 +269,7 @@
 	},
 	"18": {
 		"group": "06-lightdm",
-		"build_script": "6.150-adwaita-icon-theme",
+		"package": "6.150-adwaita-icon-theme",
 		"archives": [
 			"adwaita-icon-theme-3.32.0.tar.xz"
 		],
@@ -283,7 +283,7 @@
 	},
 	"19": {
 		"group": "06-lightdm",
-		"build_script": "6.151-hicolor-icon-theme",
+		"package": "6.151-hicolor-icon-theme",
 		"archives": [
 			"hicolor-icon-theme-0.17.tar.xz"
 		],
@@ -297,7 +297,7 @@
 	},
 	"20": {
 		"group": "06-lightdm",
-		"build_script": "6.160-iso-codes",
+		"package": "6.160-iso-codes",
 		"archives": [
 			"iso-codes-4.3.tar.xz"
 		],
@@ -311,7 +311,7 @@
 	},
 	"21": {
 		"group": "06-lightdm",
-		"build_script": "6.180-xkeyboard-config",
+		"package": "6.180-xkeyboard-config",
 		"archives": [
 			"xkeyboard-config-2.27.tar.bz2"
 		],
@@ -325,7 +325,7 @@
 	},
 	"22": {
 		"group": "06-lightdm",
-		"build_script": "6.170-libxkbcommon",
+		"package": "6.170-libxkbcommon",
 		"archives": [
 			"libxkbcommon-0.8.4.tar.xz"
 		],
@@ -339,7 +339,7 @@
 	},
 	"23": {
 		"group": "06-lightdm",
-		"build_script": "6.180-pango",
+		"package": "6.180-pango",
 		"archives": [
 			"pango-1.42.4.tar.xz"
 		],
@@ -353,7 +353,7 @@
 	},
 	"24": {
 		"group": "06-lightdm",
-		"build_script": "6.190-libsass",
+		"package": "6.190-libsass",
 		"archives": [
 			"libsass-3.6.1.tar.gz"
 		],
@@ -369,7 +369,7 @@
 	},
 	"25": {
 		"group": "06-lightdm",
-		"build_script": "6.195-sassc",
+		"package": "6.195-sassc",
 		"archives": [
 			"sassc-3.6.1.tar.gz"
 		],
@@ -380,7 +380,7 @@
 	},
 	"26": {
 		"group": "06-lightdm",
-		"build_script": "6.200-libcroco",
+		"package": "6.200-libcroco",
 		"archives": [
 			"libcroco-0.6.13.tar.xz"
 		],
@@ -394,7 +394,7 @@
 	},
 	"27": {
 		"group": "06-lightdm",
-		"build_script": "6.210-LibTIFF",
+		"package": "6.210-LibTIFF",
 		"archives": [
 			"tiff-4.0.10.tar.gz"
 		],
@@ -408,7 +408,7 @@
 	},
 	"28": {
 		"group": "06-lightdm",
-		"build_script": "6.220-itstool",
+		"package": "6.220-itstool",
 		"archives": [
 			"itstool-2.0.6.tar.bz2"
 		],
@@ -422,7 +422,7 @@
 	},
 	"29": {
 		"group": "06-lightdm",
-		"build_script": "6.230-libxslt",
+		"package": "6.230-libxslt",
 		"archives": [
 			"libxslt-1.1.33.tar.gz"
 		],
@@ -440,7 +440,7 @@
 	},
 	"30": {
 		"group": "06-lightdm",
-		"build_script": "6.240-gdkpix-buf",
+		"package": "6.240-gdkpix-buf",
 		"archives": [
 			"gdk-pixbuf-2.38.1.tar.xz"
 		],
@@ -454,7 +454,7 @@
 	},
 	"31": {
 		"group": "06-lightdm",
-		"build_script": "6.260-libxklavier",
+		"package": "6.260-libxklavier",
 		"archives": [
 			"libxklavier-5.4.tar.bz2"
 		],
@@ -468,7 +468,7 @@
 	},
 	"32": {
 		"group": "06-lightdm",
-		"build_script": "6.265-librsvg",
+		"package": "6.265-librsvg",
 		"archives": [
 			"librsvg-2.44.14.tar.xz"
 		],
@@ -482,7 +482,7 @@
 	},
 	"33": {
 		"group": "06-lightdm",
-		"build_script": "6.270-perl-uri",
+		"package": "6.270-perl-uri",
 		"archives": [
 			"URI-1.76.tar.gz"
 		],
@@ -496,7 +496,7 @@
 	},
 	"34": {
 		"group": "06-lightdm",
-		"build_script": "6.271-docbook-xml-dtd",
+		"package": "6.271-docbook-xml-dtd",
 		"archives": [
 			"docbook-xml-4.5.tar.gz"
 		],
@@ -510,7 +510,7 @@
 	},
 	"35": {
 		"group": "06-lightdm",
-		"build_script": "6.280-gtk",
+		"package": "6.280-gtk",
 		"archives": [
 			"gtk+-3.24.20.tar.xz"
 		],
@@ -524,7 +524,7 @@
 	},
 	"36": {
 		"group": "06-lightdm",
-		"build_script": "6.290-libxfce4util",
+		"package": "6.290-libxfce4util",
 		"archives": [
 			"libxfce4util-4.14.0.tar.bz2"
 		],
@@ -538,7 +538,7 @@
 	},
 	"37": {
 		"group": "06-lightdm",
-		"build_script": "6.292-libxfconf",
+		"package": "6.292-libxfconf",
 		"archives": [
 			"xfconf-4.14.1.tar.bz2"
 		],
@@ -552,7 +552,7 @@
 	},
 	"38": {
 		"group": "06-lightdm",
-		"build_script": "6.291-libxfce4ui",
+		"package": "6.291-libxfce4ui",
 		"archives": [
 			"libxfce4ui-4.14.1.tar.bz2"
 		],
@@ -566,7 +566,7 @@
 	},
 	"39": {
 		"group": "06-lightdm",
-		"build_script": "6.300-exo",
+		"package": "6.300-exo",
 		"archives": [
 			"exo-0.12.8.tar.bz2"
 		],
@@ -580,7 +580,7 @@
 	},
 	"40": {
 		"group": "06-lightdm",
-		"build_script": "6.310-lightdm",
+		"package": "6.310-lightdm",
 		"archives": [
 			"lightdm-1.30.0.tar.xz"
 		],
@@ -596,7 +596,7 @@
 	},
 	"41": {
 		"group": "06-lightdm",
-		"build_script": "6.320-lightdm-greeter",
+		"package": "6.320-lightdm-greeter",
 		"archives": [
 			"lightdm-gtk-greeter-2.0.6.tar.gz"
 		],

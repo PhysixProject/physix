@@ -9,7 +9,7 @@
 	],
 	"0": {
 		"group": "01-base-toolchain",
-		"build_script": "1.040-binutils-p1",
+		"package": "1.040-binutils-p1",
 		"archives": [
 			"binutils-2.34.tar.xz"
 		],
@@ -24,7 +24,7 @@
 	},
 	"1": {
 		"group": "01-base-toolchain",
-		"build_script": "1.050-gcc-p1",
+		"package": "1.050-gcc-p1",
 		"archives": [
 			"gcc-9.2.0.tar.xz",
 			"mpfr-4.0.2.tar.xz",
@@ -48,7 +48,7 @@
 	},
 	"2": {
 		"group": "01-base-toolchain",
-		"build_script": "1.060-linux-api-headers",
+		"package": "1.060-linux-api-headers",
 		"archives": [
 			"linux-5.4.47.tar.xz"
 		],
@@ -63,7 +63,7 @@
 	},
 	"3": {
 		"group": "01-base-toolchain",
-		"build_script": "1.070-glibc",
+		"package": "1.070-glibc",
 		"archives": [
 			"glibc-2.30.tar.xz"
 		],
@@ -78,7 +78,7 @@
 	},
 	"4": {
 		"group": "01-base-toolchain",
-		"build_script": "1.080-libstdc++",
+		"package": "1.080-libstdc++",
 		"archives": [
 			"gcc-9.2.0.tar.xz"
 		],
@@ -93,7 +93,7 @@
 	},
 	"5": {
 		"group": "01-base-toolchain",
-		"build_script": "1.090-binutils-p2",
+		"package": "1.090-binutils-p2",
 		"archives": [
 			"binutils-2.34.tar.xz"
 		],
@@ -108,7 +108,7 @@
 	},
 	"6": {
 		"group": "01-base-toolchain",
-		"build_script": "1.100-gcc-p2",
+		"package": "1.100-gcc-p2",
 		"archives": [
 			"gcc-9.2.0.tar.xz",
 			"mpfr-4.0.2.tar.xz",
@@ -132,7 +132,7 @@
 	},
 	"7": {
 		"group": "01-base-toolchain",
-		"build_script": "1.110-tcl",
+		"package": "1.110-tcl",
 		"archives": [
 			"tcl8.6.9-src.tar.gz"
 		],
@@ -147,7 +147,7 @@
 	},
 	"8": {
 		"group": "01-base-toolchain",
-		"build_script": "1.120-expect",
+		"package": "1.120-expect",
 		"archives": [
 			"expect5.45.4.tar.gz"
 		],
@@ -162,7 +162,7 @@
 	},
 	"9": {
 		"group": "01-base-toolchain",
-		"build_script": "1.130-dejaGNU",
+		"package": "1.130-dejaGNU",
 		"archives": [
 			"dejagnu-1.6.2.tar.gz"
 		],
@@ -177,7 +177,7 @@
 	},
 	"10": {
 		"group": "01-base-toolchain",
-		"build_script": "1.140-m4",
+		"package": "1.140-m4",
 		"archives": [
 			"m4-1.4.18.tar.xz"
 		],
@@ -192,7 +192,7 @@
 	},
 	"11": {
 		"group": "01-base-toolchain",
-		"build_script": "1.150-ncurses",
+		"package": "1.150-ncurses",
 		"archives": [
 			"ncurses-6.1.tar.gz"
 		],
@@ -207,7 +207,7 @@
 	},
 	"12": {
 		"group": "01-base-toolchain",
-		"build_script": "1.160-bash",
+		"package": "1.160-bash",
 		"archives": [
 			"bash-5.0.tar.gz"
 		],
@@ -222,7 +222,7 @@
 	},
 	"13": {
 		"group": "01-base-toolchain",
-		"build_script": "1.170-bison",
+		"package": "1.170-bison",
 		"archives": [
 			"bison-3.4.1.tar.xz"
 		],
@@ -237,7 +237,7 @@
 	},
 	"14": {
 		"group": "01-base-toolchain",
-		"build_script": "1.180-bzip",
+		"package": "1.180-bzip",
 		"archives": [
 			"bzip2-1.0.8.tar.gz"
 		],
@@ -252,7 +252,7 @@
 	},
 	"15": {
 		"group": "01-base-toolchain",
-		"build_script": "1.190-coreutils",
+		"package": "1.190-coreutils",
 		"archives": [
 			"coreutils-8.31.tar.xz"
 		],
@@ -267,7 +267,7 @@
 	},
 	"16": {
 		"group": "01-base-toolchain",
-		"build_script": "1.200-diffutils",
+		"package": "1.200-diffutils",
 		"archives": [
 			"diffutils-3.7.tar.xz"
 		],
@@ -282,7 +282,7 @@
 	},
 	"17": {
 		"group": "01-base-toolchain",
-		"build_script": "1.210-File",
+		"package": "1.210-File",
 		"archives": [
 			"file-5.37.tar.gz"
 		],
@@ -297,7 +297,7 @@
 	},
 	"18": {
 		"group": "01-base-toolchain",
-		"build_script": "1.220-findutils",
+		"package": "1.220-findutils",
 		"archives": [
 			"findutils-4.6.0.tar.gz"
 		],
@@ -312,7 +312,7 @@
 	},
 	"19": {
 		"group": "01-base-toolchain",
-		"build_script": "1.230-gawk",
+		"package": "1.230-gawk",
 		"archives": [
 			"gawk-5.0.1.tar.xz"
 		],
@@ -327,7 +327,7 @@
 	},
 	"20": {
 		"group": "01-base-toolchain",
-		"build_script": "1.240-gettext",
+		"package": "1.240-gettext",
 		"archives": [
 			"gettext-0.20.1.tar.xz"
 		],
@@ -342,7 +342,7 @@
 	},
 	"21": {
 		"group": "01-base-toolchain",
-		"build_script": "1.250.grep",
+		"package": "1.250.grep",
 		"archives": [
 			"grep-3.3.tar.xz"
 		],
@@ -357,7 +357,7 @@
 	},
 	"22": {
 		"group": "01-base-toolchain",
-		"build_script": "1.260-gzip",
+		"package": "1.260-gzip",
 		"archives": [
 			"gzip-1.10.tar.xz"
 		],
@@ -372,7 +372,7 @@
 	},
 	"23": {
 		"group": "01-base-toolchain",
-		"build_script": "1.270-make",
+		"package": "1.270-make",
 		"archives": [
 			"make-4.2.1.tar.gz"
 		],
@@ -387,7 +387,7 @@
 	},
 	"24": {
 		"group": "01-base-toolchain",
-		"build_script": "1.280-patch",
+		"package": "1.280-patch",
 		"archives": [
 			"patch-2.7.6.tar.xz"
 		],
@@ -402,7 +402,7 @@
 	},
 	"25": {
 		"group": "01-base-toolchain",
-		"build_script": "1.290-perl",
+		"package": "1.290-perl",
 		"archives": [
 			"perl-5.30.0.tar.xz"
 		],
@@ -417,7 +417,7 @@
 	},
 	"26": {
 		"group": "01-base-toolchain",
-		"build_script": "1.300-python",
+		"package": "1.300-python",
 		"archives": [
 			"Python-3.7.4.tar.xz"
 		],
@@ -433,7 +433,7 @@
 	},
 	"27": {
 		"group": "01-base-toolchain",
-		"build_script": "1.310-sed",
+		"package": "1.310-sed",
 		"archives": [
 			"sed-4.7.tar.xz"
 		],
@@ -448,7 +448,7 @@
 	},
 	"28": {
 		"group": "01-base-toolchain",
-		"build_script": "1.320-tar",
+		"package": "1.320-tar",
 		"archives": [
 			"tar-1.32.tar.xz"
 		],
@@ -463,7 +463,7 @@
 	},
 	"29": {
 		"group": "01-base-toolchain",
-		"build_script": "1.330-texinfo",
+		"package": "1.330-texinfo",
 		"archives": [
 			"texinfo-6.6.tar.xz"
 		],
@@ -478,7 +478,7 @@
 	},
 	"30": {
 		"group": "01-base-toolchain",
-		"build_script": "1.340-util-linux",
+		"package": "1.340-util-linux",
 		"archives": [
 			"util-linux-2.34.tar.xz"
 		],
@@ -493,7 +493,7 @@
 	},
 	"31": {
 		"group": "01-base-toolchain",
-		"build_script": "1.350-xz",
+		"package": "1.350-xz",
 		"archives": [
 			"xz-5.2.4.tar.xz"
 		],
@@ -508,7 +508,7 @@
 	},
 	"32": {
 		"group": "01-base-toolchain",
-		"build_script": "1.360-stripping",
+		"package": "1.360-stripping",
 		"archives": [],
 		"patches": [],
 		"physix_sources": {},

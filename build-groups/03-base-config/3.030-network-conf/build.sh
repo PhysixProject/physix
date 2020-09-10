@@ -36,7 +36,7 @@ chroot_check $? "Set DOMAIN: $CONF_DOMAIN"
 # SETUP /etc/systemd/network/10-ether0.link
 report "Creating /etc/systemd/network/10-ether0.link"
 install -v -m644 $PKG_DIR_PATH/etc_network_10-ether0.link.cfg  /etc/systemd/network/10-ether0.link
-chroot_check $? "system config : network :  cp -v /physix/config_scripts/etc_network_10-ether0.linkf.cfg /etc/systemd/network/10-ether0.link"
+chroot_check $? "install -v -m644 $PKG_DIR_PATH/etc_network_10-ether0.link.cfg"
 
 SED_CMD='s/MAC_ADDRESS_MARKER/'$MAC'/g'
 sed -i $SED_CMD /etc/systemd/network/10-ether0.link
@@ -66,5 +66,5 @@ for IFACE in `ls /sys/class/net` ; do
 done
 
 install -v -m644 $PKG_DIR_PATH/motd  /etc/motd
-chroot_check $? "cp -v /physix/build-scripts.config/configs/motd /etc/motd"
+chroot_check $? "install -v -m644 $PKG_DIR_PATH/motd  /etc/motd"
 

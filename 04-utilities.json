@@ -13,7 +13,7 @@
 	"0": 
 	{
 		"group": "04-utils",
-		"build_script": "4.070-nettle",
+		"package": "4.070-nettle",
 		"archives": 
 		[
 			"nettle-3.5.1.tar.gz"
@@ -31,7 +31,7 @@
 	"1": 
 	{
 		"group": "04-utils",
-		"build_script": "4.080-json-c",
+		"package": "4.080-json-c",
 		"archives": 
 		[
 			"json-c-0.13.1.tar.gz"
@@ -49,7 +49,7 @@
 	"2": 
 	{
 		"group": "04-utils",
-		"build_script": "4.090-libgpg-error",
+		"package": "4.090-libgpg-error",
 		"archives": 
 		[
 			"libgpg-error-1.36.tar.bz2"
@@ -67,7 +67,7 @@
 	"3": 
 	{
 		"group": "04-utils",
-		"build_script": "4.100-libgcrypt",
+		"package": "4.100-libgcrypt",
 		"archives": 
 		[
 			"libgcrypt-1.8.5.tar.bz2"
@@ -85,7 +85,7 @@
 	"4": 
 	{
 		"group": "04-utils",
-		"build_script": "4.110-cracklib",
+		"package": "4.110-cracklib",
 		"archives": 
 		[
 			"cracklib-2.9.7.tar.bz2",
@@ -106,7 +106,7 @@
 	"5": 
 	{
 		"group": "04-utils",
-		"build_script": "4.120-libassuan",
+		"package": "4.120-libassuan",
 		"archives": 
 		[
 			"libassuan-2.5.3.tar.bz2"
@@ -124,7 +124,7 @@
 	"6": 
 	{
 		"group": "04-utils",
-		"build_script": "4.130-sudo",
+		"package": "4.130-sudo",
 		"archives": 
 		[
 			"sudo-1.8.29.tar.gz"
@@ -142,7 +142,7 @@
 	"7": 
 	{
 		"group": "04-utils",
-		"build_script": "4.140-libksba",
+		"package": "4.140-libksba",
 		"archives": 
 		[
 			"libksba-1.3.5.tar.bz2"
@@ -160,7 +160,7 @@
 	"8": 
 	{
 		"group": "04-utils",
-		"build_script": "4.150-libunistring",
+		"package": "4.150-libunistring",
 		"archives": 
 		[
 			"libunistring-0.9.10.tar.xz"
@@ -178,7 +178,7 @@
 	"9": 
 	{
 		"group": "04-utils",
-		"build_script": "4.160-gnutls",
+		"package": "4.160-gnutls",
 		"archives": 
 		[
 			"gnutls-3.6.9.tar.xz"
@@ -196,7 +196,7 @@
 	"10": 
 	{
 		"group": "04-utils",
-		"build_script": "4.170-gpgme",
+		"package": "4.170-gpgme",
 		"archives": 
 		[
 			"gpgme-1.13.1.tar.bz2"
@@ -214,7 +214,7 @@
 	"11": 
 	{
 		"group": "04-utils",
-		"build_script": "4.180-haveged",
+		"package": "4.180-haveged",
 		"archives": 
 		[
 			"haveged-1.9.2.tar.gz"
@@ -232,7 +232,7 @@
 	"12": 
 	{
 		"group": "04-utils",
-		"build_script": "4.190-iptables",
+		"package": "4.190-iptables",
 		"archives": 
 		[
 			"iptables-1.8.3.tar.bz2"
@@ -250,7 +250,7 @@
 	"13": 
 	{
 		"group": "04-utils",
-		"build_script": "4.210-libtirpc",
+		"package": "4.210-libtirpc",
 		"archives": 
 		[
 			"libtirpc-1.1.4.tar.bz2"
@@ -268,7 +268,7 @@
 	"14": 
 	{
 		"group": "04-utils",
-		"build_script": "4.220-BerkeleyDB",
+		"package": "4.220-BerkeleyDB",
 		"archives": 
 		[
 			"db-5.3.28.tar.gz"
@@ -286,7 +286,7 @@
 	"15": 
 	{
 		"group": "04-utils",
-		"build_script": "4.230-linux-pam",
+		"package": "4.230-linux-pam",
 		"archives": 
 		[
 			"Linux-PAM-1.3.1.tar.xz"
@@ -304,7 +304,7 @@
 	"16": 
 	{
 		"group": "04-utils",
-		"build_script": "4.231-libcap-pam",
+		"package": "4.231-libcap-pam",
 		"archives": 
 		[
 			"libcap-2.27.tar.xz"
@@ -324,7 +324,7 @@
 	"17": 
 	{
 		"group": "04-utils",
-		"build_script": "4.240-shadow",
+		"package": "4.240-shadow",
 		"archives": 
 		[
 			"shadow-4.7.tar.xz"
@@ -342,7 +342,7 @@
 	"18": 
 	{
 		"group": "04-utils",
-		"build_script": "4.245-openssh",
+		"package": "4.245-openssh",
 		"archives": 
 		[
 			"openssh-8.0p1.tar.gz"
@@ -360,7 +360,7 @@
 	"19": 
 	{
 		"group": "04-utils",
-		"build_script": "4.245-systemd",
+		"package": "4.245-systemd",
 		"archives": 
 		[
 			"systemd-243.tar.gz",
@@ -386,7 +386,7 @@
 	"20": 
 	{
 		"group": "04-utils",
-		"build_script": "4.250-liboauth",
+		"package": "4.250-liboauth",
 		"archives": 
 		[
 			"liboauth-1.0.3.tar.gz"
@@ -409,7 +409,7 @@
 	"21": 
 	{
 		"group": "04-utils",
-		"build_script": "4.260-libpwquality",
+		"package": "4.260-libpwquality",
 		"archives": 
 		[
 			"libpwquality-1.4.0.tar.bz2"
@@ -427,7 +427,7 @@
 	"22": 
 	{
 		"group": "04-utils",
-		"build_script": "4.270-nspr",
+		"package": "4.270-nspr",
 		"archives": 
 		[
 			"nspr-4.21.tar.gz"
@@ -445,7 +445,7 @@
 	"23": 
 	{
 		"group": "04-utils",
-		"build_script": "4.290-nss",
+		"package": "4.290-nss",
 		"archives": 
 		[
 			"nss-3.45.tar.gz"
@@ -468,7 +468,7 @@
 	"24": 
 	{
 		"group": "04-utils",
-		"build_script": "4.280-unzip",
+		"package": "4.280-unzip",
 		"archives": 
 		[
 			"unzip60.tar.gz"
@@ -486,7 +486,7 @@
 	"25": 
 	{
 		"group": "04-utils",
-		"build_script": "4.550-zip",
+		"package": "4.550-zip",
 		"archives": 
 		[
 			"zip30.tar.gz"
@@ -504,7 +504,7 @@
 	"26": 
 	{
 		"group": "04-utils",
-		"build_script": "4.330-cryptsetup",
+		"package": "4.330-cryptsetup",
 		"archives": 
 		[
 			"cryptsetup-2.0.6.tar.xz"
@@ -522,7 +522,7 @@
 	"27": 
 	{
 		"group": "04-utils",
-		"build_script": "4.340-lsof",
+		"package": "4.340-lsof",
 		"archives": 
 		[
 			"lsof_4.91.tar.gz"
@@ -540,7 +540,7 @@
 	"28": 
 	{
 		"group": "04-utils",
-		"build_script": "4.350-time",
+		"package": "4.350-time",
 		"archives": 
 		[
 			"time-1.9.tar.gz"
@@ -558,7 +558,7 @@
 	"29": 
 	{
 		"group": "04-utils",
-		"build_script": "4.360-tree",
+		"package": "4.360-tree",
 		"archives": 
 		[
 			"tree-1.8.0.tgz"
@@ -576,7 +576,7 @@
 	"30": 
 	{
 		"group": "04-utils",
-		"build_script": "4.370-which",
+		"package": "4.370-which",
 		"archives": 
 		[
 			"which-2.21.tar.gz"
@@ -594,7 +594,7 @@
 	"31": 
 	{
 		"group": "04-utils",
-		"build_script": "4.380-PCRE",
+		"package": "4.380-PCRE",
 		"archives": 
 		[
 			"pcre-8.43.tar.bz2"
@@ -612,7 +612,7 @@
 	"32": 
 	{
 		"group": "04-utils",
-		"build_script": "4.390-libxml2",
+		"package": "4.390-libxml2",
 		"archives": 
 		[
 			"libxml2-2.9.9.tar.gz"
@@ -630,7 +630,7 @@
 	"33": 
 	{
 		"group": "04-utils",
-		"build_script": "4.400-libxslt",
+		"package": "4.400-libxslt",
 		"archives": 
 		[
 			"libxslt-1.1.33.tar.gz"
@@ -648,7 +648,7 @@
 	"34": 
 	{
 		"group": "04-utils",
-		"build_script": "4.410-docbook-nons",
+		"package": "4.410-docbook-nons",
 		"archives": 
 		[
 			"docbook-xsl-nons-1.79.2.tar.bz2"
@@ -671,7 +671,7 @@
 	"35": 
 	{
 		"group": "04-utils",
-		"build_script": "4.420-glib260",
+		"package": "4.420-glib260",
 		"archives": 
 		[
 			"glib-2.60.6.tar.xz"
@@ -694,7 +694,7 @@
 	"36": 
 	{
 		"group": "04-utils",
-		"build_script": "4.440-pciutils",
+		"package": "4.440-pciutils",
 		"archives": 
 		[
 			"pciutils-3.6.2.tar.xz"
@@ -712,7 +712,7 @@
 	"37": 
 	{
 		"group": "04-utils",
-		"build_script": "4.450-bind-utils",
+		"package": "4.450-bind-utils",
 		"archives": 
 		[
 			"bind-9.14.5.tar.gz"
@@ -730,7 +730,7 @@
 	"38": 
 	{
 		"group": "04-utils",
-		"build_script": "4.470-libevent",
+		"package": "4.470-libevent",
 		"archives": 
 		[
 			"libevent-2.1.11-stable.tar.gz"
@@ -748,7 +748,7 @@
 	"39": 
 	{
 		"group": "04-utils",
-		"build_script": "4.490-rsync",
+		"package": "4.490-rsync",
 		"archives": 
 		[
 			"rsync-3.1.3.tar.gz"
@@ -766,7 +766,7 @@
 	"40": 
 	{
 		"group": "04-utils",
-		"build_script": "4.500-traceroute",
+		"package": "4.500-traceroute",
 		"archives": 
 		[
 			"traceroute-2.1.0.tar.gz"
@@ -784,7 +784,7 @@
 	"41": 
 	{
 		"group": "04-utils",
-		"build_script": "4.520-parted",
+		"package": "4.520-parted",
 		"archives": 
 		[
 			"parted-3.2.tar.xz"
@@ -802,7 +802,7 @@
 	"42": 
 	{
 		"group": "04-utils",
-		"build_script": "4.530-dosfstools",
+		"package": "4.530-dosfstools",
 		"archives": 
 		[
 			"dosfstools-4.1.tar.xz"
@@ -820,7 +820,7 @@
 	"43": 
 	{
 		"group": "04-utils",
-		"build_script": "4.540-autoconf",
+		"package": "4.540-autoconf",
 		"archives": 
 		[
 			"autoconf-2.13.tar.gz"
@@ -843,7 +843,7 @@
 	"44": 
 	{
 		"group": "04-utils",
-		"build_script": "4.600-libuv",
+		"package": "4.600-libuv",
 		"archives": 
 		[
 			"libuv-v1.31.0.tar.gz"
@@ -861,7 +861,7 @@
 	"45": 
 	{
 		"group": "04-utils",
-		"build_script": "4.610-libarchive",
+		"package": "4.610-libarchive",
 		"archives": 
 		[
 			"libarchive-3.4.0.tar.gz"
@@ -879,7 +879,7 @@
 	"46": 
 	{
 		"group": "04-utils",
-		"build_script": "4.620-cmake",
+		"package": "4.620-cmake",
 		"archives": 
 		[
 			"cmake-3.15.2.tar.gz"
@@ -897,7 +897,7 @@
 	"47": 
 	{
 		"group": "04-utils",
-		"build_script": "4.630-npth",
+		"package": "4.630-npth",
 		"archives": 
 		[
 			"npth-1.6.tar.bz2"
@@ -915,7 +915,7 @@
 	"48": 
 	{
 		"group": "04-utils",
-		"build_script": "4.640-pinentry",
+		"package": "4.640-pinentry",
 		"archives": 
 		[
 			"pinentry-1.1.0.tar.bz2"
@@ -933,7 +933,7 @@
 	"49": 
 	{
 		"group": "04-utils",
-		"build_script": "4.650-gnupg",
+		"package": "4.650-gnupg",
 		"archives": 
 		[
 			"gnupg-2.2.17.tar.bz2"
@@ -951,7 +951,7 @@
 	"50": 
 	{
 		"group": "04-utils",
-		"build_script": "4.660-libssh2",
+		"package": "4.660-libssh2",
 		"archives": 
 		[
 			"libssh2-1.9.0.tar.gz"
@@ -969,7 +969,7 @@
 	"51": 
 	{
 		"group": "04-utils",
-		"build_script": "4.690-ICU",
+		"package": "4.690-ICU",
 		"archives": 
 		[
 			"icu4c-64_2-src.tgz"
@@ -987,7 +987,7 @@
 	"52": 
 	{
 		"group": "04-utils",
-		"build_script": "4.700-python",
+		"package": "4.700-python",
 		"archives": 
 		[
 			"Python-2.7.16.tar.xz"
@@ -1005,7 +1005,7 @@
 	"53": 
 	{
 		"group": "04-utils",
-		"build_script": "4.710-mutt",
+		"package": "4.710-mutt",
 		"archives": 
 		[
 			"mutt-1.12.1.tar.gz"
@@ -1023,7 +1023,7 @@
 	"54": 
 	{
 		"group": "04-utils",
-		"build_script": "4.720-tmux",
+		"package": "4.720-tmux",
 		"archives": 
 		[
 			"tmux-2.9a.tar.gz"
@@ -1041,7 +1041,7 @@
 	"55": 
 	{
 		"group": "04-utils",
-		"build_script": "4.730-screen",
+		"package": "4.730-screen",
 		"archives": 
 		[
 			"screen-4.6.2.tar.gz"
@@ -1059,7 +1059,7 @@
 	"56": 
 	{
 		"group": "04-utils",
-		"build_script": "4.740-htop",
+		"package": "4.740-htop",
 		"archives": 
 		[
 			"htop-2.2.0.tar.gz"
@@ -1077,7 +1077,7 @@
 	"57": 
 	{
 		"group": "04-utils",
-		"build_script": "4.745-mdadm",
+		"package": "4.745-mdadm",
 		"archives": 
 		[
 			"mdadm-4.1.tar.xz"
@@ -1095,7 +1095,7 @@
 	"58": 
 	{
 		"group": "04-utils",
-		"build_script": "4.747-strace",
+		"package": "4.747-strace",
 		"archives": 
 		[
 			"strace-5.7.tar.xz"
@@ -1113,7 +1113,7 @@
 	"59": 
 	{
 		"group": "04-utils",
-		"build_script": "4.748-golang",
+		"package": "4.748-golang",
 		"archives": 
 		[
 			"go1.4-bootstrap-20171003.tar.gz",
@@ -1134,7 +1134,7 @@
 	"60": 
 	{
 		"group": "04-utils",
-		"build_script": "4.749-vgrep",
+		"package": "4.749-vgrep",
 		"archives": 
 		[
 			"vgrep-2.3.1.tar.gz"
@@ -1152,7 +1152,7 @@
 	"61": 
 	{
 		"group": "04-utils",
-		"build_script": "4.750-llvm",
+		"package": "4.750-llvm",
 		"archives": 
 		[
 			"llvm-8.0.1.src.tar.xz",
@@ -1176,7 +1176,7 @@
 	"62": 
 	{
 		"group": "04-utils",
-		"build_script": "4.760-rust",
+		"package": "4.760-rust",
 		"archives": 
 		[
 			"rustc-1.35.0-src.tar.gz"

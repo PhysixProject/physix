@@ -366,7 +366,7 @@ def setup(config):
         if validate(ret_tpl, "useradd physix"):
             return FAILURE
 
-    src = str(os.getcwd()) + "/build-scripts/03-base-config/configs/physix-bashrc"
+    src = str(os.getcwd()) + "/build-groups/03-base-config/configs/physix-bashrc"
     dest = "/home/physix/.bashrc"
     ret_tpl = run_cmd(['cp', src, dest])
     if validate(ret_tpl, "set physix user's .bashrc file"):
@@ -434,11 +434,11 @@ def build_toolchain(recipe, context, start, stop):
 
         build_file = os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
-                              str(element["build_script"]),
+                              str(element["package"]),
                               "build.sh")
 
         cwd = BUILDROOT_BUILDBOX_DIR_PATH + build_src
-        log_name = 'toolchain' + "-" + str(element["build_script"])
+        log_name = 'toolchain' + "-" + str(element["package"])
         os.chdir(cwd)
 
         cmd = [build_file, 'prep']
@@ -511,12 +511,12 @@ def build_recipe(recipe, context, start, stop):
         else:
             build_src = ''
 
-        #build_file = os.path.join('/opt/admin/physix/build-scripts/',
+        #build_file = os.path.join('/opt/admin/physix/build-groups/',
         build_file = os.path.join(BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
-                              str(element["build_script"]),
+                              str(element["package"]),
                               "build.sh")
-        log_name = get_name_current_stack() + "-" + str(element["build_script"])
+        log_name = get_name_current_stack() + "-" + str(element["package"])
 
         # CHDIR
         #os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
@@ -563,7 +563,7 @@ def build_recipe(recipe, context, start, stop):
         db = get_db_connection()
         if db:
             stack_name = get_name_current_stack()
-            entry = (date(), 'BUILD', commit_id, str(stack_name), build_src, str(element["build_script"]))
+            entry = (date(), 'BUILD', commit_id, str(stack_name), build_src, str(element["package"]))
             sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
             if exec_sql(db, sql, entry):
                 error("DB: Failed to insert entry")
@@ -588,7 +588,7 @@ def build_base(recipe, context, start, stop):
     """
 
     if start == 0:
-        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/2.000-base-build-prep/build.sh']
+        cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base/2.000-base-build-prep/build.sh']
         ret_tpl = run_cmd_log_io_as_root_user(cmd, "2.000-base-build-prep.sh", "")
         if validate(ret_tpl, "Build: " + str(cmd)):
             return FAILURE
@@ -617,10 +617,10 @@ def build_base(recipe, context, start, stop):
         else:
             build_src = ''
 
-        stack_script = "STACk_0-" + str(element["build_script"])
+        stack_script = "STACk_0-" + str(element["package"])
 
-        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/02-base/000-chroot_stub.sh',
-               str(element["build_script"]),
+        cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base/000-chroot_stub.sh',
+               str(element["package"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
         ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
@@ -666,10 +666,10 @@ def config_base_system(recipe, context, start, stop):
         else:
             build_src = ''
 
-        stack_script = "STACk_0-" + str(element["build_script"])
+        stack_script = "STACk_0-" + str(element["package"])
 
-        cmd = ['/mnt/physix/opt/admin/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
-               str(element["build_script"]),
+        cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-base-config/000-conf_chrrot_stub.sh',
+               str(element["package"]),
                build_src]
         info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
         ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
@@ -677,7 +677,7 @@ def config_base_system(recipe, context, start, stop):
             return FAILURE
 
     """ Special case for user to set password without logging"""
-    cmd = ['/mnt/physix/opt/admin/physix/build-scripts/03-base-config/000-conf_chrrot_stub.sh',
+    cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-base-config/000-conf_chrrot_stub.sh',
            '3.111-set-passwd']
     run_cmd_live(cmd)
 

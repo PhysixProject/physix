@@ -17,8 +17,8 @@ BUILDROOT_SOURCES_DIR_PATH = '/mnt/physix/opt/admin/sources.physix/'
 ADMIN_DIR_PATH = '/opt/admin/'
 BUILDROOT_ADMIN_DIR_PATH = '/mnt/physix/opt/admin/'
 
-BUILDSCRIPTS_DIR_PATH = '/opt/admin/physix/build-scripts/'
-BUILDROOT_BUILDSCRIPTS_DIR_PATH = '/mnt/physix/opt/admin/physix/build-scripts/'
+BUILDSCRIPTS_DIR_PATH = '/opt/admin/physix/build-groups/'
+BUILDROOT_BUILDSCRIPTS_DIR_PATH = '/mnt/physix/opt/admin/physix/build-groups/'
 
 BUILDBOX_DIR_PATH = '/opt/admin/sources.physix/BUILDBOX/'
 BUILDROOT_BUILDBOX_DIR_PATH = '/mnt/physix/opt/admin/sources.physix/BUILDBOX/'

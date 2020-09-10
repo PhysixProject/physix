@@ -88,7 +88,7 @@ localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
 make localedata/install-locales
 chroot_check $? "6.09-glibc.sh make localedata/install-locales"
 
-cp -v /opt/admin/physix/build-scripts/02-base/configs/etc_nsswitch.conf /etc/nsswitch.conf
+cp -v /opt/admin/physix/build-groups/02-base/2.040-glibc/etc_nsswitch.conf /etc/nsswitch.conf
 chroot_check $? "/etc/nsswitch.conf"
 
 tar -xf ../../tzdata2019b.tar.gz
@@ -110,7 +110,7 @@ unset ZONEINFO
 #tzselect
 cp -v /usr/share/zoneinfo/US/Pacific /etc/localtime
 
-cp -v /opt/admin/physix/build-scripts/02-base/configs/etc_ld.so.conf  /etc/ld.so.conf
+cp -v /opt/admin/physix/build-groups/02-base/2.040-glibc/etc_ld.so.conf  /etc/ld.so.conf
 
 mkdir -pv /etc/ld.so.conf.d
 

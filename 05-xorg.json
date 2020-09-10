@@ -18,7 +18,7 @@
 	],
 	"0": {
 		"group": "05-xorg",
-		"build_script": "5.000-init",
+		"package": "5.000-init",
 		"archives": [
 			"util-macros-1.19.2.tar.bz2"
 		],
@@ -28,7 +28,7 @@
 	},
 	"1": {
 		"group": "05-xorg",
-		"build_script": "5.010-util-macros",
+		"package": "5.010-util-macros",
 		"archives": [
 			"util-macros-1.19.2.tar.bz2"
 		],
@@ -42,7 +42,7 @@
 	},
 	"2": {
 		"group": "05-xorg",
-		"build_script": "5.020-xorgproto-macros",
+		"package": "5.020-xorgproto-macros",
 		"archives": [
 			"xorgproto-2019.1.tar.bz2"
 		],
@@ -56,7 +56,7 @@
 	},
 	"3": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXau-1.0.9.tar.bz2"
 		],
@@ -70,7 +70,7 @@
 	},
 	"4": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXdmcp-1.1.3.tar.bz2"
 		],
@@ -84,7 +84,7 @@
 	},
 	"5": {
 		"group": "05-xorg",
-		"build_script": "5.050-xcb-proto",
+		"package": "5.050-xcb-proto",
 		"archives": [
 			"xcb-proto-1.13.tar.bz2"
 		],
@@ -98,7 +98,7 @@
 	},
 	"6": {
 		"group": "05-xorg",
-		"build_script": "5.060-libxcb",
+		"package": "5.060-libxcb",
 		"archives": [
 			"libxcb-1.13.1.tar.bz2"
 		],
@@ -112,7 +112,7 @@
 	},
 	"7": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xtrans-1.4.0.tar.bz2"
 		],
@@ -126,7 +126,7 @@
 	},
 	"8": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libX11-1.6.8.tar.bz2"
 		],
@@ -140,7 +140,7 @@
 	},
 	"9": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXext-1.3.4.tar.bz2"
 		],
@@ -154,7 +154,7 @@
 	},
 	"10": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libFS-1.0.8.tar.bz2"
 		],
@@ -168,7 +168,7 @@
 	},
 	"11": {
 		"group": "05-xorg",
-		"build_script": "5.066-libICE",
+		"package": "5.066-libICE",
 		"archives": [
 			"libICE-1.0.10.tar.bz2"
 		],
@@ -182,7 +182,7 @@
 	},
 	"12": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libSM-1.2.3.tar.bz2"
 		],
@@ -196,7 +196,7 @@
 	},
 	"13": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXScrnSaver-1.2.3.tar.bz2"
 		],
@@ -210,7 +210,7 @@
 	},
 	"14": {
 		"group": "05-xorg",
-		"build_script": "5.069-libXt",
+		"package": "5.069-libXt",
 		"archives": [
 			"libXt-1.2.0.tar.bz2"
 		],
@@ -224,7 +224,7 @@
 	},
 	"15": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXmu-1.1.3.tar.bz2"
 		],
@@ -238,7 +238,7 @@
 	},
 	"16": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXpm-3.5.12.tar.bz2"
 		],
@@ -252,7 +252,7 @@
 	},
 	"17": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXaw-1.0.13.tar.bz2"
 		],
@@ -266,7 +266,7 @@
 	},
 	"18": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXfixes-5.0.3.tar.bz2"
 		],
@@ -280,7 +280,7 @@
 	},
 	"19": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXcomposite-0.4.5.tar.bz2"
 		],
@@ -294,7 +294,7 @@
 	},
 	"20": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXrender-0.9.10.tar.bz2"
 		],
@@ -308,7 +308,7 @@
 	},
 	"21": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXcursor-1.2.0.tar.bz2"
 		],
@@ -322,7 +322,7 @@
 	},
 	"22": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXdamage-1.1.5.tar.bz2"
 		],
@@ -336,7 +336,7 @@
 	},
 	"23": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libfontenc-1.1.4.tar.bz2"
 		],
@@ -350,7 +350,7 @@
 	},
 	"24": {
 		"group": "05-xorg",
-		"build_script": "5.094-freetype",
+		"package": "5.094-freetype",
 		"archives": [
 			"freetype-2.10.1.tar.xz"
 		],
@@ -364,7 +364,7 @@
 	},
 	"25": {
 		"group": "05-xorg",
-		"build_script": "5.079-libXfont2",
+		"package": "5.079-libXfont2",
 		"archives": [
 			"libXfont2-2.0.3.tar.bz2"
 		],
@@ -378,7 +378,7 @@
 	},
 	"26": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXi-1.7.10.tar.bz2"
 		],
@@ -392,7 +392,7 @@
 	},
 	"27": {
 		"group": "05-xorg",
-		"build_script": "5.082-libXinerama",
+		"package": "5.082-libXinerama",
 		"archives": [
 			"libXinerama-1.1.4.tar.bz2"
 		],
@@ -406,7 +406,7 @@
 	},
 	"28": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXrandr-1.5.2.tar.bz2"
 		],
@@ -420,7 +420,7 @@
 	},
 	"29": {
 		"group": "05-xorg",
-		"build_script": "5.084-libXres",
+		"package": "5.084-libXres",
 		"archives": [
 			"libXres-1.2.0.tar.bz2"
 		],
@@ -434,7 +434,7 @@
 	},
 	"30": {
 		"group": "05-xorg",
-		"build_script": "5.085-libXtst",
+		"package": "5.085-libXtst",
 		"archives": [
 			"libXtst-1.2.3.tar.bz2"
 		],
@@ -448,7 +448,7 @@
 	},
 	"31": {
 		"group": "05-xorg",
-		"build_script": "5.086-libXv",
+		"package": "5.086-libXv",
 		"archives": [
 			"libXv-1.0.11.tar.bz2"
 		],
@@ -462,7 +462,7 @@
 	},
 	"32": {
 		"group": "05-xorg",
-		"build_script": "5.087-libXvMC",
+		"package": "5.087-libXvMC",
 		"archives": [
 			"libXvMC-1.0.11.tar.bz2"
 		],
@@ -476,7 +476,7 @@
 	},
 	"33": {
 		"group": "05-xorg",
-		"build_script": "5.088-libXxf86dga",
+		"package": "5.088-libXxf86dga",
 		"archives": [
 			"libXxf86dga-1.1.5.tar.bz2"
 		],
@@ -490,7 +490,7 @@
 	},
 	"34": {
 		"group": "05-xorg",
-		"build_script": "5.089-libXxf86vm",
+		"package": "5.089-libXxf86vm",
 		"archives": [
 			"libXxf86vm-1.1.4.tar.bz2"
 		],
@@ -504,7 +504,7 @@
 	},
 	"35": {
 		"group": "05-xorg",
-		"build_script": "5.090-libdmx",
+		"package": "5.090-libdmx",
 		"archives": [
 			"libdmx-1.1.4.tar.bz2"
 		],
@@ -518,7 +518,7 @@
 	},
 	"36": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libpciaccess-0.16.tar.bz2"
 		],
@@ -532,7 +532,7 @@
 	},
 	"37": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libxkbfile-1.1.0.tar.bz2"
 		],
@@ -546,7 +546,7 @@
 	},
 	"38": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libxshmfence-1.3.tar.bz2"
 		],
@@ -560,7 +560,7 @@
 	},
 	"39": {
 		"group": "05-xorg",
-		"build_script": "5.095-fontconfig",
+		"package": "5.095-fontconfig",
 		"archives": [
 			"fontconfig-2.13.1.tar.bz2"
 		],
@@ -574,7 +574,7 @@
 	},
 	"40": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"libXft-2.3.3.tar.bz2"
 		],
@@ -588,7 +588,7 @@
 	},
 	"41": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcb-util-0.4.0.tar.bz2"
 		],
@@ -602,7 +602,7 @@
 	},
 	"42": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcb-util-image-0.4.0.tar.bz2"
 		],
@@ -616,7 +616,7 @@
 	},
 	"43": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcb-util-keysyms-0.4.0.tar.bz2"
 		],
@@ -630,7 +630,7 @@
 	},
 	"44": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcb-util-renderutil-0.3.9.tar.bz2"
 		],
@@ -644,7 +644,7 @@
 	},
 	"45": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcb-util-wm-0.4.1.tar.bz2"
 		],
@@ -658,7 +658,7 @@
 	},
 	"46": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcb-util-cursor-0.1.3.tar.bz2"
 		],
@@ -672,7 +672,7 @@
 	},
 	"47": {
 		"group": "05-xorg",
-		"build_script": "5.160-libdrm",
+		"package": "5.160-libdrm",
 		"archives": [
 			"libdrm-2.4.100.tar.bz2"
 		],
@@ -686,7 +686,7 @@
 	},
 	"48": {
 		"group": "05-xorg",
-		"build_script": "5.170-python-makeupsafe",
+		"package": "5.170-python-makeupsafe",
 		"archives": [
 			"MarkupSafe-1.1.1.tar.gz"
 		],
@@ -700,7 +700,7 @@
 	},
 	"49": {
 		"group": "05-xorg",
-		"build_script": "5.180-python-mako",
+		"package": "5.180-python-mako",
 		"archives": [
 			"Mako-1.1.1.tar.gz"
 		],
@@ -714,7 +714,7 @@
 	},
 	"50": {
 		"group": "05-xorg",
-		"build_script": "5.200-libvdpau",
+		"package": "5.200-libvdpau",
 		"archives": [
 			"libva-2.6.1.tar.bz2"
 		],
@@ -728,7 +728,7 @@
 	},
 	"51": {
 		"group": "05-xorg",
-		"build_script": "5.200-libvdpau",
+		"package": "5.200-libvdpau",
 		"archives": [
 			"libvdpau-1.3.tar.bz2"
 		],
@@ -742,7 +742,7 @@
 	},
 	"52": {
 		"group": "05-xorg",
-		"build_script": "5.210-wayland",
+		"package": "5.210-wayland",
 		"archives": [
 			"wayland-1.17.0.tar.xz"
 		],
@@ -756,7 +756,7 @@
 	},
 	"53": {
 		"group": "05-xorg",
-		"build_script": "5.211-wayland-proto",
+		"package": "5.211-wayland-proto",
 		"archives": [
 			"wayland-protocols-1.18.tar.xz"
 		],
@@ -770,7 +770,7 @@
 	},
 	"54": {
 		"group": "05-xorg",
-		"build_script": "5.220-mesa",
+		"package": "5.220-mesa",
 		"archives": [
 			"mesa-19.3.3.tar.xz"
 		],
@@ -784,7 +784,7 @@
 	},
 	"55": {
 		"group": "05-xorg",
-		"build_script": "5.230-xbitmaps",
+		"package": "5.230-xbitmaps",
 		"archives": [
 			"xbitmaps-1.1.2.tar.bz2"
 		],
@@ -798,7 +798,7 @@
 	},
 	"56": {
 		"group": "05-xorg",
-		"build_script": "5.240-libpng",
+		"package": "5.240-libpng",
 		"archives": [
 			"libpng-1.6.37.tar.xz"
 		],
@@ -814,7 +814,7 @@
 	},
 	"57": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"iceauth-1.0.8.tar.bz2"
 		],
@@ -828,7 +828,7 @@
 	},
 	"58": {
 		"group": "05-xorg",
-		"build_script": "5.250-luit",
+		"package": "5.250-luit",
 		"archives": [
 			"luit-1.1.1.tar.bz2"
 		],
@@ -842,7 +842,7 @@
 	},
 	"59": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"mkfontdir-1.0.7.tar.bz2"
 		],
@@ -856,7 +856,7 @@
 	},
 	"60": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"mkfontscale-1.2.1.tar.bz2"
 		],
@@ -870,7 +870,7 @@
 	},
 	"61": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"sessreg-1.1.2.tar.bz2"
 		],
@@ -884,7 +884,7 @@
 	},
 	"62": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"setxkbmap-1.3.2.tar.bz2"
 		],
@@ -898,7 +898,7 @@
 	},
 	"63": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"smproxy-1.0.6.tar.bz2"
 		],
@@ -912,7 +912,7 @@
 	},
 	"64": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"x11perf-1.6.1.tar.bz2"
 		],
@@ -926,7 +926,7 @@
 	},
 	"65": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xauth-1.1.tar.bz2"
 		],
@@ -940,7 +940,7 @@
 	},
 	"66": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xbacklight-1.2.3.tar.bz2"
 		],
@@ -954,7 +954,7 @@
 	},
 	"67": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcmsdb-1.0.5.tar.bz2"
 		],
@@ -968,7 +968,7 @@
 	},
 	"68": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcursorgen-1.0.7.tar.bz2"
 		],
@@ -982,7 +982,7 @@
 	},
 	"69": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xdpyinfo-1.3.2.tar.bz2"
 		],
@@ -996,7 +996,7 @@
 	},
 	"70": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xdriinfo-1.0.6.tar.bz2"
 		],
@@ -1010,7 +1010,7 @@
 	},
 	"71": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xev-1.2.3.tar.bz2"
 		],
@@ -1024,7 +1024,7 @@
 	},
 	"72": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xgamma-1.0.6.tar.bz2"
 		],
@@ -1038,7 +1038,7 @@
 	},
 	"73": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xhost-1.0.8.tar.bz2"
 		],
@@ -1052,7 +1052,7 @@
 	},
 	"74": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xinput-1.6.3.tar.bz2"
 		],
@@ -1066,7 +1066,7 @@
 	},
 	"75": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xkbcomp-1.4.2.tar.bz2"
 		],
@@ -1080,7 +1080,7 @@
 	},
 	"76": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xkbevd-1.1.4.tar.bz2"
 		],
@@ -1094,7 +1094,7 @@
 	},
 	"77": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xkbutils-1.0.4.tar.bz2"
 		],
@@ -1108,7 +1108,7 @@
 	},
 	"78": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xkill-1.0.5.tar.bz2"
 		],
@@ -1122,7 +1122,7 @@
 	},
 	"79": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xlsatoms-1.1.3.tar.bz2"
 		],
@@ -1136,7 +1136,7 @@
 	},
 	"80": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xlsclients-1.1.4.tar.bz2"
 		],
@@ -1150,7 +1150,7 @@
 	},
 	"81": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xmessage-1.0.5.tar.bz2"
 		],
@@ -1164,7 +1164,7 @@
 	},
 	"82": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xmodmap-1.0.10.tar.bz2"
 		],
@@ -1178,7 +1178,7 @@
 	},
 	"83": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xpr-1.0.5.tar.bz2"
 		],
@@ -1192,7 +1192,7 @@
 	},
 	"84": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xprop-1.2.4.tar.bz2"
 		],
@@ -1206,7 +1206,7 @@
 	},
 	"85": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xrandr-1.5.1.tar.xz"
 		],
@@ -1220,7 +1220,7 @@
 	},
 	"86": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xrdb-1.2.0.tar.bz2"
 		],
@@ -1234,7 +1234,7 @@
 	},
 	"87": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xrefresh-1.0.6.tar.bz2"
 		],
@@ -1248,7 +1248,7 @@
 	},
 	"88": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xset-1.2.4.tar.bz2"
 		],
@@ -1262,7 +1262,7 @@
 	},
 	"89": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xsetroot-1.1.2.tar.bz2"
 		],
@@ -1276,7 +1276,7 @@
 	},
 	"90": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xvinfo-1.1.4.tar.bz2"
 		],
@@ -1290,7 +1290,7 @@
 	},
 	"91": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xwd-1.0.7.tar.bz2"
 		],
@@ -1304,7 +1304,7 @@
 	},
 	"92": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xwininfo-1.1.5.tar.bz2"
 		],
@@ -1318,7 +1318,7 @@
 	},
 	"93": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xwud-1.0.5.tar.bz2"
 		],
@@ -1332,7 +1332,7 @@
 	},
 	"94": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xcursor-themes-1.0.6.tar.bz2"
 		],
@@ -1346,7 +1346,7 @@
 	},
 	"95": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-util-1.3.2.tar.bz2"
 		],
@@ -1360,7 +1360,7 @@
 	},
 	"96": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"encodings-1.0.5.tar.bz2"
 		],
@@ -1374,7 +1374,7 @@
 	},
 	"97": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-alias-1.0.3.tar.bz2"
 		],
@@ -1388,7 +1388,7 @@
 	},
 	"98": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-adobe-utopia-type1-1.0.4.tar.bz2"
 		],
@@ -1402,7 +1402,7 @@
 	},
 	"99": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-bh-ttf-1.0.3.tar.bz2"
 		],
@@ -1416,7 +1416,7 @@
 	},
 	"100": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-bh-type1-1.0.3.tar.bz2"
 		],
@@ -1430,7 +1430,7 @@
 	},
 	"101": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-ibm-type1-1.0.3.tar.bz2"
 		],
@@ -1444,7 +1444,7 @@
 	},
 	"102": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-misc-ethiopic-1.0.3.tar.bz2"
 		],
@@ -1458,7 +1458,7 @@
 	},
 	"103": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"font-xfree86-type1-1.0.4.tar.bz2"
 		],
@@ -1472,7 +1472,7 @@
 	},
 	"104": {
 		"group": "05-xorg",
-		"build_script": "5.260-XKeyboardConfig",
+		"package": "5.260-XKeyboardConfig",
 		"archives": [
 			"xkeyboard-config-2.29.tar.bz2"
 		],
@@ -1486,7 +1486,7 @@
 	},
 	"105": {
 		"group": "05-xorg",
-		"build_script": "5.270-pixman",
+		"package": "5.270-pixman",
 		"archives": [
 			"pixman-0.38.4.tar.gz"
 		],
@@ -1500,7 +1500,7 @@
 	},
 	"106": {
 		"group": "05-xorg",
-		"build_script": "5.271-epoxy",
+		"package": "5.271-epoxy",
 		"archives": [
 			"libepoxy-1.5.4.tar.xz"
 		],
@@ -1514,7 +1514,7 @@
 	},
 	"107": {
 		"group": "05-xorg",
-		"build_script": "5.272-mtdev",
+		"package": "5.272-mtdev",
 		"archives": [
 			"mtdev-1.1.6.tar.bz2"
 		],
@@ -1528,7 +1528,7 @@
 	},
 	"108": {
 		"group": "05-xorg",
-		"build_script": "5.280-xorg-server",
+		"package": "5.280-xorg-server",
 		"archives": [
 			"xorg-server-1.20.7.tar.bz2"
 		],
@@ -1542,7 +1542,7 @@
 	},
 	"109": {
 		"group": "05-xorg",
-		"build_script": "5.290-xorg-libevdev",
+		"package": "5.290-xorg-libevdev",
 		"archives": [
 			"libevdev-1.8.0.tar.xz"
 		],
@@ -1556,7 +1556,7 @@
 	},
 	"110": {
 		"group": "05-xorg",
-		"build_script": "5.300-xorg-Evdev",
+		"package": "5.300-xorg-Evdev",
 		"archives": [
 			"xf86-input-evdev-2.10.6.tar.bz2"
 		],
@@ -1570,7 +1570,7 @@
 	},
 	"111": {
 		"group": "05-xorg",
-		"build_script": "5.310-libinput",
+		"package": "5.310-libinput",
 		"archives": [
 			"libinput-1.15.0.tar.xz"
 		],
@@ -1584,7 +1584,7 @@
 	},
 	"112": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xf86-input-libinput-0.29.0.tar.bz2"
 		],
@@ -1598,7 +1598,7 @@
 	},
 	"113": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xf86-input-synaptics-1.9.1.tar.bz2"
 		],
@@ -1612,7 +1612,7 @@
 	},
 	"114": {
 		"group": "05-xorg",
-		"build_script": "5.320-xorg-Wacom",
+		"package": "5.320-xorg-Wacom",
 		"archives": [
 			"xf86-input-wacom-0.39.0.tar.bz2"
 		],
@@ -1626,7 +1626,7 @@
 	},
 	"115": {
 		"group": "05-xorg",
-		"build_script": "5.330-twm",
+		"package": "5.330-twm",
 		"archives": [
 			"twm-1.0.10.tar.bz2"
 		],
@@ -1640,7 +1640,7 @@
 	},
 	"116": {
 		"group": "05-xorg",
-		"build_script": "5.340-xterm",
+		"package": "5.340-xterm",
 		"archives": [
 			"xterm-352.tgz"
 		],
@@ -1654,7 +1654,7 @@
 	},
 	"117": {
 		"group": "05-xorg",
-		"build_script": "5.999-general",
+		"package": "5.999-general",
 		"archives": [
 			"xclock-1.0.9.tar.bz2"
 		],
@@ -1668,7 +1668,7 @@
 	},
 	"118": {
 		"group": "05-xorg",
-		"build_script": "5.350-xinit",
+		"package": "5.350-xinit",
 		"archives": [
 			"xinit-1.4.1.tar.bz2"
 		],
@@ -1682,7 +1682,7 @@
 	},
 	"119": {
 		"group": "05-xorg",
-		"build_script": "5.360-mozjs",
+		"package": "5.360-mozjs",
 		"archives": [
 			"mozjs-60.8.0.tar.bz2"
 		],
@@ -1696,7 +1696,7 @@
 	},
 	"120": {
 		"group": "05-xorg",
-		"build_script": "5.3709-polkit",
+		"package": "5.3709-polkit",
 		"archives": [
 			"polkit-0.116.tar.gz"
 		],

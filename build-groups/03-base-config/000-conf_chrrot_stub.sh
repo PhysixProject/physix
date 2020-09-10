@@ -9,5 +9,5 @@ SOURCES=${2:-''}
 chroot "$BUILDROOT" /usr/bin/env -i HOME=/root  TERM="$TERM" \
         PS1='(physix chroot) \u:\w\$ '                       \
         PATH=/bin:/usr/bin:/sbin:/usr/sbin                   \
-        /bin/bash --login -c "/opt/admin/physix/build-scripts/03-base-config/$PKG/build.sh $SOURCES"
+        /bin/bash --login -c "/opt/admin/physix/build-groups/03-base-config/$PKG/build.sh $SOURCES"
 

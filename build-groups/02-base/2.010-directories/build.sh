@@ -42,10 +42,10 @@ ln -svf bash /bin/sh                &&
 ln -svf /proc/self/mounts /etc/mtab
 chroot_check $? "link bash/sh"
 
-cp /opt/admin/physix/build-scripts/02-base/configs/etc_passwd /etc/passwd
+cp /opt/admin/physix/build-groups/02-base/configs/etc_passwd /etc/passwd
 chroot_check $? "Wrote /etc/passwd"
 
-cp /opt/admin/physix/build-scripts/02-base/configs/etc_group /etc/group
+cp /opt/admin/physix/build-groups/02-base/configs/etc_group /etc/group
 chroot_check $? "wrote /etc/group"
 
 touch /var/log/{btmp,lastlog,faillog,wtmp} &&

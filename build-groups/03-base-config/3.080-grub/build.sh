@@ -44,7 +44,7 @@ chroot_check $? "Grub sed edit $SED_CMD grub.cfg"
 
 if [ -e /boot/grub ] ; then
 	install --verbose --mode 444 --owner root --group root $PKG_DIR_PATH/unicode.pf2  /boot/grub/fonts/
-	chroot_check $? "install /physix/build-scripts.config/configs/unicode.pf2 /boot/grub/fonts"
+	chroot_check $? "install $PKG_DIR_PATH/unicode.pf2  /boot/grub/fonts/"
 
 	install --verbose --mode 444 --owner root --group root $PKG_DIR_PATH/physix-splash.png  /boot/grub/
     chroot_check $? "install physix-splash.png /boot/grub/"

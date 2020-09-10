@@ -5,7 +5,7 @@
 
 	"0": {
 		"group": "05-services",
-		"build_script": "5.000-dhclient",
+		"package": "5.000-dhclient",
 		"archives":
 		[
 			"dhcp-4.4.2.tar.gz"
@@ -22,7 +22,7 @@
 	},
 	"1": {
 		"group": "05-services",
-		"build_script": "5.000-libnfsidmap",
+		"package": "5.000-libnfsidmap",
 		"archives": [
 			"libnfsidmap-0.26.tar.bz2"
 		],
@@ -36,7 +36,7 @@
 	},
 	"2": {
 		"group": "05-services",
-		"build_script": "5.001-rpcsvc-proto",
+		"package": "5.001-rpcsvc-proto",
 		"archives": [
 			"rpcsvc-proto-1.4.tar.gz"
 		],
@@ -50,7 +50,7 @@
 	},
 	"3": {
 		"group": "05-services",
-		"build_script": "5.002-krb",
+		"package": "5.002-krb",
 		"archives": [
 			"krb5-1.18.tar.gz"
 		],
@@ -64,7 +64,7 @@
 	},
 	"4": {
 		"group": "05-services",
-		"build_script": "5.003-keyutils",
+		"package": "5.003-keyutils",
 		"archives": [
 			"keyutils-1.6.1.tar.bz2"
 		],
@@ -78,7 +78,7 @@
 	},
 	"5": {
 		"group": "05-services",
-		"build_script": "5.010-nfs-netutils",
+		"package": "5.010-nfs-netutils",
 		"archives": [
 			"nfs-utils-2.4.3.tar.xz"
 		],
@@ -92,7 +92,7 @@
 	},
 	"6": {
 		"group": "05-services",
-		"build_script": "5.011-apr",
+		"package": "5.011-apr",
 		"archives": [
 			"apr-1.7.0.tar.bz2"
 		],
@@ -106,7 +106,7 @@
 	},
 	"7": {
 		"group": "05-services",
-		"build_script": "5.012-apr-utils",
+		"package": "5.012-apr-utils",
 		"archives": [
 			"apr-util-1.6.1.tar.bz2"
 		],
@@ -120,7 +120,7 @@
 	},
 	"8": {
 		"group": "05-services",
-		"build_script": "5.013-http",
+		"package": "5.013-http",
 		"archives": [
 			"httpd-2.4.41.tar.bz2"
 		],
