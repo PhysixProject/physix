@@ -22,19 +22,19 @@ done
 
 ./catalyst -t 01-toolchain.json
 if [ $? -ne 0 ] ; then
-	echo "$RECIPE: Build Failed"
+	echo "Build Failed"
 	exit 1
 fi
 
 ./catalyst -s 02-base-system.json
 if [ $? -ne 0 ] ; then
-    echo "$RECIPE: Build Failed"
+    echo "Build Failed"
     exit 1
 fi
 
 ./catalyst -c 03-config-base.json
 if [ $? -ne 0 ] ; then
-    echo "$RECIPE: Build Failed"
+    echo "Build Failed"
     exit 1
 fi
 
