@@ -13,8 +13,8 @@ applicable law.
 Errata:
 =======
 The software used in Physix is constantly being updated. The best way to see fixes to
-errors. warnings, and security exploits is to contribute a patch or communicate the need
-for an update by opening a task on github.
+errors, warnings, and security exploits is to contribute a patch or communicate the need
+for an update by opening a task on GitHub.
 
 
 Definition:
@@ -51,10 +51,10 @@ Quickstart:
 
    NOTE_1: The device you are installing to should be at least 60G
 
-   NOTE_2: verify '/sbin' is in your environment PATH.
+   NOTE_2: Verify '/sbin' is in your environment PATH.
            echo $PATH | grep '\/sbin'
 
-3. Setup the disk partitions by running:
+3. Set up the disk partitions by running:
 	 ./catalyst -i physix.conf
    NOTE: This will move this git repository to /mnt/physix/opt/admin/physix
 
@@ -72,7 +72,7 @@ Branches:
 Conceptual Project Design:
 ==========================
 The system is devided into software groups. Software groups are collections
-of source code which are compiled in-order, so that all dependencies are met.
+of source code which are compiled in order, so that all dependencies are met.
 Software groups are defined as config files called recipes.
 
 The system is built using a command line tool called 'catalyst', which
@@ -84,13 +84,13 @@ uses the recipes as its instructions.
                   the build script. The recipe names are prefixed by a number to
                   signify build order.
 
- - Build Scripts: Are the command line instructions to build each software
+ - Build scripts: These are the command line instructions to build each software
                   project. These scripts are organized by the software group they
                   belong to in the build-scripts directory. Like the naming scheme
                   of the recipes, build scripts are also ordered by number for the same
                   reason.
 
- - service configs: System services (such as PAM, httpd, openssh, etc...) use configs which
+ - Service configs: System services (such as PAM, httpd, openssh, etc...) use configs which
                     are installed in /etc and elsewhere. These configs are located within
                     the config directory under its associated software group directory
                     (e.g. build-scripts/04-utils/configs/linux-pam/ )
@@ -112,7 +112,7 @@ What Physix Currently Provides:
    of the file system's state to be recorded. This allows for returning the system
    to a previously known state.
 
- * Standard Uitilites built from: 04-utilities.json
+ * Standard Utilities built from: 04-utilities.json
 
  * X Windows Display server: 05-xorg.json
 
@@ -130,7 +130,7 @@ Estimated Build Time:
 =====================
 To provide an idea of the time required to build each software
 group, these estimates were collected using a system running
-an Intel i7-4790 (4 Core, 2 threads/core) with 32G Memory.
+an Intel i7-4790 (4 Core, 2 threads/core) with 32G memory.
 
 01-toolchain.json   :  50 Minutes
 02-base-system.json : 168 Minutes
@@ -151,15 +151,15 @@ Installation:
    Prequisites:
 	P0: Since there is not YET a bootable ISO image, a host system is required to 
             install from. During development, Debian 10.2 and Fedora 30 was used 
-            extensively, and thus is reccomended. See LFS host requirements for more
-            explicit requirements. 
+            extensively, and thus is recommended. See LFS host requirements for more
+            specific requirements. 
             http://www.linuxfromscratch.org/lfs/view/stable-systemd/chapter02/hostreqs.html
 
 	P1: i386 and/or x86_64 CPU
 
 	P2: 62 Gigabytes of blank storage space. Storage volumes sizes can be adjusted in 
-            physix.conf, however keep in mind that file systems have organizational
-            overhead; so available space will not be exact.
+            physix.conf, however, keep in mind that file systems have organizational
+            overhead, so available space will not be exact.
 
 	P3: No existing partitions/volumes should be present on the storage device. 
 
@@ -212,7 +212,7 @@ Installation:
               For example, to remove all volumes from device sdb: 
                 $# lvremove EMG
 
-	      In the preceding example, this would remove all volume under EMG volume group.
+	      In the preceding example, this would remove all volumes under the EMG volume group.
 
             D2: Use the 'parted' tool to delete all remaining partitions.
               For example, to delete all partitions from device sdb:
@@ -229,16 +229,16 @@ Installation:
             of those labeled as 'MANDATORY CONFIGS'. An example physix.conf can be found in
             Documentation/physix.conf-EXAMPLE
 
-            CONF_ROOT_DEVICE=  Device NAME which new system will be installed. In referece to the
-                               above example, this would be set to 'sdb'
+            CONF_ROOT_DEVICE=  Device NAME in which the new system will be installed. In reference to the
+                               above example, this would be set to 'sdb'.
 
             CONF_GRUB_SET_ROOT=  This option specifies the name and partition used to configure
                                  the GRUB bootloader. It is IMPORTANT to set this correctly.
                                  It usually takes the form of '(hd0,2)', which indicates
                                  Storage Disk 1, Partition 2. This config/value is defined
-                                 by you systemd BIOS, so if unsure, consult the BIOS config.
+                                 by your systemd BIOS, so if unsure, consult the BIOS config.
 
-            CONF_GEN_USER=  login name of the a general user other than root, to be
+            CONF_GEN_USER=  Login name of the a general user other than root, to be
                             created during installation
 
             CONF_IP_ADDRESS= IP Address of the system at first boot.
@@ -255,8 +255,8 @@ Installation:
            catalyst -i physix.conf
            cd /mnt/physix/opt/admin/physix
 
-           To reduce the need to babysit the build, You can skip steps
-           S1. S2, and S3 by running: BUILD_BASE_SYSTEM.sh
+           To reduce the need to babysit the build, you can skip steps
+           S1, S2, and S3 by running: BUILD_BASE_SYSTEM.sh
 
        S1. Build the temporary toolchain:
            - Pull/Download sources:
@@ -274,7 +274,7 @@ Installation:
            catalyst -p 03-config-base.json
            catalyst -c 03-config-base.json
 
-       S4. Reboot into your new base system, login as root
+       S4. Reboot into your new base system, log in as root
 
        S5. [Recommended] If the system was built using btrfs, it is a good
            idea to take a snapshot of your system's current state. This will
