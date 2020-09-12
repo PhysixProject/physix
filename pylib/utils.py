@@ -492,7 +492,7 @@ def run_cmd(cmd):
 
     out = ''
     err = ''
-    rtn = 1
+    rtn = FAILURE
     try:
         p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         rtn = int(p.returncode)
