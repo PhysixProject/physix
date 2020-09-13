@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
 source /opt/admin/physix/include.sh || exit 1
-#cd /opt/admin/sources.physix/$1 || exit 1
 
 mv -v /tools/bin/{ld,ld-old}
 mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
