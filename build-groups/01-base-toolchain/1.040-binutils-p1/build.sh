@@ -1,7 +1,7 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
-source /mnt/physix/opt/admin/physix/include.sh || exit 1
+source ../include.sh || exit 1
 source ~/.bashrc
 
 prep(){
