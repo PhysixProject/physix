@@ -16,10 +16,18 @@ SUCCESS = 0
 from utils import *
 from definitions import *
 
-def get_db_connection():
+def get_db_connection(context):
     """Return db connection object. Return None on error."""
-    db_path = '/opt/admin/.DB.physix'
+    db_path = ''
     conn = None
+
+    if context == "CHRT":
+        db_path = DB_PATH
+    elif context == "NON-CHRT":
+        db_path = BUILDROOT_DB_PATH
+    else:
+        error("get_db_connection(): Unknown context")
+        return None 
 
     try:
         conn = sqlite3.connect(db_path)
@@ -68,6 +76,9 @@ def list_stack(conn):
 def init_db_tables():
     """Create initial STACK_0 Table and initialize it.
        Returns SUCCESS/FAILURE"""
+
+    if os.path.exists('/mnt/physix/opt/admin/.DB.physix'):
+        return SUCCESS
 
     conn = None
     try:
@@ -123,4 +134,27 @@ def exec_sql(conn, sql, data):
         return FAILURE
     return SUCCESS
 
+
+def write_db_stack_entry(context, cmt_id, operation, build_src, pkg_name):
+    '''
+    Write entry to physix.db
+
+    Keyword arguments:
+    context --  STRING
+    cmt_id -- STRING
+    operation -- STRING
+    build_src  -- STRING
+    pkg_name -- STRING
+    '''
+
+    db = get_db_connection(context)
+    if db:
+        stack_name = get_name_current_stack()
+        entry = (date(), operation, cmt_id, str(stack_name), build_src, str(pkg_name))
+        sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
+        if exec_sql(db, sql, entry):
+            error("DB: Failed to insert entry")
+            return FAILURE
+        db.close()
+    return SUCCESS
 

@@ -653,8 +653,8 @@
 			"efivar-37-gcc_9-1.patch"
 		],
 		"physix_sources": {
-			"http://physixproject.org/source/base/efivar-37.tar.bz2": "9f067275c5f7aafdd75bfb364280ac9c",
-			"http://physixproject.org/source/base/efivar-37-gcc_9-1.patch": "2f2bd3d8a14cb2691b6295f1f852b2a7"
+			"https://physixproject.org/source/base/efivar-37.tar.bz2": "9f067275c5f7aafdd75bfb364280ac9c",
+			"https://physixproject.org/source/base/efivar-37-gcc_9-1.patch": "2f2bd3d8a14cb2691b6295f1f852b2a7"
 		},
 		"alt_sources": {}
 	},

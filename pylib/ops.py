@@ -319,6 +319,7 @@ def setup_build_env(element, context):
         ret_tpl = run_cmd(['cp', archive_path, bb_path])
         if validate(ret_tpl, 'Copy archive to BUILDBOX'):
             return FAILURE
+
     return SUCCESS
 
 
@@ -394,6 +395,10 @@ def setup(config):
     if validate(ret_tpl, "Move physix repo to "+BUILDROOT_ADMIN_DIR_PATH):
         return FAILURE
 
+    if init_db_tables():
+        error("Initialization of DB tables")
+        return FAILURE
+
     return SUCCESS 
 
 
@@ -409,6 +414,11 @@ def build_toolchain(recipe, context, start, stop):
     start -- integer: defines the position in the recipe to start building at.
     stop -- integer: defines the position in the recipe to stop building at.
     """
+
+    commit_id = get_curr_commit_id()
+    if commit_id == None:
+        error("Could not retrieve git commit id. Exiting.")
+        return FAILURE
 
     buildq = recipe['build_queue']
     for i in range(start, stop):
@@ -465,6 +475,10 @@ def build_toolchain(recipe, context, start, stop):
             return FAILURE
 
         os.chdir(BUILDROOT_PHYSIX_DIR)
+        if write_db_stack_entry('NON-CHRT', commit_id, 'BUILD', build_src, str(element["package"])):
+            error("write_db_stack_entry failed")
+            return FAILURE
+
     return SUCCESS
 
 
@@ -557,21 +571,23 @@ def build_recipe(recipe, context, start, stop):
         #os.chdir('/opt/admin/physix')
         os.chdir(PHYSIX_DIR)
 
-
-
-
-        db = get_db_connection()
-        if db:
-            stack_name = get_name_current_stack()
-            entry = (date(), 'BUILD', commit_id, str(stack_name), build_src, str(element["package"]))
-            sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
-            if exec_sql(db, sql, entry):
-                error("DB: Failed to insert entry")
-                return FAILURE
-            db.close()
+        #db = get_db_connection()
+        #if db:
+        #    stack_name = get_name_current_stack()
+        #    entry = (date(), 'BUILD', commit_id, str(stack_name), build_src, str(element["package"]))
+        #    sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
+        #    if exec_sql(db, sql, entry):
+        #        error("DB: Failed to insert entry")
+        #        return FAILURE
+        #    db.close()
 
         if unset_build_lock():
             return FAILURE
+
+        if write_db_stack_entry('CHRT', commit_id, 'BUILD', build_src, str(element["package"])):
+            error("write_db_stack_entry failed, but installation was successful")
+            return FAILURE
+
 
 
 def build_base(recipe, context, start, stop):
@@ -586,6 +602,11 @@ def build_base(recipe, context, start, stop):
     start -- integer: defines the position in the recipe to start building at.
     stop -- integer: defines the position in the recipe to stop building at.
     """
+
+    commit_id = get_curr_commit_id()
+    if commit_id == None:
+        error("Could not retrieve git commit id. Exiting.")
+        return FAILURE
 
     if start == 0:
         cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base/2.000-base-build-prep/build.sh']
@@ -627,6 +648,11 @@ def build_base(recipe, context, start, stop):
         if validate(ret_tpl, "Build: " + str(cmd), True):
             return FAILURE
 
+        if write_db_stack_entry('NON-CHRT', commit_id, 'BUILD', build_src, str(element["package"])):
+            error("write_db_stack_entry failed, but installation was successful")
+            return FAILURE
+
+
 
 def config_base_system(recipe, context, start, stop):
     """
@@ -641,6 +667,11 @@ def config_base_system(recipe, context, start, stop):
     start -- integer: defines the position in the recipe to start building at.
     stop -- integer: defines the position in the recipe to stop building at.
     """
+
+    commit_id = get_curr_commit_id()
+    if commit_id == None:
+        error("Could not retrieve git commit id. Exiting.")
+        return FAILURE
 
     buildq = recipe['build_queue']
     for i in range(start, stop):
@@ -675,6 +706,11 @@ def config_base_system(recipe, context, start, stop):
         ret_tpl = run_cmd_log_io_as_root_user(cmd, stack_script, "")
         if validate(ret_tpl, "Build: "+str(cmd), True):
             return FAILURE
+
+        if write_db_stack_entry('NON-CHRT', commit_id, 'BUILD', build_src, str(element["package"])):
+            error("write_db_stack_entry failed, but installation was successful")
+            return FAILURE
+
 
     """ Special case for user to set password without logging"""
     cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-base-config/000-conf_chrrot_stub.sh',
@@ -860,10 +896,6 @@ def do_config_base(options):
     if config_base_system(RECIPE, "NON-CHRT", start, stop):
         return FAILURE
 
-    if init_db_tables():
-        error("Initialization of DB tables")
-        return FAILURE
-
     info("------------------------------------")
     info("- Base System Configured!")
     info("- Next Steps:")
@@ -920,8 +952,12 @@ def do_list_stack(options):
     Keyword arguments:
     options -- dict: config options.
     """
+    if os.path.exists('/mnt/physix/opt/admin/physix'):
+        context = 'NON-CHRT'
+    else:
+        context = 'CHRT'
 
-    conn = get_db_connection()
+    conn = get_db_connection(context)
     if list_stack(conn):
         error("list_stack failed")
     conn.close()
@@ -1006,8 +1042,11 @@ def do_snapshot(options):
     Keyword arguments:
     options -- dict: config options.
     """
-
     snap_name = options.snapshot
+
+    if '/mnt/physix/' in str(os.getcwd()):
+        error("Snapshots not supported during Initial Base build process")
+        return FAILURE
 
     if 'btrfs' != root_fs_type():
         error("File system snapshots are not available for " + str(root_fs_type()))
@@ -1028,7 +1067,7 @@ def do_snapshot(options):
         error("Could not retrieve git commit id. Exiting.")
         return FAILURE
 
-    db = get_db_connection()    
+    db = get_db_connection('CHRT')    
     if db:
         curr_stack = get_name_current_stack()
     else:
@@ -1105,6 +1144,10 @@ def do_delete_snapshot(options):
 
     snap_name = options.delete_snap
 
+    if '/mnt/physix/' in str(os.getcwd()):
+        error("Snapshot delete is not supported during Initial Base build process")
+        return FAILURE
+
     curr_stack = get_name_current_stack()
     if curr_stack == snap_name:
         error("Can not delete currently running snapshot")
@@ -1119,7 +1162,7 @@ def do_delete_snapshot(options):
             info(str(e))
             return FAILURE
 
-    db  = get_db_connection()
+    db  = get_db_connection('CHRT')
     if db:
         curr_stack = get_name_current_stack()
     else:
