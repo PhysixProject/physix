@@ -13,8 +13,8 @@ install -dv -m 0750 /root                                      &&
 install -dv -m 1777 /tmp /var/tmp                              &&
 mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}             &&
 mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man} &&
-mkdir -pv  /usr/{,local/}share/{misc,terminfo,zoneinfo}         &&
-mkdir -pv  /usr/libexec                                         &&
+mkdir -pv /usr/{,local/}share/{misc,terminfo,zoneinfo}         &&
+mkdir -pv /usr/libexec                                         &&
 mkdir -pv /usr/{,local/}share/man/man{1..8}                    
 chroot_check $? "setup /usr"
 
@@ -53,5 +53,4 @@ chgrp -v utmp /var/log/lastlog             &&
 chmod -v 664  /var/log/lastlog             &&
 chmod -v 600  /var/log/btmp                
 chroot_check $? "wrote /var/log/{group,lastlog,btmp}"
-
 

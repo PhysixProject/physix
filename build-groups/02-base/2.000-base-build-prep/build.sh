@@ -3,11 +3,6 @@
 # Copyright (C) 2019 Tree Davies
 source /mnt/physix/opt/admin/physix/include.sh || exit 1
 
-#if [ ! -e /usr/src/tools ] ; then
-#	cp -r $BUILDROOT/tools $BUILDROOT/usr/src
-#	check $? "Copy built $BUILDROOT/tools to /usr/src just in casse"
-#fi
-
 mkdir -pv $BUILDROOT/{dev,proc,sys,run}
 check $? "6.02-prep mkdir -pv $BUILDROOT/{dev,proc,sys,run}"
 

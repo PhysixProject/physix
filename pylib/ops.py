@@ -571,16 +571,6 @@ def build_recipe(recipe, context, start, stop):
         #os.chdir('/opt/admin/physix')
         os.chdir(PHYSIX_DIR)
 
-        #db = get_db_connection()
-        #if db:
-        #    stack_name = get_name_current_stack()
-        #    entry = (date(), 'BUILD', commit_id, str(stack_name), build_src, str(element["package"]))
-        #    sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
-        #    if exec_sql(db, sql, entry):
-        #        error("DB: Failed to insert entry")
-        #        return FAILURE
-        #    db.close()
-
         if unset_build_lock():
             return FAILURE
 
