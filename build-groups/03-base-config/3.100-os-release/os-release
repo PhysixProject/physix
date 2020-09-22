@@ -1,7 +1,7 @@
 NAME="Physix"
-VERSION="Beta-v3.0"
+VERSION="Beta-v3.1"
 ID=physix
 PRETTY_NAME="Physix Project"
-VERSION_CODENAME="GNU Loves Us All"
+VERSION_CODENAME="GNU Metal"
 HOME_URL="https://github.com/PhysixProject/physix.git"
 
