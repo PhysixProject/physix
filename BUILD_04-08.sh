@@ -27,7 +27,7 @@ for RECIPE in  04-utilities.json 05-services.json 05-testing.json 05-xorg.json 0
 	fi
 done
 
-./catalyst -r SNAP_A
+./catalyst -r INITIAL_BOOT
 ./catalyst -b 04-utilities.json
 if [ $? -ne 0 ] ; then
 	echo "Build Failed"
