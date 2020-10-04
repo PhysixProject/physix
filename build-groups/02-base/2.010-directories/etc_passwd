@@ -12,3 +12,4 @@ systemd-timesync:x:78:78:systemd Time Synchronization:/:/bin/false
 systemd-coredump:x:79:79:systemd Core Dumper:/:/bin/false
 nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
 physix:x:1000:1000::/home/physix:/bin/bash
+fcron:x:22:22:Fcron User:/dev/null:/bin/false

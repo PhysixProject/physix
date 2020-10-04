@@ -21,10 +21,6 @@ build() {
 }
 
 build_install() {
-	groupadd -g 22 fcron &&
-	useradd -d /dev/null -c "Fcron User" -g fcron -s /bin/false -u 22 fcron
-	chroot_check $? "Create Fcron User/group" NOEXIT
-
 	install -vdm754 /etc/cron.{hourly,daily,weekly,monthly}
 	chroot_check $? "mkdir /etc/cron.{hourly,daily,weekly,monthly}"
 
