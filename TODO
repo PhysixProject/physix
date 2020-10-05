@@ -37,6 +37,3 @@
 12. Build a binary package while you are building the system. That way you shouldn't _have_to _
     build it twice.
 
-* Update catalyst to write DB entries for 01-toolchain, 02-base, and 03-config
-
-
