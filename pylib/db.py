@@ -77,7 +77,7 @@ def init_db_tables():
     """Create initial STACK_0 Table and initialize it.
        Returns SUCCESS/FAILURE"""
 
-    if os.path.exists('/mnt/physix/opt/admin/.DB.physix'):
+    if os.path.exists(BUILDROOT_DB_PATH):
         return SUCCESS
 
     conn = None
