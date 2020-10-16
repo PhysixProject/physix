@@ -2,13 +2,13 @@
 
 VERSION=$1
 if [ -z $VERSION ] ; then
-	echo "No Lebel Provided... Exiting." 
+	echo "No Version Lebel Provided... Exiting."
 	exit 1
 fi
 
 LABEL=$2
 if [ -z $LABEL ] ; then
-        echo "No LABEL Provided... Exiting."
+        echo "No Name LABEL Provided... Exiting."
         exit 1
 fi
 
