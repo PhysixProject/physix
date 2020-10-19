@@ -61,7 +61,7 @@ Quickstart:
 4. Run build script.
 	 cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
 
-5. Run BUILD_04-08.sh, to build all packages.
+5. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
 
 Branches:
 =========
