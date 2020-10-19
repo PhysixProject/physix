@@ -50,13 +50,13 @@
 	"5":{
 		"group": "03-base-config",
 		"package": "3.070-kernel",
-		"archives": ["linux-5.4.47.tar.xz"],
+		"archives": ["linux-5.9.tar.xz"],
 		"patches": [],
 		"physix_sources": {
-			"https://physixproject.org/source/base/linux-5.4.47.tar.xz":"5efbf6aa31ae1dd5ebf2c6d9a609b804"
+			"https://physixproject.org/source/base/linux-5.9.tar.xz":"0959d759fd19e146367221aff504ad91"
 		},
 		"alt_sources": {
-			"https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.4.47.tar.xz":"5efbf6aa31ae1dd5ebf2c6d9a609b804"
+			"https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.9.tar.xz":"0959d759fd19e146367221aff504ad91"
 		}
 	},
 

@@ -5,6 +5,10 @@ source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
 VERSION=$(echo $1 | cut -d- -f2)
+DOTCOUNT=`awk -F"." '{print NF-1}' <<< "${VERSION}"`
+if [ $DOTCOUNT == 1 ] ; then
+	VERSION=$VERSION".0"
+fi
 
 make mrproper
 chroot_check $? "system config: kernel : make mr_proper"
