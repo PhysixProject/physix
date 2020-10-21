@@ -45,7 +45,12 @@ def list_stack(conn):
        conn -- sqlite db object
     """
 
-    stack_name = get_name_current_stack()
+    if os.path.exists('/mnt/physix/opt/admin/physix'):
+        context = 'NON-CHRT'
+    else:
+        context = 'CHRT'
+
+    stack_name = get_name_current_stack(context)
 
     stack_lst = []
     try:
@@ -149,9 +154,10 @@ def write_db_stack_entry(context, cmt_id, operation, build_src, pkg_name):
 
     db = get_db_connection(context)
     if db:
-        stack_name = get_name_current_stack()
+        stack_name = get_name_current_stack(context)
         entry = (date(), operation, cmt_id, str(stack_name), build_src, str(pkg_name))
         sql = "INSERT INTO "+ stack_name + " (TIME,OP,COMMITID,SNAPID,PKG,SCRIPT) VALUES(?,?,?,?,?,?) "
+        info(stack_name)
         if exec_sql(db, sql, entry):
             error("DB: Failed to insert entry")
             return FAILURE

@@ -1,6 +1,6 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Travis Davies
+# Copyright (C) 2019 Tree Davies
 source /opt/admin/physix/include.sh || exit 1
 
 install --verbose --mode 444 --owner root --group root  $PKG_DIR_PATH/os-release  /etc/os-release

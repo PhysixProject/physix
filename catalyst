@@ -63,7 +63,7 @@ def main():
     (options, args) = parser.parse_args()
 
     if options.physix_conf:
-        sys.exit(do_partition_init(options))
+        sys.exit(do_physix_conf_init(options))
 
     if options.toolchain_conf:
         if verify_sfwr_group('01-base-toolchain', options.toolchain_conf):

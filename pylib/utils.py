@@ -109,8 +109,12 @@ def root_lvm_path():
     return None
 
 
-def get_name_current_stack():
+def get_name_current_stack(context):
     """Return string name of the currently mounted FS snapshot"""
+
+    if context == 'NON-CHRT':
+        return 'STACK_0'
+
     if 'btrfs' != root_fs_type():
         return 'STACK_0'
 
@@ -229,6 +233,20 @@ def load_physix_config(cfg):
     return config
 
 
+def num_root_device_partitions(config):
+    """
+        Return number of partitions on root device
+
+        Keyword arguments:
+        config -- string: path to config file
+    """
+
+    root_dev = config["CONF_ROOT_DEVICE"]
+    devlst = os.listdir("/dev")
+    dev_count = sum(1 for ln in devlst if root_dev in ln)
+    return int(dev_count) - 1
+
+
 def verify_checker(config):
     """
         Read input physix.conf as dict
@@ -245,20 +263,36 @@ def verify_checker(config):
         if validate(ret_tpl, "Check: "+ tool):
             return FAILURE
 
-    root_dev = config["CONF_ROOT_DEVICE"]
-    devlst = os.listdir("/dev")
-    dev_count = sum(1 for ln in devlst if root_dev in ln)
-    if dev_count > 1:
-        msg = "".join(["Found Existing partition(s) on: /dev/", root_dev,
-                       "Please remove them and restart this opperation"])
-        error(msg)
-        return FAILURE
+    if config['CONF_SKIP_PARTITIONING'].lower() == 'n':
+        root_dev = config["CONF_ROOT_DEVICE"]
+        devlst = os.listdir("/dev")
+        dev_count = sum(1 for ln in devlst if root_dev in ln)
+        if dev_count > 1:
+            msg = "".join([" ERROR: Found Existing partition(s) on: /dev/", root_dev,
+                           "Please remove them and restart this opperation"])
+            error(msg)
+            return FAILURE
 
     if config['CONF_UEFI_ENABLE'].lower() == "y":
         if not os.path.exists("/sys/firmware/efi"):
             info("Host system not booted via UEFI")
             return FAILURE
 
+    #TODO VERIFY CONF_ROOT_DEVICE HAS COORRECT FLAGS
+    #if CONF_UEFI_ENABLE=='n' and CONF_SKIP_PARTITIONING == 'y':
+    #    device = '/dev/' + config['CONF_ROOT_DEVICE']
+    #    (rtn, output, error) = run_cmd(['parted', device, '-m', print])
+    #    lines = output.split('\n')
+    #    for ln in lines:
+    #        sln = ln.split(':')    
+    #        if len(sln) == 6:
+    #           flag_lst = sln[6]
+    #           if 'esp' in flag_lst:
+    #               msg = "".join(["Installation device ", device, "contains efi system parttion (esp) flag, but UEFI is not set in "])
+    #               error("")
+    #               return FAILURE
+    # else
+    #   check CONF_INSTALL_DEV_PARTITION has 'boot' flag and NOT 'esp'
     return SUCCESS
 
 
@@ -629,4 +663,29 @@ def unpack(element, context):
         return FAILURE
 
     return SUCCESS
+
+
+def separate_device_and_partition(device):
+    """ Separate the string by device and partition number
+        return list: [device, part_num]
+        return empty string on error
+
+        Keyword arguments:
+        device -- string: "sda12"
+    """
+
+    dev = ''
+    part = ''
+    for i in range(len(str(device))):
+        if device[i].isalpha():
+            dev = dev + device[i]
+        elif device[i].isdigit():
+            part = part + device[i]
+        else:
+            return []
+
+    if (not dev in device) or (not part in device) :
+        return []
+
+    return [dev, part]
 

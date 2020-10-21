@@ -31,7 +31,7 @@ build_install() {
 	check $? "rm -rf /tools/{,share}/{info,man,doc}"
 
 	find /tools/{lib,libexec} -name \*.la -delete
-	check $? "find /tools/{lib,libexec} -name \*.la -delete"
+	check $? "find /tools/{lib,libexec} -name \*.la -delete" NOEXIT
 }
 
 [ $1 == 'prep' ]   && prep   && exit $?

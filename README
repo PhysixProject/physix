@@ -37,8 +37,11 @@ Media:
 * The Build Process Demo: https://youtu.be/57FnNBbi728
 
 
-Quickstart:
+Quickstart A: Install to blank storage device.
 ===========
+NOTE: This installation path is intended for installation on a blank storage device which is not
+shareed with any other installed operating systems.
+
 0. Install required tools on the host system:
 	* Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
 	* Fedora : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
@@ -46,10 +49,15 @@ Quickstart:
 1. git clone https://github.com/PhysixProject/physix.git
    cd physix
 
-2. Edit physix.conf: Identify the disk you will install to, by setting
-   the CONF_ROOT_DEVICE variable.
+2. Edit physix.conf: Set your mandatory configs.
+     CONF_SKIP_PARTITIONING=n
+     CONF_UEFI_ENABLE=
+     CONF_ROOT_DEVICE=
+     CONF_UEFI_DEV_PART=
+     CONF_BOOT_DEV_PART=
+     CONF_INSTALL_DEV_PARTITION=
 
-   NOTE_1: The device you are installing to should be at least 60G
+   NOTE_1: The device you are installing to (CONF_ROOT_DEVICE) should be at least 60G AND blank.
 
    NOTE_2: Verify '/sbin' is in your environment PATH.
            echo $PATH | grep '\/sbin'
@@ -62,6 +70,48 @@ Quickstart:
 	 cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
 
 5. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
+
+
+Quickstart B: Install to a Selected Partition.
+===========
+NOTE: This installation process is intended for installing Physix on a storage device which is
+ALSO shared by another Operating system. The main difference between Quickstart A and B, is that 
+partitioning is not performed; And grub.cfg will need to be setup manually. An mockup example is 
+written to /boot/physix-grub.cfg.
+
+0. Install required tools on the host system:
+    * Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
+    * Fedora : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
+
+1. git clone https://github.com/PhysixProject/physix.git
+   cd physix
+
+2. Edit physix.conf: Set your mandatory configs. 
+    CONF_SKIP_PARTITIONING=y
+    CONF_UEFI_ENABLE=
+    CONF_ROOT_DEVICE=
+    CONF_UEFI_DEV_PART=
+    CONF_BOOT_DEV_PART=
+    CONF_INSTALL_DEV_PARTITION=
+
+   NOTE_2: Verify '/sbin' is in your environment PATH.
+           echo $PATH | grep '\/sbin'
+
+3. Set up the disk volumes by running:
+     ./catalyst -i physix.conf
+   NOTE: This will move this git repository to /mnt/physix/opt/admin/physix
+
+4. Run build script.
+     cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
+
+5. Setup efibootmgr entries
+   For example, run: efibootmgr -c -d /dev/sda -p 1 -L "PHYSIX" -l '\efi\boot\bootx64.efi'
+   for a system where the EFI and boot partitions are on /dev/sda1 and /dev/sda2, respectively.
+
+6. Create a grub boot entry in grub.conf
+
+7. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
+
 
 Branches:
 =========

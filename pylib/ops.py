@@ -73,7 +73,11 @@ def create_volumes(config):
     """
 
     system_root = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n')
-    system_root = system_root + "3"
+    if config['CONF_SKIP_PARTITIONING'].lower() == 'y':
+        system_root = "/dev/" + str(config['CONF_INSTALL_DEV_PARTITION'])
+    else:
+        system_root = system_root + "3"
+
     ret_tpl = run_cmd(['pvcreate', '-ff', '-y', system_root])
     if validate(ret_tpl, "Physical Volume Create: "+system_root):
         return FAILURE
@@ -106,6 +110,31 @@ def create_volumes(config):
     return SUCCESS
 
 
+def format_partitions(config):
+    """
+        Format partitions.
+        Return SUCCESS/FAILURE
+
+        Keyword arguments:
+        config -- dict: config options
+    """
+
+    filesystem = config['CONF_ROOTPART_FS']
+    mkfs_cmd  = "mkfs." + filesystem
+    system_root = "/dev/" + config["CONF_ROOT_DEVICE"]
+
+    part1 = system_root + "1"
+    ret_tpl = run_cmd(['mkfs.fat', part1])
+    if validate(ret_tpl, "mkfs.fat: " + part1):
+        return FAILURE
+
+    part2 = system_root + "2"
+    ret_tpl = run_cmd(['mkfs.ext2', part2])
+    if validate(ret_tpl, "mkfs.ext2: " + part2):
+        return FAILURE
+    return SUCCESS
+
+
 def format_volumes(config):
     """
     Format LVM volumes and partitions.
@@ -117,19 +146,7 @@ def format_volumes(config):
 
     filesystem = config['CONF_ROOTPART_FS']
     mkfs_cmd  = "mkfs." + filesystem
-
-    system_root = "/dev/" + config["CONF_ROOT_DEVICE"]
     vol_group_name = config["CONF_VOL_GROUP_NAME"]
-
-    part1 = system_root + "1"
-    ret_tpl = run_cmd(['mkfs.fat', part1])
-    if validate(ret_tpl, "mkfs.fat: " + part1):
-        return FAILURE
-
-    part2 = system_root + "2"
-    ret_tpl = run_cmd(['mkfs.ext2', part2])
-    if validate(ret_tpl, "mkfs.ext2: " + part2):
-        return FAILURE
 
     physix_root = "/dev/mapper/" + vol_group_name + "-root"
     ret_tpl = run_cmd([mkfs_cmd, physix_root])
@@ -150,6 +167,36 @@ def format_volumes(config):
     ret_tpl = run_cmd([mkfs_cmd, physix_admin])
     if validate(ret_tpl, mkfs_cmd+":"+ physix_admin):
         return FAILURE
+
+    return SUCCESS
+
+
+def mount_partitions(config):
+    """
+        Mount partitions.
+        Return SUCCESS/FAILURE
+
+        Keyword arguments:
+        config -- dict: config options
+    """
+
+    boot = BUILDROOT + "/boot"
+    os.mkdir(boot, 0o755)
+    if not config["CONF_BOOT_DEV_PART"] == "":
+        boot_part = "/dev/" + config["CONF_BOOT_DEV_PART"].strip('\n')
+        ret_tpl = run_cmd(['mount', boot_part, boot])
+        if validate(ret_tpl, "Mount: " + boot_part):
+            return FAILURE
+
+    if config['CONF_UEFI_ENABLE'].lower() == 'y':
+        efi_dir = BUILDROOT + "/boot/efi"
+        if not os.path.exists(efi_dir):
+            os.mkdir(efi_dir, 0o755)
+
+        efi_boot_part = "/dev/" + config["CONF_UEFI_DEV_PART"].strip('\n')
+        ret_tpl = run_cmd(['mount', efi_boot_part, efi_dir])
+        if validate(ret_tpl, "Mount: " + efi_boot_part):
+            return FAILURE
 
     return SUCCESS
 
@@ -222,21 +269,6 @@ def mount_volumes(config):
     ret_tpl = run_cmd(['mount', volume_admin, mnt_point])
     if validate(ret_tpl, "Mount: " + volume_admin):
         return FAILURE
-
-    boot = BUILDROOT + "/boot"
-    os.mkdir(boot, 0o755)
-    boot_part = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n') + "2"
-    ret_tpl = run_cmd(['mount', boot_part, boot])
-    if validate(ret_tpl, "Mount: " + boot_part):
-        return FAILURE
-
-    if config['CONF_UEFI_ENABLE'].lower() == 'y':
-        efi_dir = BUILDROOT + "/boot/efi"
-        os.mkdir(efi_dir, 0o755)
-        efi_boot_part = "/dev/" + config["CONF_ROOT_DEVICE"].strip('\n') + "1"
-        ret_tpl = run_cmd(['mount', efi_boot_part, efi_dir])
-        if validate(ret_tpl, "Mount: " + efi_boot_part):
-            return FAILURE
 
     return SUCCESS
 
@@ -363,7 +395,7 @@ def setup(config):
 
     (rtn, out, err) = run_cmd(['grep', 'physix', '/etc/passwd'])
     if int(rtn) != 0:
-        ret_tpl = run_cmd(['useradd', '-s', '/bin/bash', '-m', 'physix'])
+        ret_tpl = run_cmd(['useradd', '-s', '/bin/bash', '-m', 'physix', '-U'])
         if validate(ret_tpl, "useradd physix"):
             return FAILURE
 
@@ -530,7 +562,7 @@ def build_recipe(recipe, context, start, stop):
                               str(element["group"]),
                               str(element["package"]),
                               "build.sh")
-        log_name = get_name_current_stack() + "-" + str(element["package"])
+        log_name = get_name_current_stack('CHRT') + "-" + str(element["package"])
 
         # CHDIR
         #os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
@@ -708,11 +740,12 @@ def config_base_system(recipe, context, start, stop):
     run_cmd_live(cmd)
 
 
-def do_partition_init(options):
+def do_physix_conf_init(options):
     """
     High level function whcih calls lower functions that:
       - create partitions
       - create volumes
+      - format partitions
       - format volumes
       - mount volumes
     Return SUCCESS/FAILURE
@@ -731,29 +764,58 @@ def do_partition_init(options):
         return FAILURE
     ok("Systemd Requirement check")
 
-    info("Creating Partitions")
-    if create_partitions(BUILD_CONFIG):
-        error("Creating Partitions")
-        return FAILURE
-    ok("Creating Partitions")
+    if BUILD_CONFIG['CONF_SKIP_PARTITIONING'].lower() == 'n':
+        """ We expect a blank device """
+        if num_root_device_partitions(BUILD_CONFIG) > 0:
+            error("Found Existing partition(s) on CONF_ROOT_DEVICE, Please remove them and restart this opperation")
+            return FAILURE
 
-    info("Creating Volumes")
-    if create_volumes(BUILD_CONFIG):
-        error("Creating Volumes")
+        info("Creating Partitions")
+        if create_partitions(BUILD_CONFIG):
+            error("Creating Partitions")
+            return FAILURE
+        ok("Created Partitions")
+
+        info("Format Partitions")
+        if format_partitions(BUILD_CONFIG):
+            error("Format Partitions")
+            return FAILURE
+        ok("Formatted Partitions")
+
+        info("Creating Volumes")
+        if create_volumes(BUILD_CONFIG):
+            error("Creating Volumes")
+            return FAILURE
+        ok("Created Volumes")
+
+    elif BUILD_CONFIG['CONF_SKIP_PARTITIONING'].lower() == 'y':
+        """ Skip partitioning and setup volumes on CONF_CUSTOM_PARTITION """
+        info("Creating Volumes")
+        if create_volumes(BUILD_CONFIG):
+            error("Creating Volumes")
+            return FAILURE
+        ok("Created Volumes")
+    else:
+        error("Invalid config")
         return FAILURE
-    ok("Create Volumes")
 
     info("Formating Volumes")
     if format_volumes(BUILD_CONFIG):
         error("Formating Volumes")
         return FAILURE
-    ok("Format Volumes")
+    ok("Formatted Volumes")
 
     info("Mounting Volumes")
     if mount_volumes(BUILD_CONFIG):
         error("Mounting Volumes")
         return FAILURE
-    ok("Mounting Volumes")
+    ok("Mounted Volumes")
+
+    info("Mounting Partitions")
+    if mount_partitions(BUILD_CONFIG):
+        error("Mounting Partitions")
+        return FAILURE
+    ok("Mounted Partitions")
 
     if setup(BUILD_CONFIG):
         return FAILURE
@@ -1059,7 +1121,7 @@ def do_snapshot(options):
 
     db = get_db_connection('CHRT')    
     if db:
-        curr_stack = get_name_current_stack()
+        curr_stack = get_name_current_stack('CHRT')
     else:
         error("DB connection == None")
         return FAILURE
@@ -1138,7 +1200,7 @@ def do_delete_snapshot(options):
         error("Snapshot delete is not supported during Initial Base build process")
         return FAILURE
 
-    curr_stack = get_name_current_stack()
+    curr_stack = get_name_current_stack('CHRT')
     if curr_stack == snap_name:
         error("Can not delete currently running snapshot")
         return FAILURE
@@ -1154,7 +1216,7 @@ def do_delete_snapshot(options):
 
     db  = get_db_connection('CHRT')
     if db:
-        curr_stack = get_name_current_stack()
+        curr_stack = get_name_current_stack('CHRT')
     else:
         error("DB connection == None")
         return FAILURE
