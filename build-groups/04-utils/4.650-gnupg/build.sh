@@ -15,10 +15,10 @@ config() {
 }
 
 build() {
-	make &&
-              makeinfo --html --no-split -o doc/gnupg_nochunks.html doc/gnupg.texi &&
-              makeinfo --plaintext       -o doc/gnupg.txt           doc/gnupg.texi &&
-              make -C doc html
+	make -j$NPROC &&
+    makeinfo --html --no-split -o doc/gnupg_nochunks.html doc/gnupg.texi &&
+    makeinfo --plaintext       -o doc/gnupg.txt           doc/gnupg.texi &&
+    make -C doc html
 	chroot_check $? "GnuPG : make"
 }
 

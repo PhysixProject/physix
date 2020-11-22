@@ -19,7 +19,7 @@ config() {
 }
 
 build() {
-	make
+	make -j$NPROC
 	chroot_check $? "shadow : make"
 }
 

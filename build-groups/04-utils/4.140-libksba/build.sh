@@ -11,7 +11,7 @@ chroot_check $? "libksba : configure "
 }
 
 build() {
-	make
+	make -j$NPROC
 	chroot_check $? "libksba : make"
 }
 

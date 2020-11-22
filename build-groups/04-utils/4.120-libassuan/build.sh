@@ -11,7 +11,7 @@ config() {
 }
 
 build() {
-	make               &&
+	make -j$NPROC      &&
 	make -C doc html   &&
 	makeinfo --html --no-split -o doc/assuan_nochunks.html doc/assuan.texi &&
 	makeinfo --plaintext       -o doc/assuan.txt           doc/assuan.texi

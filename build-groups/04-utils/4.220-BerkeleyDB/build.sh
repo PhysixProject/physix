@@ -16,7 +16,7 @@ config() {
 }
 
 build() {
-	cd build_unix && make
+	cd build_unix && make -j$NPROC
 	chroot_check $? "BerkeleyDB : make"
 }
 
