@@ -17,12 +17,14 @@ sh Configure -des -Dprefix=/usr                 \
                   -Dusethreads
 chroot_check $? "configure"
 
-make -j8
+make -j$NPROC
 chroot_check $? "make"
 
-make -k test
-chroot_check $? "system build : perl : make test " NOEXIT
-# One test fails due to using the most recent version of gdbm.
+if [ "$CONF_RUN_ALL_TEST_SUITE" == "y" ] ; then
+	make -k test
+	chroot_check $? "system build : perl : make test " NOEXIT
+	# One test fails due to using the most recent version of gdbm.
+fi
 
 make install
 chroot_check $? "system build : perl : make install"
