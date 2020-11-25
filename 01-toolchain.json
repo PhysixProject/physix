@@ -50,14 +50,14 @@
 		"group": "01-base-toolchain",
 		"package": "1.060-linux-api-headers",
 		"archives": [
-			"linux-5.4.47.tar.xz"
+			"linux-5.4.80.tar.xz"
 		],
 		"patches": [],
 		"physix_sources": {
-			"https://physixproject.org/source/toolchain/linux-5.4.47.tar.xz": "5efbf6aa31ae1dd5ebf2c6d9a609b804"
+			"https://physixproject.org/source/toolchain/linux-5.4.80.tar.xz": "ae47e8dc778e21294dbab5c956b1619d"
 		},
 		"alt_sources": {
-			"https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.4.47.tar.xz": "5efbf6aa31ae1dd5ebf2c6d9a609b804"
+			"https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.4.80.tar.xz": "ae47e8dc778e21294dbab5c956b1619d"
 		},
 		"license": "GPLv2"
 	},
