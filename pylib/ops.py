@@ -78,6 +78,10 @@ def create_volumes(config):
     else:
         system_root = system_root + "3"
 
+    if data_present(system_root):
+        error("".join(["Data Found on:", system_root, "\nExiting..."]))
+        return FAILURE
+
     ret_tpl = run_cmd(['pvcreate', '-ff', '-y', system_root])
     if validate(ret_tpl, "Physical Volume Create: "+system_root):
         return FAILURE
