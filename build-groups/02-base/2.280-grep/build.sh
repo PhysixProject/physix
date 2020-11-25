@@ -7,8 +7,8 @@ cd $SOURCE_DIR/$1 || exit 1
 ./configure --prefix=/usr --bindir=/bin
 chroot_check $? "grep ./configure --prefix=/usr --bindir=/bin"
 
-make -j8
-chroot_check $? "grep eake"
+make -j$NPROC
+chroot_check $? "grep make"
 
 make -k check
 chroot_check $? "grep make -k check" NOEXIT
