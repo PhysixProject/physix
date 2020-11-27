@@ -952,13 +952,15 @@ def do_config_base(options):
     if config_base_system(RECIPE, "NON-CHRT", start, stop):
         return FAILURE
 
-    info("------------------------------------")
+    info("----------------------------------------------------------------------")
     info("- Base System Configured!")
     info("- Next Steps:")
-    info("- 1. reboot ")
-    info("- 2. login as root")
-    info("- 3. make-ca -g")
-    info("------------------------------------")
+    info("- 0. A mockup grub config has been moved to /boot/physix-grub.cfg")
+    info("     Use this example as a starting point to configure your /boot/grub/grub.cfg")
+    info("- 1. reboot")
+    info("- 2. login")
+    INFO("- 3. See README for further build instructions.")
+    info("----------------------------------------------------------------------")
     return SUCCESS
 
 
