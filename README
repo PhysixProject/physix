@@ -76,7 +76,7 @@ Quickstart B: Install to a Selected Partition.
 ===========
 NOTE: This installation process is intended for installing Physix on a storage device which is
 ALSO shared by another Operating system. The main difference between Quickstart A and B, is that 
-partitioning is not performed; And grub.cfg will need to be setup manually. An mockup example is 
+partitioning is not performed; And grub.cfg will need to be setup manually. A mockup example is
 written to /boot/physix-grub.cfg.
 
 0. Install required tools on the host system:
@@ -196,7 +196,7 @@ an Intel i7-4790 (4 Core, 2 threads/core) with 32G memory.
 Summation           :  ~8.25 hours
 
 
-Installation:
+Installation (To separate storage device):
 =============
 
    Prequisites:
