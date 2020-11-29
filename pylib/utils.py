@@ -693,7 +693,7 @@ def separate_device_and_partition(device):
 def data_present(device):
     """ Given device path as arg, atempt to mount device.
         return True if files are present 
-        return False if files are NOT present
+        return False if files are NOT present or device not mountable
 
         Keyword arguments:
         device -- string: "/dev/sdBlah"
@@ -703,17 +703,18 @@ def data_present(device):
     if not os.path.exists('/tmp/.ppdc'):
         os.mkdir('/tmp/.ppdc', 0o755)
 
-    ret_tpl = run_cmd(['mount', device, '/tmp/.ppdc'])
-    if not validate(ret_tpl, "Mount: "+device, report=False):
+    rtn_tpl = run_cmd(['mount', device, '/tmp/.ppdc'])
+    if int(rtn_tpl[0]) == 0:
         contents = os.listdir('/tmp/.ppdc')
         if 'lost+found' in contents:
             contents.remove('lost+found')
-
         if len(contents) > 0:
-            ret_tpl = run_cmd(['umount', '/tmp/.ppdc'])
-            if validate(ret_tpl, "umount: " + device):
-                error("Could not unmount"+device)
             rtn_bool = True
+        ret_tpl = run_cmd(['umount', '/tmp/.ppdc'])
+        if validate(ret_tpl, "umount: " + device):
+            error("Could not unmount"+device)
+    else:
+        info("Checking if data_preset(): Device " + device + " Could not be mounted. This is OK." )
 
     return rtn_bool
 
