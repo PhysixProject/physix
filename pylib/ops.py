@@ -959,7 +959,7 @@ def do_config_base(options):
     info("     Use this example as a starting point to configure your /boot/grub/grub.cfg")
     info("- 1. reboot")
     info("- 2. login")
-    INFO("- 3. See README for further build instructions.")
+    info("- 3. See README for further build instructions.")
     info("----------------------------------------------------------------------")
     return SUCCESS
 
