@@ -959,7 +959,13 @@ def do_config_base(options):
     info("     Use this example as a starting point to configure your /boot/grub/grub.cfg")
     info("- 1. reboot")
     info("- 2. login")
-    info("- 3. See README for further build instructions.")
+    info("- 3. Take a snapshot of the system:\n  cd /opt/admin/physix ; ./catalyst -r SNAPSHOT_NAME"
+    info("- 4. Download root of trust certs: `make-ca -g`")
+    info("- 5. Build Utilities:")
+    info("     cd /opt/admin/physix")
+    info("     ./catalyst -p 04-utilities.json")
+    info("     ./catalyst -b 04-utilities.json")
+    info("- 6. See README for further build instructions.")
     info("----------------------------------------------------------------------")
     return SUCCESS
 
