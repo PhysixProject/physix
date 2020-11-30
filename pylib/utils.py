@@ -115,7 +115,11 @@ def root_lvm_path():
 
 
 def get_name_current_stack(context):
-    """Return string name of the currently mounted FS snapshot"""
+    """Return string: name of the currently mounted FS snapshot
+
+        Keyword arguments:
+        context: - String
+    """
 
     if context == 'NON-CHRT':
         return 'STACK_0'
@@ -123,16 +127,16 @@ def get_name_current_stack(context):
     if 'btrfs' != root_fs_type():
         return 'STACK_0'
 
+    rtn_val = ""
     ret_tpl = run_cmd(['btrfs', 'subvolume', 'show', '/'])
     if validate(ret_tpl, "btrfs subvolume show /"):
-        return FAILURE
-    std_out = ret_tpl[1]
-
-    parsed_lst = std_out.split('\n')
-    if parsed_lst[0]:
-        return str(parsed_lst[0])
+        error("get_name_current_stack(): 'btrfs subvolume show' failed")
     else:
-        return None
+        std_out = ret_tpl[1]
+        parsed_lst = std_out.split('\n')
+        if parsed_lst[0]:
+            rtn_val = str(parsed_lst[0])
+    return rtn_val
 
 
 def index_already_exists(stack_name):
