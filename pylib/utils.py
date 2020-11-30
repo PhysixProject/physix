@@ -74,23 +74,28 @@ def get_curr_commit_id():
 
 
 def root_fs_type():
-    """
+    """ Discover FS type of root File system
         Return string: File System type of device mounted at /
-        Return FAILURE (1) on error
+        Return empty string on error
     """
+
+    rtn_val = ""
 
     ret_tpl = run_cmd(['lsblk', '-o', 'MOUNTPOINT,FSTYPE'])
     if validate(ret_tpl, "Determine root FS type"):
-        return FAILURE
-    std_out = ret_tpl[1]
+        error("root_fs_type(): Call to 'lsblk' failed.")
+    else:
+        std_out = ret_tpl[1]
+        for line in std_out.split('\n'):
+            split_line = line.split(' ')
+            result = list(filter(lambda x: x != "", split_line))
+            if len(result) != 2:
+                continue
+            if result[0] == '/':
+                rtn_val = result[1]
+                break
 
-    for line in std_out.split('\n'):
-        split_line = line.split(' ')
-        result = list(filter(lambda x: x != "", split_line))
-        if len(result) != 2:
-            continue
-        if result[0] == '/':
-            return result[1]
+    return rtn_val
 
 
 def root_lvm_path():
