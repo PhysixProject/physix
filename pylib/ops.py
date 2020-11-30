@@ -1217,8 +1217,6 @@ def do_delete_snapshot(options):
         error("Can not delete currently running snapshot")
         return FAILURE
 
-    #TODO Check snap_name is not a next default stack
-
     if not os.path.exists(TMP_MNTPOINT_DIR):
         try:
             os.makedirs(TMP_MNTPOINT_DIR, 0o755)
