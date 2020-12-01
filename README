@@ -43,8 +43,9 @@ NOTE: This installation path is intended for installation on a blank storage dev
 shareed with any other installed operating systems.
 
 0. Install required tools on the host system:
-	* Debian : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
-	* Fedora : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
+	* Debian 10.2.0 : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
+	* Ubuntu 20.10  : sudo apt-get install gcc g++ make gawk bison parted texinfo flex btrfs-progs vim git lvm2   
+	* Fedora 32     : sudo dnf install gcc g++ make gawk bison parted texinfo flex btrfs-tools vim git lvm2
 
 1. git clone https://github.com/PhysixProject/physix.git
    cd physix
