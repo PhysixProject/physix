@@ -69,7 +69,11 @@ shareed with any other installed operating systems.
 4. Run build script.
 	 cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
 
-5. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
+5. Configure bootloader:
+   Use your host system's grub.cfg as is, and add a Physix menu entry to it. A mock-up
+   entry for this can be found at /boot/physix-grub.cfg.
+
+6. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
 
 
 Quickstart B: Install to a Selected Partition.
@@ -104,13 +108,11 @@ written to /boot/physix-grub.cfg.
 4. Run build script.
      cd /mnt/physix/opt/admin/physix ; ./BUILD_BASE_SYSTEM.sh
 
-5. Setup efibootmgr entries
-   For example, run: efibootmgr -c -d /dev/sda -p 1 -L "PHYSIX" -l '\efi\boot\bootx64.efi'
-   for a system where the EFI and boot partitions are on /dev/sda1 and /dev/sda2, respectively.
+5. Configure bootloader:
+   Use your host system's grub.cfg as is, and add a Physix menu entry to it. A mock-up
+   entry for this can be found at /boot/physix-grub.cfg. 
 
-6. Create a grub boot entry in grub.conf
-
-7. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
+6. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
 
 
 Branches:
