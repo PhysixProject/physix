@@ -222,7 +222,7 @@ Installation (To separate storage device):
         If not, set it in root user's .bashrc
 
    Device Setup: 
-	If your target installation device is NOT blank, use the following steps to remove existing 
+		If your target installation device is NOT blank, use the following steps to remove existing 
         partitions and volumes from the device. If your device is already blank, skip the Device Setup steps
         and go to the Build Configuration steps.
          
@@ -283,23 +283,40 @@ Installation (To separate storage device):
             of those labeled as 'MANDATORY CONFIGS'. An example physix.conf can be found in
             Documentation/physix.conf-EXAMPLE
 
-            CONF_ROOT_DEVICE=  Device NAME in which the new system will be installed. In reference to the
-                               above example, this would be set to 'sdb'.
+            CONF_SKIP_PARTITIONING=
 
-            CONF_GRUB_SET_ROOT=  This option specifies the name and partition used to configure
-                                 the GRUB bootloader. It is IMPORTANT to set this correctly.
-                                 It usually takes the form of '(hd0,2)', which indicates
-                                 Storage Disk 1, Partition 2. This config/value is defined
-                                 by your systemd BIOS, so if unsure, consult the BIOS config.
+            CONF_ROOT_DEVICE=  
+                Device NAME in which the new system will be installed. In reference to the
+                above example, this would be set to 'sdb'.
 
-            CONF_GEN_USER=  Login name of the a general user other than root, to be
-                            created during installation
+            CONF_INSTALL_DEV_PARTITION= 
+                This defines the 'device' and 'partitionn number', where the 
+                root system will live.
+			    This should be the same as CONF_ROOT_DEVICE suffixed by a partition number.
 
-            CONF_IP_ADDRESS= IP Address of the system at first boot.
+            CONF_UEFI_ENABLE=
+            CONF_UEFI_DEV_PART=
+            CONF_BOOT_DEV_PART=
 
-            CONF_NAMESERVER= IP Address of DNS server
+            CONF_GRUB_SET_ROOT=  
+                This option specifies the name and partition used to configure
+                the GRUB bootloader. It is IMPORTANT to set this correctly.
+                It usually takes the form of '(hd0,2)', which indicates
+                Storage Disk 1, Partition 2. This config/value is defined
+                by your systemd BIOS, so if unsure, consult the BIOS config.
 
-            CONF_DEFAULT_ROUTE= IP Address of your local network's router
+            CONF_GEN_USER=  
+                Login name of the a general user other than root, to be
+                created during installation
+
+            CONF_IP_ADDRESS= 
+                IP Address of the system at first boot.
+
+            CONF_NAMESERVER= 
+                IP Address of DNS server
+
+            CONF_DEFAULT_ROUTE= 
+                IP Address of your local network's router
 
 
 
