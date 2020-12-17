@@ -1,7 +1,7 @@
 NAME="Physix"
-VERSION="Beta-v3.2"
+VERSION="Beta-v3.3"
 ID=physix
 PRETTY_NAME="Physix Project"
-VERSION_CODENAME="Coffee on Mars"
+VERSION_CODENAME="Tea on Jupiter"
 HOME_URL="https://github.com/PhysixProject/physix.git"
 
