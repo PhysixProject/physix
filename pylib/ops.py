@@ -33,11 +33,16 @@ def create_partitions(config):
     if validate(ret_tpl, "Zero out beginning of device"):
         return FAILURE
 
-    ret_tpl = run_cmd(['parted', root_device, 'mklabel', 'gpt'])
-    if validate(ret_tpl, "Create Disk label"):
-        return FAILURE
+    if config['CONF_UEFI_ENABLE'].lower() == 'y':
+        ret_tpl = run_cmd(['parted', root_device, 'mklabel', 'gpt'])
+        if validate(ret_tpl, "Create Disk label"):
+            return FAILURE
+    else:
+        ret_tpl = run_cmd(['parted', root_device, 'mklabel', 'msdos'])
+        if validate(ret_tpl, "Create Disk label"):
+            return FAILURE
 
-    # UEFI 1
+    # UEFI 
     uefi_size = config["CONF_UEFI_PART_SIZE"].strip("\n")
     ret_tpl = run_cmd(["parted", root_device, "mkpart", "primary", "1", uefi_size])
     if validate(ret_tpl, "Create UEFI Partition"):
