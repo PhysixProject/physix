@@ -4,14 +4,15 @@
 source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-# Uncomment these 2 cp commands to build generic libraries.
-#cp -v configfsf.guess config.guess
-#cp -v configfsf.sub   config.sub
+# These 2 cp commands build generic libraries.
+cp -v configfsf.guess config.guess
+cp -v configfsf.sub   config.sub
 
 ./configure --prefix=/usr    \
             --enable-cxx     \
             --disable-static \
-            --docdir=/usr/share/doc/gmp-6.1.2
+            --docdir=/usr/share/doc/gmp-6.1.2 \
+            --build=x86_64-unknown-linux-gnu
 chroot_check $? "system-build : GMP : configure"
 
 make -j8
