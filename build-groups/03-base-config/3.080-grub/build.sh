@@ -20,14 +20,17 @@ if [ $CONF_SKIP_PARTITIONING == "n" ]  ; then
 		# Can be forced with --force
 		grub-install --target=i386-pc --force /dev/$ROOT_DEV
 		chroot_check $? "grub-install /dev/$ROOT_DEV"
+
+		install --verbose --mode 644 --owner root --group root $PKG_DIR_PATH/mbr-lvm-grub.cfg  /boot/physix-grub.cfg
+		chroot_check $? "Install grub.cfg"
 	else
 		grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=PHYSIX --force /dev/$ROOT_DEV
 		chroot_check $? "grub-install EFI"
+
+		install --verbose --mode 644 --owner root --group root $PKG_DIR_PATH/uefi-lvm-grub.cfg  /boot/physix-grub.cfg
+		chroot_check $? "Install grub.cfg"
 	fi
 fi
-
-install --verbose --mode 644 --owner root --group root $PKG_DIR_PATH/lvm-grub.cfg  /boot/physix-grub.cfg
-chroot_check $? "Install grub.cfg"
 
 SED_CMD='s/SET_ROOT_MARKER/'$SET_ROOT'/g'
 sed -i $SED_CMD /boot/physix-grub.cfg
