@@ -369,16 +369,16 @@
 		"package": "4.245-openssh",
 		"archives": 
 		[
-			"openssh-8.0p1.tar.gz"
+			"openssh-8.3p1.tar.gz"
 		],
 		"patches": [],
 		"physix_sources": 
 		{
-			"https://physixproject.org/source/utils/openssh-8.0p1.tar.gz": "bf050f002fe510e1daecd39044e1122d"
+			"https://physixproject.org/source/utils/openssh-8.3p1.tar.gz": "68d7527bf2672153ca47402f6489a1af"
 		},
 		"alt_sources": 
 		{
-			"http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz": "bf050f002fe510e1daecd39044e1122d"
+			"http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.3p1.tar.gz": "68d7527bf2672153ca47402f6489a1af"
 		}
 	},
 	"21": 
