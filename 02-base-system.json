@@ -9,7 +9,7 @@
 	40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
 	50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
 	60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
-	70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+	70, 71, 75, 72, 73, 74, 76, 77, 78, 79,
 	80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
 	90, 91, 92
 	],
@@ -1042,14 +1042,13 @@
 		"group": "02-base",
 		"package": "2.720-systemd",
 		"archives": [
-			"systemd-243.tar.gz"
+			"systemd-246.tar.gz",
+			"systemd-man-pages-246.tar.xz"
 		],
-		"patches": [
-			"systemd-243-consolidated_fixes-2.patch"
-		],
+		"patches": [],
 		"physix_sources": {
-			"https://physixproject.org/source/base/systemd-243.tar.gz": "ca2403fa7dff73afd2e896b4cb25021b",
-			"https://physixproject.org/source/base/systemd-243-consolidated_fixes-2.patch": "2bad2992f4373eb925885f2ea2fb8d14"
+			"https://github.com/systemd/systemd/archive/v246/systemd-246.tar.gz": "a3e9efa72d0309dd26513a221cdff31b",
+			"http://anduin.linuxfromscratch.org/LFS/systemd-man-pages-246.tar.xz": "819cc8ccffe51cb1863846fcb59a784a"
 		},
 		"alt_sources": {
 			"https://ftp.osuosl.org/pub/blfs/conglomeration/systemd/systemd-243.tar.gz": "ca2403fa7dff73afd2e896b4cb25021b",
