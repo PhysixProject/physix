@@ -27,9 +27,9 @@ NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
 GREEN="\[\e[1;32m\]"
 if [[ $EUID == 0 ]] ; then
-	PS1="- - - - - - - - - - - - - - - - - - - -\n$RED\u$NORMAL@$RED\h [ $NORMAL\W$RED ]# $NORMAL"
+	PS1="- - - - - - - - - - - - - - - - - - - -\n$RED\u$NORMAL@$RED\h \$? [ $NORMAL\W$RED ]# $NORMAL"
 else
-	PS1="- - - - - - - - - - - - - - - - - - - -\n$GREEN\u$NORMAL@$GREEN\h [ $NORMAL\W$GREEN ]\$ $NORMAL"
+	PS1="- - - - - - - - - - - - - - - - - - - -\n$GREEN\u$NORMAL@$GREEN\h \$? [ $NORMAL\W$GREEN ]\$ $NORMAL"
 fi
 
 unset RED GREEN NORMAL
