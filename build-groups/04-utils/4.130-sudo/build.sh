@@ -3,8 +3,7 @@ source ../include.sh || exit 1
 source /etc/physix.conf || exit 1
 
 prep(){
-	sed -e '/^pre-install:/{N;s@;@ -a -r $(sudoersdir)/sudoers;@}' \
-    	-i plugins/sudoers/Makefile.in
+	return 0
 }
 
 config() {
@@ -13,7 +12,7 @@ config() {
             --with-secure-path         \
             --with-all-insults         \
             --with-env-editor          \
-            --docdir=/usr/share/doc/sudo-1.8.29 \
+            --docdir=/usr/share/doc/sudo-1.9.5p2 \
             --with-passprompt="[sudo] password for %p: "
 	chroot_check $? "sudo : configure"
 }
@@ -25,7 +24,7 @@ build() {
 
 build_install() {
 	make install &&
-	ln -sfv libsudo_util.so.0.0.0 /usr/lib/sudo/libsudo_util.so.0
+    ln -sfv libsudo_util.so.0.0.0 /usr/lib/sudo/libsudo_util.so.0
 	chroot_check $? "sudo : make install"
 
 cat > /etc/sudoers.d/sudo << "EOF"

@@ -127,16 +127,16 @@
 		"package": "4.130-sudo",
 		"archives": 
 		[
-			"sudo-1.8.29.tar.gz"
+			"sudo-1.9.5p2.tar.gz"
 		],
 		"patches": [],
 		"physix_sources": 
 		{
-			"https://physixproject.org/source/utils/sudo-1.8.29.tar.gz": "b28dabff9c460f115fe74de4d6a6f79d"
+			"https://physixproject.org/source/utils/sudo-1.9.5p2.tar.gz": "e6bc4c18c06346e6b3431637a2b5f3d5"
 		},
 		"alt_sources": 
 		{
-			"http://www.sudo.ws/dist/sudo-1.8.29.tar.gz": "b28dabff9c460f115fe74de4d6a6f79d"
+			"http://www.sudo.ws/dist/sudo-1.9.5p2.tar.gz": "e6bc4c18c06346e6b3431637a2b5f3d5"
 		}
 	},
 	"7": 
