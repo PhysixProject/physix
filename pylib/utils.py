@@ -31,7 +31,6 @@ def error(msg) -> None:
     logging.error(msg)
 
 
-# \e[92m[OK]\e[0m
 def ok(msg) -> None:
     """write success message to log"""
     msg = "\033[0;32;48m [OK] \033[0m   " + msg
