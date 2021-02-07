@@ -38,7 +38,7 @@ def ok(msg) -> None:
     logging.info(msg)
 
 
-def date():
+def date() -> str:
     """Retrun Data-Time: Month/Day/Year-Hour:Minute:Sec"""
     date_time = datetime.datetime.now()
     return str(date_time.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
