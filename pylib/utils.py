@@ -315,6 +315,7 @@ def verify_sfwr_group(group_name, recipe_name) -> int:
         group_name -- string
         recipe_name -- String
     """
+    rtn = SUCCESS
     RECIPE = load_recipe(recipe_name)
     buildq = RECIPE['build_queue']
     for i in range(len(buildq)):
@@ -322,8 +323,8 @@ def verify_sfwr_group(group_name, recipe_name) -> int:
         element = RECIPE[build_id]
         grp = element['group']
         if grp != group_name:
-            return FAILURE
-    return SUCCESS
+            rtn = FAILURE
+    return rtn
 
 
 def get_subvol_id(mount_point, stack_name):
