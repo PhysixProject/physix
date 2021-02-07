@@ -18,13 +18,13 @@ from optparse import OptionParser
 FAILURE = 1
 SUCCESS = 0
 
-def info(msg):
+def info(msg) -> None:
     """write info message to log"""
     print("\033[0;33;48m [INFO] \033[0m " + msg)
     logging.info(msg)
 
 
-def error(msg):
+def error(msg) -> None:
     """write error message to log"""
     msg = "\033[0;31;48m [ERROR] \033[0m " + msg
     print(msg)
@@ -32,7 +32,7 @@ def error(msg):
 
 
 # \e[92m[OK]\e[0m
-def ok(msg):
+def ok(msg) -> None:
     """write success message to log"""
     msg = "\033[0;32;48m [OK] \033[0m   " + msg
     print(msg)
