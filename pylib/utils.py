@@ -305,7 +305,7 @@ def verify_checker(config):
     return SUCCESS
 
 
-def verify_sfwr_group(group_name, recipe_name):
+def verify_sfwr_group(group_name, recipe_name) -> int:
     """
         Verify the recipe for a software group can be built by
         the operational function it is passed to.
