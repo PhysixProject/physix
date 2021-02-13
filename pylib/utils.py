@@ -12,7 +12,8 @@ import tarfile
 import logging
 import datetime
 import subprocess
-from signal import signal, SIGINT
+from signal import signal
+from signal import SIGINT
 from optparse import OptionParser
 
 FAILURE = 1
