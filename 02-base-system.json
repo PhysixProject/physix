@@ -958,14 +958,14 @@
 		"group": "02-base",
 		"package": "2.660-make",
 		"archives": [
-			"make-4.2.1.tar.gz"
+			"make-4.3.tar.gz"
 		],
 		"patches": [],
 		"physix_sources": {
-			"https://physixproject.org/source/base/make-4.2.1.tar.gz": "7d0dcb6c474b258aab4d54098f2cf5a7"
+			"https://physixproject.org/source/base/make-4.3.tar.gz": "fc7a67ea86ace13195b0bce683fd4469"
 		},
 		"alt_sources": {
-			"http://ftp.gnu.org/gnu/make/make-4.2.1.tar.gz": "7d0dcb6c474b258aab4d54098f2cf5a7"
+			"http://ftp.gnu.org/gnu/make/make-4.3.tar.gz": "fc7a67ea86ace13195b0bce683fd4469"
 		}
 	},
 	"67": {

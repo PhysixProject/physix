@@ -4,19 +4,15 @@
 source /opt/admin/physix/include.sh || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
-
-./configure --prefix=/usr
+./configure --prefix=/usr   \
+            --without-guile \
+            --build=$(build-aux/config.guess)
 chroot_check $? "make configure"
 
 make
-chroot_check $? "make make "
+chroot_check $? "make"
 
-make PERL5LIB=$PWD/tests/ check
-chroot_check $? "Mkae make check"
-
-make install
-chroot_check $? "make make install"
-
+make DESTDIR=$LFS install
+chroot_check $? "make install"
 
 
