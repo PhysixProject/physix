@@ -2,14 +2,18 @@
 
 VERSION=$1
 if [ -z $VERSION ] ; then
-	echo "No Version Lebel Provided... Exiting."
+	echo "USAGE:"
+	echo " kinstall <kernel-version> <Label>"
+	echo "No Version Lebel Provided... check /lib/modules/"
 	exit 1
 fi
 
 LABEL=$2
 if [ -z $LABEL ] ; then
-        echo "No Name LABEL Provided... Exiting."
-        exit 1
+	echo "USAGE:"
+	echo " kinstall <kernel-version> <Label>"
+	echo "No Name LABEL Provided..."
+	exit 1
 fi
 
 if [ -e ./arch/x86/boot/bzImage ] ; then 
