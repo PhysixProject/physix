@@ -6,7 +6,7 @@ prep() {
 }
 
 config() {
-	./configure
+	./configure --prefix=/usr/local/bin/fio
 	chroot_check $? "configure"
 }
 
