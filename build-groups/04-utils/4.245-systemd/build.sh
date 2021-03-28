@@ -31,6 +31,7 @@ config() {
 		-Dhomed=false               \
 		-Duserdb=false              \
 		-Ddocdir=/usr/share/doc/systemd-246 \
+    -Dmain=false                \
 		..
 	chroot_check $? "systemd : configure"
 }
