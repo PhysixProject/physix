@@ -50,13 +50,13 @@
 	"5":{
 		"group": "03-base-config",
 		"package": "3.070-kernel",
-		"archives": ["linux-5.4.80.tar.xz"],
+		"archives": ["linux-5.10.26.tar.xz"],
 		"patches": [],
 		"physix_sources": {
-			"https://physixproject.org/source/base/linux-5.4.80.tar.xz":"ae47e8dc778e21294dbab5c956b1619d"
+			"https://physixproject.org/source/base/linux-5.10.26.tar.xz":"90c64d22f4e5deb6283c76365183e17e"
 		},
 		"alt_sources": {
-			"https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.80.tar.xz":"ae47e8dc778e21294dbab5c956b1619d"
+			"https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.10.26.tar.xz":"90c64d22f4e5deb6283c76365183e17e"
 		}
 	},
 
