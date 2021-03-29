@@ -1119,16 +1119,16 @@
 		"package": "4.747-strace",
 		"archives": 
 		[
-			"strace-5.7.tar.xz"
+			"strace-5.11.tar.xz"
 		],
 		"patches": [],
 		"physix_sources": 
 		{
-			"https://physixproject.org/source/utils/strace-5.7.tar.xz": "8c35b8ebf187b2ec18209bd7bbd16e7a"
+			"https://physixproject.org/source/utils/strace-5.11.tar.xz": "f5a317fd535465cf9130d0547661f5c4"
 		},
 		"alt_sources": 
 		{
-			"https://github.com/strace/strace/releases/download/v5.7/strace-5.7.tar.xz": "8c35b8ebf187b2ec18209bd7bbd16e7a"
+			"https://github.com/strace/strace/releases/download/v5.11/strace-5.11.tar.xz": "f5a317fd535465cf9130d0547661f5c4"
 		}
 	},
 	"61": 
