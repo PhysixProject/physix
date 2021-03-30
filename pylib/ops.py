@@ -561,13 +561,11 @@ def build_recipe(recipe, context, start, stop):
         """ Dir name of First tarball in list, is taken/used/assumed to be
             the build directory we want to chdir into """
         if element["archives"] != []:
-            #bsp = "/opt/admin/sources.physix/"+ str(element["archives"][0])
             bsp = SOURCES_DIR_PATH + str(element["archives"][0])
             build_src = top_most_dir(bsp)
         else:
             build_src = ''
 
-        #build_file = os.path.join('/opt/admin/physix/build-groups/',
         build_file = os.path.join(BUILDSCRIPTS_DIR_PATH,
                               str(element["group"]),
                               str(element["package"]),
@@ -575,10 +573,8 @@ def build_recipe(recipe, context, start, stop):
         log_name = get_name_current_stack('CHRT') + "-" + str(element["package"])
 
         # CHDIR
-        #os.chdir('/opt/admin/sources.physix/BUILDBOX/'+build_src)
         os.chdir(BUILDBOX_DIR_PATH + build_src)
 
-        #cwd = '/opt/admin/sources.physix/BUILDBOX/'+build_src
         cwd = BUILDBOX_DIR_PATH + build_src
         cmd = [build_file, 'prep']
 
