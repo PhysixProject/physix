@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2019 Tree Davies
+
 import os
 import sys
 import json
