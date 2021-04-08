@@ -1,12 +1,16 @@
 #!/tools/bin/bash
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tree Davies
-source /opt/admin/physix/include.sh || exit 1
+source /opt/admin/physix/include.sh  || exit 1
+source /opt/admin/physix/physix.conf || exit 1
 cd $SOURCE_DIR/$1 || exit 1
 
-# These 2 cp commands build generic libraries.
-cp -v configfsf.guess config.guess
-cp -v configfsf.sub   config.sub
+if [ "$CONF_BUILD_GENERIC_BINARIES" == 'y' ] ; then
+  echo "INFO: BUILDING FOR GENERIC BINARIES"
+  cp -v configfsf.guess config.guess
+  cp -v configfsf.sub   config.sub
+fi
+echo "INFO: OPTIMIZING FOR CPU"
 
 ./configure --prefix=/usr    \
             --enable-cxx     \
