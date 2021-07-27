@@ -1,6 +1,6 @@
 {
 
-	"build_queue" : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+	"build_queue" : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 
 	"0":{
 		"group": "03-base-config",
@@ -88,6 +88,15 @@
 	},
 
 	"9":{
+		"group": "03-base-config",
+		"package": "3.108-set-sysctl-conf",
+		"archives": [],
+		"patches": [],
+		"physix_sources": {},
+		"alt_sources": {}
+	},
+
+	"10":{
 		"group": "03-base-config",
 		"package": "3.110-setup-users",
 		"archives": [],
