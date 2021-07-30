@@ -4,11 +4,10 @@
 source /opt/admin/physix/include.sh || exit 1
 source /opt/admin/physix/physix.conf || exit 1
 
-IFACE=`ip link | grep 'state UP' | awk -F: '{print $2}' | tr -d '[:space:]'`
+IFACE=$CONF_ETH_INTERFACE
 MAC=`cat /sys/class/net/$IFACE/address`
 TYPE=`cat /sys/class/net/$IFACE/type`
 ID=`cat /sys/class/net/$IFACE/dev_id`
-
 
 # SETUP /etc/systemd/network/10-eth-static.network
 install -v -m644 $PKG_DIR_PATH/etc_eth-static.network.cfg  /etc/systemd/network/10-eth-static.network
