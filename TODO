@@ -1,12 +1,4 @@
 
-0. [Implemented but still experimental] Implement boot via UEFI. 
-
-1. Create process/Documentation for creating a bootable ISO Image.
-
-2.5. Move actions in 2.000-base-build-prep.sh and 2.010-directories.sh out of the 
-     software group because 1. it doesn't install software, and 2. it can't not
-     be accomplished by a non-priv'd user.
-
 4. For the moment, docbook zip pkgs have been repackaqged as a tar.gz
    to fit the process, but this case could be handled.
 
@@ -33,7 +25,4 @@
    This will require changes to all recipes and catalyst functions which parse it.
 
 11. Implement LUKS disk encryption
-
-12. Build a binary package while you are building the system. That way you shouldn't _have_to _
-    build it twice.
 

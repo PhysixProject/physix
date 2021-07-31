@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+# Copyright (C) 2020 Tree Davies
+
 
 NR_PROC=`nproc`
 N=$(($NR_PROC-1))
