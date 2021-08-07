@@ -9,6 +9,7 @@ import os
 import sys
 import pwd
 import json
+import shutil
 import sqlite3
 import tarfile
 import logging
@@ -200,8 +201,10 @@ def unset_build_lock():
     Return SUCCESS/FAILURE
     """
     if os.path.exists(BUILDLOCK_FILE):
-        rtn_tpl = run_cmd(['rm', BUILDLOCK_FILE])
-        return validate(rtn_tpl, "buildbox.lock removed")
+        try:
+            os.remove(BUILDLOCK_FILE)
+        except Exception as e:
+            return validate((1,"","Error: Removing buildbox lock"), "buildbox.lock removal")
     else:
         error("buildbox.lock not Set.")
         return FAILURE
@@ -591,8 +594,10 @@ def refresh_build_box(context):
     bb_path = prefix + "BUILDBOX"
 
     if os.path.exists(bb_path):
-        ret_tpl = run_cmd(['rm', '-r', bb_path])
-        validate(ret_tpl, 'Failed to rm BUILDBOX')
+        try:
+            shutil.rmtree(bb_path)
+        except Exception as e:
+            validate((1,"","ERROR: removing buildbox"), 'Failed to rm BUILDBOX')
 
     try:
         os.makedirs(bb_path, 0o755)
