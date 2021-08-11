@@ -57,6 +57,7 @@ shareed with any other installed operating systems.
      CONF_UEFI_DEV_PART=
      CONF_BOOT_DEV_PART=
      CONF_INSTALL_DEV_PARTITION=
+     CONF_ETH_INTERFACE=
 
    NOTE_1: The device you are installing to (CONF_ROOT_DEVICE) should be at least 60G AND blank.
 
