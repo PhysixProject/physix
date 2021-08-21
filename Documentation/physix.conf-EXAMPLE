@@ -13,31 +13,34 @@
 # CONF_SKIP_PARTITIONING=y skips partitioning setup.
 # Enabling This requires disk partitioning to be setup manually, 
 # and also requires user to setup Grub config.
-CONF_SKIP_PARTITIONING=y
+CONF_SKIP_PARTITIONING=n
 
 # This defines the 'device' where the system will be installed to.
 # Example CONF_ROOT_DEVICE=sdc (DO NOT include a partition number)
-CONF_ROOT_DEVICE=sdc
+CONF_ROOT_DEVICE=sdb
 
 # This defines the 'device' and 'partitionn number', where the root system will live.
 # This should be the same as CONF_ROOT_DEVICE suffixed by a partition number.
 # Example CONF_INSTALL_PARTITION=sdc3
-CONF_INSTALL_DEV_PARTITION=sdc1
+CONF_INSTALL_DEV_PARTITION=sdb3
 
 # Enable (y) this to boot system via UEFI
 # Disable (n) this to boot system via legacy BIOS boot.
-CONF_UEFI_ENABLE=y
+CONF_UEFI_ENABLE=n
 
 # This defines the device and partition number of the system's UEFI Partition.
 # Example: CONF_UEFI_DEV_PART=sda1
 # This is IGNORED if CONF_SKIP_PARTITIONING=n 
 # This is IGNORED if CONF_UEFI_ENABLE=n
-CONF_UEFI_DEV_PART=sda1
+CONF_UEFI_DEV_PART=sdb1
 
 # This defines the device and partition number of the system's boot partition.
 # Example CONF_BOOT_DEV_PART=sda2
-# This is IGNORED if CONF_SKIP_PARTITIONING=n
-CONF_BOOT_DEV_PART=sda2
+CONF_BOOT_DEV_PART=sdb2
+
+# This defines the ethernet interface that will be setup
+# as the default interface
+CONF_ETH_INTERFACE=enp6s0
 
 ##### END MANDATORY CONFIG #####
 
@@ -51,7 +54,9 @@ CONF_DEFAULT_ROUTE=192.168.1.1
 CONF_HOSTNAME=physix
 CONF_VOL_GROUP_NAME=physix
 CONF_DOMAIN=localdomain
-CONF_RUN_ALL_TEST_SUITE=y
+CONF_RUN_ALL_TEST_SUITE=n
+CONF_BUILD_GENERIC_BINARIES=y
+
 
 # LOGICAL VOLUME SIZES
 # VALUES ARE IN UNITS OF GIGABYTES
