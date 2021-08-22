@@ -26,3 +26,7 @@ mkdir -p /usr/share/doc/python-3.7.4/html &&
 cp -r ../$2 /usr/share/doc/python-3.7.4/html
 chroot_check $? "Install preformatted docs"
 
+ln -s /usr/bin/python3 /usr/bin/python
+chroot_check $? "Set python symlink"
+
+
