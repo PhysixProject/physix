@@ -7,7 +7,7 @@
 	20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 	30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
 	40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-	50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+	50, 51, 52, 53,     55, 56, 57, 58, 59,
 	60, 61, 62, 63, 64
 	],
 	"0": 
@@ -1003,24 +1003,6 @@
 		"alt_sources": 
 		{
 			"https://github.com/unicode-org/icu/releases/download/release-64-2/icu4c-64_2-src.tgz": "a3d18213beec454e3cdec9a3116d6b05"
-		}
-	},
-	"54": 
-	{
-		"group": "04-utils",
-		"package": "4.700-python",
-		"archives": 
-		[
-			"Python-2.7.16.tar.xz"
-		],
-		"patches": [],
-		"physix_sources": 
-		{
-			"https://physixproject.org/source/utils/Python-2.7.16.tar.xz": "30157d85a2c0479c09ea2cbe61f2aaf5"
-		},
-		"alt_sources": 
-		{
-			"https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tar.xz": "30157d85a2c0479c09ea2cbe61f2aaf5"
 		}
 	},
 	"55": 
