@@ -48,7 +48,7 @@ def date() -> str:
 	return str(date_time.strftime("%m/%d/%y-%Hh:%Mm:%Ss"))
 
 
-def validate(rtn_tpl, msg, report=False):
+def validate(rtn_tpl, msg, report=False) -> int:
 	"""Log appropriate message based on return code"""
 	rcode = int(rtn_tpl[0])
 	if rcode == SUCCESS:
@@ -63,7 +63,7 @@ def validate(rtn_tpl, msg, report=False):
 	return FAILURE
 
 
-def get_curr_commit_id():
+def get_curr_commit_id() -> str:
 	"""Return commit id of git repo"""
 	ret_tpl = run_cmd(['git', 'log', '--oneline'])
 	if validate(ret_tpl, "git log --oneline"):
@@ -76,7 +76,7 @@ def get_curr_commit_id():
 	return str(lst[0])
 
 
-def root_fs_type():
+def root_fs_type() -> str:
 	""" Discover FS type of root File system
 		Return string: File System type of device mounted at /
 		Return empty string on error
@@ -117,7 +117,7 @@ def root_lvm_path():
 	return None
 
 
-def get_name_current_stack(context):
+def get_name_current_stack(context)i -> str:
 	"""Return string: name of the currently mounted FS snapshot
 
 		Keyword arguments:
@@ -142,7 +142,7 @@ def get_name_current_stack(context):
 	return rtn_val
 
 
-def index_already_exists(stack_name):
+def index_already_exists(stack_name) -> bool:
 	"""Return boolean: if stack_name (snapshot) already exists"""
 	ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
 	if validate(ret_tpl, "btrfs subvolume list /"):
@@ -180,7 +180,7 @@ def get_snap_id(stack_name):
 	return None
 
 
-def set_build_lock():
+def set_build_lock() -> int:
 	"""
 		Create a file on FS to indicate the BUILDBOX directory
 		should not be modified because another process is most
@@ -195,7 +195,7 @@ def set_build_lock():
 		return FAILURE
 
 
-def unset_build_lock():
+def unset_build_lock() -> int:
 	"""
 	Remove lockfile from File system
 	Return SUCCESS/FAILURE
@@ -210,7 +210,7 @@ def unset_build_lock():
 		return FAILURE
 
 
-def load_recipe(cfg):
+def load_recipe(cfg) -> dict:
 	"""
 		Read input recipe as dict
 
@@ -221,7 +221,7 @@ def load_recipe(cfg):
 		return json.load(file_desc)
 
 
-def load_physix_config(cfg):
+def load_physix_config(cfg) -> dict:
 	"""
 		Read input physix.conf as dict
 
@@ -247,7 +247,7 @@ def load_physix_config(cfg):
 	return config
 
 
-def num_root_device_partitions(config):
+def num_root_device_partitions(config) -> int:
 	"""
 		Return number of partitions on root device
 
@@ -390,7 +390,7 @@ def get_physix_prefix(context):
 	return rtn
 
 
-def verify_file_md5(fname, rmd5, context):
+def verify_file_md5(fname, rmd5, context) -> bool:
 	"""
 		Generate md5sum of a fname and compare it against rmd5/
 		Returns boolean
@@ -417,7 +417,7 @@ def verify_file_md5(fname, rmd5, context):
 	return rbool
 
 
-def verify_recipe_md5(recipe, context):
+def verify_recipe_md5(recipe, context) -> int:
 	"""
 		Traverse through recipe file and verify md5sums of sources
 
@@ -463,7 +463,7 @@ def setup_user_env(user_name, cwd):
 	return (env, user_uid, user_gid)
 
 
-def run_cmd_log_io_as_physix_user(cmd, name, context, cwd):
+def run_cmd_log_io_as_physix_user(cmd, name, context, cwd) -> tuple:
 	"""
 		Run command and log I/O to log file
 		Returns tuple: (int, str, str)
@@ -497,7 +497,7 @@ def run_cmd_log_io_as_physix_user(cmd, name, context, cwd):
 	return (rtn, "", "")
 
 
-def run_cmd_log_io_as_root_user(cmd, name, context):
+def run_cmd_log_io_as_root_user(cmd, name, context) -> tuple:
 	"""
 		Run command and log I/O to log file
 		Returns tuple: (int, str, str)
@@ -530,7 +530,7 @@ def run_cmd_log_io_as_root_user(cmd, name, context):
 	return (rtn, "", "")
 
 
-def run_cmd(cmd):
+def run_cmd(cmd) -> tuple:
 	"""
 		Run command return captured I/O
 		Returns tuple (return_code, stdout, stdin)
@@ -553,7 +553,7 @@ def run_cmd(cmd):
 	return (int(rtn), str(out), str(err))
 
 
-def run_cmd_live(cmd):
+def run_cmd_live(cmd) -> tuple:
 	""" run commmand, don't capture output  """
 	try:
 		proc = subprocess.run(cmd)
@@ -563,7 +563,7 @@ def run_cmd_live(cmd):
 	return (rtn, "", "")
 
 
-def top_most_dir(archive_path):
+def top_most_dir(archive_path) -> str:
 	""" Return name of directory encapsolated in the tar archive """
 	archive_path = archive_path.strip().strip("\n")
 	if not os.path.exists(archive_path):
@@ -576,7 +576,7 @@ def top_most_dir(archive_path):
 		return str(name_lst[0])
 
 
-def name_is_valid(name):
+def name_is_valid(name) -> bool:
 	if '-' in name:
 		error("Snapshot Name can not contain '-' character")
 		return False
@@ -611,7 +611,7 @@ def refresh_build_box(context):
 	return True
 
 
-def verify_build_bounderies(options, RECIPE):
+def verify_build_bounderies(options, RECIPE) -> tuple:
 	start = 0
 	stop = 0
 
@@ -642,6 +642,7 @@ def unpack(element, context):
 	archive_list = []
 
 	if element['archives'] == []:
+		#Should return FAILURE
 		return []
 
 	# Archives are stored in 1 or 2 paths, depending on
