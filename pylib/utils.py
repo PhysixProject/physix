@@ -158,7 +158,7 @@ def index_already_exists(stack_name) -> bool:
 	return False
 
 
-def get_snap_id(stack_name):
+def get_snap_id(stack_name) -> str:
 	"""
 	   Return btrfs snapshot ID
 	   Returns None if it fails.
@@ -168,7 +168,7 @@ def get_snap_id(stack_name):
 	"""
 	ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', '/'])
 	if validate(ret_tpl, "btrfs subvolume list /"):
-		return None
+		return ""
 	std_out = ret_tpl[1]
 
 	parsed_lst = std_out.split('\n')
@@ -177,7 +177,7 @@ def get_snap_id(stack_name):
 		if len(datums) == 9:
 			if str(stack_name) == str(datums[8]):
 				return str(datums[1])
-	return None
+	return ""
 
 
 def set_build_lock() -> int:

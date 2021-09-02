@@ -1276,7 +1276,7 @@ def do_set_default_snapshot(options):
 
 	snap_name = options.defsnap
 	snap_id = get_snap_id(snap_name)
-	if snap_id == None:
+	if snap_id == "":
 		return FAILURE
 
 	ret_tpl = run_cmd(['btrfs', 'subvolume', 'set-default', snap_id, '/'])
