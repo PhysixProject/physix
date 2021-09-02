@@ -240,8 +240,8 @@ def mount_volumes(config):
 		if validate(ret_tpl, "Create  subvolume: STACK_0 on physix-root"):
 			return FAILURE
 
-		vol_id = get_subvol_id(BUILDROOT, "STACK_0")
-		if vol_id == None:
+		vol_id = get_subvol_id(BUILDROOT)
+		if vol_id == "":
 			return FAILURE
 		ret_tpl = run_cmd(['btrfs', 'subvolume', 'set-default', vol_id, BUILDROOT])
 		if validate(ret_tpl, "btrfs subvolume set-default:"+vol_id):

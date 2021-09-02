@@ -117,7 +117,7 @@ def root_lvm_path() -> str:
 	return ""
 
 
-def get_name_current_stack(context)i -> str:
+def get_name_current_stack(context) -> str:
 	"""Return string: name of the currently mounted FS snapshot
 
 		Keyword arguments:
@@ -161,7 +161,7 @@ def index_already_exists(stack_name) -> bool:
 def get_snap_id(stack_name) -> str:
 	"""
 	   Return btrfs snapshot ID
-	   Returns None if it fails.
+	   Returns "" if it fails.
 
 	   Keyword arguments:
 	   stack_name -- string
@@ -261,12 +261,12 @@ def num_root_device_partitions(config) -> int:
 	return int(dev_count) - 1
 
 
-def verify_checker(config):
+def verify_checker(config: dict) -> int:
 	"""
 		Read input physix.conf as dict
 
 		Keyword arguments:
-		config -- string: path to config file
+		config -- dict: config dict
 	"""
 
 	filesystem = config['CONF_ROOTPART_FS']
@@ -310,7 +310,7 @@ def verify_checker(config):
 	return SUCCESS
 
 
-def verify_sfwr_group(group_name, recipe_name) -> int:
+def verify_sfwr_group(group_name: str, recipe_name: str) -> int:
 	"""
 		Verify the recipe for a software group can be built by
 		the operational function it is passed to.
@@ -332,19 +332,18 @@ def verify_sfwr_group(group_name, recipe_name) -> int:
 	return rtn
 
 
-def get_subvol_id(mount_point, stack_name):
+def get_subvol_id(mount_point: str) -> str:
 	"""
 		Return ID of snapshot
-		Returns: Integer on Success, None on Failure
+		Returns: str(int) on Success, "" on Failure
 
 		Keyword arguments:
 		mount_point -- string
-		stack_name -- String
 	"""
 
 	ret_tpl = run_cmd(['btrfs', 'subvolume', 'list', mount_point])
 	if validate(ret_tpl, "List subvolumes for mountpoint:" + mount_point):
-		return None
+		return ""
 
 	output = ret_tpl[1]
 	lst = output.split(' ')
@@ -353,7 +352,7 @@ def get_subvol_id(mount_point, stack_name):
 		return vol_id
 	else:
 		error("Unexpected String size.")
-		return None
+		return ""
 
 
 def get_sources_prefix(context):
