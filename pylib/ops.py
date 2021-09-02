@@ -1086,7 +1086,7 @@ def do_list_snapshots():
 	ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
 
 	physix_root = root_lvm_path()
-	if physix_root == None:
+	if physix_root == "":
 		return FAILURE
 
 	ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, TMP_MNTPOINT_DIR])
@@ -1151,7 +1151,7 @@ def do_snapshot(options):
 	ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
 
 	physix_root = root_lvm_path()
-	if physix_root == None:
+	if physix_root == "":
 		return FAILURE
 
 	ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, TMP_MNTPOINT_DIR])
@@ -1240,7 +1240,7 @@ def do_delete_snapshot(options):
 	ret_tpl = run_cmd(['umount', TMP_MNTPOINT_DIR])
 
 	physix_root = root_lvm_path()
-	if physix_root == None:
+	if physix_root == "":
 		return FAILURE
 
 	ret_tpl = run_cmd(['mount', '-o', 'subvolid=5', physix_root, TMP_MNTPOINT_DIR])
