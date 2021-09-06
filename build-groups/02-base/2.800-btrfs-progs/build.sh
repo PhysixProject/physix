@@ -21,6 +21,7 @@ mv tests/convert-tests/014-reiserfs-tail-handling/test.sh{,.broken}         &&
 mv tests/misc-tests/025-zstd-compression/test.sh{,.broken}
 chroot_check $? "btrfs-progs : make tests"
 
+if [ "$CONF_RUN_ALL_TEST_SUITE" == "y" ] ; then
 pushd tests
    ./fsck-tests.sh
    ./mkfs-tests.sh
@@ -30,7 +31,7 @@ pushd tests
    ./fuzz-tests.sh
 popd
 chroot_check $? "btrfs-progs : test suite"
-
+fi
 
 make install &&
 ln -sfv ../../lib/$(readlink /lib/libbtrfs.so) /usr/lib/libbtrfs.so &&
