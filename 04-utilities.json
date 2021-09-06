@@ -8,7 +8,7 @@
 	30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
 	40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
 	50, 51, 52, 53, 54, 55, 56, 57, 58,
-	59, 60, 61, 62, 63
+	59, 60, 61, 62, 63, 64
 	],
 	"0": 
 	{
@@ -1193,7 +1193,22 @@
 		{
 			"https://static.rust-lang.org/dist/rustc-1.35.0-src.tar.gz": "f43af67a139ce21ff5f530bbd2f486aa"
 		}
+	},
+	"64": {
+		"group": "04-utils",
+		"package": "4.800-pacman",
+		"archives": [
+			"pacman-6.0.1.tar.xz"
+		],
+		"patches": [],
+		"physix_sources": {
+			"https://physixproject.org/source/base/pacman-6.0.1.tar.xz": "f71e6f06867749735960d0c1d199d375"
+		},
+		"alt_sources": {
+			"https://sources.archlinux.org/other/pacman/pacman-6.0.1.tar.xz": "f71e6f06867749735960d0c1d199d375"
+		}
 	}
+
 }
 
 
