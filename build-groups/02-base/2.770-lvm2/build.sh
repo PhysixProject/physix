@@ -21,8 +21,10 @@ make -C udev  install                 &&
 make -C libdm install
 chroot_check $? "lvm2 : make tools/udev/libdm install"
 
-make check_local
-chroot_check $? "lvm2 : make check local" NOEXIT
+if [ "$CONF_RUN_ALL_TEST_SUITE" == "y" ] ; then
+    make check_local
+    chroot_check $? "lvm2 : make check local" NOEXIT
+fi
 
 make install
 chroot_check $? "lvm2 : make install"
