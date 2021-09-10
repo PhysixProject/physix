@@ -355,7 +355,7 @@ def get_subvol_id(mount_point: str) -> str:
 		return ""
 
 
-def get_sources_prefix(context):
+def get_sources_prefix(context: str) -> str:
 	"""
 		Keyword arguments:
 		context -- string
@@ -367,7 +367,7 @@ def get_sources_prefix(context):
 		return BUILDROOT_SOURCES_DIR_PATH
 	else:
 		error("get_sources_prefix(): Unknown context")
-		return False
+		return ""
 
 
 def get_physix_prefix(context):
@@ -401,7 +401,11 @@ def verify_file_md5(fname, rmd5, context) -> bool:
 	"""
 
 	rbool = False
-	fname_path = get_sources_prefix(context) + fname
+	fname_path = get_sources_prefix(context)
+	if not fname_path:
+		error("verify_file_md5(): get_sources_prefix returns empty string. ")
+		return rbool
+	fname_path = fname_path + fname
 
 	(rtn, output, error) = run_cmd(['md5sum', fname_path])
 	if rtn == 0:
@@ -590,6 +594,9 @@ def refresh_build_box(context):
 	""" Remove and Re-create BUILDBOX """
 
 	prefix = get_sources_prefix(context)
+	if not prefix:
+		error("refresh_build_box(): get_sources_prefix() returns empty string")
+		return FAILURE
 	bb_path = prefix + "BUILDBOX"
 
 	if os.path.exists(bb_path):
@@ -647,6 +654,9 @@ def unpack(element, context):
 	# Archives are stored in 1 or 2 paths, depending on
 	# whether executed in chrooted or non-chrooted context
 	src_path = get_sources_prefix(context)
+	if not src_path:
+		error("unpack(): get_sources_prefix() return empty string")
+		return FAILURE
 	bb_path = src_path + "BUILDBOX/"
 
 	if not os.path.exists(bb_path):

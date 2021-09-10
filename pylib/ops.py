@@ -330,7 +330,7 @@ def setup_build_env(element, context):
 	"""
 
 	src_prefix = get_sources_prefix(context)
-	if src_prefix == False:
+	if src_prefix == "":
 		return FAILURE
 	bb_path = os.path.join(src_prefix, "BUILDBOX")
 
@@ -484,7 +484,10 @@ def build_toolchain(recipe, context, start, stop):
 			build script """
 		build_src = ''
 		if element["archives"] != []:
-			bsp = os.path.join(get_sources_prefix(context), str(element["archives"][0]))
+			src_prefix = get_sources_prefix(context)
+			if not src_prefix:
+				return FAILURE
+			bsp = os.path.join(src_prefix, str(element["archives"][0]))
 			build_src = top_most_dir(bsp)
 
 		build_file = os.path.join(BUILDROOT_BUILDSCRIPTS_DIR_PATH,
