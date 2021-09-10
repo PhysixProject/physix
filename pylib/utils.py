@@ -158,7 +158,7 @@ def index_already_exists(stack_name) -> bool:
 	return False
 
 
-def get_snap_id(stack_name) -> str:
+def get_snap_id(stack_name: str) -> str:
 	"""
 	   Return btrfs snapshot ID
 	   Returns "" if it fails.
@@ -210,7 +210,7 @@ def unset_build_lock() -> int:
 		return FAILURE
 
 
-def load_recipe(cfg) -> dict:
+def load_recipe(cfg: str) -> dict:
 	"""
 		Read input recipe as dict
 
@@ -221,7 +221,7 @@ def load_recipe(cfg) -> dict:
 		return json.load(file_desc)
 
 
-def load_physix_config(cfg) -> dict:
+def load_physix_config(cfg: str) -> dict:
 	"""
 		Read input physix.conf as dict
 
@@ -247,12 +247,12 @@ def load_physix_config(cfg) -> dict:
 	return config
 
 
-def num_root_device_partitions(config) -> int:
+def num_root_device_partitions(config: dict) -> int:
 	"""
 		Return number of partitions on root device
 
 		Keyword arguments:
-		config -- string: path to config file
+		config -- dict
 	"""
 
 	root_dev = config["CONF_ROOT_DEVICE"]
@@ -370,7 +370,7 @@ def get_sources_prefix(context: str) -> str:
 		return ""
 
 
-def get_physix_prefix(context):
+def get_physix_prefix(context: str):
 	"""
 		Construct system path of physix direcotry
 		Return String on success, False on failure.
@@ -389,7 +389,7 @@ def get_physix_prefix(context):
 	return rtn
 
 
-def verify_file_md5(fname, rmd5, context) -> bool:
+def verify_file_md5(fname: str, rmd5: str, context: str) -> bool:
 	"""
 		Generate md5sum of a fname and compare it against rmd5/
 		Returns boolean
@@ -420,7 +420,7 @@ def verify_file_md5(fname, rmd5, context) -> bool:
 	return rbool
 
 
-def verify_recipe_md5(recipe, context) -> int:
+def verify_recipe_md5(recipe: dict, context: str) -> int:
 	"""
 		Traverse through recipe file and verify md5sums of sources
 
@@ -443,14 +443,14 @@ def verify_recipe_md5(recipe, context) -> int:
 	return SUCCESS
 
 
-def demote(user_uid, user_gid):
+def demote(user_uid: int, user_gid: int):
 	def result():
 		os.setgid(user_gid)
 		os.setuid(user_uid)
 	return result
 
 
-def setup_user_env(user_name, cwd):
+def setup_user_env(user_name: str, cwd: str) -> tuple:
 	pw_record = pwd.getpwnam(user_name)
 	user_name	  = pw_record.pw_name
 	user_home_dir  = pw_record.pw_dir
@@ -466,7 +466,7 @@ def setup_user_env(user_name, cwd):
 	return (env, user_uid, user_gid)
 
 
-def run_cmd_log_io_as_physix_user(cmd, name, context, cwd) -> tuple:
+def run_cmd_log_io_as_physix_user(cmd: list, name: str, context: str, cwd: str) -> tuple:
 	"""
 		Run command and log I/O to log file
 		Returns tuple: (int, str, str)
@@ -556,7 +556,7 @@ def run_cmd(cmd) -> tuple:
 	return (int(rtn), str(out), str(err))
 
 
-def run_cmd_live(cmd) -> tuple:
+def run_cmd_live(cmd: str) -> tuple:
 	""" run commmand, don't capture output  """
 	try:
 		proc = subprocess.run(cmd)
@@ -566,7 +566,7 @@ def run_cmd_live(cmd) -> tuple:
 	return (rtn, "", "")
 
 
-def top_most_dir(archive_path) -> str:
+def top_most_dir(archive_path: str) -> str:
 	""" Return name of directory encapsolated in the tar archive """
 	archive_path = archive_path.strip().strip("\n")
 	if not os.path.exists(archive_path):
@@ -579,7 +579,7 @@ def top_most_dir(archive_path) -> str:
 		return str(name_lst[0])
 
 
-def name_is_valid(name) -> bool:
+def name_is_valid(name: str) -> bool:
 	if '-' in name:
 		error("Snapshot Name can not contain '-' character")
 		return False
@@ -590,7 +590,7 @@ def name_is_valid(name) -> bool:
 	return True
 
 
-def refresh_build_box(context):
+def refresh_build_box(context: str):
 	""" Remove and Re-create BUILDBOX """
 
 	prefix = get_sources_prefix(context)
@@ -617,7 +617,7 @@ def refresh_build_box(context):
 	return True
 
 
-def verify_build_bounderies(options, RECIPE) -> tuple:
+def verify_build_bounderies(options, RECIPE: dict) -> tuple:
 	start = 0
 	stop = 0
 
@@ -692,7 +692,7 @@ def unpack(element, context):
 	return SUCCESS
 
 
-def separate_device_and_partition(device):
+def separate_device_and_partition(device: str) -> list:
 	""" Separate the string by device and partition number
 		return list: [device, part_num]
 		return empty string on error
@@ -717,7 +717,7 @@ def separate_device_and_partition(device):
 	return [dev, part]
 
 
-def data_present(device):
+def data_present(device: str) -> bool:
 	""" Given device path as arg, atempt to mount device.
 		return True if files are present 
 		return False if files are NOT present or device not mountable

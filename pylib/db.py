@@ -20,7 +20,7 @@ SUCCESS = 0
 from utils import *
 from definitions import *
 
-def get_db_connection(context):
+def get_db_connection(context: str):
 	"""Return db connection object. Return None on error."""
 	db_path = ''
 	conn = None
@@ -82,7 +82,7 @@ def list_stack(conn):
 	return SUCCESS
 
 
-def init_db_tables():
+def init_db_tables() -> int:
 	"""Create initial STACK_0 Table and initialize it.
 	   Returns SUCCESS/FAILURE"""
 
