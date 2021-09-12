@@ -75,7 +75,11 @@ shareed with any other installed operating systems.
    Use your host system's grub.cfg as is, and add a Physix menu entry to it. A mock-up
    entry for this can be found at /boot/physix-grub.cfg.
 
-6. After reboot, `cd /opt/admin/physix;  ./BUILD_04-08.sh;` to build all packages.
+6. Reboot.
+
+7. After reboot, continue building the remaining recipes.
+   # ./catalyst -p <recipe>
+   # ./catalyst -b <recipe>
 
 
 Quickstart B: Install to a Selected Partition.
@@ -145,11 +149,6 @@ uses the recipes as its instructions.
                   of the recipes, build scripts are also ordered by number for the same
                   reason.
 
- - Service configs: System services (such as PAM, httpd, openssh, etc...) use configs which
-                    are installed in /etc and elsewhere. These configs are located within
-                    the config directory under its associated software group directory
-                    (e.g. build-scripts/04-utils/configs/linux-pam/ )
-
 When upgrading to a newer version of a source package, the recipe, build script, and
 associated service configs are the key pieces to change.
 
@@ -169,16 +168,15 @@ What Physix Currently Provides:
 
  * Standard Utilities built from: 04-utilities.json
 
- * X Windows Display server: 05-xorg.json
+ * System Services:  05-services.json
 
- * Display Manager: 06-lightdm.json
+ * System Testing: 05-testing.json
 
- * Lightweight X11 Desktop Environment (LXDE): 07-lxde.json
-
- * X11 Applications: 08-xapps.json
-   Currently VERY minimal:
-    - Xterm
-    - Firefox
+ * adjunct branch:
+    - X Windows Display server: 05-xorg.json
+    - Display Manager: 06-lightdm.json
+    - Lightweight X11 Desktop Environment (LXDE): 07-lxde.json
+    - X11 Applications: 08-xapps.json
 
 
 Estimated Build Time:
@@ -360,18 +358,6 @@ Installation (To separate storage device):
            cd /opt/admin/physix
            catalyst -p 04-utilities.json
            catalyst -b 04-utilities.json
-
-       S8. Download xorg sources and Build xorg recipe:
-           catalyst -p 05-xorg.json
-           catalyst -b 05-xorg.json
-
-       S9. Download Lightdm sources and build it:
-           catalyst -p 06.lightdm.json
-           catalyst -b 06.lightdm.json
-
-       S10. Download LXDE sources and build it:
-            catalyst -p 07-lxde.json
-            catalyst -b 07-lxde.json
 
 
 Contributions:
