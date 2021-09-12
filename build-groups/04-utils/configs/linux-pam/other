@@ -1,5 +1,0 @@
-# This Linux-PAM config is used ad the default for undefined services.
-auth            required        pam_unix.so
-account         required        pam_unix.so
-session         required        pam_unix.so
-password        required        pam_unix.so

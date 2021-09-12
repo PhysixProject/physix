@@ -1,2 +1,0 @@
-export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/lib:/usr/bin/rustc/bin/:/usr/local/bin/
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib64/pkgconfig
