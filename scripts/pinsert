@@ -1,0 +1,76 @@
+#!/usr/bin/python3
+
+import hashlib
+import json
+import sys
+import os
+
+if len(sys.argv) < 3:
+    print("Error: Missing arguments")
+    print("pinsert <recipe.json> <insert-position> <pkg_name>")
+    sys.exit(1)
+
+input_file = sys.argv[1]
+position = sys.argv[2]
+pkg_name = sys.argv[3]
+
+if not (input_file and position and pkg_name):
+    print("Error: Missing arguments")
+    print("pinsert <recipe.json> <insert-position> <pkg_name>")
+    sys.exit(1)
+
+# insist cwd is ./physix
+cwd = os.getcwd()
+print(cwd)
+cwd_lst = cwd.split("/")
+print(str(cwd_lst))
+
+# Find File 
+pkg_path = ""
+if os.path.exists("../sources/" + pkg_name):
+    pkg_path = "../sources/" + pkg_name
+if os.path.exists("./" + pkg_name):
+    pkg_path = "./" + pkg_name
+print("Found pkg path: " + pkg_name)
+
+# read in file
+pkg_data = None
+with open(pkg_path,"rb") as FD:
+    pkg_data = FD.read()
+print(len(pkg_data)) 
+
+
+# Get MD5
+md5sum  = hashlib.md5(pkg_data).hexdigest()
+print("MD5: "+md5sum)
+
+build_group = input_file.replace(".json","")
+pkg_name = pkg_name.split("/")[-1]
+print(str(pkg_name))
+
+element = {}
+element[str(position)] = {
+    "group" : build_group,
+    "package" : "",
+    "archives" : [pkg_name],
+    "patches" : [],
+    "physix_sources" : {"https://physixproject.org/source/toolchain/"+pkg_name:md5sum},
+    "license" : ""
+}
+
+print(str(element))
+print(json.dumps(element[str(position)], indent=4))
+print("\n\n")
+
+recipe = None
+with open(input_file,"r") as fd:
+    recipe = json.load(fd)
+
+print(json.dumps(recipe["3"], indent=4))
+
+#print(json.dumps(parsed, indent=4))
+
+
+
+
+
