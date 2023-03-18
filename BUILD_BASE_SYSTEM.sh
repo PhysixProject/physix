@@ -32,7 +32,7 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
-./catalyst -c 03-config-base.json
+./catalyst -c 03-base-config.json
 if [ $? -ne 0 ] ; then
     echo "Build Failed"
     exit 1

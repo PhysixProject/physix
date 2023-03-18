@@ -54,10 +54,10 @@ build_install() {
         install -d -m 755 /lib/systemd/system
         chroot_check $? "install dirs"
 
-        install -v -m644 /opt/admin/physix/build-groups/04-utils/configs/dhclient/dhclient.conf  /etc/dhcp
+        install -v -m644 /opt/admin/physix/build-groups/04-utilities/configs/dhclient/dhclient.conf  /etc/dhcp
         chroot_check $? "Install /etc/dhcp/dhclient.conf"
 
-        install -v -m644 /opt/admin/physix/build-groups/04-utils/configs/dhclient/dhclient@.service  /lib/systemd/system/
+        install -v -m644 /opt/admin/physix/build-groups/04-utilities/configs/dhclient/dhclient@.service  /lib/systemd/system/
         chroot_check $? "Install  /lib/systemd/system/dhclient@.service"
 
         systemctl disable systemd-networkd

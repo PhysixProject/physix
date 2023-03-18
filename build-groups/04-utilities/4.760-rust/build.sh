@@ -25,7 +25,7 @@ prep() {
 
 
 config() {
-	cp /opt/admin/physix/build-groups/04-utils/configs/rustc/config.toml .
+	cp /opt/admin/physix/build-groups/04-utilities/configs/rustc/config.toml .
 	chroot_check $? "Set ./config.toml"
 }
 

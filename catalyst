@@ -70,13 +70,13 @@ def main():
         sys.exit(do_physix_conf_init(options))
 
     if options.toolchain_conf:
-        if verify_sfwr_group('01-base-toolchain', options.toolchain_conf):
+        if verify_sfwr_group('01-toolchain', options.toolchain_conf):
             error("Invalid build flag for recipe " + str(options.toolchain_conf))
             return FAILURE
         sys.exit(do_toolchain_build(options))
 
     if options.base_conf:
-        if verify_sfwr_group('02-base', options.base_conf):
+        if verify_sfwr_group('02-base-system', options.base_conf):
             error("Invalid build flag for recipe " + str(options.base_conf))
             return FAILURE
         sys.exit(do_base_build(options))
@@ -88,8 +88,8 @@ def main():
         sys.exit(do_config_base(options))
 
     if options.build_recipe:
-        if not (verify_sfwr_group('01-base-toolchain', options.build_recipe) and
-                verify_sfwr_group('02-base', options.build_recipe) and
+        if not (verify_sfwr_group('01-toolchain', options.build_recipe) and
+                verify_sfwr_group('02-base-system', options.build_recipe) and
                 verify_sfwr_group('03-base-config', options.build_recipe)):
             error("Invalid build flag for recipe " + str(options.build_recipe))
             return FAILURE

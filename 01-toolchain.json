@@ -8,7 +8,7 @@
 	30,31,32
 	],
 	"0": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.040-binutils-p1",
 		"archives": [
 			"binutils-2.34.tar.xz"
@@ -23,7 +23,7 @@
 		"license": "GPLv2"
 	},
 	"1": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.050-gcc-p1",
 		"archives": [
 			"gcc-9.2.0.tar.xz",
@@ -47,7 +47,7 @@
 		"license": "GPLv2"
 	},
 	"2": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.060-linux-api-headers",
 		"archives": [
 			"linux-5.10.26.tar.xz"
@@ -62,7 +62,7 @@
 		"license": "GPLv2"
 	},
 	"3": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.070-glibc",
 		"archives": [
 			"glibc-2.30.tar.xz"
@@ -77,7 +77,7 @@
 		"license": "GPLv2"
 	},
 	"4": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.080-libstdc++",
 		"archives": [
 			"gcc-9.2.0.tar.xz"
@@ -92,7 +92,7 @@
 		"license": "GPLv2"
 	},
 	"5": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.090-binutils-p2",
 		"archives": [
 			"binutils-2.34.tar.xz"
@@ -107,7 +107,7 @@
 		"license": "GPLv2"
 	},
 	"6": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.100-gcc-p2",
 		"archives": [
 			"gcc-9.2.0.tar.xz",
@@ -131,7 +131,7 @@
 		"license": "GPLv2"
 	},
 	"7": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.110-tcl",
 		"archives": [
 			"tcl8.6.9-src.tar.gz"
@@ -146,7 +146,7 @@
 		"license": "TCL"
 	},
 	"8": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.120-expect",
 		"archives": [
 			"expect5.45.4.tar.gz"
@@ -161,7 +161,7 @@
 		"license": "Public Domain"
 	},
 	"9": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.130-dejaGNU",
 		"archives": [
 			"dejagnu-1.6.2.tar.gz"
@@ -176,7 +176,7 @@
 		"license": "GPLv3+"
 	},
 	"10": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.140-m4",
 		"archives": [
 			"m4-1.4.18.tar.xz"
@@ -191,7 +191,7 @@
 		"license": "GPLv3+"
 	},
 	"11": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.150-ncurses",
 		"archives": [
 			"ncurses-6.1.tar.gz"
@@ -206,7 +206,7 @@
 		"license": "MIT"
 	},
 	"12": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.160-bash",
 		"archives": [
 			"bash-5.0.tar.gz"
@@ -221,7 +221,7 @@
 		"license": "GPLv3+"
 	},
 	"13": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.170-bison",
 		"archives": [
 			"bison-3.4.1.tar.xz"
@@ -236,7 +236,7 @@
 		"license": "GPLv3+"
 	},
 	"14": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.180-bzip",
 		"archives": [
 			"bzip2-1.0.8.tar.gz"
@@ -251,7 +251,7 @@
 		"license": "BSD"
 	},
 	"15": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.190-coreutils",
 		"archives": [
 			"coreutils-8.31.tar.xz"
@@ -266,7 +266,7 @@
 		"license": "GPLv3+"
 	},
 	"16": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.200-diffutils",
 		"archives": [
 			"diffutils-3.7.tar.xz"
@@ -281,7 +281,7 @@
 		"license": "GPLv3+"
 	},
 	"17": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.210-File",
 		"archives": [
 			"file-5.37.tar.gz"
@@ -296,7 +296,7 @@
 		"license": "BSD"
 	},
 	"18": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.220-findutils",
 		"archives": [
 			"findutils-4.6.0.tar.gz"
@@ -311,7 +311,7 @@
 		"license": "GPLv3+"
 	},
 	"19": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.230-gawk",
 		"archives": [
 			"gawk-5.0.1.tar.xz"
@@ -326,7 +326,7 @@
 		"license": "GPLv3+ and GPLv2+ and LGPLv2+ and BSD"
 	},
 	"20": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.240-gettext",
 		"archives": [
 			"gettext-0.20.1.tar.xz"
@@ -341,7 +341,7 @@
 		"license": "GPLv3+ and LGPLv2+ and GFDL"
 	},
 	"21": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.250.grep",
 		"archives": [
 			"grep-3.3.tar.xz"
@@ -356,7 +356,7 @@
 		"license": "GPLv3+"
 	},
 	"22": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.260-gzip",
 		"archives": [
 			"gzip-1.10.tar.xz"
@@ -371,7 +371,7 @@
 		"license": "GPLv3+ and GFDL"
 	},
 	"23": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.270-make",
 		"archives": [
 			"make-4.2.1.tar.gz"
@@ -386,7 +386,7 @@
 		"license": "GPLv3+"
 	},
 	"24": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.280-patch",
 		"archives": [
 			"patch-2.7.6.tar.xz"
@@ -401,7 +401,7 @@
 		"license": "GPLv3+"
 	},
 	"25": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.290-perl",
 		"archives": [
 			"perl-5.30.0.tar.xz"
@@ -416,7 +416,7 @@
 		"license": "GPL+ or Artistic"
 	},
 	"26": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.300-python",
 		"archives": [
 			"Python-3.7.4.tar.xz"
@@ -432,7 +432,7 @@
 		"license": "Python"
 	},
 	"27": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.310-sed",
 		"archives": [
 			"sed-4.7.tar.xz"
@@ -447,7 +447,7 @@
 		"license": "GPLv3+"
 	},
 	"28": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.320-tar",
 		"archives": [
 			"tar-1.32.tar.xz"
@@ -462,7 +462,7 @@
 		"license": "GPLv3+"
 	},
 	"29": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.330-texinfo",
 		"archives": [
 			"texinfo-6.6.tar.xz"
@@ -477,7 +477,7 @@
 		"license": "GPLv3+"
 	},
 	"30": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.340-util-linux",
 		"archives": [
 			"util-linux-2.34.tar.xz"
@@ -492,7 +492,7 @@
 		"license": "GPLv2 and GPLv2+ and LGPLv2+ and BSD with advertising and Public Domain"
 	},
 	"31": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.350-xz",
 		"archives": [
 			"xz-5.2.4.tar.xz"
@@ -507,7 +507,7 @@
 		"license": "GPLv2+ and Public Domain"
 	},
 	"32": {
-		"group": "01-base-toolchain",
+		"group": "01-toolchain",
 		"package": "1.360-stripping",
 		"archives": [],
 		"patches": [],

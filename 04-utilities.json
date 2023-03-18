@@ -12,7 +12,7 @@
 	],
 	"0": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.070-nettle",
 		"archives": 
 		[
@@ -30,7 +30,7 @@
 	},
 	"1": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.080-json-c",
 		"archives": 
 		[
@@ -48,7 +48,7 @@
 	},
 	"2": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.090-libgpg-error",
 		"archives": 
 		[
@@ -66,7 +66,7 @@
 	},
 	"3": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.100-libgcrypt",
 		"archives": 
 		[
@@ -84,7 +84,7 @@
 	},
 	"4": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.110-cracklib",
 		"archives": 
 		[
@@ -105,7 +105,7 @@
 	},
 	"5": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.120-libassuan",
 		"archives": 
 		[
@@ -123,7 +123,7 @@
 	},
 	"6": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.130-sudo",
 		"archives": 
 		[
@@ -141,7 +141,7 @@
 	},
 	"7": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.140-libksba",
 		"archives": 
 		[
@@ -159,7 +159,7 @@
 	},
 	"8": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.150-libunistring",
 		"archives": 
 		[
@@ -177,7 +177,7 @@
 	},
 	"9": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.160-gnutls",
 		"archives": 
 		[
@@ -195,7 +195,7 @@
 	},
 	"10": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.170-gpgme",
 		"archives": 
 		[
@@ -213,7 +213,7 @@
 	},
 	"11": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.180-haveged",
 		"archives": 
 		[
@@ -231,7 +231,7 @@
 	},
 	"12": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.190-iptables",
 		"archives": 
 		[
@@ -249,7 +249,7 @@
 	},
 	"13":
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.191-set-iptables-rules",
 		"archives":	[],
 		"patches": [],
@@ -258,7 +258,7 @@
 	},
 	"14": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.210-libtirpc",
 		"archives": 
 		[
@@ -276,7 +276,7 @@
 	},
 	"15": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.220-BerkeleyDB",
 		"archives": 
 		[
@@ -294,7 +294,7 @@
 	},
 	"16": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.230-linux-pam",
 		"archives": 
 		[
@@ -312,7 +312,7 @@
 	},
 	"17": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.231-libcap-pam",
 		"archives": 
 		[
@@ -332,7 +332,7 @@
 	},
 	"18": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.240-shadow",
 		"archives": 
 		[
@@ -350,7 +350,7 @@
 	},
 	"19":
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.242-fcron",
 		"archives": [ "fcron-3.2.1.src.tar.gz" ],
 		"patches": [],
@@ -365,7 +365,7 @@
 	},
 	"20": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.245-openssh",
 		"archives": 
 		[
@@ -383,7 +383,7 @@
 	},
 	"21": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.245-systemd",
 		"archives": 
 		[
@@ -406,7 +406,7 @@
 	},
 	"22": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.250-liboauth",
 		"archives": 
 		[
@@ -429,7 +429,7 @@
 	},
 	"23": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.260-libpwquality",
 		"archives": 
 		[
@@ -447,7 +447,7 @@
 	},
 	"24": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.270-nspr",
 		"archives": 
 		[
@@ -465,7 +465,7 @@
 	},
 	"25": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.290-nss",
 		"archives": 
 		[
@@ -488,7 +488,7 @@
 	},
 	"26": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.280-unzip",
 		"archives": 
 		[
@@ -506,7 +506,7 @@
 	},
 	"27": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.550-zip",
 		"archives": 
 		[
@@ -524,7 +524,7 @@
 	},
 	"28": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.330-cryptsetup",
 		"archives": 
 		[
@@ -542,7 +542,7 @@
 	},
 	"29": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.340-lsof",
 		"archives": 
 		[
@@ -560,7 +560,7 @@
 	},
 	"30": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.350-time",
 		"archives": 
 		[
@@ -578,7 +578,7 @@
 	},
 	"31": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.360-tree",
 		"archives": 
 		[
@@ -596,7 +596,7 @@
 	},
 	"32": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.370-which",
 		"archives": 
 		[
@@ -614,7 +614,7 @@
 	},
 	"33": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.380-PCRE",
 		"archives": 
 		[
@@ -632,7 +632,7 @@
 	},
 	"34": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.390-libxml2",
 		"archives": 
 		[
@@ -650,7 +650,7 @@
 	},
 	"35": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.400-libxslt",
 		"archives": 
 		[
@@ -668,7 +668,7 @@
 	},
 	"36": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.410-docbook-nons",
 		"archives": 
 		[
@@ -691,7 +691,7 @@
 	},
 	"37": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.420-glib260",
 		"archives": 
 		[
@@ -714,7 +714,7 @@
 	},
 	"38": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.440-pciutils",
 		"archives": 
 		[
@@ -732,7 +732,7 @@
 	},
 	"39": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.450-bind-utils",
 		"archives": 
 		[
@@ -750,7 +750,7 @@
 	},
 	"40": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.470-libevent",
 		"archives": 
 		[
@@ -768,7 +768,7 @@
 	},
 	"41": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.490-rsync",
 		"archives": 
 		[
@@ -786,7 +786,7 @@
 	},
 	"42": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.500-traceroute",
 		"archives": 
 		[
@@ -804,7 +804,7 @@
 	},
 	"43": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.520-parted",
 		"archives": 
 		[
@@ -822,7 +822,7 @@
 	},
 	"44": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.530-dosfstools",
 		"archives": 
 		[
@@ -840,7 +840,7 @@
 	},
 	"45": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.540-autoconf",
 		"archives": 
 		[
@@ -863,7 +863,7 @@
 	},
 	"46": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.600-libuv",
 		"archives": 
 		[
@@ -881,7 +881,7 @@
 	},
 	"47": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.610-libarchive",
 		"archives": 
 		[
@@ -899,7 +899,7 @@
 	},
 	"48": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.620-cmake",
 		"archives": 
 		[
@@ -917,7 +917,7 @@
 	},
 	"49": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.630-npth",
 		"archives": 
 		[
@@ -935,7 +935,7 @@
 	},
 	"50": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.640-pinentry",
 		"archives": 
 		[
@@ -953,7 +953,7 @@
 	},
 	"51": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.650-gnupg",
 		"archives": 
 		[
@@ -971,7 +971,7 @@
 	},
 	"52": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.660-libssh2",
 		"archives": 
 		[
@@ -989,7 +989,7 @@
 	},
 	"53": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.690-ICU",
 		"archives": 
 		[
@@ -1007,7 +1007,7 @@
 	},
 	"54": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.710-mutt",
 		"archives": 
 		[
@@ -1025,7 +1025,7 @@
 	},
 	"55": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.720-tmux",
 		"archives": 
 		[
@@ -1043,7 +1043,7 @@
 	},
 	"56": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.730-screen",
 		"archives": 
 		[
@@ -1061,7 +1061,7 @@
 	},
 	"57": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.740-htop",
 		"archives": 
 		[
@@ -1079,7 +1079,7 @@
 	},
 	"58": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.745-mdadm",
 		"archives": 
 		[
@@ -1097,7 +1097,7 @@
 	},
 	"59": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.747-strace",
 		"archives": 
 		[
@@ -1115,7 +1115,7 @@
 	},
 	"60": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.748-golang",
 		"archives": 
 		[
@@ -1136,7 +1136,7 @@
 	},
 	"61": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.749-vgrep",
 		"archives": 
 		[
@@ -1154,7 +1154,7 @@
 	},
 	"62": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.750-llvm",
 		"archives": 
 		[
@@ -1178,7 +1178,7 @@
 	},
 	"63": 
 	{
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.760-rust",
 		"archives": 
 		[
@@ -1195,7 +1195,7 @@
 		}
 	},
 	"64": {
-		"group": "04-utils",
+		"group": "04-utilities",
 		"package": "4.800-pacman",
 		"archives": [
 			"pacman-6.0.1.tar.xz"
