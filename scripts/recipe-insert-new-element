@@ -1,0 +1,154 @@
+#!/usr/bin/python3
+
+from optparse import OptionParser                                              
+import requests
+import hashlib
+import json
+import sys
+import os
+
+SRC_PATH = "https://physixproject.org/source/toolchain/"
+DEBUG = False
+
+# insist cwd is ./physix
+def cwd_check(cwd) -> bool:
+	cwd_lst = cwd.split("/")
+	curr_dir = str(cwd_lst[-1])
+	if curr_dir != "physix":
+		return False
+	return True
+
+# Find File 
+def find_file(archive_name: str) -> str:
+	rel_pkg_path = ""
+
+	# if http in archive_name:
+	#	DL archive
+	#	return pkg_path
+
+	if os.path.exists("./sources/" + archive_name):
+		rel_pkg_path = "./sources/" + archive_name
+		print("Found pkg path: " + archive_name) 
+		return rel_pkg_path
+	return rel_pkg_path
+
+# read in file
+def read_in_and_change(input_file, pkg_name, archive_name, position):
+	pkg_data = None
+	arch_file = archive_name.split("/")[-1]                                  
+	arch_path = "./sources/" + arch_file
+
+	with open(arch_path,"rb") as FD:
+		pkg_data = FD.read()
+
+	# Get MD5
+	md5sum  = hashlib.md5(pkg_data).hexdigest()
+	print("MD5: "+md5sum)
+
+	build_group = input_file.replace(".json","")
+
+	element = {}
+	element[str(position)] = {
+		"group" : build_group,
+		"package" : pkg_name,
+		"archives" : [arch_file],
+		"patches" : [],
+		"physix_sources" : {SRC_PATH + arch_file:md5sum},
+		"license" : ""
+	}
+
+	if DEBUG:
+		print(json.dumps(element[str(position)], indent=4))
+
+	recipe = None
+	with open(input_file,"r") as fd:
+		recipe = json.load(fd)
+
+	# Re-sort keys
+	new_dict = {}
+	sz = len(recipe["build_queue"])
+	for i in range(int(position)+1):
+		if i < int(position):
+			new_dict[str(i)] = recipe[str(i)]
+		elif i == int(position):
+			new_dict[str(i)] = element[str(position)]
+			break
+	for i in range(int(position), sz):
+		k = i + 1
+		new_dict[str(k)] = recipe[str(i)]   
+ 
+	# Create directory
+	if not DEBUG:
+		print(json.dumps(recipe["build_queue"], indent=4))
+		print(json.dumps(new_dict, indent=4))
+
+
+def pull_archive(url, fname):
+	rtn = True
+	fname = "./sources/" + fname
+
+	if os.path.exists(fname):
+		print(f"Found {fname}...")
+	else:
+		print("Downloading_Archive...")
+		try:
+			req = requests.get(url, allow_redirects=True, stream=True)
+			with open(fname, 'wb') as open_file:
+				for chunk in req.iter_content(chunk_size=1024):
+					open_file.write(chunk)
+		except requests.RequestException as expn_str:
+			print("Failed to Downloaded file, "+ str(expn_str))
+			rtn = False
+	return rtn
+
+'''
+input_file , position, archive_name, pkg_name
+'''
+if __name__ == "__main__":
+
+	if not cwd_check(os.getcwd()):
+		print("Current directory is not physix directory. \n Exiting...")
+		sys.exit()
+                                                                                
+	parser = OptionParser()
+	parser.add_option("-r", "--recipe", dest="rcp_file",
+						help="Recipe file to be edited", metavar="")
+	parser.add_option("-i", "--insert-position", dest="position",
+						help="Position to insert new element", metavar="")
+	parser.add_option("-a", "--archive", dest="archive_name", 
+						help="New package/archive file name", metavar="") 
+	parser.add_option("-p", "--package-name", dest="pkg_name",
+						help="Recipe file to be edited", metavar="") 
+	(options, args) = parser.parse_args()
+
+	recipe       = options.rcp_file
+	position     = options.position
+	archive_name = options.archive_name
+	pkg_name     = options.pkg_name
+
+	if DEBUG: 
+		print("--------")
+		print(f"Recipe:   {recipe}")
+		print(f"Position: {position}")
+		print(f"Archive:  {archive_name}")
+		print(f"Package:  {pkg_name}")
+		print("---------")
+
+	if not (recipe and position and archive_name and pkg_name):
+		print("Error: Missing arguments")                                           
+		sys.exit(1)
+
+	if archive_name.startswith("http") or archive_name.startswith("ftp"):
+		arch_file = archive_name.split("/")[-1]
+		pull_archive(archive_name, arch_file)
+	else:
+		archive_path = find_file(archive_name)
+		if not arch_path:
+			sys.exit("I Suck")
+
+	read_in_and_change(recipe, pkg_name, archive_name, position)
+
+
+
+
+

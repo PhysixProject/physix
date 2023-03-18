@@ -12,7 +12,7 @@ if [ `pwd` != '/mnt/physix/opt/admin/physix' ] ; then
 	exit 1
 fi
 
-for RECIPE in 01-toolchain.json 02-base-system.json 03-config-base.json ; do
+for RECIPE in 01-base-toolchain.json 02-base-system.json 03-config-base.json ; do
 	./catalyst -p $RECIPE
 	if [ $? -ne 0 ] ; then
 		echo "$RECIPE: Download soureces Failed"
@@ -20,7 +20,7 @@ for RECIPE in 01-toolchain.json 02-base-system.json 03-config-base.json ; do
 	fi
 done
 
-./catalyst -t 01-toolchain.json
+./catalyst -t 01-base-toolchain.json
 if [ $? -ne 0 ] ; then
 	echo "Build Failed"
 	exit 1
