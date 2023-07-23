@@ -836,8 +836,8 @@ def do_physix_conf_init(options):
 	info("- Build initialization completete!")
 	info("- Next Step: Build the toolchain.")
 	info("- 1. cd /mnt/physix/opt/admin/physix")
-	info("- 2. ./catalyst -p 01-toolchain.json")
-	info("- 3. ./catalyst -t 01-toolchain.json")
+	info("- 2. ./catalyst -p 01-base-toolchain.json")
+	info("- 3. ./catalyst -t 01-base-toolchain.json")
 	info("------------------------------------")
 	return SUCCESS
 
