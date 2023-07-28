@@ -8,7 +8,7 @@ import sys
 import os
 
 SRC_PATH = "https://physixproject.org/source/toolchain/"
-DEBUG = False
+DEBUG = True
 
 # insist cwd is ./physix
 def cwd_check(cwd) -> bool:
@@ -19,10 +19,11 @@ def cwd_check(cwd) -> bool:
 	return True
 
 # read in file
-def read_in_and_change(input_file, pkg_name, archive_name, position):
+def create_new_element(input_file, pkg_name, archive_name, position):
 	pkg_data = None
 	arch_file = archive_name.split("/")[-1]                                  
 	arch_path = "./sources/" + arch_file
+	build_group = input_file.replace(".json","")
 
 	with open(arch_path,"rb") as FD:
 		pkg_data = FD.read()
@@ -64,11 +65,35 @@ def read_in_and_change(input_file, pkg_name, archive_name, position):
 	#adjust build queue
 	q = recipe["build_queue"]
 	q_len = len(recipe["build_queue"])
+	print(f"q_len is {q_len}")
  
 	# Create directory
 	if not DEBUG:
 		print(json.dumps(recipe["build_queue"], indent=4))
 		print(json.dumps(new_dict, indent=4))
+
+	
+	pkg_path = "/".join(["build-groups",build_group, pkg_name])
+	pkg_path = "./" + pkg_path
+	if not os.path.exists(pkg_path):
+		rsp = input(f"Create mew dorectpry, {pkg_path} ? (y/n):")
+		if rsp.lower() == "y":
+			os.mkdir(pkg_path)
+
+def update_element(input_file, pkg_name, archive_name, position):
+	pkg_data = None
+	arch_file = archive_name.split("/")[-1]
+	arch_path = "./sources/" + arch_file
+
+	with open(arch_path,"rb") as FD:
+		pkg_data = FD.read()
+
+	# Get MD5
+	md5sum  = hashlib.md5(pkg_data).hexdigest()
+	build_group = input_file.replace(".json","")
+	recipe[str(position)]["package"]  = pkg_name
+	recipe[str(position)]["archives"] = archive_name
+	return True
 
 
 def pull_archive(url, fname):
@@ -108,20 +133,31 @@ if __name__ == "__main__":
 						help="New package/archive file name", metavar="") 
 	parser.add_option("-p", "--package-name", dest="pkg_name",
 						help="Recipe file to be edited", metavar="") 
+	parser.add_option("-c", "--create-element", action="store_true", dest="create", default=False,
+						help="Create new element at position" )
+	parser.add_option("-u", "--update-element", action="store_true", dest="update", default=False,
+						help="Update element at position" )
 	(options, args) = parser.parse_args()
 
 	recipe       = options.rcp_file
 	position     = options.position
 	archive_name = options.archive_name
 	pkg_name     = options.pkg_name
+	create       = options.create
+	update       = options.update
 
 	if DEBUG: 
 		print("--------")
-		print(f"Recipe:   {recipe}")
+		print(f"Recipe  : {recipe}")
 		print(f"Position: {position}")
-		print(f"Archive:  {archive_name}")
-		print(f"Package:  {pkg_name}")
+		print(f"Archive : {archive_name}")
+		print(f"Package : {pkg_name}")
+		print(f"Create  : {create}")
+		print(f"update  : {update}")
 		print("---------")
+
+	if update == True and create == True: 
+		sys.exit("Exiting...\nCan not create and update at the same time")
 
 	if not (recipe and position and archive_name and pkg_name):
 		print("Error: Missing arguments")                                           
@@ -134,7 +170,12 @@ if __name__ == "__main__":
 		if not os.path.exists("./sources/" + archive_name):
 			sys.exit("I Suck")
 
-	read_in_and_change(recipe, pkg_name, archive_name, position)
+	if create:
+		create_new_element(recipe, pkg_name, archive_name, position)
+	if update:
+		update_element(recipe, pkg_name, archive_name, position)
+	else:
+		sys.exit("No op")
 
 	# Check if build group exists
 	# check if pkg_dir exists
