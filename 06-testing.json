@@ -3,8 +3,8 @@
 {
 	"build_queue": [0, 1, 2, 3, 4, 5, 6],
 	"0": {
-		"group": "05-testing",
-		"package": "5.000-ltp",
+		"group": "06-testing",
+		"package": "6.000-ltp",
 		"archives": [
 			"ltp-full-20210121.tar.xz"
 		],
@@ -17,8 +17,8 @@
 		}
 	},
 	"1": {
-		"group": "05-testing",
-		"package": "5.001-iperf",
+		"group": "06-testing",
+		"package": "6.001-iperf",
 		"archives": [
 			"iperf-3.9.tar.gz"
 		],
@@ -31,8 +31,8 @@
 		}
 	},
 	"2": {
-		"group": "05-testing",
-		"package": "5.010-bcc",
+		"group": "06-testing",
+		"package": "6.010-bcc",
 		"archives": [
 			"bcc-src-with-submodule.tar.gz"
 		],
@@ -45,8 +45,8 @@
 		}
 	},
 	"3": {
-		"group": "05-testing",
-		"package": "5.020-libpcap",
+		"group": "06-testing",
+		"package": "6.020-libpcap",
 		"archives": [
 			"libpcap-1.9.1.tar.gz"
 		],
@@ -59,8 +59,8 @@
 		}
 	},
 	"4": {
-		"group": "05-testing",
-		"package": "5.030-tcpdump",
+		"group": "06-testing",
+		"package": "6.030-tcpdump",
 		"archives": [
 			"tcpdump-4.9.3.tar.gz"
 		],
@@ -73,8 +73,8 @@
 		}
 	},
 	"5": {
-		"group": "05-testing",
-		"package": "5.040-sysstat",
+		"group": "06-testing",
+		"package": "6.040-sysstat",
 		"archives": [
 			"sysstat-12.4.0.tar.gz"
 		],
@@ -87,8 +87,8 @@
 		}
 	},
 	"6": {
-		"group": "05-testing",
-		"package": "5.050-fio",
+		"group": "06-testing",
+		"package": "6.050-fio",
 		"archives": [
 			"fio-3.25.tar.gz"
 		],
