@@ -14,7 +14,7 @@
 	90, 91, 92
 	],
 	"0": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.010-directories",
 		"archives": [],
 		"patches": [],
@@ -23,7 +23,7 @@
 		"license": ""
 	},
 	"1": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.020-linux-api-headers",
 		"archives": [
 			"linux-5.10.26.tar.xz"
@@ -38,7 +38,7 @@
 		"license": ""
 	},
 	"2": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.030-man",
 		"archives": [
 			"man-pages-5.02.tar.xz"
@@ -53,7 +53,7 @@
 		"license": ""
 	},
 	"3": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.040-glibc",
 		"archives": [
 			"glibc-2.30.tar.xz"
@@ -72,7 +72,7 @@
 		"license": ""
 	},
 	"4": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.050-adjust-toolchain",
 		"archives": [],
 		"patches": [],
@@ -80,7 +80,7 @@
 		"physix_sources": {}
 	},
 	"5": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.060-zlib",
 		"archives": [
 			"zlib-1.2.11.tar.xz"
@@ -95,7 +95,7 @@
 		"license": ""
 	},
 	"6": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.070-file",
 		"archives": [
 			"file-5.37.tar.gz"
@@ -110,7 +110,7 @@
 		"license": ""
 	},
 	"7": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.080-readline",
 		"archives": [
 			"readline-8.0.tar.gz"
@@ -125,7 +125,7 @@
 		"license": ""
 	},
 	"8": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.090-m4",
 		"archives": [
 			"m4-1.4.18.tar.xz"
@@ -140,7 +140,7 @@
 		"license": ""
 	},
 	"9": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.100-bc",
 		"archives": [
 			"bc-2.1.3.tar.gz"
@@ -155,7 +155,7 @@
 		"license": ""
 	},
 	"10": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.110-binutils",
 		"archives": [
 			"binutils-2.34.tar.xz"
@@ -170,7 +170,7 @@
 		"license": ""
 	},
 	"11": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.120-gmp",
 		"archives": [
 			"gmp-6.1.2.tar.xz"
@@ -185,7 +185,7 @@
 		"license": ""
 	},
 	"12": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.130-mpfr",
 		"archives": [
 			"mpfr-4.0.2.tar.xz"
@@ -200,7 +200,7 @@
 		"license": ""
 	},
 	"13": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.140-mpc",
 		"archives": [
 			"mpc-1.1.0.tar.gz"
@@ -215,7 +215,7 @@
 		"license": ""
 	},
 	"14": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.150-shadow",
 		"archives": [
 			"shadow-4.7.tar.xz"
@@ -230,7 +230,7 @@
 		"license": ""
 	},
 	"15": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.160-gcc",
 		"archives": [
 			"gcc-9.2.0.tar.xz"
@@ -245,7 +245,7 @@
 		"license": ""
 	},
 	"16": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.170-bzip",
 		"archives": [
 			"bzip2-1.0.8.tar.gz"
@@ -264,7 +264,7 @@
 		"license": ""
 	},
 	"17": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.180-pkg-config",
 		"archives": [
 			"pkg-config-0.29.2.tar.gz"
@@ -279,7 +279,7 @@
 		"license": ""
 	},
 	"18": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.190-ncurses",
 		"archives": [
 			"ncurses-6.1.tar.gz"
@@ -294,7 +294,7 @@
 		"license": ""
 	},
 	"19": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.200-attr",
 		"archives": [
 			"attr-2.4.48.tar.gz"
@@ -308,7 +308,7 @@
 		}
 	},
 	"20": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.210-acl",
 		"archives": [
 			"acl-2.2.53.tar.gz"
@@ -322,7 +322,7 @@
 		}
 	},
 	"21": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.220-libcap",
 		"archives": [
 			"libcap-2.27.tar.xz"
@@ -336,7 +336,7 @@
 		}
 	},
 	"22": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.230-sed",
 		"archives": [
 			"sed-4.7.tar.xz"
@@ -350,7 +350,7 @@
 		}
 	},
 	"23": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.240-psmisc",
 		"archives": [
 			"psmisc-23.2.tar.xz"
@@ -364,7 +364,7 @@
 		}
 	},
 	"24": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.250-iana-etc",
 		"archives": [
 			"iana-etc-2.30.tar.bz2"
@@ -378,7 +378,7 @@
 		}
 	},
 	"25": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.260-bison",
 		"archives": [
 			"bison-3.4.1.tar.xz"
@@ -392,7 +392,7 @@
 		}
 	},
 	"26": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.270-flex",
 		"archives": [
 			"flex-2.6.4.tar.gz"
@@ -406,7 +406,7 @@
 		}
 	},
 	"27": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.280-grep",
 		"archives": [
 			"grep-3.3.tar.xz"
@@ -420,7 +420,7 @@
 		}
 	},
 	"28": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.290-bash",
 		"archives": [
 			"bash-5.0.tar.gz"
@@ -434,7 +434,7 @@
 		}
 	},
 	"29": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.300-libtool",
 		"archives": [
 			"libtool-2.4.6.tar.xz"
@@ -448,7 +448,7 @@
 		}
 	},
 	"30": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.310-gdbm",
 		"archives": [
 			"gdbm-1.18.1.tar.gz"
@@ -462,7 +462,7 @@
 		}
 	},
 	"31": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.320-gperf",
 		"archives": [
 			"gperf-3.1.tar.gz"
@@ -476,7 +476,7 @@
 		}
 	},
 	"32": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.330-expat",
 		"archives": [
 			"expat-2.2.7.tar.xz"
@@ -490,7 +490,7 @@
 		}
 	},
 	"33": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.340-inetutils",
 		"archives": [
 			"inetutils-1.9.4.tar.xz"
@@ -504,7 +504,7 @@
 		}
 	},
 	"34": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.350-perl",
 		"archives": [
 			"perl-5.30.0.tar.xz"
@@ -518,7 +518,7 @@
 		}
 	},
 	"35": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.360-xmlparser",
 		"archives": [
 			"XML-Parser-2.44.tar.gz"
@@ -532,7 +532,7 @@
 		}
 	},
 	"36": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.370-intltool",
 		"archives": [
 			"intltool-0.51.0.tar.gz"
@@ -546,7 +546,7 @@
 		}
 	},
 	"37": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.380-autoconf",
 		"archives": [
 			"autoconf-2.69.tar.xz"
@@ -560,7 +560,7 @@
 		}
 	},
 	"38": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.390-automake",
 		"archives": [
 			"automake-1.16.1.tar.xz"
@@ -574,7 +574,7 @@
 		}
 	},
 	"39": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.400-xz",
 		"archives": [
 			"xz-5.2.4.tar.xz"
@@ -588,7 +588,7 @@
 		}
 	},
 	"40": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.410-kmod",
 		"archives": [
 			"kmod-26.tar.xz"
@@ -602,7 +602,7 @@
 		}
 	},
 	"41": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.420-gettext",
 		"archives": [
 			"gettext-0.20.1.tar.xz"
@@ -616,7 +616,7 @@
 		}
 	},
 	"42": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.430-libelf",
 		"archives": [
 			"elfutils-0.177.tar.bz2"
@@ -630,7 +630,7 @@
 		}
 	},
 	"43": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.440-libffi",
 		"archives": [
 			"libffi-3.2.1.tar.gz"
@@ -644,7 +644,7 @@
 		}
 	},
 	"44": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.590-efivar",
 		"archives": [
 			"efivar-37.tar.bz2"
@@ -659,7 +659,7 @@
 		"alt_sources": {}
 	},
 	"45": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.450-openssl",
 		"archives": [
 			"openssl-1.1.1c.tar.gz"
@@ -673,7 +673,7 @@
 		}
 	},
 	"46": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.455-sqlite",
 		"archives": [
 			"sqlite-autoconf-3310100.tar.gz"
@@ -687,7 +687,7 @@
 		}
 	},
 	"47": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.460-python",
 		"archives": [
 			"Python-3.7.4.tar.xz"
@@ -703,7 +703,7 @@
 		}
 	},
 	"48": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.470-ninja",
 		"archives": [
 			"ninja-1.9.0.tar.gz"
@@ -717,7 +717,7 @@
 		}
 	},
 	"49": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.480-meson",
 		"archives": [
 			"meson-0.51.1.tar.gz"
@@ -731,7 +731,7 @@
 		}
 	},
 	"50": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.490-coreutils",
 			"archives": [
 				"coreutils-8.31.tar.xz"
@@ -747,7 +747,7 @@
 			}
 	},
 	"51": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.510-diffutils",
 			"archives": [
 				"diffutils-3.7.tar.xz"
@@ -761,7 +761,7 @@
 			}
 	},
 	"52": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.500-check",
 		"archives": [
 			"check-0.12.0.tar.gz"
@@ -775,7 +775,7 @@
 		}
 	},
 	"53": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.520-gawk",
 		"archives": [
 			"gawk-5.0.1.tar.xz"
@@ -789,7 +789,7 @@
 		}
 	},
 	"54": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.530-cpio",
 		"archives": [
 			"cpio-2.12.tar.bz2"
@@ -803,7 +803,7 @@
 		}
 	},
 	"55": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.540-dracut",
 		"archives": [
 			"dracut-050.tar.gz"
@@ -817,7 +817,7 @@
 		}
 	},
 	"56": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.550-findutils",
 		"archives": [
 			"findutils-4.6.0.tar.gz"
@@ -831,7 +831,7 @@
 		}
 	},
 	"57": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.560-groff",
 		"archives": [
 			"groff-1.22.4.tar.gz"
@@ -845,7 +845,7 @@
 		}
 	},
 	"58": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.570-libaio",
 		"archives": [
 			"libaio_0.3.112.orig.tar.xz"
@@ -859,7 +859,7 @@
 		}
 	},
 	"59": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.580-popt",
 		"archives": [
 			"popt-1.16.tar.gz"
@@ -873,7 +873,7 @@
 		}
 	},
 	"60": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.600-efibootmgr",
 		"archives": [
 			"efibootmgr-16.tar.bz2"
@@ -885,7 +885,7 @@
 		"alt_sources": {}
 	},
 	"61": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.610-less",
 			"archives": [
 				"less-551.tar.gz"
@@ -899,7 +899,7 @@
 			}
 	},
 	"62": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.630-iproute",
 			"archives": [
 				"iproute2-5.2.0.tar.xz"
@@ -913,7 +913,7 @@
 			}
 	},
 	"63": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.620-gzip",
 			"archives": [
 				"gzip-1.10.tar.xz"
@@ -927,7 +927,7 @@
 			}
 	},
 	"64": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.640-kbd",
 			"archives": [
 				"kbd-2.2.0.tar.xz"
@@ -941,7 +941,7 @@
 			}
 	},
 	"65": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.650-libpipeline",
 		"archives": [
 			"libpipeline-1.5.1.tar.gz"
@@ -955,7 +955,7 @@
 		}
 	},
 	"66": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.660-make",
 		"archives": [
 			"make-4.3.tar.gz"
@@ -969,7 +969,7 @@
 		}
 	},
 	"67": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.670-patch",
 		"archives": [
 			"patch-2.7.6.tar.xz"
@@ -983,7 +983,7 @@
 		}
 	},
 	"68": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.680-mandb",
 		"archives": [
 			"man-db-2.8.6.1.tar.xz"
@@ -997,7 +997,7 @@
 		}
 	},
 	"69": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.690-tar",
 		"archives": [
 			"tar-1.32.tar.xz"
@@ -1011,7 +1011,7 @@
 		}
 	},
 	"70": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.700-texinfo",
 		"archives": [
 			"texinfo-6.6.tar.xz"
@@ -1025,7 +1025,7 @@
 		}
 	},
 	"71": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.710-vim",
 		"archives": [
 			"vim-8.1.1846.tar.gz"
@@ -1039,7 +1039,7 @@
 		}
 	},
 	"72": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.720-systemd",
 		"archives": [
 			"systemd-246.tar.gz",
@@ -1056,7 +1056,7 @@
 		}
 	},
 	"73": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.730-dbus",
 		"archives": [
 			"dbus-1.12.16.tar.gz"
@@ -1070,7 +1070,7 @@
 		}
 	},
 	"74": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.740-procps-ng",
 		"archives": [
 			"procps-ng-3.3.15.tar.xz"
@@ -1084,7 +1084,7 @@
 		}
 	},
 	"75": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.750-util-linux",
 		"archives": [
 			"util-linux-2.34.tar.xz"
@@ -1098,7 +1098,7 @@
 		}
 	},
 	"76": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.760-e2fsprogs",
 		"archives": [
 			"e2fsprogs-1.45.3.tar.gz"
@@ -1112,7 +1112,7 @@
 		}
 	},
 	"77": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.770-lvm2",
 		"archives": [
 			"LVM2.2.03.05.tgz"
@@ -1126,7 +1126,7 @@
 		}
 	},
 	"78": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.780-grub",
 		"archives": [
 			"grub-2.04.tar.xz"
@@ -1140,7 +1140,7 @@
 		}
 	},
 	"79": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.790-lzo",
 		"archives": [
 			"lzo-2.10.tar.gz"
@@ -1154,7 +1154,7 @@
 		}
 	},
 	"80": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.800-btrfs-progs",
 		"archives": [
 			"btrfs-progs-v5.2.1.tar.xz"
@@ -1168,7 +1168,7 @@
 		}
 	},
 	"81": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.810-stripping",
 		"archives": [],
 		"patches": [],
@@ -1176,7 +1176,7 @@
 		"alt_sources": {}
 	},
 	"82": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.820-cleanup",
 			"archives": [],
 			"patches": [],
@@ -1184,7 +1184,7 @@
 			"alt_sources": {}
 	},
 	"83": {
-			"group": "02-base",
+			"group": "02-base-system",
 			"package": "2.840-openssh",
 			"archives": [
 				"openssh-8.3p1.tar.gz"
@@ -1198,7 +1198,7 @@
 			}
 	},
 	"84": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.830-git",
 		"archives": [
 			"git-2.23.0.tar.xz"
@@ -1212,7 +1212,7 @@
 		}
 	},
 	"85": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.850-tcl",
 		"archives": [
 			"tcl8.6.10-src.tar.gz",
@@ -1229,7 +1229,7 @@
 		}
 	},
 	"86": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.860-expect",
 		"archives": [
 			"expect5.45.4.tar.gz"
@@ -1243,7 +1243,7 @@
 		}
 	},
 	"87": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.870-libtasn",
 		"archives": [
 			"libtasn1-4.14.tar.gz"
@@ -1257,7 +1257,7 @@
 		}
 	},
 	"88": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.880-p11kit",
 		"archives": [
 			"p11-kit-0.23.16.1.tar.gz"
@@ -1271,7 +1271,7 @@
 		}
 	},
 	"89": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.890-make-ca",
 		"archives": [
 			"make-ca-1.4.tar.xz"
@@ -1285,7 +1285,7 @@
 		}
 	},
 	"90": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.900-wget",
 		"archives": [
 			"wget-1.20.3.tar.gz"
@@ -1299,7 +1299,7 @@
 		}
 	},
 	"91": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.910-curl",
 		"archives": [
 			"curl-7.65.3.tar.xz"
@@ -1313,7 +1313,7 @@
 		}
 	},
 	"92": {
-		"group": "02-base",
+		"group": "02-base-system",
 		"package": "2.920-git",
 		"archives": [
 			"git-2.23.0.tar.xz"

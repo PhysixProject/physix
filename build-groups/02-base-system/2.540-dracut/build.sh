@@ -13,6 +13,6 @@ chroot_check $? "dracut make"
 make install
 chroot_check $? "dracut make install"
 
-install -m644 /opt/admin/physix/build-groups/02-base/2.540-dracut/etc_dracut.conf /etc/dracut.conf
+install -m644 /opt/admin/physix/build-groups/02-base-system/2.540-dracut/etc_dracut.conf /etc/dracut.conf
 chroot_check $? "create /etc/dracut.conf"
 

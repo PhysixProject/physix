@@ -643,7 +643,7 @@ def build_base(recipe, context, start, stop):
 		return FAILURE
 
 	if start == 0:
-		cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base/2.000-base-build-prep/build.sh']
+		cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base-system/2.000-base-build-prep/build.sh']
 		ret_tpl = run_cmd_log_io_as_root_user(cmd, "2.000-base-build-prep.sh", "")
 		if validate(ret_tpl, "Build: " + str(cmd)):
 			return FAILURE
@@ -674,7 +674,7 @@ def build_base(recipe, context, start, stop):
 
 		stack_script = "STACk_0-" + str(element["package"])
 
-		cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base/000-chroot_stub.sh',
+		cmd = ['/mnt/physix/opt/admin/physix/build-groups/02-base-system/000-chroot_stub.sh',
 			   str(element["package"]),
 			   build_src]
 		info("Executing Build: " + "[" + str(i) + "] " + str(cmd))

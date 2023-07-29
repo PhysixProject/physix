@@ -7,7 +7,7 @@ import json
 import sys
 import os
 
-SRC_PATH = "https://physixproject.org/source/toolchain/"
+SRC_PATH = "https://physixproject.org/source/"
 DEBUG = True
 
 # insist cwd is ./physix
@@ -31,6 +31,7 @@ def create_new_element(input_file, pkg_name, archive_name, position):
 	# Get MD5
 	md5sum  = hashlib.md5(pkg_data).hexdigest()
 	build_group = input_file.replace(".json","")
+	url_src = SRC_PATH + build_group + "/"
 
 	element = {}
 	element[str(position)] = {
@@ -38,7 +39,7 @@ def create_new_element(input_file, pkg_name, archive_name, position):
 		"package" : pkg_name,
 		"archives" : [arch_file],
 		"patches" : [],
-		"physix_sources" : {SRC_PATH + arch_file:md5sum},
+		"physix_sources" : {url_src + arch_file:md5sum},
 		"license" : ""
 	}
 
