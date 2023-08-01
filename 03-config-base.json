@@ -3,7 +3,7 @@
 	"build_queue" : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 
 	"0":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.020-set-hostname",
 		"archives": [],
 		"patches": "",
@@ -12,7 +12,7 @@
 	},
 
 	"1":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.030-network-conf",
 		"archives": [],
 		"patches": [],
@@ -21,7 +21,7 @@
 	},
 
 	"2":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.040-shells",
 		"archives": [],
 		"patches": [],
@@ -30,7 +30,7 @@
 	},
 
 	"3":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.050-disable-clrscrn",
 		"archives": [],
 		"patches": [],
@@ -39,7 +39,7 @@
 	},
 
 	"4":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.060-fstab",
 		"archives": [],
 		"patches": [],
@@ -48,7 +48,7 @@
 	},
 
 	"5":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.070-kernel",
 		"archives": ["linux-5.10.26.tar.xz"],
 		"patches": [],
@@ -61,7 +61,7 @@
 	},
 
 	"6":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.080-grub",
 		"archives": [],
 		"patches": [],
@@ -70,7 +70,7 @@
 	},
 
 	"7":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.100-os-release",
 		"archives": [],
 		"patches": [],
@@ -79,7 +79,7 @@
 	},
 
 	"8":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.105-set-resolv-conf",
 		"archives": [],
 		"patches": [],
@@ -88,7 +88,7 @@
 	},
 
 	"9":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.108-set-sysctl-conf",
 		"archives": [],
 		"patches": [],
@@ -97,7 +97,7 @@
 	},
 
 	"10":{
-		"group": "03-base-config",
+		"group": "03-config-base",
 		"package": "3.110-setup-users",
 		"archives": [],
 		"patches": [],
