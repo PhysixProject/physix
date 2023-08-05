@@ -7,8 +7,7 @@
 		"package": "3.020-set-hostname",
 		"archives": [],
 		"patches": "",
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"1":{
@@ -16,8 +15,7 @@
 		"package": "3.030-network-conf",
 		"archives": [],
 		"patches": [],
-		"physix_sources":{},
-		"alt_sources": {}
+		"physix_sources":{}
 	},
 
 	"2":{
@@ -25,8 +23,7 @@
 		"package": "3.040-shells",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"3":{
@@ -34,8 +31,7 @@
 		"package": "3.050-disable-clrscrn",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"4":{
@@ -43,8 +39,7 @@
 		"package": "3.060-fstab",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"5":{
@@ -54,9 +49,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/base/linux-5.10.26.tar.xz":"90c64d22f4e5deb6283c76365183e17e"
-		},
-		"alt_sources": {
-			"https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.10.26.tar.xz":"90c64d22f4e5deb6283c76365183e17e"
 		}
 	},
 
@@ -65,8 +57,7 @@
 		"package": "3.080-grub",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"7":{
@@ -74,8 +65,7 @@
 		"package": "3.100-os-release",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"8":{
@@ -83,8 +73,7 @@
 		"package": "3.105-set-resolv-conf",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"9":{
@@ -92,8 +81,7 @@
 		"package": "3.108-set-sysctl-conf",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	},
 
 	"10":{
@@ -101,8 +89,7 @@
 		"package": "3.110-setup-users",
 		"archives": [],
 		"patches": [],
-		"physix_sources": {},
-		"alt_sources": {}
+		"physix_sources": {}
 	}
 }
 
