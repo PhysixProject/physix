@@ -11,9 +11,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/ltp-full-20210121.tar.xz":"574e1c2ad562259cc6e15bb20bc7f3dd"
-		},
-		"alt_sources": {
-			"https://github.com/linux-test-project/ltp/releases/download/20210121/ltp-full-20210121.tar.xz":"574e1c2ad562259cc6e15bb20bc7f3dd"
 		}
 	},
 	"1": {
@@ -25,9 +22,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/iperf-3.9.tar.gz":"510fdb0943e88da5e0063f4599fa14f3"
-		},
-		"alt_sources": {
-			"https://github.com/esnet/iperf/archive/3.9.tar.gz":"510fdb0943e88da5e0063f4599fa14f3"
 		}
 	},
 	"2": {
@@ -39,9 +33,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/bcc-src-with-submodule.tar.gz":"5753ca10617dea73c511c40f69a68b1e"
-		},
-		"alt_sources": {
-			"https://github.com/iovisor/bcc/releases/download/v0.16.0/bcc-src-with-submodule.tar.gz":"5753ca10617dea73c511c40f69a68b1e"
 		}
 	},
 	"3": {
@@ -53,9 +44,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/libpcap-1.9.1.tar.gz":"21af603d9a591c7d96a6457021d84e6c"
-		},
-		"alt_sources": {
-			"https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz":"21af603d9a591c7d96a6457021d84e6c"
 		}
 	},
 	"4": {
@@ -67,9 +55,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/tcpdump-4.9.3.tar.gz":"a4ead41d371f91aa0a2287f589958bae"
-		},
-		"alt_sources": {
-			"https://www.tcpdump.org/release/tcpdump-4.9.3.tar.gz":"a4ead41d371f91aa0a2287f589958bae"
 		}
 	},
 	"5": {
@@ -81,9 +66,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/sysstat-12.4.0.tar.gz":"cfc48837b0e2fc08a98aa6dea3002894"
-		},
-		"alt_sources": {
-			"https://github.com/sysstat/sysstat/archive/v12.4.0.tar.gz":"cfc48837b0e2fc08a98aa6dea3002894"
 		}
 	},
 	"6": {
@@ -95,9 +77,6 @@
 		"patches": [],
 		"physix_sources": {
 			"https://physixproject.org/source/testing/fio-3.25.tar.gz":"05c78381b4609befe41218693e2820d7"
-		},
-		"alt_sources": {
-			"https://github.com/axboe/fio/archive/fio-3.25.tar.gz":"05c78381b4609befe41218693e2820d7"
 		}
 	}
 
