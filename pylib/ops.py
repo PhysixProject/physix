@@ -412,7 +412,7 @@ def setup(config):
 		if validate(ret_tpl, "useradd physix"):
 			return FAILURE
 
-	src = str(os.getcwd()) + "/build-groups/03-base-config/configs/physix-bashrc"
+	src = str(os.getcwd()) + "/build-groups/03-config-base/configs/physix-bashrc"
 	dest = "/home/physix/.bashrc"
 	ret_tpl = run_cmd(['cp', src, dest])
 	if validate(ret_tpl, "set physix user's .bashrc file"):
@@ -733,7 +733,7 @@ def config_base_system(recipe, context, start, stop):
 
 		stack_script = "STACk_0-" + str(element["package"])
 
-		cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-base-config/000-conf_chrrot_stub.sh',
+		cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-config-base/000-conf_chrrot_stub.sh',
 			   str(element["package"]),
 			   build_src]
 		info("Executing Build: " + "[" + str(i) + "] " + str(cmd))
@@ -747,7 +747,7 @@ def config_base_system(recipe, context, start, stop):
 
 
 	""" Special case for user to set password without logging"""
-	cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-base-config/000-conf_chrrot_stub.sh',
+	cmd = ['/mnt/physix/opt/admin/physix/build-groups/03-config-base/000-conf_chrrot_stub.sh',
 		   '3.111-set-passwd']
 	run_cmd_live(cmd)
 
