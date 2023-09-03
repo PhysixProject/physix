@@ -82,7 +82,7 @@ def main():
         sys.exit(do_base_build(options))
 
     if options.configure_base_conf:
-        if verify_sfwr_group('03-base-config', options.configure_base_conf):
+        if verify_sfwr_group('03-config-base', options.configure_base_conf):
             error("Invalid build flag for recipe " + str(options.base_conf))
             return FAILURE
         sys.exit(do_config_base(options))
@@ -90,7 +90,7 @@ def main():
     if options.build_recipe:
         if not (verify_sfwr_group('01-base-toolchain', options.build_recipe) and
                 verify_sfwr_group('02-base-system', options.build_recipe) and
-                verify_sfwr_group('03-base-config', options.build_recipe)):
+                verify_sfwr_group('03-config-base', options.build_recipe)):
             error("Invalid build flag for recipe " + str(options.build_recipe))
             return FAILURE
         sys.exit(do_build_recipe(options))

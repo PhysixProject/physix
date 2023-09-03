@@ -702,7 +702,7 @@
 		],
 		"patches": [],
 		"physix_sources": {
-			"http://physixproject.org/source/base/efibootmgr-16.tar.bz2": "ab7cf46774fda951a0e8a40beb65a90e"
+			"https://physixproject.org/source/base/efibootmgr-16.tar.bz2": "ab7cf46774fda951a0e8a40beb65a90e"
 		}
 	},
 	"61": {
