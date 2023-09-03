@@ -36,9 +36,9 @@ install -v -m644    INSTALL LICENCE OVERVIEW README* \
 chroot_check $? "openssh : make install"
 
 
-install -m644 /opt/admin/physix/build-groups/04-utils/configs/openssh/sshd.service   /lib/systemd/system/sshd.service &&
-install -m644 /opt/admin/physix/build-groups/04-utils/configs/openssh/sshdat.service /lib/systemd/system/sshd@.service &&
-install -m644 /opt/admin/physix/build-groups/04-utils/configs/openssh/sshd.socket    /lib/systemd/system/sshd.socket &&
+install -m644 /opt/admin/physix/build-groups/04-utilities/configs/openssh/sshd.service   /lib/systemd/system/sshd.service &&
+install -m644 /opt/admin/physix/build-groups/04-utilities/configs/openssh/sshdat.service /lib/systemd/system/sshd@.service &&
+install -m644 /opt/admin/physix/build-groups/04-utilities/configs/openssh/sshd.socket    /lib/systemd/system/sshd.socket &&
 systemctl enable sshd.service
 chroot_check $? "systemctl enable sshd.service"
 
