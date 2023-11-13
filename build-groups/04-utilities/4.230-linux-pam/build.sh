@@ -29,7 +29,7 @@ build_install() {
 	install -v -m755 -d /etc/pam.d &&
 	chroot_check $? "Linux-PAM : install "
 
-	cp -v /opt/admin/physix/build-groups/04-utils/configs/linux-pam/other.test /etc/pam.d/other
+	cp -v /opt/admin/physix/build-groups/04-utilities/configs/linux-pam/other.test /etc/pam.d/other
 	chroot_check $? "Created /etc/pam.d/other for make check"
 
 	make check
