@@ -27,7 +27,7 @@ build_install() {
 
 	#FIXME
 	install -v -dm744 /etc/cron.hourly/ && 
-	install -v -m744 /opt/admin/physix/build-groups/04-utils/4.191-set-iptables-rules/restore-iptables /etc/cron.hourly/restore-iptables
+	install -v -m744 /opt/admin/physix/build-groups/04-utilities/4.191-set-iptables-rules/restore-iptables /etc/cron.hourly/restore-iptables
 	chroot_check $? "iptables: install /etc/cron.hourly/restore-iptables"
 }
 
